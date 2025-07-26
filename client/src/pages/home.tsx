@@ -95,6 +95,24 @@ export default function Home() {
             Living Books
           </h2>
           
+          {/* What's a Living Book explanation */}
+          <div className="mb-8 bg-gray-50 border border-gray-200 rounded-lg p-6">
+            <h3 className="text-lg font-medium text-gray-900 mb-3">What's a Living Book?</h3>
+            <p className="text-gray-700 mb-3">
+              A Living Book is an interactive version of any text, powered by AI. Features include:
+            </p>
+            <ul className="text-gray-700 space-y-1 list-disc list-inside">
+              <li>Ask AI anything about the text (math notation supported)</li>
+              <li>Get AI to write about the text (with full math export support)</li>
+              <li>Rewrite the text using custom instructions</li>
+              <li>Generate tests based on the text</li>
+              <li>Take AI-generated tests</li>
+              <li>Create study guides</li>
+              <li>Generate podcasts from selected passages</li>
+              <li>Listen to AI narration</li>
+            </ul>
+          </div>
+          
           <div className="mb-8">
             <h3 className="text-lg font-medium text-gray-800 mb-4">
               By Kuczynski / Zhi Systems
