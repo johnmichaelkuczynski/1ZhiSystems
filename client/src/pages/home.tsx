@@ -29,7 +29,7 @@ export default function Home() {
   ];
 
   const coreApplications = [
-    { title: "Living Book Creator", url: null, note: "(no URL yet; just list the name)" },
+    { title: "Living Book Creator", url: "https://livingbook.xyz/" },
     { title: "EZGrader", url: "https://ezgrader.xyz" },
     { title: "Originality Meter", url: "https://originalitymeter.com" },
     { title: "Intelligence Meter", url: "https://intelligencemeter.biz" },
