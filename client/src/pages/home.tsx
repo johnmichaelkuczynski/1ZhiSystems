@@ -12,7 +12,8 @@ export default function Home() {
     { title: "AI LOGIC", url: "https://ailogic101.xyz" },
     { title: "CRITICAL REASONING", url: "https://criticalreasoning.xyz" },
     { title: "WRITING COURSE", url: "https://writing101.xyz" },
-    { title: "ON THE CARDINALITY OF PROOF SPACES", url: "https://godel101.xyz" }
+    { title: "ON THE CARDINALITY OF PROOF SPACES", url: "https://godel101.xyz" },
+    { title: "SEMANTICS", url: "https://semantics101.xyz" }
   ];
 
   const classicsBooks = [
