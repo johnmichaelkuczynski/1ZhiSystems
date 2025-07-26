@@ -126,7 +126,7 @@ export default function Home() {
           
           <div className="grid gap-3">
             {coreApplications.map((app) => (
-              <BookItem key={app.title} title={app.title} url={app.url} note={app.note} />
+              <BookItem key={app.title} title={app.title} url={app.url} />
             ))}
           </div>
         </section>
