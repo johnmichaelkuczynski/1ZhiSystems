@@ -14,7 +14,8 @@ export default function Home() {
     { title: "WRITING COURSE", url: "https://writing101.xyz" },
     { title: "ON THE CARDINALITY OF PROOF SPACES", url: "https://godel101.xyz" },
     { title: "SEMANTICS", url: "https://semantics101.xyz" },
-    { title: "ANALYTIC PHILOSOPHY CHAPTER 1", url: "https://analysisofanalysis.xyz" }
+    { title: "ANALYTIC PHILOSOPHY CHAPTER 1", url: "https://analysisofanalysis.xyz" },
+    { title: "WHY WAS SOCRATES EXECUTED?", url: "https://socrates101.xyz" }
   ];
 
   const classicsBooks = [
@@ -27,7 +28,12 @@ export default function Home() {
     { title: "FRANKENSTEIN", url: "https://frankenstein101.xyz" },
     { title: "DRACULA", url: "https://dracula101.xyz" },
     { title: "A ROOM WITH A VIEW", url: "https://aroomwithaview101.xyz" },
-    { title: "SHAKESPEARE COMPLETE WORKS", url: "https://shakespeare101.xyz" }
+    { title: "SHAKESPEARE COMPLETE WORKS", url: "https://shakespeare101.xyz" },
+    { title: "TOTEM AND TABOO", url: "https://totemandtaboo.xyz" },
+    { title: "THE COMMUNIST MANIFESTO", url: "https://communistmanifesto.xyz" },
+    { title: "INDUSTRIAL SOCIETY AND ITS FUTURE", url: "https://unabombermanifesto.xyz" },
+    { title: "THE LAWS", url: "https://thelawsbyplato.xyz" },
+    { title: "TRACTATUS LOGICO-PHILOSOPHICUS", url: "https://tractatuslogicophilosophicus.xyz" }
   ];
 
   const coreApplications = [
