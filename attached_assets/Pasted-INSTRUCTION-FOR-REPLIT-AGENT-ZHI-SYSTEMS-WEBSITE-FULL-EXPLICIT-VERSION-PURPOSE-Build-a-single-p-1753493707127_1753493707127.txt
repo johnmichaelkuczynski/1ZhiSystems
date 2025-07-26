@@ -1,0 +1,117 @@
+INSTRUCTION FOR REPLIT AGENT: ZHI SYSTEMS WEBSITE (FULL EXPLICIT VERSION)
+
+PURPOSE:
+Build a single-page website for Zhi Systems that:
+
+Lists every book and app with working, clickable full URLs
+
+Has no fluff, no projections, no marketing filler
+
+Has a Contact Us link at the top left: mailto:contact@zhisystems.ai
+
+Uses no templates, themes, boilerplate, or animation
+
+Must be functionally plain and direct, with zero placeholders
+
+PAGE STRUCTURE (TOP TO BOTTOM)
+1. Top Left: Contact
+Text: Contact Us
+
+Link: mailto:contact@zhisystems.ai
+
+2. Main Header
+rust
+Copy
+Edit
+Zhi Systems | High-Performance AI Tools for Writers, Thinkers, and Analysts
+3. Living Books
+Section Header: Living Books
+
+By Kuczynski / Zhi Systems
+
+ETHICS — https://ethics101.xyz
+
+FREEDOM — https://freedom101.xyz
+
+CAUSATION — https://causality101.xyz
+
+EPISTEMOLOGY — https://epistemology101.xyz
+
+EMPIRICISM AND ITS LIMITS — https://empiricism101.xyz
+
+DICTIONARY OF ANALYTIC PHILOSOPHY — https://philosophydictionary.xyz
+
+AI AND PHILOSOPHY — https://aiandphilosophy.com
+
+SYMBOLIC LOGIC — https://symboliclogic.xyz
+
+MATHEMATICAL LOGIC — https://mathematicallogic.xyz
+
+AI LOGIC — https://ailogic101.xyz
+
+CRITICAL REASONING — https://criticalreasoning.xyz
+
+WRITING COURSE — https://writing101.xyz
+
+ON THE CARDINALITY OF PROOF SPACES — https://godel101.xyz
+
+Classics / Public Domain
+
+ART OF WAR — https://theartofwarbysuntzu.xyz
+
+BOOK OF MORMON — https://bookofmormon101.xyz
+
+KING JAMES BIBLE — https://kingjamesbible.xyz
+
+OUR KNOWLEDGE OF THE EXTERNAL WORLD — https://ourknowledgeoftheexternalworld.xyz
+
+DREAM PSYCHOLOGY — https://dreampsychology.xyz
+
+ANARCHISM AND OTHER ESSAYS — https://anarchismandotheressays.xyz
+
+FRANKENSTEIN — https://frankenstein101.xyz
+
+DRACULA — https://dracula101.xyz
+
+A ROOM WITH A VIEW — https://aroomwithaview101.xyz
+
+SHAKESPEARE COMPLETE WORKS — https://shakespeare101.xyz
+
+4. Core Applications
+Section Header: Core Applications
+
+Living Book Creator — (no URL yet; just list the name)
+
+EZGrader — https://ezgrader.xyz
+
+Originality Meter — https://originalitymeter.com
+
+Intelligence Meter — https://intelligencemeter.biz
+
+Book Builder — https://bookbuilder.xyz
+
+Cognitive Profiler — https://cognitiveprofiler.xyz
+
+EZ Reader — https://ezreader.ai
+
+Classic EZ Reader — https://classicezreader.com
+
+Homework Helper — https://homeworkrobot.xyz
+
+Photo/Video Psychoanalysis — https://videoprofiler.xyz
+
+Genius Dictation — https://geniusdictation.com
+
+5. Footer
+yaml
+Copy
+Edit
+© Zhi Systems 2025
+DEPLOYMENT
+Must run correctly in Replit
+
+Must export to Vercel without breaking
+
+Every link must be live, visible, and functional
+
+No placeholders, previews, or future-looking features allowed
