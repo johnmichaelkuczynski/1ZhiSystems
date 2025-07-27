@@ -15,7 +15,8 @@ export default function Home() {
     { title: "ON THE CARDINALITY OF PROOF SPACES", url: "https://godel101.xyz" },
     { title: "SEMANTICS", url: "https://semantics101.xyz" },
     { title: "ANALYTIC PHILOSOPHY CHAPTER 1", url: "https://analysisofanalysis.xyz" },
-    { title: "WHY WAS SOCRATES EXECUTED?", url: "https://socrates101.xyz" }
+    { title: "WHY WAS SOCRATES EXECUTED?", url: "https://socrates101.xyz" },
+    { title: "ANALYTIC PHILOSOPHY CHAPTER 2", url: "https://platonism101.xyz" }
   ];
 
   const classicsBooks = [
@@ -33,7 +34,9 @@ export default function Home() {
     { title: "THE COMMUNIST MANIFESTO", url: "https://communistmanifesto.xyz" },
     { title: "INDUSTRIAL SOCIETY AND ITS FUTURE", url: "https://unabombermanifesto.xyz" },
     { title: "THE LAWS", url: "https://thelawsbyplato.xyz" },
-    { title: "TRACTATUS LOGICO-PHILOSOPHICUS", url: "https://tractatuslogicophilosophicus.xyz" }
+    { title: "TRACTATUS LOGICO-PHILOSOPHICUS", url: "https://tractatuslogicophilosophicus.xyz" },
+    { title: "DEATH OF IVAN ILYCH", url: "https://ivanilych.xyz" },
+    { title: "PRINCIPLES OF PSYCHOLOGY", url: "https://herbertspencer.xyz" }
   ];
 
   const coreApplications = [
