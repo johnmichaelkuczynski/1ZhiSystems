@@ -48,7 +48,7 @@ export default function Home() {
     { title: "Cognitive Profiler", url: "https://cognitiveprofiler.xyz" },
     { title: "Super Cognitive Profiler", url: "https://supercognitiveprofiler.xyz" },
     { title: "EZ Reader", url: "https://ezreader.ai" },
-    { title: "READING PRO", url: "https://readingpro.xyz" },
+    { title: "Reading Pro", url: "https://readingpro.xyz" },
     { title: "Homework Helper", url: "https://homeworkrobot.xyz" },
     { title: "Photo/Video Psychoanalysis", url: "https://videoprofiler.xyz" },
     { title: "Genius Dictation", url: "https://geniusdictation.com" }
