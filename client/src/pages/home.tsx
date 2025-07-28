@@ -47,6 +47,7 @@ export default function Home() {
     { title: "Book Builder", url: "https://bookbuilder.xyz" },
     { title: "Cognitive Profiler", url: "https://cognitiveprofiler.xyz" },
     { title: "Super Cognitive Profiler", url: "https://supercognitiveprofiler.xyz" },
+    { title: "Psychological Profiler", url: "https://psychologicalprofiler.xyz" },
     { title: "EZ Reader", url: "https://ezreader.ai" },
     { title: "Reading Pro", url: "https://readingpro.xyz" },
     { title: "Homework Helper", url: "https://homeworkrobot.xyz" },
