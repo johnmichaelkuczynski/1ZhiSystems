@@ -46,6 +46,7 @@ export default function Home() {
     { title: "Intelligence Meter", url: "https://intelligencemeter.biz" },
     { title: "Book Builder", url: "https://bookbuilder.xyz" },
     { title: "Cognitive Profiler", url: "https://cognitiveprofiler.xyz" },
+    { title: "Super Cognitive Profiler", url: "https://supercognitiveprofiler.xyz" },
     { title: "EZ Reader", url: "https://ezreader.ai" },
     { title: "Classic EZ Reader", url: "https://classicezreader.com" },
     { title: "Homework Helper", url: "https://homeworkrobot.xyz" },
