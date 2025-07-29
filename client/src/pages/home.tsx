@@ -36,7 +36,9 @@ export default function Home() {
     { title: "THE LAWS", url: "https://thelawsbyplato.xyz" },
     { title: "TRACTATUS LOGICO-PHILOSOPHICUS", url: "https://tractatuslogicophilosophicus.xyz" },
     { title: "DEATH OF IVAN ILYCH", url: "https://ivanilych.xyz" },
-    { title: "PRINCIPLES OF PSYCHOLOGY", url: "https://herbertspencer.xyz" }
+    { title: "PRINCIPLES OF PSYCHOLOGY", url: "https://herbertspencer.xyz" },
+    { title: "SEVEN SECRETS OF A STRESS FREE LIFE", url: "https://sevensecrets.xyz" },
+    { title: "CIVILIZATION AND ITS DISCONTENTS", url: "https://civilizationanditsdiscontents.xyz" }
   ];
 
   const coreApplications = [
