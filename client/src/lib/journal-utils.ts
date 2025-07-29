@@ -18,9 +18,10 @@ export function formatJournalUrl(volume: number, issue: number): string {
   return `/journal/vol-${toRomanNumeral(volume).toLowerCase()}/no-${issue}`;
 }
 
-export function formatJournalHeader(volume: number, issue: number, year: number): string {
+export function formatJournalHeader(volume: number, issue: number, year: number, publishedDate: string): string {
   return `Zhi Systems Journal
-Vol. ${toRomanNumeral(volume)}, No. ${issue} (${year})`;
+Vol. ${toRomanNumeral(volume)}, No. ${issue} (${year})
+Published: ${publishedDate}`;
 }
 
 export function parseMarkdown(text: string): string {

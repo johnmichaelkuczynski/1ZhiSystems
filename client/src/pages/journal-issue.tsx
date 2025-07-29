@@ -65,10 +65,18 @@ export default function JournalIssuePage() {
     );
   }
 
+  // Format the publication date
+  const publishedDate = new Date(journalIssue.createdAt).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+  
   const formattedHeader = formatJournalHeader(
     journalIssue.volume,
     journalIssue.issue,
-    journalIssue.year
+    journalIssue.year,
+    publishedDate
   );
 
   return (
