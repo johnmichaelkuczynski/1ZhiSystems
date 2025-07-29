@@ -74,7 +74,11 @@ export default function JournalPage() {
                   </h3>
                   
                   <div className="text-gray-600 mb-4 line-clamp-3">
-                    {issue.body.replace(/^# .*$/gm, '').substring(0, 200)}...
+                    {issue.body
+                      .replace(/^# .*$/gm, '')
+                      .replace(/\*\*(.*?)\*\*/g, '$1')
+                      .replace(/\*(.*?)\*/g, '$1')
+                      .substring(0, 200)}...
                   </div>
                   
                   <Link 
