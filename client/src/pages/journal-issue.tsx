@@ -68,8 +68,7 @@ export default function JournalIssuePage() {
   const formattedHeader = formatJournalHeader(
     journalIssue.volume,
     journalIssue.issue,
-    journalIssue.year,
-    journalIssue.title
+    journalIssue.year
   );
 
   return (

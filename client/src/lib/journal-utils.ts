@@ -18,15 +18,15 @@ export function formatJournalUrl(volume: number, issue: number): string {
   return `/journal/vol-${toRomanNumeral(volume).toLowerCase()}/no-${issue}`;
 }
 
-export function formatJournalHeader(volume: number, issue: number, year: number, title: string): string {
+export function formatJournalHeader(volume: number, issue: number, year: number): string {
   return `Zhi Systems Journal
-Vol. ${toRomanNumeral(volume)}, No. ${issue} (${year})
-Title: ${title}`;
+Vol. ${toRomanNumeral(volume)}, No. ${issue} (${year})`;
 }
 
 export function parseMarkdown(text: string): string {
   // Basic markdown parsing - can be enhanced later
   return text
+    .replace(/^# (.*$)/gm, '<h1 class="text-3xl font-bold mb-6">$1</h1>')
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
     .replace(/\n\n/g, '</p><p>')
