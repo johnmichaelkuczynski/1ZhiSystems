@@ -81,12 +81,20 @@ export default function Home() {
       {/* Contact Us - Top Left */}
       <div className="bg-gray-50 border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 py-3">
-          <a 
-            href="mailto:contact@zhisystems.ai" 
-            className="text-blue-600 hover:text-blue-800 font-medium"
-          >
-            Contact Us
-          </a>
+          <div className="flex items-center justify-between">
+            <a 
+              href="mailto:contact@zhisystems.ai" 
+              className="text-blue-600 hover:text-blue-800 font-medium"
+            >
+              Contact Us
+            </a>
+            <a
+              href="/journal"
+              className="text-blue-600 hover:text-blue-800 font-medium"
+            >
+              Zhi Systems Journal
+            </a>
+          </div>
         </div>
       </div>
 

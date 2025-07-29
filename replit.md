@@ -34,6 +34,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Frontend Components
 - **Home Page**: Main landing page displaying all books and applications in organized sections
+- **Journal System**: Complete blog system with listing, individual issues, and admin interface
 - **UI Components**: Comprehensive set of reusable components from shadcn/ui
 - **Responsive Design**: Mobile-first approach with Tailwind CSS
 
@@ -44,6 +45,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Database Schema
 - **Users Table**: Basic user entity with id, username, and password fields
+- **Journal Issues Table**: Complete blog system for "Zhi Systems Journal" with volume/issue numbering
 - **Schema Location**: `shared/schema.ts` for type sharing between client and server
 
 ## Data Flow
@@ -101,6 +103,13 @@ Preferred communication style: Simple, everyday language.
 - **Date**: January 26, 2025
 - **Changes**: Created DatabaseStorage class, added db.ts configuration, pushed schema to database
 - **Rationale**: Provides persistent data storage and prepares for production deployment
+
+### Journal System Implementation
+- **Implementation**: Complete blog system called "Zhi Systems Journal"
+- **Date**: January 27, 2025
+- **Features**: Volume/issue numbering with Roman numerals, markdown support, admin interface
+- **URL Structure**: `/journal/vol-[roman]/no-[number]` format for SEO-friendly URLs
+- **Components**: Journal listing, individual issue pages, admin panel for CRUD operations
 
 ### Component Library Choice
 - **Decision**: shadcn/ui over pre-built component libraries
