@@ -184,18 +184,4 @@ export default function Home() {
     </div>
   );
 }
-return (
-  <div>
-    <h1>Zhi Systems</h1>
-    <p>High-Performance AI Tools for Writers, Thinkers, and Analysts</p>
-    <h2>Living Books</h2>
-    <ul>
-      {livingBooksByKuczynski.map((book, i) => (
-        <li key={i}>
-          <a href={book.url}>{book.title}</a>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
 
