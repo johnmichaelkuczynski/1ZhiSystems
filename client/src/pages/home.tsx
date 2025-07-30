@@ -172,7 +172,6 @@ export default function Home() {
           </div>
         </section>
       </div>
-
       {/* Footer */}
       <footer className="bg-gray-50 border-t border-gray-200 mt-16">
         <div className="max-w-6xl mx-auto px-4 py-6">
@@ -184,4 +183,5 @@ export default function Home() {
     </div>
   );
 }
+
 
