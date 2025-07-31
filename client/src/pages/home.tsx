@@ -54,7 +54,6 @@ export default function Home() {
     { title: "Reading Pro", url: "https://readingpro.xyz" },
     { title: "Homework Helper", url: "https://homeworkrobot.xyz" },
     { title: "Photo Analysis", url: "https://photoanalysis.xyz" },
-    { title: "Photo/Video Psychoanalysis", url: "https://videoprofiler.xyz" },
     { title: "Genius Dictation", url: "https://geniusdictation.com" }
   ];
 
