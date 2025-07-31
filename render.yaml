@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: zhi-systems-website
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/journal
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: zhi-systems-db
+          property: connectionString
+    autoDeploy: false
+
+databases:
+  - name: zhi-systems-db
+    databaseName: zhi_systems
+    user: zhi_systems_user
+    plan: free
+    region: oregon
