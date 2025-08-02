@@ -42,6 +42,10 @@ export default function Home() {
     { title: "CIVILIZATION AND ITS DISCONTENTS", url: "https://civilizationanditsdiscontents.xyz" }
   ];
 
+  const courses = [
+    { title: "Logic101", url: "https://logic101.xyz" }
+  ];
+
   const coreApplications = [
     { title: "Living Book Creator", url: "https://livingbook.xyz/" },
     { title: "EZGrader", url: "https://ezgrader.xyz" },
@@ -54,7 +58,6 @@ export default function Home() {
     { title: "EZ Reader", url: "https://ezreader.ai" },
     { title: "Reading Pro", url: "https://readingpro.xyz" },
     { title: "Homework Helper", url: "https://homeworkrobot.xyz" },
-    { title: "Logic101", url: "https://logic101.xyz" },
     { title: "Photo Analysis", url: "https://photoanalysis.xyz" },
     { title: "Texas Bar Prep", url: "https://texasbarprep.xyz" },
     { title: "Genius Dictation", url: "https://geniusdictation.com" }
@@ -159,6 +162,19 @@ export default function Home() {
                 <BookItem key={book.title} title={book.title} url={book.url} />
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Courses Section */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-6 border-b border-gray-200 pb-2">
+            Courses
+          </h2>
+          
+          <div className="grid gap-3">
+            {courses.map((course) => (
+              <BookItem key={course.title} title={course.title} url={course.url} />
+            ))}
           </div>
         </section>
 
