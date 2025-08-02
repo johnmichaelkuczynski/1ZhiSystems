@@ -144,11 +144,6 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
       setShowModal(true);
       setShowToolbar(false);
 
-      toast({
-        title: "Processing complete!",
-        description: `Your ${action.replace('-', ' ')} has been generated.`
-      });
-
     } catch (error) {
       console.error(`Error processing ${action}:`, error);
       toast({
@@ -169,10 +164,6 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
       setTimeout(() => {
         setCopiedStates(prev => ({ ...prev, [key]: false }));
       }, 2000);
-      toast({
-        title: "Copied!",
-        description: "Content copied to clipboard."
-      });
     } catch (error) {
       toast({
         title: "Copy failed",
@@ -192,11 +183,6 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
 
       const result = await response.json();
       setModalContent({ ...modalContent, testResult: result });
-      
-      toast({
-        title: "Test submitted!",
-        description: `You scored ${result.score}%`
-      });
     } catch (error) {
       toast({
         title: "Submission failed",
@@ -527,9 +513,9 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
       <div
         className="fixed z-50 bg-white border border-gray-200 rounded-lg shadow-lg p-2"
         style={{
-          left: `${toolbarPosition.x - 200}px`,
+          left: `${toolbarPosition.x - 250}px`,
           top: `${toolbarPosition.y}px`,
-          minWidth: '400px'
+          minWidth: '500px'
         }}
       >
         <div className="mb-3">
@@ -552,12 +538,12 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
           </p>
         </div>
         
-        <div className="grid grid-cols-4 gap-1">
+        <div className="grid grid-cols-2 gap-2">
           {ACTION_BUTTONS.map((button) => (
             <Button
               key={button.action}
               size="sm"
-              className={`${button.color} text-white text-xs`}
+              className={`${button.color} text-white text-xs px-3 py-2 h-auto flex items-center justify-center min-h-[40px]`}
               onClick={() => {
                 if (button.action === 'rewrite') {
                   setCurrentAction(button.action);
@@ -568,11 +554,14 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
               }}
               disabled={isProcessing}
             >
-              {isProcessing && currentAction === button.action ? (
-                <Loader2 className="w-3 h-3 animate-spin" />
-              ) : (
-                button.icon
-              )}
+              <div className="flex flex-col items-center space-y-1">
+                {isProcessing && currentAction === button.action ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  button.icon
+                )}
+                <span className="text-xs font-medium">{button.label}</span>
+              </div>
             </Button>
           ))}
         </div>
@@ -585,10 +574,13 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
 
     return (
       <Dialog open={showModal} onOpenChange={setShowModal}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl" aria-describedby="rewrite-description">
           <DialogHeader>
             <DialogTitle>Rewrite Text</DialogTitle>
           </DialogHeader>
+          <div id="rewrite-description" className="sr-only">
+            Provide custom instructions for rewriting your selected text
+          </div>
           <div className="space-y-4">
             <div>
               <Label htmlFor="custom-instructions">Custom Instructions</Label>
@@ -630,12 +622,15 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
       {renderRewriteModal()}
       
       <Dialog open={showModal && currentAction !== 'rewrite'} onOpenChange={setShowModal}>
-        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto" aria-describedby="modal-description">
           <DialogHeader>
             <DialogTitle>
               {currentAction && ACTION_BUTTONS.find(b => b.action === currentAction)?.label}
             </DialogTitle>
           </DialogHeader>
+          <div id="modal-description" className="sr-only">
+            AI-generated content based on your selected text
+          </div>
           {renderModalContent()}
         </DialogContent>
       </Dialog>

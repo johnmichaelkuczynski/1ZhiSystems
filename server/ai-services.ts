@@ -107,9 +107,9 @@ Format the study guide with clear sections and bullet points for easy reading.`;
 }
 
 export async function generateTest(request: TextProcessingRequest): Promise<TestQuestion[]> {
-  const systemPrompt = "You are an expert educator creating assessment questions. Generate varied, challenging questions that test comprehension, analysis, and critical thinking.";
+  const systemPrompt = "You are an expert educator creating assessment questions. Generate varied, challenging questions that test comprehension, analysis, and critical thinking. Always respond with valid JSON only, no markdown formatting or code blocks.";
   
-  const prompt = `Create a test with 5-8 questions based on the following text. Include multiple choice, short answer, and essay questions. Return the response as valid JSON in this format:
+  const prompt = `Create a test with 5-8 questions based on the following text. Include multiple choice, short answer, and essay questions. Respond with ONLY valid JSON in this exact format (no markdown, no code blocks):
 
 {
   "questions": [
@@ -129,18 +129,27 @@ ${request.selectedText}`;
   const response = await callAI(request.provider, prompt, systemPrompt);
   
   try {
-    const parsed = JSON.parse(response);
+    let cleanResponse = response.trim();
+    if (cleanResponse.startsWith('```json')) {
+      cleanResponse = cleanResponse.replace(/^```json\s*/, '').replace(/\s*```$/, '');
+    }
+    if (cleanResponse.startsWith('```')) {
+      cleanResponse = cleanResponse.replace(/^```\s*/, '').replace(/\s*```$/, '');
+    }
+    
+    const parsed = JSON.parse(cleanResponse);
     return parsed.questions || [];
   } catch (error) {
     console.error('Failed to parse test questions:', error);
+    console.error('Raw response:', response);
     return [];
   }
 }
 
 export async function generatePodcast(request: TextProcessingRequest): Promise<PodcastScript> {
-  const systemPrompt = "You are an expert podcast scriptwriter. Create engaging, conversational scripts that make complex topics accessible and interesting.";
+  const systemPrompt = "You are an expert podcast scriptwriter. Create engaging, conversational scripts that make complex topics accessible and interesting. Always respond with valid JSON only, no markdown formatting or code blocks.";
   
-  const prompt = `Create a podcast script based on the following text. Make it engaging and conversational, suitable for audio consumption. Return as valid JSON:
+  const prompt = `Create a podcast script based on the following text. Make it engaging and conversational, suitable for audio consumption. Respond with ONLY valid JSON in this exact format (no markdown, no code blocks):
 
 {
   "title": "Podcast episode title",
@@ -156,7 +165,15 @@ ${request.selectedText}`;
   const response = await callAI(request.provider, prompt, systemPrompt);
   
   try {
-    const parsed = JSON.parse(response);
+    let cleanResponse = response.trim();
+    if (cleanResponse.startsWith('```json')) {
+      cleanResponse = cleanResponse.replace(/^```json\s*/, '').replace(/\s*```$/, '');
+    }
+    if (cleanResponse.startsWith('```')) {
+      cleanResponse = cleanResponse.replace(/^```\s*/, '').replace(/\s*```$/, '');
+    }
+    
+    const parsed = JSON.parse(cleanResponse);
     return {
       title: parsed.title || 'Podcast Episode',
       introduction: parsed.introduction || '',
@@ -177,9 +194,9 @@ ${request.selectedText}`;
 }
 
 export async function generateCognitiveMap(request: TextProcessingRequest): Promise<CognitiveMap> {
-  const systemPrompt = "You are an expert in knowledge mapping and conceptual analysis. Create clear, hierarchical cognitive maps that visualize relationships between ideas.";
+  const systemPrompt = "You are an expert in knowledge mapping and conceptual analysis. Create clear, hierarchical cognitive maps that visualize relationships between ideas. Always respond with valid JSON only, no markdown formatting or code blocks.";
   
-  const prompt = `Create a cognitive map for the following text. Identify the central concept and main branches with their interconnections. Return as valid JSON:
+  const prompt = `Create a cognitive map for the following text. Identify the central concept and main branches with their interconnections. Respond with ONLY valid JSON in this exact format (no markdown, no code blocks):
 
 {
   "centralConcept": "Main central idea",
@@ -199,7 +216,15 @@ ${request.selectedText}`;
   const response = await callAI(request.provider, prompt, systemPrompt);
   
   try {
-    const parsed = JSON.parse(response);
+    let cleanResponse = response.trim();
+    if (cleanResponse.startsWith('```json')) {
+      cleanResponse = cleanResponse.replace(/^```json\s*/, '').replace(/\s*```$/, '');
+    }
+    if (cleanResponse.startsWith('```')) {
+      cleanResponse = cleanResponse.replace(/^```\s*/, '').replace(/\s*```$/, '');
+    }
+    
+    const parsed = JSON.parse(cleanResponse);
     return {
       centralConcept: parsed.centralConcept || 'Main Concept',
       mainBranches: parsed.mainBranches || [],
@@ -207,6 +232,7 @@ ${request.selectedText}`;
     };
   } catch (error) {
     console.error('Failed to parse cognitive map:', error);
+    console.error('Raw response:', response);
     return {
       centralConcept: 'Main Concept',
       mainBranches: [],
@@ -216,13 +242,13 @@ ${request.selectedText}`;
 }
 
 export async function generateSummaryThesis(request: TextProcessingRequest): Promise<SummaryThesis> {
-  const systemPrompt = "You are an expert at distilling complex ideas into clear, concise summaries and identifying core theses.";
+  const systemPrompt = "You are an expert at distilling complex ideas into clear, concise summaries and identifying core theses. Always respond with valid JSON only, no markdown formatting or code blocks.";
   
   const prompt = `Analyze the following text and provide:
 1. A one-line thesis statement that captures the main argument
 2. A one-paragraph summary
 
-Return as valid JSON:
+Respond with ONLY valid JSON in this exact format (no markdown, no code blocks):
 {
   "thesis": "One line thesis statement here",
   "summary": "One paragraph summary here"
@@ -234,13 +260,22 @@ ${request.selectedText}`;
   const response = await callAI(request.provider, prompt, systemPrompt);
   
   try {
-    const parsed = JSON.parse(response);
+    let cleanResponse = response.trim();
+    if (cleanResponse.startsWith('```json')) {
+      cleanResponse = cleanResponse.replace(/^```json\s*/, '').replace(/\s*```$/, '');
+    }
+    if (cleanResponse.startsWith('```')) {
+      cleanResponse = cleanResponse.replace(/^```\s*/, '').replace(/\s*```$/, '');
+    }
+    
+    const parsed = JSON.parse(cleanResponse);
     return {
       thesis: parsed.thesis || 'Main thesis not identified',
       summary: parsed.summary || 'Summary not available'
     };
   } catch (error) {
     console.error('Failed to parse summary thesis:', error);
+    console.error('Raw response:', response);
     return {
       thesis: 'Main thesis not identified',
       summary: response
@@ -260,9 +295,9 @@ ${request.selectedText}`;
 }
 
 export async function generateSuggestedReadings(request: TextProcessingRequest): Promise<SuggestedReadings> {
-  const systemPrompt = "You are a research librarian and academic expert. Recommend relevant, high-quality readings that complement and extend the given material.";
+  const systemPrompt = "You are a research librarian and academic expert. Recommend relevant, high-quality readings that complement and extend the given material. Always respond with valid JSON only, no markdown formatting or code blocks.";
   
-  const prompt = `Based on the following text, suggest relevant readings including primary sources and supplementary materials. Return as valid JSON:
+  const prompt = `Based on the following text, suggest relevant readings including primary sources and supplementary materials. Respond with ONLY valid JSON in this exact format (no markdown, no code blocks):
 
 {
   "primarySources": [
@@ -270,7 +305,7 @@ export async function generateSuggestedReadings(request: TextProcessingRequest):
       "title": "Book/article title",
       "author": "Author name", 
       "relevance": "Why this is relevant",
-      "difficulty": "beginner/intermediate/advanced"
+      "difficulty": "beginner"
     }
   ],
   "supplementaryReadings": [
@@ -278,7 +313,7 @@ export async function generateSuggestedReadings(request: TextProcessingRequest):
       "title": "Title",
       "author": "Author",
       "relevance": "Relevance explanation",
-      "type": "book/article/paper/website"
+      "type": "book"
     }
   ]
 }
@@ -289,13 +324,23 @@ ${request.selectedText}`;
   const response = await callAI(request.provider, prompt, systemPrompt);
   
   try {
-    const parsed = JSON.parse(response);
+    // Clean the response to remove any markdown formatting
+    let cleanResponse = response.trim();
+    if (cleanResponse.startsWith('```json')) {
+      cleanResponse = cleanResponse.replace(/^```json\s*/, '').replace(/\s*```$/, '');
+    }
+    if (cleanResponse.startsWith('```')) {
+      cleanResponse = cleanResponse.replace(/^```\s*/, '').replace(/\s*```$/, '');
+    }
+    
+    const parsed = JSON.parse(cleanResponse);
     return {
       primarySources: parsed.primarySources || [],
       supplementaryReadings: parsed.supplementaryReadings || []
     };
   } catch (error) {
     console.error('Failed to parse suggested readings:', error);
+    console.error('Raw response:', response);
     return {
       primarySources: [],
       supplementaryReadings: []
