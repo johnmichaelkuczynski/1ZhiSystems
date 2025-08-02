@@ -16,7 +16,8 @@ export default function Home() {
     { title: "SEMANTICS", url: "https://semantics101.xyz" },
     { title: "ANALYTIC PHILOSOPHY CHAPTER 1", url: "https://analysisofanalysis.xyz" },
     { title: "WHY WAS SOCRATES EXECUTED?", url: "https://socrates101.xyz" },
-    { title: "ANALYTIC PHILOSOPHY CHAPTER 2", url: "https://platonism101.xyz" }
+    { title: "ANALYTIC PHILOSOPHY CHAPTER 2", url: "https://platonism101.xyz" },
+    { title: "ANALYTIC PHILOSOPHY CHAPTER 3", url: "https://truthandmeaning.xyz" }
   ];
 
   const classicsBooks = [
@@ -53,7 +54,9 @@ export default function Home() {
     { title: "EZ Reader", url: "https://ezreader.ai" },
     { title: "Reading Pro", url: "https://readingpro.xyz" },
     { title: "Homework Helper", url: "https://homeworkrobot.xyz" },
+    { title: "Logic101", url: "https://logic101.xyz" },
     { title: "Photo Analysis", url: "https://photoanalysis.xyz" },
+    { title: "Texas Bar Prep", url: "https://texasbarprep.xyz" },
     { title: "Genius Dictation", url: "https://geniusdictation.com" }
   ];
 
