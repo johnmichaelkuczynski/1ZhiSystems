@@ -1,5 +1,6 @@
 import OpenAI from 'openai';
 import Anthropic from '@anthropic-ai/sdk';
+import fs from 'fs';
 import type { AIProvider, TextProcessingRequest, TestQuestion, PodcastScript, CognitiveMap, SummaryThesis, SuggestedReadings } from '@shared/ai-services';
 
 // Initialize AI clients
@@ -80,6 +81,24 @@ async function callAI(provider: AIProvider, prompt: string, systemPrompt?: strin
   }
 }
 
+// Generate speech using OpenAI TTS
+async function generateSpeech(text: string): Promise<Buffer> {
+  try {
+    const response = await openai.audio.speech.create({
+      model: 'tts-1-hd',
+      voice: 'alloy',
+      input: text,
+      response_format: 'mp3'
+    });
+
+    const buffer = Buffer.from(await response.arrayBuffer());
+    return buffer;
+  } catch (error) {
+    console.error('Error generating speech:', error);
+    throw error;
+  }
+}
+
 export async function rewriteText(request: TextProcessingRequest): Promise<string> {
   const systemPrompt = "You are an expert editor and writer. Rewrite the given text according to the user's instructions while maintaining the core meaning and improving clarity, style, and effectiveness.";
   
@@ -146,51 +165,40 @@ ${request.selectedText}`;
   }
 }
 
-export async function generatePodcast(request: TextProcessingRequest): Promise<PodcastScript> {
-  const systemPrompt = "You are an expert podcast scriptwriter. Create engaging, conversational scripts that make complex topics accessible and interesting. Always respond with valid JSON only, no markdown formatting or code blocks.";
+export async function generatePodcast(request: TextProcessingRequest): Promise<{ script: PodcastScript; audioUrl: string }> {
+  const systemPrompt = "You are an expert podcast host. Create engaging, conversational podcast content that makes complex topics accessible and interesting. Write in a natural speaking style with smooth transitions.";
   
-  const prompt = `Create a podcast script based on the following text. Make it engaging and conversational, suitable for audio consumption. Respond with ONLY valid JSON in this exact format (no markdown, no code blocks):
+  const prompt = `Create a complete podcast episode based on the following text. Make it engaging and conversational, suitable for audio consumption. Write as if you're speaking directly to listeners:
 
-{
-  "title": "Podcast episode title",
-  "introduction": "Engaging introduction",
-  "mainContent": "Main discussion content with natural flow",
-  "conclusion": "Wrap-up and key takeaways",
-  "estimatedDuration": "8-12 minutes"
-}
+Text to discuss:
+${request.selectedText}
 
-Text:
-${request.selectedText}`;
+Create a full podcast script that flows naturally when spoken aloud.`;
 
-  const response = await callAI(request.provider, prompt, systemPrompt);
+  const scriptResponse = await callAI(request.provider, prompt, systemPrompt);
   
-  try {
-    let cleanResponse = response.trim();
-    if (cleanResponse.startsWith('```json')) {
-      cleanResponse = cleanResponse.replace(/^```json\s*/, '').replace(/\s*```$/, '');
-    }
-    if (cleanResponse.startsWith('```')) {
-      cleanResponse = cleanResponse.replace(/^```\s*/, '').replace(/\s*```$/, '');
-    }
-    
-    const parsed = JSON.parse(cleanResponse);
-    return {
-      title: parsed.title || 'Podcast Episode',
-      introduction: parsed.introduction || '',
-      mainContent: parsed.mainContent || '',
-      conclusion: parsed.conclusion || '',
-      estimatedDuration: parsed.estimatedDuration || '5-10 minutes'
-    };
-  } catch (error) {
-    console.error('Failed to parse podcast script:', error);
-    return {
-      title: 'Podcast Episode',
-      introduction: '',
-      mainContent: response,
-      conclusion: '',
+  // Generate audio using OpenAI TTS
+  const audioBuffer = await generateSpeech(scriptResponse);
+  
+  // Create a unique filename and save the audio
+  const timestamp = Date.now();
+  const filename = `podcast_${timestamp}.mp3`;
+  const audioPath = `/tmp/${filename}`;
+  
+  // Write the audio buffer to file
+  fs.writeFileSync(audioPath, audioBuffer);
+  
+  // Return both script and audio URL
+  return {
+    script: {
+      title: 'AI Generated Podcast',
+      introduction: 'Podcast introduction...',
+      mainContent: scriptResponse,
+      conclusion: 'Thanks for listening!',
       estimatedDuration: '5-10 minutes'
-    };
-  }
+    },
+    audioUrl: `/api/audio/${filename}`
+  };
 }
 
 export async function generateCognitiveMap(request: TextProcessingRequest): Promise<CognitiveMap> {

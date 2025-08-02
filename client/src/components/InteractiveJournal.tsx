@@ -209,7 +209,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
       }
     } else if (modalContent.questions) {
       actionType = 'test';
-    } else if (modalContent.script) {
+    } else if (modalContent.script || modalContent.audioUrl) {
       actionType = 'podcast';
     } else if (modalContent.map) {
       actionType = 'cognitive-map';
@@ -330,22 +330,25 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
         );
 
       case 'podcast':
-        const script: PodcastScript = modalContent.script;
+        const script: PodcastScript = modalContent.script || {};
         return (
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">{script.title}</h3>
             <Badge variant="secondary">Duration: {script.estimatedDuration}</Badge>
             
-            {script.audioUrl && (
+            {modalContent.audioUrl && (
               <div className="p-4 bg-blue-50 rounded-lg">
                 <div className="flex items-center space-x-2 mb-2">
                   <Volume2 className="w-4 h-4" />
                   <span className="font-medium">Audio Version</span>
                 </div>
                 <audio controls className="w-full">
-                  <source src={script.audioUrl} type="audio/wav" />
+                  <source src={modalContent.audioUrl} type="audio/mpeg" />
                   Your browser does not support audio playback.
                 </audio>
+                <p className="text-sm text-blue-600 mt-2">
+                  Generated using OpenAI TTS with "alloy" voice
+                </p>
               </div>
             )}
 
@@ -673,7 +676,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
                   if (modalContent.result.includes('thesis') || modalContent.result.includes('Thesis')) return 'Thesis Deep Dive';
                   return 'Rewritten Text';
                 } else if (modalContent.questions) return 'Test Questions';
-                else if (modalContent.script) return 'Podcast Script';
+                else if (modalContent.script || modalContent.audioUrl) return 'AI Generated Podcast';
                 else if (modalContent.map) return 'Cognitive Map';
                 else if (modalContent.result && modalContent.result.thesis) return 'Summary + Thesis';
                 else if (modalContent.readings) return 'Suggested Readings';

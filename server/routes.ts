@@ -1,5 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
+import fs from "fs";
 import { storage } from "./storage";
 import { insertJournalIssueSchema } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
@@ -170,26 +171,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/ai/podcast", async (req, res) => {
     try {
       const request: TextProcessingRequest = req.body;
-      const script = await generatePodcast(request);
+      const result = await generatePodcast(request);
       
-      // Generate audio if requested
-      if (request.includeAudio && request.voiceSelection) {
-        try {
-          const fullScript = `${script.introduction}\n\n${script.mainContent}\n\n${script.conclusion}`;
-          const audioUrl = await generateAudio(fullScript, {
-            provider: 'azure',
-            voice: request.voiceSelection,
-            speed: 1.0,
-            pitch: 0
-          });
-          script.audioUrl = audioUrl;
-        } catch (audioError) {
-          console.error("Error generating audio:", audioError);
-          // Continue without audio
-        }
-      }
-      
-      res.json({ script });
+      res.json(result);
     } catch (error) {
       console.error("Error generating podcast:", error);
       res.status(500).json({ error: "Failed to generate podcast" });
@@ -242,6 +226,37 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/voice-options", (req, res) => {
     res.json(VOICE_OPTIONS);
+  });
+
+  // Serve audio files
+  app.get('/api/audio/:filename', (req, res) => {
+    try {
+      const filename = req.params.filename;
+      const audioPath = `/tmp/${filename}`;
+      
+      // Check if file exists
+      if (!fs.existsSync(audioPath)) {
+        return res.status(404).json({ error: 'Audio file not found' });
+      }
+      
+      // Set appropriate headers for audio
+      res.setHeader('Content-Type', 'audio/mpeg');
+      res.setHeader('Content-Disposition', `inline; filename="${filename}"`);
+      
+      // Stream the file
+      const fileStream = fs.createReadStream(audioPath);
+      fileStream.pipe(res);
+      
+      // Clean up file after streaming (optional - may want to keep for caching)
+      fileStream.on('end', () => {
+        // Optionally delete the file after serving
+        // fs.unlinkSync(audioPath);
+      });
+      
+    } catch (error) {
+      console.error('Error serving audio:', error);
+      res.status(500).json({ error: 'Failed to serve audio file' });
+    }
   });
 
   const httpServer = createServer(app);
