@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams, Link } from "wouter";
 import { formatJournalHeader, parseMarkdown } from "@/lib/journal-utils";
 import type { JournalIssue } from "@shared/schema";
+import InteractiveJournal from "@/components/InteractiveJournal";
 
 export default function JournalIssuePage() {
   const params = useParams();
@@ -105,13 +106,12 @@ export default function JournalIssuePage() {
           </pre>
         </header>
 
-        {/* Article Body */}
+        {/* Interactive Article Body */}
         <div className="prose prose-lg max-w-none">
-          <div 
-            className="font-serif text-lg leading-relaxed text-gray-900"
-            dangerouslySetInnerHTML={{ 
-              __html: `<p>${parseMarkdown(journalIssue.body)}</p>` 
-            }}
+          <InteractiveJournal 
+            content={parseMarkdown(journalIssue.body)}
+            issueId={journalIssue.id}
+            title={journalIssue.title}
           />
         </div>
 
