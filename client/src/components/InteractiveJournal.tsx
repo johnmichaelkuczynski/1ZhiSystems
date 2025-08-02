@@ -117,7 +117,6 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
     }
 
     setIsProcessing(true);
-    setCurrentAction(action);
 
     try {
       const request: TextProcessingRequest = {
@@ -153,7 +152,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
       });
     } finally {
       setIsProcessing(false);
-      setCurrentAction(null);
+      // Don't clear currentAction until modal is closed
     }
   };
 
@@ -193,9 +192,36 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
   };
 
   const renderModalContent = () => {
-    if (!modalContent || !currentAction) return null;
+    if (!modalContent) {
+      return <div className="p-4 text-center text-gray-500">No content available</div>;
+    }
 
-    switch (currentAction) {
+    // Determine action from modal content structure
+    let actionType: ActionType;
+    if (modalContent.result && typeof modalContent.result === 'string') {
+      // Could be rewrite, study-guide, thesis-deep-dive
+      if (modalContent.result.includes('# Study Guide')) {
+        actionType = 'study-guide';
+      } else if (modalContent.result.includes('thesis') || modalContent.result.includes('Thesis')) {
+        actionType = 'thesis-deep-dive';
+      } else {
+        actionType = 'rewrite';
+      }
+    } else if (modalContent.questions) {
+      actionType = 'test';
+    } else if (modalContent.script) {
+      actionType = 'podcast';
+    } else if (modalContent.map) {
+      actionType = 'cognitive-map';
+    } else if (modalContent.result && modalContent.result.thesis && modalContent.result.summary) {
+      actionType = 'summary-thesis';
+    } else if (modalContent.readings) {
+      actionType = 'suggested-readings';
+    } else {
+      actionType = currentAction || 'rewrite';
+    }
+
+    switch (actionType) {
       case 'rewrite':
         return (
           <div className="space-y-4">
@@ -549,6 +575,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
                   setCurrentAction(button.action);
                   setShowModal(true);
                 } else {
+                  setCurrentAction(button.action);
                   processWithAI(button.action);
                 }
               }}
@@ -573,7 +600,13 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
     if (currentAction !== 'rewrite' || !showModal) return null;
 
     return (
-      <Dialog open={showModal} onOpenChange={setShowModal}>
+      <Dialog open={showModal} onOpenChange={(open) => {
+        setShowModal(open);
+        if (!open) {
+          setCurrentAction(null);
+          setModalContent(null);
+        }
+      }}>
         <DialogContent className="max-w-2xl" aria-describedby="rewrite-description">
           <DialogHeader>
             <DialogTitle>Rewrite Text</DialogTitle>
@@ -621,11 +654,31 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
       {renderToolbar()}
       {renderRewriteModal()}
       
-      <Dialog open={showModal && currentAction !== 'rewrite'} onOpenChange={setShowModal}>
+      <Dialog open={showModal && currentAction !== 'rewrite'} onOpenChange={(open) => {
+        setShowModal(open);
+        if (!open) {
+          setCurrentAction(null);
+          setModalContent(null);
+        }
+      }}>
         <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto" aria-describedby="modal-description">
           <DialogHeader>
             <DialogTitle>
-              {currentAction && ACTION_BUTTONS.find(b => b.action === currentAction)?.label}
+              {(() => {
+                if (!modalContent) return 'AI Result';
+                
+                // Determine title from modal content structure
+                if (modalContent.result && typeof modalContent.result === 'string') {
+                  if (modalContent.result.includes('# Study Guide')) return 'Study Guide';
+                  if (modalContent.result.includes('thesis') || modalContent.result.includes('Thesis')) return 'Thesis Deep Dive';
+                  return 'Rewritten Text';
+                } else if (modalContent.questions) return 'Test Questions';
+                else if (modalContent.script) return 'Podcast Script';
+                else if (modalContent.map) return 'Cognitive Map';
+                else if (modalContent.result && modalContent.result.thesis) return 'Summary + Thesis';
+                else if (modalContent.readings) return 'Suggested Readings';
+                else return 'AI Result';
+              })()}
             </DialogTitle>
           </DialogHeader>
           <div id="modal-description" className="sr-only">
