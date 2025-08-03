@@ -84,6 +84,11 @@ async function callAI(provider: AIProvider, prompt: string, systemPrompt?: strin
 // Generate speech using OpenAI TTS
 async function generateSpeech(text: string): Promise<Buffer> {
   try {
+    // Validate text length (OpenAI TTS has a 4096 character limit)
+    if (text.length > 4096) {
+      throw new Error(`Text too long for TTS: ${text.length} characters (max: 4096)`);
+    }
+
     const response = await openai.audio.speech.create({
       model: 'tts-1-hd',
       voice: 'alloy',
@@ -95,6 +100,9 @@ async function generateSpeech(text: string): Promise<Buffer> {
     return buffer;
   } catch (error) {
     console.error('Error generating speech:', error);
+    if (error instanceof Error && error.message?.includes('maximum context length')) {
+      throw new Error('Script too long for audio generation. Please try with shorter text.');
+    }
     throw error;
   }
 }
@@ -166,19 +174,25 @@ ${request.selectedText}`;
 }
 
 export async function generatePodcast(request: TextProcessingRequest): Promise<{ script: PodcastScript; audioUrl: string }> {
-  const systemPrompt = "You are an expert podcast host. Create engaging, conversational podcast content that makes complex topics accessible and interesting. Write in a natural speaking style with smooth transitions.";
+  const systemPrompt = "You are an expert podcast host. Create engaging, conversational podcast content that makes complex topics accessible and interesting. Write in a natural speaking style with smooth transitions. Keep the content concise for audio - aim for 2-3 minutes of speaking time (about 300-400 words).";
   
-  const prompt = `Create a complete podcast episode based on the following text. Make it engaging and conversational, suitable for audio consumption. Write as if you're speaking directly to listeners:
+  const prompt = `Create a concise podcast episode based on the following text. Make it engaging and conversational, suitable for audio consumption. Keep it short - around 300-400 words maximum for a 2-3 minute podcast. Write as if you're speaking directly to listeners:
 
 Text to discuss:
 ${request.selectedText}
 
-Create a full podcast script that flows naturally when spoken aloud.`;
+Create a brief but complete podcast script that flows naturally when spoken aloud. Focus on the key insights and make it accessible.`;
 
   const scriptResponse = await callAI(request.provider, prompt, systemPrompt);
   
+  // Ensure script is not too long for TTS (max 4000 characters to be safe)
+  let finalScript = scriptResponse;
+  if (finalScript.length > 4000) {
+    finalScript = finalScript.substring(0, 3900) + "... Thanks for listening to this episode!";
+  }
+  
   // Generate audio using OpenAI TTS
-  const audioBuffer = await generateSpeech(scriptResponse);
+  const audioBuffer = await generateSpeech(finalScript);
   
   // Create a unique filename and save the audio
   const timestamp = Date.now();
@@ -192,10 +206,10 @@ Create a full podcast script that flows naturally when spoken aloud.`;
   return {
     script: {
       title: 'AI Generated Podcast',
-      introduction: 'Podcast introduction...',
-      mainContent: scriptResponse,
+      introduction: 'Welcome to this episode...',
+      mainContent: finalScript,
       conclusion: 'Thanks for listening!',
-      estimatedDuration: '5-10 minutes'
+      estimatedDuration: '2-3 minutes'
     },
     audioUrl: `/api/audio/${filename}`
   };
