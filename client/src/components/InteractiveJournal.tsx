@@ -467,29 +467,57 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
                 })}
                 
                 {/* Render nodes */}
-                {map.nodes?.map((node) => (
-                  <g key={node.id}>
-                    <circle
-                      cx={node.x}
-                      cy={node.y}
-                      r={node.type === 'central' ? 50 : node.type === 'primary' ? 35 : 25}
-                      fill={node.color}
-                      stroke="#fff"
-                      strokeWidth="3"
-                      className="cursor-pointer hover:opacity-80"
-                    />
-                    <text
-                      x={node.x}
-                      y={node.y}
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      className="fill-white text-xs font-medium pointer-events-none"
-                      style={{ fontSize: node.type === 'central' ? '14px' : '12px' }}
-                    >
-                      {node.label.length > 20 ? node.label.substring(0, 18) + '...' : node.label}
-                    </text>
-                  </g>
-                ))}
+                {map.nodes?.map((node) => {
+                  const radius = node.type === 'central' ? 70 : node.type === 'primary' ? 55 : 40;
+                  const maxCharsPerLine = node.type === 'central' ? 12 : node.type === 'primary' ? 10 : 8;
+                  const words = node.label.split(' ');
+                  const lines = [];
+                  let currentLine = '';
+                  
+                  // Wrap text into lines
+                  for (const word of words) {
+                    if ((currentLine + ' ' + word).length <= maxCharsPerLine) {
+                      currentLine = currentLine ? currentLine + ' ' + word : word;
+                    } else {
+                      if (currentLine) lines.push(currentLine);
+                      currentLine = word;
+                    }
+                  }
+                  if (currentLine) lines.push(currentLine);
+                  
+                  // Limit to 3 lines max
+                  if (lines.length > 3) {
+                    lines.splice(2);
+                    lines[2] = lines[2].substring(0, maxCharsPerLine - 3) + '...';
+                  }
+                  
+                  return (
+                    <g key={node.id}>
+                      <circle
+                        cx={node.x}
+                        cy={node.y}
+                        r={radius}
+                        fill={node.color}
+                        stroke="#fff"
+                        strokeWidth="3"
+                        className="cursor-pointer hover:opacity-80"
+                      />
+                      {lines.map((line, i) => (
+                        <text
+                          key={i}
+                          x={node.x}
+                          y={node.y + (i - (lines.length - 1) / 2) * 14}
+                          textAnchor="middle"
+                          dominantBaseline="middle"
+                          className="fill-white font-medium pointer-events-none"
+                          style={{ fontSize: node.type === 'central' ? '13px' : node.type === 'primary' ? '11px' : '10px' }}
+                        >
+                          {line}
+                        </text>
+                      ))}
+                    </g>
+                  );
+                })}
               </svg>
             </div>
 

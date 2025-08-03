@@ -251,7 +251,7 @@ export async function generateCognitiveMap(request: TextProcessingRequest): Prom
   "insights": ["Key insight 1", "Key insight 2"]
 }
 
-Create 5-8 nodes total. Use these colors: central (#3B82F6), primary (#10B981), secondary (#F59E0B), detail (#EF4444). Position nodes in a visually appealing radial pattern around the center.
+Create 5-8 nodes total. Use these colors: central (#3B82F6), primary (#10B981), secondary (#F59E0B), detail (#EF4444). Position nodes in a visually appealing radial pattern around the center. Keep node labels concise - use 1-3 words when possible for better readability in the visual map.
 
 Text:
 ${request.selectedText}`;
