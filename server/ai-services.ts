@@ -216,21 +216,42 @@ Create a brief but complete podcast script that flows naturally when spoken alou
 }
 
 export async function generateCognitiveMap(request: TextProcessingRequest): Promise<CognitiveMap> {
-  const systemPrompt = "You are an expert in knowledge mapping and conceptual analysis. Create clear, hierarchical cognitive maps that visualize relationships between ideas. Always respond with valid JSON only, no markdown formatting or code blocks.";
+  const systemPrompt = "You are an expert in mind mapping and visual knowledge representation. Create interactive cognitive maps that show concepts as connected nodes in a visual network. Always respond with valid JSON only, no markdown formatting or code blocks.";
   
-  const prompt = `Create a cognitive map for the following text. Identify the central concept and main branches with their interconnections. Respond with ONLY valid JSON in this exact format (no markdown, no code blocks):
+  const prompt = `Create a visual cognitive map for the following text. Design it as a network of interconnected nodes representing concepts. The central concept should be at the center (x:400, y:300), with related concepts arranged around it in a radial pattern. Respond with ONLY valid JSON in this exact format (no markdown, no code blocks):
 
 {
   "centralConcept": "Main central idea",
-  "mainBranches": [
+  "nodes": [
     {
-      "title": "Branch title",
-      "concepts": ["concept1", "concept2"],
-      "connections": ["how this connects to other branches"]
+      "id": "central",
+      "label": "Central Concept",
+      "type": "central",
+      "x": 400,
+      "y": 300,
+      "color": "#3B82F6"
+    },
+    {
+      "id": "node1",
+      "label": "Primary Concept 1",
+      "type": "primary",
+      "x": 200,
+      "y": 150,
+      "color": "#10B981"
     }
   ],
-  "keyInsights": ["insight1", "insight2"]
+  "connections": [
+    {
+      "from": "central",
+      "to": "node1",
+      "label": "relationship description",
+      "type": "strong"
+    }
+  ],
+  "insights": ["Key insight 1", "Key insight 2"]
 }
+
+Create 5-8 nodes total. Use these colors: central (#3B82F6), primary (#10B981), secondary (#F59E0B), detail (#EF4444). Position nodes in a visually appealing radial pattern around the center.
 
 Text:
 ${request.selectedText}`;
@@ -249,16 +270,27 @@ ${request.selectedText}`;
     const parsed = JSON.parse(cleanResponse);
     return {
       centralConcept: parsed.centralConcept || 'Main Concept',
-      mainBranches: parsed.mainBranches || [],
-      keyInsights: parsed.keyInsights || []
+      nodes: parsed.nodes || [],
+      connections: parsed.connections || [],
+      insights: parsed.insights || []
     };
   } catch (error) {
     console.error('Failed to parse cognitive map:', error);
     console.error('Raw response:', response);
     return {
       centralConcept: 'Main Concept',
-      mainBranches: [],
-      keyInsights: []
+      nodes: [
+        {
+          id: 'central',
+          label: 'Main Concept',
+          type: 'central',
+          x: 400,
+          y: 300,
+          color: '#3B82F6'
+        }
+      ],
+      connections: [],
+      insights: []
     };
   }
 }

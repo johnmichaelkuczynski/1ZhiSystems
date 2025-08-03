@@ -432,46 +432,104 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
         return (
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Cognitive Map</h3>
-            <div className="text-center p-6 bg-blue-50 rounded-lg">
-              <h4 className="text-xl font-bold text-blue-800">{map.centralConcept}</h4>
-            </div>
             
-            <div className="grid gap-4">
-              {map.mainBranches.map((branch, index) => (
-                <div key={index} className="p-4 border rounded-lg">
-                  <h5 className="font-semibold text-lg mb-2">{branch.title}</h5>
-                  <div className="mb-3">
-                    <h6 className="font-medium text-sm text-gray-600 mb-1">Concepts:</h6>
-                    <div className="flex flex-wrap gap-1">
-                      {branch.concepts.map((concept, i) => (
-                        <Badge key={i} variant="outline">{concept}</Badge>
-                      ))}
-                    </div>
-                  </div>
-                  {branch.connections.length > 0 && (
-                    <div>
-                      <h6 className="font-medium text-sm text-gray-600 mb-1">Connections:</h6>
-                      <ul className="text-sm text-gray-700">
-                        {branch.connections.map((connection, i) => (
-                          <li key={i} className="mb-1">• {connection}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              ))}
+            {/* Visual Node Map */}
+            <div className="relative bg-gray-50 rounded-lg border overflow-hidden" style={{ height: '600px', width: '100%', maxWidth: '800px' }}>
+              <svg width="800" height="600" className="absolute inset-0">
+                {/* Render connections first (behind nodes) */}
+                {map.connections?.map((connection, i) => {
+                  const fromNode = map.nodes?.find(n => n.id === connection.from);
+                  const toNode = map.nodes?.find(n => n.id === connection.to);
+                  if (!fromNode || !toNode) return null;
+                  
+                  return (
+                    <g key={i}>
+                      <line
+                        x1={fromNode.x}
+                        y1={fromNode.y}
+                        x2={toNode.x}
+                        y2={toNode.y}
+                        stroke={connection.type === 'strong' ? '#374151' : '#9CA3AF'}
+                        strokeWidth={connection.type === 'strong' ? 2 : 1}
+                        strokeDasharray={connection.type === 'weak' ? '5,5' : '0'}
+                      />
+                      {/* Connection label */}
+                      <text
+                        x={(fromNode.x + toNode.x) / 2}
+                        y={(fromNode.y + toNode.y) / 2 - 5}
+                        textAnchor="middle"
+                        className="fill-gray-600 text-xs"
+                      >
+                        {connection.label}
+                      </text>
+                    </g>
+                  );
+                })}
+                
+                {/* Render nodes */}
+                {map.nodes?.map((node) => (
+                  <g key={node.id}>
+                    <circle
+                      cx={node.x}
+                      cy={node.y}
+                      r={node.type === 'central' ? 50 : node.type === 'primary' ? 35 : 25}
+                      fill={node.color}
+                      stroke="#fff"
+                      strokeWidth="3"
+                      className="cursor-pointer hover:opacity-80"
+                    />
+                    <text
+                      x={node.x}
+                      y={node.y}
+                      textAnchor="middle"
+                      dominantBaseline="middle"
+                      className="fill-white text-xs font-medium pointer-events-none"
+                      style={{ fontSize: node.type === 'central' ? '14px' : '12px' }}
+                    >
+                      {node.label.length > 20 ? node.label.substring(0, 18) + '...' : node.label}
+                    </text>
+                  </g>
+                ))}
+              </svg>
             </div>
 
-            {map.keyInsights.length > 0 && (
-              <div className="p-4 bg-yellow-50 rounded-lg">
-                <h4 className="font-semibold mb-2">Key Insights</h4>
-                <ul className="space-y-1">
-                  {map.keyInsights.map((insight, index) => (
-                    <li key={index} className="text-sm">• {insight}</li>
-                  ))}
-                </ul>
+            {/* Legend */}
+            <div className="flex gap-4 text-xs">
+              <div className="flex items-center gap-1">
+                <div className="w-4 h-4 rounded-full bg-blue-500"></div>
+                <span>Central</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <div className="w-4 h-4 rounded-full bg-green-500"></div>
+                <span>Primary</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <div className="w-4 h-4 rounded-full bg-yellow-500"></div>
+                <span>Secondary</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <div className="w-4 h-4 rounded-full bg-red-500"></div>
+                <span>Detail</span>
+              </div>
+            </div>
+
+            {/* Key Insights */}
+            {map.insights && map.insights.length > 0 && (
+              <div className="p-4 bg-amber-50 rounded-lg">
+                <h5 className="font-semibold mb-2">Key Insights</h5>
+                {map.insights.map((insight: string, index: number) => (
+                  <p key={index} className="text-sm text-amber-800 mb-1">• {insight}</p>
+                ))}
               </div>
             )}
+
+            <Button
+              variant="outline"
+              onClick={() => copyToClipboard(`Central Concept: ${map.centralConcept}\n\nNodes: ${map.nodes?.map(n => n.label).join(', ')}\n\nConnections: ${map.connections?.map(c => `${c.from} → ${c.to}: ${c.label}`).join('\n')}`, 'cognitive-map')}
+            >
+              {copiedStates['cognitive-map'] ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
+              Copy Map Data
+            </Button>
           </div>
         );
 

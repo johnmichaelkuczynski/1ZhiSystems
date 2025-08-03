@@ -66,12 +66,21 @@ export interface PodcastScript {
 
 export interface CognitiveMap {
   centralConcept: string;
-  mainBranches: {
-    title: string;
-    concepts: string[];
-    connections: string[];
+  nodes: {
+    id: string;
+    label: string;
+    type: 'central' | 'primary' | 'secondary' | 'detail';
+    x: number;
+    y: number;
+    color: string;
   }[];
-  keyInsights: string[];
+  connections: {
+    from: string;
+    to: string;
+    label: string;
+    type: 'strong' | 'weak' | 'causal' | 'conceptual';
+  }[];
+  insights: string[];
 }
 
 export interface SummaryThesis {
