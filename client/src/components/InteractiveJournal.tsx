@@ -19,7 +19,8 @@ import {
   Volume2,
   Loader2,
   Copy,
-  Check
+  Check,
+  Download
 } from 'lucide-react';
 import type { 
   AIProvider, 
@@ -72,6 +73,32 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
   const [voiceSelection, setVoiceSelection] = useState('en-US-AriaNeural');
   const [voiceOptions, setVoiceOptions] = useState<any>({ azure: [], google: [] });
   const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
+
+  // Download audio file function
+  const downloadAudio = async (audioUrl: string, filename: string = 'podcast.mp3') => {
+    try {
+      const response = await fetch(audioUrl);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      toast({
+        title: "Success",
+        description: "Podcast downloaded successfully!",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to download podcast. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
   const [testAnswers, setTestAnswers] = useState<Record<number, string>>({});
 
   const contentRef = useRef<HTMLDivElement>(null);
@@ -338,9 +365,20 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
             
             {modalContent.audioUrl && (
               <div className="p-4 bg-blue-50 rounded-lg">
-                <div className="flex items-center space-x-2 mb-2">
-                  <Volume2 className="w-4 h-4" />
-                  <span className="font-medium">Audio Version</span>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center space-x-2">
+                    <Volume2 className="w-4 h-4" />
+                    <span className="font-medium">Audio Version</span>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => downloadAudio(modalContent.audioUrl, `podcast-${Date.now()}.mp3`)}
+                    className="flex items-center gap-2"
+                  >
+                    <Download className="w-4 h-4" />
+                    Download
+                  </Button>
                 </div>
                 <audio controls className="w-full">
                   <source src={modalContent.audioUrl} type="audio/mpeg" />
