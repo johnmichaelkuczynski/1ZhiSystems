@@ -167,7 +167,19 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
 
       const data = await response.json();
       setModalContent(data);
-      setShowModal(true);
+      
+      // For rewrite action, we need to transition from the rewrite modal to results modal
+      if (action === 'rewrite') {
+        // Set currentAction to null to close the rewrite modal
+        setCurrentAction(null);
+        // Small delay to ensure proper modal transition
+        setTimeout(() => {
+          setShowModal(true);
+        }, 100);
+      } else {
+        setShowModal(true);
+      }
+      
       setShowToolbar(false);
 
     } catch (error) {
@@ -710,10 +722,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
                 Cancel
               </Button>
               <Button 
-                onClick={() => {
-                  processWithAI('rewrite');
-                  setShowModal(false); // Close the rewrite modal
-                }} 
+                onClick={() => processWithAI('rewrite')} 
                 disabled={isProcessing}
               >
                 {isProcessing ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
