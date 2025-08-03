@@ -573,6 +573,30 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
     }
   };
 
+  // Add keyboard event handler
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!showToolbar || !selectedText || isProcessing) return;
+      
+      // Check for number keys 1-8 to trigger actions
+      const actionIndex = parseInt(e.key) - 1;
+      if (actionIndex >= 0 && actionIndex < ACTION_BUTTONS.length) {
+        e.preventDefault();
+        const button = ACTION_BUTTONS[actionIndex];
+        if (button.action === 'rewrite') {
+          setCurrentAction(button.action);
+          setShowModal(true);
+        } else {
+          setCurrentAction(button.action);
+          processWithAI(button.action);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showToolbar, selectedText, isProcessing]);
+
   const renderToolbar = () => {
     if (!showToolbar || !selectedText) return null;
 
@@ -605,12 +629,17 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
           </p>
         </div>
         
+        <div className="mb-2">
+          <p className="text-xs text-gray-400 text-center">
+            Press number keys 1-8 or click buttons below
+          </p>
+        </div>
         <div className="grid grid-cols-2 gap-2">
-          {ACTION_BUTTONS.map((button) => (
+          {ACTION_BUTTONS.map((button, index) => (
             <Button
               key={button.action}
               size="sm"
-              className={`${button.color} text-white text-xs px-3 py-2 h-auto flex items-center justify-center min-h-[40px]`}
+              className={`${button.color} text-white text-xs px-3 py-2 h-auto flex items-center justify-center min-h-[40px] relative`}
               onClick={() => {
                 if (button.action === 'rewrite') {
                   setCurrentAction(button.action);
@@ -630,6 +659,9 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
                 )}
                 <span className="text-xs font-medium">{button.label}</span>
               </div>
+              <span className="absolute top-1 right-1 bg-black bg-opacity-50 text-white text-xs rounded px-1">
+                {index + 1}
+              </span>
             </Button>
           ))}
         </div>
@@ -663,6 +695,12 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
                 placeholder="How would you like the text to be rewritten? (e.g., 'Make it more formal', 'Simplify for beginners', etc.)"
                 value={customInstructions}
                 onChange={(e) => setCustomInstructions(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey && !isProcessing) {
+                    e.preventDefault();
+                    processWithAI('rewrite');
+                  }
+                }}
                 className="mt-1"
               />
             </div>
@@ -671,7 +709,13 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
               <Button variant="outline" onClick={() => setShowModal(false)}>
                 Cancel
               </Button>
-              <Button onClick={() => processWithAI('rewrite')} disabled={isProcessing}>
+              <Button 
+                onClick={() => {
+                  processWithAI('rewrite');
+                  setShowModal(false); // Close the rewrite modal
+                }} 
+                disabled={isProcessing}
+              >
                 {isProcessing ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
                 Rewrite Text
               </Button>
