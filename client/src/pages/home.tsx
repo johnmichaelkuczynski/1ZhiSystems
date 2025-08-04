@@ -14,6 +14,7 @@ export default function Home() {
     { title: "WRITING COURSE", url: "https://writing101.xyz" },
     { title: "ON THE CARDINALITY OF PROOF SPACES", url: "https://godel101.xyz" },
     { title: "SEMANTICS", url: "https://semantics101.xyz" },
+    { title: "ANALYTIC PHILOSOPHY (COMPLETE)", url: "https://analyticphilosophy.xyz" },
     { title: "ANALYTIC PHILOSOPHY CHAPTER 1", url: "https://analysisofanalysis.xyz" },
     { title: "WHY WAS SOCRATES EXECUTED?", url: "https://socrates101.xyz" },
     { title: "ANALYTIC PHILOSOPHY CHAPTER 2", url: "https://platonism101.xyz" },
