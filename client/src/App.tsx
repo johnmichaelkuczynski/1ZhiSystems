@@ -7,6 +7,7 @@ import Home from "@/pages/home";
 import Journal from "@/pages/journal";
 import JournalIssue from "@/pages/journal-issue";
 import JournalAdmin from "@/pages/journal-admin";
+import Podcasts from "@/pages/podcasts";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -17,6 +18,7 @@ function Router() {
       <Route path="/journal/vol-:volume/no-:issue" component={JournalIssue} />
       <Route path="/journal/:volume/:issue" component={JournalIssue} />
       <Route path="/journal/admin" component={JournalAdmin} />
+      <Route path="/podcasts" component={Podcasts} />
       <Route component={NotFound} />
     </Switch>
   );
