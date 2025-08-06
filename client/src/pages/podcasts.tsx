@@ -16,6 +16,7 @@ const podcasts: Podcast[] = [
     id: "borderline-personality-disorder",
     title: "Borderline Personality Disorder",
     description: "An AI-generated deep dive into understanding Borderline Personality Disorder, its symptoms, causes, and treatment approaches.",
+    audioUrl: "/audio/bpd-podcast.mp3",
     publishedDate: "2025-01-08",
     duration: "25:30",
     topics: ["Psychology", "Mental Health", "Personality Disorders"]
