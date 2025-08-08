@@ -81,32 +81,60 @@ async function callAI(provider: AIProvider, prompt: string, systemPrompt?: strin
   }
 }
 
-// Generate speech using OpenAI TTS
+// Generate speech using Azure Speech Services
 async function generateSpeech(text: string, voice: string = 'alloy'): Promise<Buffer> {
   try {
-    // Validate text length (OpenAI TTS has a 4096 character limit)
-    if (text.length > 4096) {
-      throw new Error(`Text too long for TTS: ${text.length} characters (max: 4096)`);
+    const endpoint = process.env.AZURE_SPEECH_ENDPOINT;
+    const apiKey = process.env.AZURE_SPEECH_KEY;
+    const region = process.env.AZURE_SPEECH_REGION;
+
+    if (!endpoint || !apiKey || !region) {
+      throw new Error('Azure Speech credentials not configured');
     }
 
-    // Validate voice option
-    const validVoices = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
-    const selectedVoice = validVoices.includes(voice) ? voice : 'alloy';
+    // Map OpenAI-style voices to Azure voices
+    const voiceMapping: { [key: string]: string } = {
+      'alloy': 'en-US-AriaNeural',
+      'echo': 'en-US-DavisNeural', 
+      'fable': 'en-GB-LibbyNeural',
+      'onyx': 'en-US-GuyNeural',
+      'nova': 'en-US-JennyNeural',
+      'shimmer': 'en-US-MichelleNeural'
+    };
 
-    const response = await openai.audio.speech.create({
-      model: 'tts-1-hd',
-      voice: selectedVoice as any,
-      input: text,
-      response_format: 'mp3'
+    const azureVoice = voiceMapping[voice] || 'en-US-AriaNeural';
+
+    // Create SSML for Azure Speech
+    const ssml = `
+      <speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US">
+        <voice name="${azureVoice}">
+          <prosody rate="1.0" pitch="0%">
+            ${text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}
+          </prosody>
+        </voice>
+      </speak>
+    `;
+
+    // Make request to Azure Speech API
+    const response = await fetch(`${endpoint}/cognitiveservices/v1`, {
+      method: 'POST',
+      headers: {
+        'Ocp-Apim-Subscription-Key': apiKey,
+        'Content-Type': 'application/ssml+xml',
+        'X-Microsoft-OutputFormat': 'audio-16khz-128kbitrate-mono-mp3',
+      },
+      body: ssml
     });
 
-    const buffer = Buffer.from(await response.arrayBuffer());
-    return buffer;
-  } catch (error) {
-    console.error('Error generating speech:', error);
-    if (error instanceof Error && error.message?.includes('maximum context length')) {
-      throw new Error('Script too long for audio generation. Please try with shorter text.');
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Azure Speech API error: ${response.status} - ${errorText}`);
     }
+
+    const audioBuffer = Buffer.from(await response.arrayBuffer());
+    return audioBuffer;
+  } catch (error) {
+    console.error('Error generating speech with Azure:', error);
     throw error;
   }
 }
