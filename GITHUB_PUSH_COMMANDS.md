@@ -9,16 +9,16 @@ Your repository is already connected to: `https://github.com/johnmichaelkuczynsk
 git add .
 
 # 2. Commit with a descriptive message
-git commit -m "Complete AI-powered journal system with all 13 chapters of Veblen analysis
+git commit -m "Add Volume I Issue 4 and migrate to OpenAI TTS-1 with Alloy voice
 
-- Add complete Journal Issue #3: 'Veblen Utility Functions' with all 13 chapters
-- Implement full AI functionality: rewrite, study guides, tests, podcasts, cognitive maps
-- Add visual SVG-based cognitive mapping with interconnected nodes
-- Implement OpenAI TTS integration for podcast audio generation
-- Add comprehensive AI text processing with 8 different functions
-- Include thesis analysis, deep dives, and suggested readings
-- Complete database integration with PostgreSQL and Drizzle ORM
-- Ready for production deployment with full feature set"
+- Add Volume I, Issue 4: 'The Tarski's World Problem' by J.-M. Kuczynski
+- Successfully migrate from Azure TTS to OpenAI TTS-1 model with Alloy voice
+- Remove all markdown formatting from journal articles for clean display
+- Add 'The Tarski's World Problem' podcast to main podcasts section
+- Confirm audio generation working with OpenAI API (3.9MB files generated)
+- Update voice options to show OpenAI voices (Alloy, Echo, Fable, Nova, Shimmer, Onyx)
+- All 8 AI functions working with clean text output (no markdown formatting)
+- Complete journal system now has 4 published issues with proper author attribution"
 
 # 3. Push to GitHub
 git push origin main
@@ -31,13 +31,15 @@ git push origin master
 
 ## What Will Be Pushed:
 - Complete AI-powered journal system with 8 AI functions
-- Journal Issue #3 with all 13 chapters of Veblen analysis
+- Four journal issues including "The Tarski's World Problem" by J.-M. Kuczynski
 - Visual cognitive mapping with SVG rendering
-- OpenAI TTS integration for podcast generation
+- OpenAI TTS-1 integration with Alloy voice (migrated from Azure)
+- Clean text output without markdown formatting
 - Complete database schema with PostgreSQL
 - All AI service implementations (rewrite, study guides, tests, etc.)
 - Frontend components for interactive text selection
 - Backend API routes for all AI functionality
+- Podcasts section with Tarski's World audio
 - render.yaml (Render deployment config)
 - All deployment documentation and guides
 
