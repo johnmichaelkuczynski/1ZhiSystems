@@ -179,9 +179,9 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
       const data = await response.json();
       setModalContent(data);
       
-      // For rewrite action, we need to transition from the rewrite modal to results modal
-      if (action === 'rewrite') {
-        // Set currentAction to null to close the rewrite modal
+      // For rewrite and podcast actions, we need to transition from the config modal to results modal
+      if (action === 'rewrite' || action === 'podcast') {
+        // Set currentAction to null to close the config modal
         setCurrentAction(null);
         // Small delay to ensure proper modal transition
         setTimeout(() => {
