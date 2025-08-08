@@ -20,7 +20,10 @@ import {
   Loader2,
   Copy,
   Check,
-  Download
+  Download,
+  Minimize2,
+  Maximize2,
+  Move
 } from 'lucide-react';
 import type { 
   AIProvider, 
@@ -73,6 +76,10 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
   const [voiceSelection, setVoiceSelection] = useState('en-US-AriaNeural');
   const [voiceOptions, setVoiceOptions] = useState<any>({ azure: [], google: [] });
   const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [panelPosition, setPanelPosition] = useState({ x: 0, y: 0 });
 
   // Download audio file function
   const downloadAudio = async (audioUrl: string, filename: string = 'podcast.mp3') => {
@@ -695,73 +702,123 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [showToolbar, selectedText, isProcessing]);
 
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setDragStart({
+      x: e.clientX - panelPosition.x,
+      y: e.clientY - panelPosition.y
+    });
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!isDragging) return;
+    
+    setPanelPosition({
+      x: e.clientX - dragStart.x,
+      y: e.clientY - dragStart.y
+    });
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  useEffect(() => {
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+      };
+    }
+  }, [isDragging, dragStart]);
+
   const renderToolbar = () => {
     if (!showToolbar || !selectedText) return null;
 
+    const baseStyle = {
+      left: `${toolbarPosition.x - 250 + panelPosition.x}px`,
+      top: `${toolbarPosition.y + panelPosition.y}px`,
+    };
+
     return (
       <div
-        className="fixed z-50 bg-white border border-gray-200 rounded-lg shadow-lg p-2"
-        style={{
-          left: `${toolbarPosition.x - 250}px`,
-          top: `${toolbarPosition.y}px`,
-          minWidth: '500px'
-        }}
+        className={`fixed z-50 bg-white border border-gray-200 rounded-lg shadow-lg transition-all duration-200 ${
+          isDragging ? 'cursor-grabbing' : ''
+        }`}
+        style={baseStyle}
       >
-        <div className="mb-3">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium">AI Provider:</span>
+        {/* Drag Handle */}
+        <div 
+          className="flex items-center justify-between p-2 bg-gray-50 rounded-t-lg cursor-grab active:cursor-grabbing border-b"
+          onMouseDown={handleMouseDown}
+        >
+          <div className="flex items-center gap-2">
+            <Move className="w-4 h-4 text-gray-500" />
+            <span className="text-xs text-gray-600 font-medium">AI Functions</span>
+          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setIsMinimized(!isMinimized)}
+            className="h-6 w-6 p-0"
+          >
+            {isMinimized ? <Maximize2 className="w-3 h-3" /> : <Minimize2 className="w-3 h-3" />}
+          </Button>
+        </div>
+
+        {/* Panel Content */}
+        <div className={`transition-all duration-200 ${isMinimized ? 'h-0 overflow-hidden' : 'p-2'}`}>
+          <div className="mb-2">
+            <Label className="text-xs">AI Provider:</Label>
             <Select value={selectedProvider} onValueChange={(value: AIProvider) => setSelectedProvider(value)}>
-              <SelectTrigger className="w-32">
+              <SelectTrigger className="h-8 text-xs">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="openai">OpenAI</SelectItem>
                 <SelectItem value="anthropic">Anthropic</SelectItem>
-                <SelectItem value="perplexity">Perplexity</SelectItem>
-                <SelectItem value="deepseek">DeepSeek</SelectItem>
               </SelectContent>
             </Select>
           </div>
-          <p className="text-xs text-gray-500 mb-2">
-            Selected: "{selectedText.substring(0, 50)}{selectedText.length > 50 ? '...' : ''}"
-          </p>
-        </div>
-        
-        <div className="mb-2">
-          <p className="text-xs text-gray-400 text-center">
-            Press number keys 1-8 or click buttons below
-          </p>
-        </div>
-        <div className="grid grid-cols-2 gap-2">
-          {ACTION_BUTTONS.map((button, index) => (
-            <Button
-              key={button.action}
-              size="sm"
-              className={`${button.color} text-white text-xs px-3 py-2 h-auto flex items-center justify-center min-h-[40px] relative`}
-              onClick={() => {
-                if (button.action === 'rewrite') {
+
+          <div
+            className="grid grid-cols-2 gap-1"
+            style={{
+              maxWidth: '500px'
+            }}
+          >
+            {ACTION_BUTTONS.map((button, index) => (
+              <Button
+                key={button.action}
+                size="sm"
+                className={`text-xs h-16 flex flex-col items-center justify-center gap-1 ${button.color} text-white relative`}
+                onClick={() => {
                   setCurrentAction(button.action);
-                  setShowModal(true);
-                } else {
-                  setCurrentAction(button.action);
-                  processWithAI(button.action);
-                }
-              }}
-              disabled={isProcessing}
-            >
-              <div className="flex flex-col items-center space-y-1">
-                {isProcessing && currentAction === button.action ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
-                  button.icon
-                )}
-                <span className="text-xs font-medium">{button.label}</span>
-              </div>
-              <span className="absolute top-1 right-1 bg-black bg-opacity-50 text-white text-xs rounded px-1">
-                {index + 1}
-              </span>
-            </Button>
-          ))}
+                  if (button.action === 'rewrite') {
+                    setShowModal(true);
+                  } else {
+                    processWithAI(button.action);
+                  }
+                }}
+                disabled={isProcessing}
+              >
+                <div className="absolute top-1 left-1 text-xs bg-black bg-opacity-20 rounded-full w-4 h-4 flex items-center justify-center font-bold">
+                  {index + 1}
+                </div>
+                {button.icon}
+                <span className="text-[10px] leading-tight text-center">{button.label}</span>
+              </Button>
+            ))}
+          </div>
+
+          {isProcessing && (
+            <div className="mt-2 flex items-center justify-center text-xs text-gray-600">
+              <Loader2 className="w-3 h-3 mr-1 animate-spin" />
+              Processing...
+            </div>
+          )}
         </div>
       </div>
     );
