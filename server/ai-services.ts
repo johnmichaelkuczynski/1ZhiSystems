@@ -257,8 +257,8 @@ export async function generatePodcast(request: TextProcessingRequest): Promise<{
   // Configure prompts based on podcast mode
   switch (mode) {
     case 'normal-one':
-      systemPrompt = "You are an expert podcast host. Create engaging, conversational podcast content with a single narrator that makes complex topics accessible and interesting. Write in a natural speaking style with smooth transitions.";
-      prompt = `Create a single-host podcast episode based on the following text. Write as a solo narrator speaking directly to listeners:
+      systemPrompt = "You are an expert podcast host. Create engaging, conversational podcast content with a single narrator that makes complex topics accessible and interesting. Write in a natural speaking style with smooth transitions. Output ONLY plain text without any markdown, formatting, asterisks, or special characters.";
+      prompt = `Create a single-host podcast episode based on the following text. Write as a solo narrator speaking directly to listeners. Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters:
 
 Text to discuss:
 ${request.selectedText}
@@ -273,8 +273,8 @@ Keep it conversational and accessible, around 300-500 words for a 3-4 minute pod
       break;
 
     case 'normal-two':
-      systemPrompt = "You are creating a two-host podcast with natural conversation between hosts. Create engaging dialogue that makes complex topics accessible through discussion between two knowledgeable hosts.";
-      prompt = `Create a two-host podcast episode based on the following text. Format as a natural conversation between HOST 1 and HOST 2:
+      systemPrompt = "You are creating a two-host podcast with natural conversation between hosts. Create engaging dialogue that makes complex topics accessible through discussion between two knowledgeable hosts. Output ONLY plain text without any markdown, formatting, asterisks, or special characters.";
+      prompt = `Create a two-host podcast episode based on the following text. Format as a natural conversation between HOST 1 and HOST 2. Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters:
 
 Text to discuss:
 ${request.selectedText}
@@ -292,8 +292,8 @@ Format each line as "HOST 1:" or "HOST 2:" followed by their dialogue. Make it c
       break;
 
     case 'custom-one':
-      systemPrompt = `You are an expert podcast host. Create engaging, conversational podcast content with a single narrator. ${request.podcastInstructions}`;
-      prompt = `Create a single-host podcast episode based on the following text. Follow these custom instructions: ${request.podcastInstructions}
+      systemPrompt = `You are an expert podcast host. Create engaging, conversational podcast content with a single narrator. Output ONLY plain text without any markdown, formatting, asterisks, or special characters. ${request.podcastInstructions}`;
+      prompt = `Create a single-host podcast episode based on the following text. Follow these custom instructions: ${request.podcastInstructions}. Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters.
 
 Text to discuss:
 ${request.selectedText}
@@ -303,8 +303,8 @@ Create a complete podcast script following the custom instructions provided. Kee
       break;
 
     case 'custom-two':
-      systemPrompt = `You are creating a two-host podcast with natural conversation between hosts. ${request.podcastInstructions}`;
-      prompt = `Create a two-host podcast episode based on the following text. Follow these custom instructions: ${request.podcastInstructions}
+      systemPrompt = `You are creating a two-host podcast with natural conversation between hosts. Output ONLY plain text without any markdown, formatting, asterisks, or special characters. ${request.podcastInstructions}`;
+      prompt = `Create a two-host podcast episode based on the following text. Follow these custom instructions: ${request.podcastInstructions}. Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters.
 
 Text to discuss:
 ${request.selectedText}
@@ -317,7 +317,18 @@ Format as a natural conversation between HOST 1 and HOST 2. Each line should sta
       break;
   }
 
-  const scriptResponse = await callAI(request.provider, prompt, systemPrompt);
+  const rawScriptResponse = await callAI(request.provider, prompt, systemPrompt);
+  
+  // Strip all markdown formatting from the script
+  const scriptResponse = rawScriptResponse
+    .replace(/\*\*(.*?)\*\*/g, '$1')  // Remove bold
+    .replace(/\*(.*?)\*/g, '$1')       // Remove italic
+    .replace(/#{1,6}\s/g, '')         // Remove headers
+    .replace(/`(.*?)`/g, '$1')        // Remove code
+    .replace(/\[(.*?)\]\(.*?\)/g, '$1') // Remove links
+    .replace(/\-{3,}/g, '')           // Remove horizontal lines
+    .trim();
+    
   console.log('Generated script response length:', scriptResponse.length);
   console.log('Generated script preview:', scriptResponse.substring(0, 200) + '...');
   
