@@ -1036,6 +1036,72 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
                   </span>
                 </div>
               </div>
+              
+              {/* Show full script content if available */}
+              {modalContent?.script && (
+                <div className="mt-4 space-y-3 max-h-96 overflow-y-auto">
+                  <div className="border-t pt-3">
+                    <h5 className="font-medium text-sm mb-2">Full Script Content:</h5>
+                    <div className="bg-white rounded p-3 text-sm space-y-2">
+                      {modalContent.script.introduction && (
+                        <div>
+                          <strong>Introduction:</strong>
+                          <p className="mt-1">{modalContent.script.introduction}</p>
+                        </div>
+                      )}
+                      {modalContent.script.mainContent && (
+                        <div>
+                          <strong>Main Content:</strong>
+                          <div className="mt-1 whitespace-pre-wrap">{modalContent.script.mainContent}</div>
+                        </div>
+                      )}
+                      {modalContent.script.conclusion && (
+                        <div>
+                          <strong>Conclusion:</strong>
+                          <p className="mt-1">{modalContent.script.conclusion}</p>
+                        </div>
+                      )}
+                    </div>
+                    
+                    {/* Action buttons */}
+                    <div className="flex gap-2 mt-3">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          const fullScript = `${modalContent.script.introduction || ''}\n\n${modalContent.script.mainContent || ''}\n\n${modalContent.script.conclusion || ''}`;
+                          copyToClipboard(fullScript, 'podcast-script');
+                        }}
+                        className="flex items-center gap-1"
+                      >
+                        <Copy className="w-3 h-3" />
+                        Copy Script
+                      </Button>
+                      
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          const fullScript = `${modalContent.script.title || 'Podcast Script'}\n\n${modalContent.script.introduction || ''}\n\n${modalContent.script.mainContent || ''}\n\n${modalContent.script.conclusion || ''}`;
+                          const blob = new Blob([fullScript], { type: 'text/plain' });
+                          const url = URL.createObjectURL(blob);
+                          const a = document.createElement('a');
+                          a.href = url;
+                          a.download = `podcast-script-${Date.now()}.txt`;
+                          document.body.appendChild(a);
+                          a.click();
+                          document.body.removeChild(a);
+                          URL.revokeObjectURL(url);
+                        }}
+                        className="flex items-center gap-1"
+                      >
+                        <Download className="w-3 h-3" />
+                        Download Script
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
             
             <div className="flex justify-between">
