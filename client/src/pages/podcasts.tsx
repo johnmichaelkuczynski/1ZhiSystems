@@ -13,6 +13,15 @@ interface Podcast {
 
 const podcasts: Podcast[] = [
   {
+    id: "veblen-utility-functions",
+    title: "Veblen Utility Functions",
+    description: "An AI-generated exploration of Thorstein Veblen's economic theories and their application to modern utility functions in economic analysis.",
+    audioUrl: "/audio/veblen-utility-functions.mp3",
+    publishedDate: "2025-01-08",
+    duration: "35:45",
+    topics: ["Economics", "Philosophy", "Social Theory", "Veblen"]
+  },
+  {
     id: "borderline-personality-disorder",
     title: "Borderline Personality Disorder",
     description: "An AI-generated deep dive into understanding Borderline Personality Disorder, its symptoms, causes, and treatment approaches.",
