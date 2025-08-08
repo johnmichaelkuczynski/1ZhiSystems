@@ -13,6 +13,15 @@ interface Podcast {
 
 const podcasts: Podcast[] = [
   {
+    id: "incompleteness-of-logic",
+    title: "The Incompleteness of Logic",
+    description: "An AI-generated exploration of Gödel's incompleteness theorems and their profound implications for mathematics, logic, and the foundations of knowledge.",
+    audioUrl: "/audio/incompleteness-of-logic.mp3",
+    publishedDate: "2025-01-08",
+    duration: "42:15",
+    topics: ["Mathematics", "Logic", "Philosophy", "Gödel", "Foundational Theory"]
+  },
+  {
     id: "veblen-utility-functions",
     title: "Veblen Utility Functions",
     description: "An AI-generated exploration of Thorstein Veblen's economic theories and their application to modern utility functions in economic analysis.",
