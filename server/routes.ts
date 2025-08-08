@@ -135,26 +135,41 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { questions, userAnswers } = req.body;
       
       let correctCount = 0;
-      const feedback: string[] = [];
+      const detailedFeedback: any[] = [];
+      
+      console.log('Grading test with', questions.length, 'questions');
       
       questions.forEach((question: any, index: number) => {
         const userAnswer = userAnswers[index];
-        const isCorrect = userAnswer === question.correctAnswer;
+        const correctAnswer = question.correctAnswer;
+        
+        console.log(`Question ${index + 1}:`);
+        console.log(`User answer: "${userAnswer}"`);
+        console.log(`Correct answer: "${correctAnswer}"`);
+        
+        // More flexible answer matching
+        const isCorrect = userAnswer && correctAnswer && 
+          (userAnswer.trim().toLowerCase() === correctAnswer.trim().toLowerCase() ||
+           userAnswer.trim() === correctAnswer.trim());
+        
+        console.log(`Is correct: ${isCorrect}`);
         
         if (isCorrect) correctCount++;
         
-        feedback.push({
+        detailedFeedback.push({
           question: question.question,
-          userAnswer,
-          correctAnswer: question.correctAnswer,
+          userAnswer: userAnswer || "No answer provided",
+          correctAnswer: correctAnswer || "No correct answer available",
           isCorrect,
-          explanation: question.explanation
-        } as any);
+          explanation: question.explanation || "No explanation available"
+        });
       });
 
       const score = Math.round((correctCount / questions.length) * 100);
+      console.log(`Final score: ${score}% (${correctCount}/${questions.length} correct)`);
+      
       const result: TestResult = {
-        questions,
+        questions: detailedFeedback,
         userAnswers,
         score,
         totalQuestions: questions.length,

@@ -165,29 +165,47 @@ async function generateAzureAudio(text: string, voice: string = 'alloy', filenam
 }
 
 export async function rewriteText(request: TextProcessingRequest): Promise<string> {
-  const systemPrompt = "You are an expert editor and writer. Rewrite the given text according to the user's instructions while maintaining the core meaning and improving clarity, style, and effectiveness.";
+  const systemPrompt = "You are an expert editor and writer. Rewrite the given text according to the user's instructions while maintaining the core meaning and improving clarity, style, and effectiveness. Output ONLY plain text without any markdown, formatting, asterisks, or special characters.";
   
   const prompt = `Please rewrite the following text according to these instructions: "${request.customInstructions || 'Improve clarity and style while maintaining the original meaning'}"
 
 Original text:
 ${request.selectedText}
 
-Provide only the rewritten text without any additional commentary.`;
+Provide only the rewritten text as plain text without any markdown formatting, asterisks, bold text, or special characters. No additional commentary.`;
 
-  return await callAI(request.provider, prompt, systemPrompt);
+  const result = await callAI(request.provider, prompt, systemPrompt);
+  
+  // Remove any remaining markdown formatting
+  return result
+    .replace(/\*\*(.*?)\*\*/g, '$1')  // Remove bold
+    .replace(/\*(.*?)\*/g, '$1')       // Remove italic
+    .replace(/#{1,6}\s/g, '')         // Remove headers
+    .replace(/`(.*?)`/g, '$1')        // Remove code
+    .replace(/\[(.*?)\]\(.*?\)/g, '$1') // Remove links
+    .trim();
 }
 
 export async function generateStudyGuide(request: TextProcessingRequest): Promise<string> {
-  const systemPrompt = "You are an expert educator. Create comprehensive study guides that help students understand and learn complex material effectively.";
+  const systemPrompt = "You are an expert educator. Create comprehensive study guides that help students understand and learn complex material effectively. Output ONLY plain text without any markdown, formatting, asterisks, or special characters.";
   
   const prompt = `Create a comprehensive study guide for the following text. Include key concepts, important points, definitions, and study questions.
 
 Text:
 ${request.selectedText}
 
-Format the study guide with clear sections and bullet points for easy reading.`;
+Format the study guide as plain text with clear sections and simple bullet points using dashes or numbers. Do NOT use any markdown formatting, asterisks, bold text, or special characters.`;
 
-  return await callAI(request.provider, prompt, systemPrompt);
+  const result = await callAI(request.provider, prompt, systemPrompt);
+  
+  // Remove any remaining markdown formatting
+  return result
+    .replace(/\*\*(.*?)\*\*/g, '$1')  // Remove bold
+    .replace(/\*(.*?)\*/g, '$1')       // Remove italic
+    .replace(/#{1,6}\s/g, '')         // Remove headers
+    .replace(/`(.*?)`/g, '$1')        // Remove code
+    .replace(/\[(.*?)\]\(.*?\)/g, '$1') // Remove links
+    .trim();
 }
 
 export async function generateTest(request: TextProcessingRequest): Promise<TestQuestion[]> {
@@ -465,9 +483,24 @@ ${request.selectedText}`;
     }
     
     const parsed = JSON.parse(cleanResponse);
+    // Clean up any markdown in the parsed results
+    const cleanThesis = (parsed.thesis || 'Main thesis not identified')
+      .replace(/\*\*(.*?)\*\*/g, '$1')
+      .replace(/\*(.*?)\*/g, '$1')
+      .replace(/#{1,6}\s/g, '')
+      .replace(/`(.*?)`/g, '$1')
+      .trim();
+      
+    const cleanSummary = (parsed.summary || 'Summary not available')
+      .replace(/\*\*(.*?)\*\*/g, '$1')
+      .replace(/\*(.*?)\*/g, '$1')
+      .replace(/#{1,6}\s/g, '')
+      .replace(/`(.*?)`/g, '$1')
+      .trim();
+    
     return {
-      thesis: parsed.thesis || 'Main thesis not identified',
-      summary: parsed.summary || 'Summary not available'
+      thesis: cleanThesis,
+      summary: cleanSummary
     };
   } catch (error) {
     console.error('Failed to parse summary thesis:', error);
@@ -480,14 +513,25 @@ ${request.selectedText}`;
 }
 
 export async function generateThesisDeepDive(request: TextProcessingRequest): Promise<string> {
-  const systemPrompt = "You are a philosophical and analytical expert. Provide deep, nuanced analysis of theses and their implications.";
+  const systemPrompt = "You are a philosophical and analytical expert. Provide deep, nuanced analysis of theses and their implications. Output ONLY plain text without any markdown, formatting, asterisks, or special characters.";
   
   const prompt = `Provide a deep analytical discussion of the main thesis in the following text. Explore its implications, assumptions, potential criticisms, and broader significance.
 
 Text:
-${request.selectedText}`;
+${request.selectedText}
 
-  return await callAI(request.provider, prompt, systemPrompt);
+Format your response as plain text with clear sections and simple bullet points using dashes or numbers. Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters.`;
+
+  const result = await callAI(request.provider, prompt, systemPrompt);
+  
+  // Remove any remaining markdown formatting
+  return result
+    .replace(/\*\*(.*?)\*\*/g, '$1')  // Remove bold
+    .replace(/\*(.*?)\*/g, '$1')       // Remove italic
+    .replace(/#{1,6}\s/g, '')         // Remove headers
+    .replace(/`(.*?)`/g, '$1')        // Remove code
+    .replace(/\[(.*?)\]\(.*?\)/g, '$1') // Remove links
+    .trim();
 }
 
 export async function generateSuggestedReadings(request: TextProcessingRequest): Promise<SuggestedReadings> {

@@ -36,6 +36,24 @@ app.use((req, res, next) => {
   next();
 });
 
+// Add audio generation route  
+app.post("/api/ai/generate-audio", async (req, res) => {
+  try {
+    const { text } = req.body;
+    const { generateAudio } = await import('./speech-services');
+    const audioUrl = await generateAudio(text, {
+      provider: "azure",
+      voice: "en-US-AriaNeural",
+      speed: 1.0,
+      pitch: 0,
+    });
+    res.json({ success: true, audioUrl });
+  } catch (error) {
+    console.error("Error generating audio:", error);
+    res.status(500).json({ success: false, error: "Failed to generate audio" });
+  }
+});
+
 (async () => {
   const server = await registerRoutes(app);
 
