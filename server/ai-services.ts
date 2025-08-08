@@ -116,18 +116,27 @@ async function generateSpeech(text: string, voice: string = 'alloy'): Promise<Bu
     `;
 
     // Make request to Azure Speech API
+    console.log('Calling Azure Speech API with endpoint:', endpoint);
+    console.log('Using voice:', azureVoice);
+    console.log('Text length:', text.length);
+    
     const response = await fetch(`${endpoint}/cognitiveservices/v1`, {
       method: 'POST',
       headers: {
         'Ocp-Apim-Subscription-Key': apiKey,
         'Content-Type': 'application/ssml+xml',
         'X-Microsoft-OutputFormat': 'audio-16khz-128kbitrate-mono-mp3',
+        'User-Agent': 'ZhiSystems/1.0'
       },
       body: ssml
     });
 
+    console.log('Azure Speech API response status:', response.status);
+    console.log('Azure Speech API response headers:', Object.fromEntries(response.headers.entries()));
+
     if (!response.ok) {
       const errorText = await response.text();
+      console.error('Azure Speech API error response:', errorText);
       throw new Error(`Azure Speech API error: ${response.status} - ${errorText}`);
     }
 
@@ -275,6 +284,8 @@ Format as a natural conversation between HOST 1 and HOST 2. Each line should sta
   }
 
   const scriptResponse = await callAI(request.provider, prompt, systemPrompt);
+  console.log('Generated script response length:', scriptResponse.length);
+  console.log('Generated script preview:', scriptResponse.substring(0, 200) + '...');
   
   // Parse the script into components
   let introduction = "";
@@ -299,8 +310,11 @@ Format as a natural conversation between HOST 1 and HOST 2. Each line should sta
 
   // Generate audio if requested
   if (request.includeAudio) {
+    console.log('Generating audio for podcast...');
+    console.log('Voice selection:', request.voiceSelection);
     try {
       const audioBuffer = await generateSpeech(finalScript, request.voiceSelection);
+      console.log('Audio generated successfully, buffer size:', audioBuffer.length);
       
       // Create a unique filename and save the audio
       const timestamp = Date.now();
@@ -309,9 +323,11 @@ Format as a natural conversation between HOST 1 and HOST 2. Each line should sta
       
       // Write the audio buffer to file
       fs.writeFileSync(audioPath, audioBuffer);
+      console.log('Audio file saved to:', audioPath);
       audioUrl = `/api/audio/${filename}`;
     } catch (error) {
       console.error('Failed to generate audio:', error);
+      console.error('Audio generation error details:', error instanceof Error ? error.stack : error);
       // Continue without audio
     }
   }

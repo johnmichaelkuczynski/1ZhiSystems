@@ -72,8 +72,8 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState<any>(null);
   const [customInstructions, setCustomInstructions] = useState('');
-  const [includeAudio, setIncludeAudio] = useState(false);
-  const [voiceSelection, setVoiceSelection] = useState('en-US-AriaNeural');
+  const [includeAudio, setIncludeAudio] = useState(true); // Default to true for podcasts
+  const [voiceSelection, setVoiceSelection] = useState('alloy'); // Use OpenAI-style voice names
   const [voiceOptions, setVoiceOptions] = useState<any>({ azure: [], google: [] });
   const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
   const [isMinimized, setIsMinimized] = useState(false);
@@ -160,7 +160,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
         action,
         provider: selectedProvider,
         customInstructions: action === 'rewrite' ? customInstructions : undefined,
-        includeAudio: action === 'podcast' ? includeAudio : false,
+        includeAudio: action === 'podcast' ? true : false, // Always generate audio for podcasts
         voiceSelection: action === 'podcast' ? voiceSelection : undefined,
         podcastMode: action === 'podcast' ? podcastMode : undefined,
         podcastInstructions: action === 'podcast' && (podcastMode === 'custom-one' || podcastMode === 'custom-two') ? podcastInstructions : undefined
