@@ -84,68 +84,43 @@ async function callAI(provider: AIProvider, prompt: string, systemPrompt?: strin
 }
 
 // Generate speech using Azure Speech Services and save to public/audio
-async function generateAzureAudio(text: string, voice: string = 'alloy', filename?: string): Promise<string> {
+async function generateOpenAIAudio(text: string, voice: string = 'alloy', filename?: string): Promise<string> {
   try {
-    const endpoint = process.env.AZURE_SPEECH_ENDPOINT;
-    const apiKey = process.env.AZURE_SPEECH_KEY;
-    const region = process.env.AZURE_SPEECH_REGION;
+    const apiKey = process.env.OPENAI_API_KEY;
 
-    if (!endpoint || !apiKey || !region) {
-      throw new Error('Azure Speech credentials not configured');
+    if (!apiKey) {
+      throw new Error('OpenAI API key not configured');
     }
 
-    // Map OpenAI-style voices to Azure voices
-    // Note: Azure doesn't have 'AlloyNeural' - using AriaNeural as closest equivalent for alloy
-    const voiceMapping: { [key: string]: string } = {
-      'alloy': 'en-US-AriaNeural',
-      'echo': 'en-US-DavisNeural', 
-      'fable': 'en-GB-LibbyNeural',
-      'onyx': 'en-US-GuyNeural',
-      'nova': 'en-US-JennyNeural',
-      'shimmer': 'en-US-MichelleNeural'
-    };
-
-    const azureVoice = voiceMapping[voice] || 'en-US-AriaNeural';
-
-    // Create SSML for Azure Speech
-    const ssml = `
-      <speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US">
-        <voice name="${azureVoice}">
-          <prosody rate="1.0" pitch="0%">
-            ${text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}
-          </prosody>
-        </voice>
-      </speak>
-    `;
-
-    // Make request to Azure Speech API
-    console.log('Calling Azure Speech API with endpoint:', endpoint);
-    console.log('Using voice:', azureVoice);
+    console.log('Calling OpenAI TTS API');
+    console.log('Using voice:', voice);
     console.log('Text length:', text.length);
     
-    const response = await fetch(`${endpoint}/cognitiveservices/v1`, {
-      method: 'POST',
+    const response = await fetch("https://api.openai.com/v1/audio/speech", {
+      method: "POST",
       headers: {
-        'Ocp-Apim-Subscription-Key': apiKey,
-        'Content-Type': 'application/ssml+xml',
-        'X-Microsoft-OutputFormat': 'audio-16khz-32kbitrate-mono-mp3',
-        'User-Agent': 'ZhiSystems/1.0'
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json"
       },
-      body: ssml
+      body: JSON.stringify({
+        model: "tts-1",
+        input: text,
+        voice: voice
+      })
     });
 
-    console.log('Azure Speech API response status:', response.status);
-    console.log('Azure Speech API response headers:', Object.fromEntries(response.headers.entries()));
+    console.log('OpenAI TTS API response status:', response.status);
+    console.log('OpenAI TTS API response headers:', Object.fromEntries(response.headers.entries()));
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('Azure Speech API error response:', errorText);
-      throw new Error(`Azure Speech API error: ${response.status} - ${errorText}`);
+      console.error('OpenAI TTS API error response:', errorText);
+      throw new Error(`OpenAI TTS API error: ${response.status} - ${errorText}`);
     }
 
     // Get audio buffer
-    const audioBuffer = Buffer.from(await response.arrayBuffer());
-    console.log('Audio generated successfully, buffer size:', audioBuffer.length);
+    const buffer = await response.arrayBuffer();
+    console.log('Audio generated successfully, buffer size:', buffer.byteLength);
 
     // Create filename if not provided
     if (!filename) {
@@ -153,14 +128,17 @@ async function generateAzureAudio(text: string, voice: string = 'alloy', filenam
     }
 
     // Save to public/audio directory
-    const audioPath = path.join(process.cwd(), 'public', 'audio', `${filename}.mp3`);
-    await fsPromises.writeFile(audioPath, audioBuffer);
-    console.log('Audio file saved to:', audioPath);
+    const fs = await import("fs/promises");
+    const path = await import("path");
+    const filePath = path.join(process.cwd(), "public", "audio", `${filename}.mp3`);
+    await fs.mkdir(path.dirname(filePath), { recursive: true });
+    await fs.writeFile(filePath, Buffer.from(buffer));
+    console.log('Audio file saved to:', filePath);
 
     // Return the public URL path
     return `/audio/${filename}.mp3`;
   } catch (error) {
-    console.error('Error generating speech with Azure:', error);
+    console.error('Error generating speech with OpenAI:', error);
     throw error;
   }
 }
@@ -363,7 +341,7 @@ Format as a natural conversation between HOST 1 and HOST 2. Each line should sta
       const timestamp = Date.now();
       const filename = `podcast_${timestamp}`;
       
-      audioUrl = await generateAzureAudio(finalScript, request.voiceSelection, filename);
+      audioUrl = await generateOpenAIAudio(finalScript, request.voiceSelection, filename);
       console.log('Audio URL generated:', audioUrl);
     } catch (error) {
       console.error('Failed to generate audio:', error);

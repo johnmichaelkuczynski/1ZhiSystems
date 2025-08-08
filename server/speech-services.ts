@@ -97,15 +97,13 @@ async function generateGoogleAudio(text: string, config: SpeechConfig): Promise<
 }
 
 export const VOICE_OPTIONS = {
-  azure: [
-    { value: 'en-US-AriaNeural', label: 'Aria (Female, US)' },
-    { value: 'en-US-DavisNeural', label: 'Davis (Male, US)' },
-    { value: 'en-US-ElizabethNeural', label: 'Elizabeth (Female, US)' },
-    { value: 'en-US-GuyNeural', label: 'Guy (Male, US)' },
-    { value: 'en-US-JennyNeural', label: 'Jenny (Female, US)' },
-    { value: 'en-US-MichelleNeural', label: 'Michelle (Female, US)' },
-    { value: 'en-US-RogerNeural', label: 'Roger (Male, US)' },
-    { value: 'en-US-SteffanNeural', label: 'Steffan (Male, US)' }
+  openai: [
+    { value: 'alloy', label: 'Alloy (Neutral)' },
+    { value: 'echo', label: 'Echo (Male)' },
+    { value: 'fable', label: 'Fable (British Male)' },
+    { value: 'onyx', label: 'Onyx (Male)' },
+    { value: 'nova', label: 'Nova (Female)' },
+    { value: 'shimmer', label: 'Shimmer (Female)' }
   ],
   google: [
     { value: 'en-US-Wavenet-A', label: 'Wavenet A (Female)' },
