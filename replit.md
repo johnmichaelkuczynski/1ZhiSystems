@@ -114,12 +114,13 @@ Preferred communication style: Simple, everyday language.
 
 ### Journal System Implementation
 - **Implementation**: Complete blog system called "Zhi Systems Journal" with AI-powered interactive features
-- **Date**: January 27, 2025 (Updated August 3, 2025)
+- **Date**: January 27, 2025 (Updated August 8, 2025)
 - **Features**: Volume/issue numbering with Roman numerals, markdown support, admin interface
 - **URL Structure**: `/journal/vol-[roman]/no-[number]` format for SEO-friendly URLs
 - **Components**: Journal listing, individual issue pages, admin panel for CRUD operations
 - **AI Features**: Text selection with 8 AI-powered functions (rewrite, study guides, tests, podcasts, visual cognitive maps, thesis analysis, deep dives, suggested readings)
 - **Content**: Three published issues including comprehensive "Veblen Utility Functions" with complete 13-chapter analysis
+- **Audio System**: Full Azure Speech Services integration with automatic audio generation for all podcasts, saved to public/audio directory
 
 ### Component Library Choice
 - **Decision**: shadcn/ui over pre-built component libraries

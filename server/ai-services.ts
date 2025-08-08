@@ -1,6 +1,8 @@
 import OpenAI from 'openai';
 import Anthropic from '@anthropic-ai/sdk';
 import fs from 'fs';
+import fsPromises from 'fs/promises';
+import path from 'path';
 import type { AIProvider, TextProcessingRequest, TestQuestion, PodcastScript, CognitiveMap, SummaryThesis, SuggestedReadings } from '@shared/ai-services';
 
 // Initialize AI clients
@@ -81,8 +83,8 @@ async function callAI(provider: AIProvider, prompt: string, systemPrompt?: strin
   }
 }
 
-// Generate speech using Azure Speech Services
-async function generateSpeech(text: string, voice: string = 'alloy'): Promise<Buffer> {
+// Generate speech using Azure Speech Services and save to public/audio
+async function generateAzureAudio(text: string, voice: string = 'alloy', filename?: string): Promise<string> {
   try {
     const endpoint = process.env.AZURE_SPEECH_ENDPOINT;
     const apiKey = process.env.AZURE_SPEECH_KEY;
@@ -125,7 +127,7 @@ async function generateSpeech(text: string, voice: string = 'alloy'): Promise<Bu
       headers: {
         'Ocp-Apim-Subscription-Key': apiKey,
         'Content-Type': 'application/ssml+xml',
-        'X-Microsoft-OutputFormat': 'audio-16khz-128kbitrate-mono-mp3',
+        'X-Microsoft-OutputFormat': 'audio-16khz-32kbitrate-mono-mp3',
         'User-Agent': 'ZhiSystems/1.0'
       },
       body: ssml
@@ -140,8 +142,22 @@ async function generateSpeech(text: string, voice: string = 'alloy'): Promise<Bu
       throw new Error(`Azure Speech API error: ${response.status} - ${errorText}`);
     }
 
+    // Get audio buffer
     const audioBuffer = Buffer.from(await response.arrayBuffer());
-    return audioBuffer;
+    console.log('Audio generated successfully, buffer size:', audioBuffer.length);
+
+    // Create filename if not provided
+    if (!filename) {
+      filename = `podcast_${Date.now()}`;
+    }
+
+    // Save to public/audio directory
+    const audioPath = path.join(process.cwd(), 'public', 'audio', `${filename}.mp3`);
+    await fsPromises.writeFile(audioPath, audioBuffer);
+    console.log('Audio file saved to:', audioPath);
+
+    // Return the public URL path
+    return `/audio/${filename}.mp3`;
   } catch (error) {
     console.error('Error generating speech with Azure:', error);
     throw error;
@@ -313,18 +329,12 @@ Format as a natural conversation between HOST 1 and HOST 2. Each line should sta
     console.log('Generating audio for podcast...');
     console.log('Voice selection:', request.voiceSelection);
     try {
-      const audioBuffer = await generateSpeech(finalScript, request.voiceSelection);
-      console.log('Audio generated successfully, buffer size:', audioBuffer.length);
-      
-      // Create a unique filename and save the audio
+      // Create a unique filename
       const timestamp = Date.now();
-      const filename = `podcast_${timestamp}.mp3`;
-      const audioPath = `/tmp/${filename}`;
+      const filename = `podcast_${timestamp}`;
       
-      // Write the audio buffer to file
-      fs.writeFileSync(audioPath, audioBuffer);
-      console.log('Audio file saved to:', audioPath);
-      audioUrl = `/api/audio/${filename}`;
+      audioUrl = await generateAzureAudio(finalScript, request.voiceSelection, filename);
+      console.log('Audio URL generated:', audioUrl);
     } catch (error) {
       console.error('Failed to generate audio:', error);
       console.error('Audio generation error details:', error instanceof Error ? error.stack : error);

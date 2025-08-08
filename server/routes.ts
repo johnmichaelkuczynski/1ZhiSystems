@@ -228,36 +228,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.json(VOICE_OPTIONS);
   });
 
-  // Serve audio files
-  app.get('/api/audio/:filename', (req, res) => {
-    try {
-      const filename = req.params.filename;
-      const audioPath = `/tmp/${filename}`;
-      
-      // Check if file exists
-      if (!fs.existsSync(audioPath)) {
-        return res.status(404).json({ error: 'Audio file not found' });
-      }
-      
-      // Set appropriate headers for audio
-      res.setHeader('Content-Type', 'audio/mpeg');
-      res.setHeader('Content-Disposition', `inline; filename="${filename}"`);
-      
-      // Stream the file
-      const fileStream = fs.createReadStream(audioPath);
-      fileStream.pipe(res);
-      
-      // Clean up file after streaming (optional - may want to keep for caching)
-      fileStream.on('end', () => {
-        // Optionally delete the file after serving
-        // fs.unlinkSync(audioPath);
-      });
-      
-    } catch (error) {
-      console.error('Error serving audio:', error);
-      res.status(500).json({ error: 'Failed to serve audio file' });
-    }
-  });
+  // Note: Audio files are now served as static assets from public/audio/
 
   const httpServer = createServer(app);
 
