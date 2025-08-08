@@ -13,6 +13,15 @@ interface Podcast {
 
 const podcasts: Podcast[] = [
   {
+    id: "optimal-number-truth-values",
+    title: "On the Optimal Number of Truth Values",
+    description: "An AI-generated philosophical exploration examining the foundational question of how many truth values logical systems should employ, analyzing classical bivalent logic against multi-valued alternatives.",
+    audioUrl: "/audio/truth-values.mp3",
+    publishedDate: "2025-01-08",
+    duration: "38:20",
+    topics: ["Philosophy", "Logic", "Truth Values", "Mathematical Logic", "Epistemology"]
+  },
+  {
     id: "incompleteness-of-logic",
     title: "The Incompleteness of Logic",
     description: "An AI-generated exploration of Gödel's incompleteness theorems and their profound implications for mathematics, logic, and the foundations of knowledge.",
