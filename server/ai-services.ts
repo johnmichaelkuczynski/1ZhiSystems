@@ -96,7 +96,7 @@ async function generateAzureAudio(text: string, voice: string = 'alloy', filenam
 
     // Map OpenAI-style voices to Azure voices
     const voiceMapping: { [key: string]: string } = {
-      'alloy': 'en-US-AriaNeural',
+      'alloy': 'en-US-AlloyNeural',
       'echo': 'en-US-DavisNeural', 
       'fable': 'en-GB-LibbyNeural',
       'onyx': 'en-US-GuyNeural',
@@ -104,7 +104,7 @@ async function generateAzureAudio(text: string, voice: string = 'alloy', filenam
       'shimmer': 'en-US-MichelleNeural'
     };
 
-    const azureVoice = voiceMapping[voice] || 'en-US-AriaNeural';
+    const azureVoice = voiceMapping[voice] || 'en-US-AlloyNeural';
 
     // Create SSML for Azure Speech
     const ssml = `
@@ -127,7 +127,7 @@ async function generateAzureAudio(text: string, voice: string = 'alloy', filenam
       headers: {
         'Ocp-Apim-Subscription-Key': apiKey,
         'Content-Type': 'application/ssml+xml',
-        'X-Microsoft-OutputFormat': 'audio-16khz-32kbitrate-mono-mp3',
+        'X-Microsoft-OutputFormat': 'audio-24khz-48kbitrate-mono-mp3',
         'User-Agent': 'ZhiSystems/1.0'
       },
       body: ssml
