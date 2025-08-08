@@ -37,6 +37,8 @@ export interface TextProcessingRequest {
   customInstructions?: string;
   includeAudio?: boolean;
   voiceSelection?: string;
+  podcastMode?: 'normal-one' | 'normal-two' | 'custom-one' | 'custom-two';
+  podcastInstructions?: string;
 }
 
 export interface TestQuestion {
@@ -62,6 +64,11 @@ export interface PodcastScript {
   conclusion: string;
   estimatedDuration: string;
   audioUrl?: string;
+  mode: 'normal-one' | 'normal-two' | 'custom-one' | 'custom-two';
+  hosts?: {
+    name: string;
+    role: string;
+  }[];
 }
 
 export interface CognitiveMap {

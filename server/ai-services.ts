@@ -82,16 +82,20 @@ async function callAI(provider: AIProvider, prompt: string, systemPrompt?: strin
 }
 
 // Generate speech using OpenAI TTS
-async function generateSpeech(text: string): Promise<Buffer> {
+async function generateSpeech(text: string, voice: string = 'alloy'): Promise<Buffer> {
   try {
     // Validate text length (OpenAI TTS has a 4096 character limit)
     if (text.length > 4096) {
       throw new Error(`Text too long for TTS: ${text.length} characters (max: 4096)`);
     }
 
+    // Validate voice option
+    const validVoices = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
+    const selectedVoice = validVoices.includes(voice) ? voice : 'alloy';
+
     const response = await openai.audio.speech.create({
       model: 'tts-1-hd',
-      voice: 'alloy',
+      voice: selectedVoice as any,
       input: text,
       response_format: 'mp3'
     });
@@ -173,45 +177,129 @@ ${request.selectedText}`;
   }
 }
 
-export async function generatePodcast(request: TextProcessingRequest): Promise<{ script: PodcastScript; audioUrl: string }> {
-  const systemPrompt = "You are an expert podcast host. Create engaging, conversational podcast content that makes complex topics accessible and interesting. Write in a natural speaking style with smooth transitions. Keep the content concise for audio - aim for 2-3 minutes of speaking time (about 300-400 words).";
-  
-  const prompt = `Create a concise podcast episode based on the following text. Make it engaging and conversational, suitable for audio consumption. Keep it short - around 300-400 words maximum for a 2-3 minute podcast. Write as if you're speaking directly to listeners:
+export async function generatePodcast(request: TextProcessingRequest): Promise<{ script: PodcastScript; audioUrl?: string }> {
+  const mode = request.podcastMode || 'normal-two';
+  let systemPrompt = "";
+  let prompt = "";
+  let hosts: { name: string; role: string; }[] = [];
+
+  // Configure prompts based on podcast mode
+  switch (mode) {
+    case 'normal-one':
+      systemPrompt = "You are an expert podcast host. Create engaging, conversational podcast content with a single narrator that makes complex topics accessible and interesting. Write in a natural speaking style with smooth transitions.";
+      prompt = `Create a single-host podcast episode based on the following text. Write as a solo narrator speaking directly to listeners:
 
 Text to discuss:
 ${request.selectedText}
 
-Create a brief but complete podcast script that flows naturally when spoken aloud. Focus on the key insights and make it accessible.`;
+Create a complete podcast script with:
+- Engaging introduction
+- Clear explanation of key concepts
+- Conclusion with key takeaways
+
+Keep it conversational and accessible, around 300-500 words for a 3-4 minute podcast.`;
+      hosts = [{ name: "Alex", role: "Host" }];
+      break;
+
+    case 'normal-two':
+      systemPrompt = "You are creating a two-host podcast with natural conversation between hosts. Create engaging dialogue that makes complex topics accessible through discussion between two knowledgeable hosts.";
+      prompt = `Create a two-host podcast episode based on the following text. Format as a natural conversation between HOST 1 and HOST 2:
+
+Text to discuss:
+${request.selectedText}
+
+Create a complete podcast script with:
+- HOST 1: Welcome and introduction
+- Natural back-and-forth discussion between hosts
+- HOST 2: Conclusion and wrap-up
+
+Format each line as "HOST 1:" or "HOST 2:" followed by their dialogue. Make it conversational and engaging, around 400-600 words for a 4-5 minute podcast.`;
+      hosts = [
+        { name: "Alex", role: "Host 1" },
+        { name: "Sam", role: "Host 2" }
+      ];
+      break;
+
+    case 'custom-one':
+      systemPrompt = `You are an expert podcast host. Create engaging, conversational podcast content with a single narrator. ${request.podcastInstructions}`;
+      prompt = `Create a single-host podcast episode based on the following text. Follow these custom instructions: ${request.podcastInstructions}
+
+Text to discuss:
+${request.selectedText}
+
+Create a complete podcast script following the custom instructions provided. Keep it engaging and accessible.`;
+      hosts = [{ name: "Alex", role: "Host" }];
+      break;
+
+    case 'custom-two':
+      systemPrompt = `You are creating a two-host podcast with natural conversation between hosts. ${request.podcastInstructions}`;
+      prompt = `Create a two-host podcast episode based on the following text. Follow these custom instructions: ${request.podcastInstructions}
+
+Text to discuss:
+${request.selectedText}
+
+Format as a natural conversation between HOST 1 and HOST 2. Each line should start with "HOST 1:" or "HOST 2:" followed by their dialogue. Follow the custom instructions provided.`;
+      hosts = [
+        { name: "Alex", role: "Host 1" },
+        { name: "Sam", role: "Host 2" }
+      ];
+      break;
+  }
 
   const scriptResponse = await callAI(request.provider, prompt, systemPrompt);
   
+  // Parse the script into components
+  let introduction = "";
+  let mainContent = scriptResponse;
+  let conclusion = "";
+  
+  // Try to extract introduction and conclusion if structured
+  const lines = scriptResponse.split('\n').filter(line => line.trim());
+  if (lines.length > 3) {
+    introduction = lines.slice(0, Math.floor(lines.length * 0.2)).join('\n');
+    conclusion = lines.slice(Math.floor(lines.length * 0.8)).join('\n');
+    mainContent = lines.slice(Math.floor(lines.length * 0.2), Math.floor(lines.length * 0.8)).join('\n');
+  }
+
   // Ensure script is not too long for TTS (max 4000 characters to be safe)
   let finalScript = scriptResponse;
   if (finalScript.length > 4000) {
     finalScript = finalScript.substring(0, 3900) + "... Thanks for listening to this episode!";
   }
+
+  let audioUrl: string | undefined;
+
+  // Generate audio if requested
+  if (request.includeAudio) {
+    try {
+      const audioBuffer = await generateSpeech(finalScript, request.voiceSelection);
+      
+      // Create a unique filename and save the audio
+      const timestamp = Date.now();
+      const filename = `podcast_${timestamp}.mp3`;
+      const audioPath = `/tmp/${filename}`;
+      
+      // Write the audio buffer to file
+      fs.writeFileSync(audioPath, audioBuffer);
+      audioUrl = `/api/audio/${filename}`;
+    } catch (error) {
+      console.error('Failed to generate audio:', error);
+      // Continue without audio
+    }
+  }
   
-  // Generate audio using OpenAI TTS
-  const audioBuffer = await generateSpeech(finalScript);
-  
-  // Create a unique filename and save the audio
-  const timestamp = Date.now();
-  const filename = `podcast_${timestamp}.mp3`;
-  const audioPath = `/tmp/${filename}`;
-  
-  // Write the audio buffer to file
-  fs.writeFileSync(audioPath, audioBuffer);
-  
-  // Return both script and audio URL
+  // Return script and optional audio URL
   return {
     script: {
-      title: 'AI Generated Podcast',
-      introduction: 'Welcome to this episode...',
-      mainContent: finalScript,
-      conclusion: 'Thanks for listening!',
-      estimatedDuration: '2-3 minutes'
+      title: `AI Generated Podcast - ${mode.charAt(0).toUpperCase() + mode.slice(1).replace('-', ' ')} Mode`,
+      introduction: introduction || 'Welcome to this episode...',
+      mainContent: mainContent,
+      conclusion: conclusion || 'Thanks for listening!',
+      estimatedDuration: mode.includes('two') ? '4-5 minutes' : '3-4 minutes',
+      mode,
+      hosts
     },
-    audioUrl: `/api/audio/${filename}`
+    audioUrl
   };
 }
 

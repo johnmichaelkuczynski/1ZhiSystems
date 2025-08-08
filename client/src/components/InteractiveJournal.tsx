@@ -80,6 +80,8 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [panelPosition, setPanelPosition] = useState({ x: 0, y: 0 });
+  const [podcastMode, setPodcastMode] = useState<'normal-one' | 'normal-two' | 'custom-one' | 'custom-two'>('normal-two');
+  const [podcastInstructions, setPodcastInstructions] = useState('');
 
   // Download audio file function
   const downloadAudio = async (audioUrl: string, filename: string = 'podcast.mp3') => {
@@ -159,7 +161,9 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
         provider: selectedProvider,
         customInstructions: action === 'rewrite' ? customInstructions : undefined,
         includeAudio: action === 'podcast' ? includeAudio : false,
-        voiceSelection: action === 'podcast' ? voiceSelection : undefined
+        voiceSelection: action === 'podcast' ? voiceSelection : undefined,
+        podcastMode: action === 'podcast' ? podcastMode : undefined,
+        podcastInstructions: action === 'podcast' && (podcastMode === 'custom-one' || podcastMode === 'custom-two') ? podcastInstructions : undefined
       };
 
       const response = await fetch(`/api/ai/${action}`, {
@@ -796,7 +800,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
                 className={`text-xs h-16 flex flex-col items-center justify-center gap-1 ${button.color} text-white relative`}
                 onClick={() => {
                   setCurrentAction(button.action);
-                  if (button.action === 'rewrite') {
+                  if (button.action === 'rewrite' || button.action === 'podcast') {
                     setShowModal(true);
                   } else {
                     processWithAI(button.action);
@@ -878,6 +882,180 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
     );
   };
 
+  const renderPodcastModal = () => {
+    if (currentAction !== 'podcast' || !showModal) return null;
+
+    return (
+      <Dialog open={showModal} onOpenChange={(open) => {
+        setShowModal(open);
+        if (!open) {
+          setCurrentAction(null);
+          setModalContent(null);
+        }
+      }}>
+        <DialogContent className="max-w-3xl" aria-describedby="podcast-description">
+          <DialogHeader>
+            <DialogTitle>Create Podcast</DialogTitle>
+          </DialogHeader>
+          <div id="podcast-description" className="sr-only">
+            Choose your podcast format and configuration
+          </div>
+          
+          <div className="space-y-6">
+            {/* Podcast Mode Selection */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Podcast Mode</h3>
+              <div className="grid grid-cols-2 gap-4">
+                {/* Normal Mode (One Host) */}
+                <div 
+                  className={`border-2 rounded-lg p-4 cursor-pointer transition-colors ${
+                    podcastMode === 'normal-one' ? 'border-blue-500 bg-blue-50' : 'border-gray-200'
+                  }`}
+                  onClick={() => setPodcastMode('normal-one')}
+                >
+                  <div className="flex items-center justify-center mb-3">
+                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                      👤
+                    </div>
+                  </div>
+                  <h4 className="font-semibold text-center mb-2">Normal Mode (One Host)</h4>
+                  <p className="text-sm text-gray-600 text-center">Single narrator discussing the content</p>
+                </div>
+
+                {/* Normal Mode (Two Hosts) */}
+                <div 
+                  className={`border-2 rounded-lg p-4 cursor-pointer transition-colors ${
+                    podcastMode === 'normal-two' ? 'border-blue-500 bg-blue-50' : 'border-gray-200'
+                  }`}
+                  onClick={() => setPodcastMode('normal-two')}
+                >
+                  <div className="flex items-center justify-center mb-3">
+                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                      👥
+                    </div>
+                  </div>
+                  <h4 className="font-semibold text-center mb-2">Normal Mode (Two Hosts)</h4>
+                  <p className="text-sm text-gray-600 text-center">Two hosts having a conversation</p>
+                </div>
+
+                {/* Custom (One Host) */}
+                <div 
+                  className={`border-2 rounded-lg p-4 cursor-pointer transition-colors ${
+                    podcastMode === 'custom-one' ? 'border-blue-500 bg-blue-50' : 'border-gray-200'
+                  }`}
+                  onClick={() => setPodcastMode('custom-one')}
+                >
+                  <div className="flex items-center justify-center mb-3">
+                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                      👤⚙️
+                    </div>
+                  </div>
+                  <h4 className="font-semibold text-center mb-2">Custom (One Host)</h4>
+                  <p className="text-sm text-gray-600 text-center">Single host with custom instructions</p>
+                </div>
+
+                {/* Custom (Two Hosts) */}
+                <div 
+                  className={`border-2 rounded-lg p-4 cursor-pointer transition-colors ${
+                    podcastMode === 'custom-two' ? 'border-blue-500 bg-blue-50' : 'border-gray-200'
+                  }`}
+                  onClick={() => setPodcastMode('custom-two')}
+                >
+                  <div className="flex items-center justify-center mb-3">
+                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                      👥⚙️
+                    </div>
+                  </div>
+                  <h4 className="font-semibold text-center mb-2">Custom (Two Hosts)</h4>
+                  <p className="text-sm text-gray-600 text-center">Two hosts with custom instructions</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Custom Instructions (if custom mode selected) */}
+            {(podcastMode === 'custom-one' || podcastMode === 'custom-two') && (
+              <div>
+                <Label htmlFor="podcast-instructions">Custom Instructions</Label>
+                <Textarea
+                  id="podcast-instructions"
+                  placeholder="Describe how you want the podcast to be structured, the tone, specific topics to focus on, etc."
+                  value={podcastInstructions}
+                  onChange={(e) => setPodcastInstructions(e.target.value)}
+                  className="mt-1"
+                  rows={4}
+                />
+              </div>
+            )}
+
+            {/* Audio Options */}
+            <div className="space-y-3">
+              <div className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  id="include-audio"
+                  checked={includeAudio}
+                  onChange={(e) => setIncludeAudio(e.target.checked)}
+                  className="rounded border-gray-300"
+                />
+                <Label htmlFor="include-audio">Generate audio version</Label>
+              </div>
+
+              {includeAudio && (
+                <div>
+                  <Label htmlFor="voice-selection">Voice Selection</Label>
+                  <Select value={voiceSelection} onValueChange={setVoiceSelection}>
+                    <SelectTrigger className="mt-1">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="alloy">Alloy (Neutral)</SelectItem>
+                      <SelectItem value="echo">Echo (Male)</SelectItem>
+                      <SelectItem value="fable">Fable (British Accent)</SelectItem>
+                      <SelectItem value="onyx">Onyx (Deep Male)</SelectItem>
+                      <SelectItem value="nova">Nova (Young Female)</SelectItem>
+                      <SelectItem value="shimmer">Shimmer (Female)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
+            </div>
+
+            {/* Generated Script Preview */}
+            <div className="bg-gray-50 rounded-lg p-4">
+              <h4 className="font-semibold mb-2">Generated Script</h4>
+              <div className="text-sm text-gray-600 space-y-2">
+                <div className="font-medium">
+                  Selected Text Preview: "{selectedText.substring(0, 100)}{selectedText.length > 100 ? '...' : ''}"
+                </div>
+                <div>
+                  Mode: <span className="font-medium">
+                    {podcastMode === 'normal-one' && 'Single narrator discussing the content'}
+                    {podcastMode === 'normal-two' && 'Two hosts having a conversation'}
+                    {podcastMode === 'custom-one' && 'Single host with custom instructions'}
+                    {podcastMode === 'custom-two' && 'Two hosts with custom instructions'}
+                  </span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex justify-between">
+              <Button variant="outline" onClick={() => setShowModal(false)}>
+                Cancel
+              </Button>
+              <Button 
+                onClick={() => processWithAI('podcast')} 
+                disabled={isProcessing || (podcastMode.includes('custom') && !podcastInstructions.trim())}
+              >
+                {isProcessing ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+                Generate Podcast
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    );
+  };
+
   return (
     <div className="relative">
       <div
@@ -890,8 +1068,9 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
       
       {renderToolbar()}
       {renderRewriteModal()}
+      {renderPodcastModal()}
       
-      <Dialog open={showModal && currentAction !== 'rewrite'} onOpenChange={(open) => {
+      <Dialog open={showModal && currentAction !== 'rewrite' && currentAction !== 'podcast'} onOpenChange={(open) => {
         setShowModal(open);
         if (!open) {
           setCurrentAction(null);
