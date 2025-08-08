@@ -68,7 +68,16 @@ app.post("/api/ai/generate-audio", async (req, res) => {
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
+  // Add explicit audio file serving for development
   if (app.get("env") === "development") {
+    const path = await import("path");
+    app.use('/audio', express.static(path.join(process.cwd(), 'public/audio'), {
+      setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.mp3')) {
+          res.setHeader('Content-Type', 'audio/mpeg');
+        }
+      }
+    }));
     await setupVite(app, server);
   } else {
     serveStatic(app);

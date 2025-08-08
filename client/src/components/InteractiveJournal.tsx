@@ -403,8 +403,9 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
                     Download
                   </Button>
                 </div>
-                <audio controls className="w-full">
+                <audio controls className="w-full" preload="metadata">
                   <source src={modalContent.audioUrl} type="audio/mpeg" />
+                  <source src={modalContent.audioUrl} type="audio/mp3" />
                   Your browser does not support audio playback.
                 </audio>
                 <p className="text-sm text-blue-600 mt-2">
