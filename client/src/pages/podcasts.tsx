@@ -47,6 +47,15 @@ const podcasts: Podcast[] = [
     publishedDate: "2025-01-08",
     duration: "25:30",
     topics: ["Psychology", "Mental Health", "Personality Disorders"]
+  },
+  {
+    id: "tarski-world-problem",
+    title: "The Tarski's World Problem",
+    description: "An AI-generated exploration of Tarski's World as a paradigmatic failure in educational technology, examining how it illuminates broader problems with symbolic logic and contemporary philosophical pedagogy.",
+    audioUrl: "/audio/TARSKI_1754677257767.mp3",
+    publishedDate: "2025-08-08",
+    duration: "28:45",
+    topics: ["Educational Technology", "Logic", "Philosophy of Education", "Pedagogy", "Symbolic Logic"]
   }
 ];
 
