@@ -48,21 +48,26 @@ async function generateAzureAudio(text: string, config: SpeechConfig): Promise<s
       headers: {
         'Ocp-Apim-Subscription-Key': apiKey,
         'Content-Type': 'application/ssml+xml',
-        'X-Microsoft-OutputFormat': 'riff-24khz-16bit-mono-pcm',
+        'X-Microsoft-OutputFormat': 'audio-16khz-32kbitrate-mono-mp3',
       },
       responseType: 'arraybuffer'
     }
   );
 
-  // Convert audio buffer to base64 data URL
-  const audioBuffer = Buffer.from(response.data);
-  const base64Audio = audioBuffer.toString('base64');
-  return `data:audio/wav;base64,${base64Audio}`;
+  const fs = await import('fs/promises');
+  const path = await import('path');
+
+  const filename = 'test-podcast';
+  const audioPath = path.join(process.cwd(), 'public', 'audio', `${filename}.mp3`);
+  await fs.mkdir(path.dirname(audioPath), { recursive: true });
+  await fs.writeFile(audioPath, response.data);
+
+  return `/audio/${filename}.mp3`;
 }
 
 async function generateGoogleAudio(text: string, config: SpeechConfig): Promise<string> {
   const apiKey = process.env.GOOGLE_SPEECH_API_KEY;
-  
+
   if (!apiKey) {
     throw new Error('Google Speech API key not configured');
   }
