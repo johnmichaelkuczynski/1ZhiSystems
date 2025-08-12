@@ -65,7 +65,8 @@ export default function Home() {
     { title: "Homework Helper", url: "https://homeworkrobot.xyz" },
     { title: "Photo Analysis", url: "https://photoanalysis.xyz" },
     { title: "Texas Bar Prep", url: "https://texasbarprep.xyz" },
-    { title: "Genius Dictation", url: "https://geniusdictation.com" }
+    { title: "Genius Dictation", url: "https://geniusdictation.com" },
+    { title: "GPTByPass", url: "https://gptbypass.xyz" }
   ];
 
   const BookItem = ({ title, url, note }: { title: string; url: string | null; note?: string }) => (
