@@ -412,7 +412,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
                   Your browser does not support audio playback.
                 </audio>
                 <p className="text-sm text-blue-600 mt-2">
-                  Generated using Azure Speech Services with "{voiceSelection}" voice
+                  Generated using OpenAI TTS-1 with "{voiceSelection}" voice
                 </p>
               </div>
             )}
