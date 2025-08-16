@@ -36,7 +36,7 @@ async function callAI(provider: AIProvider, prompt: string, systemPrompt?: strin
             ...(systemPrompt ? [{ role: 'system' as const, content: systemPrompt }] : []),
             { role: 'user', content: prompt }
           ],
-          max_tokens: 4000,
+          max_tokens: 8000, // Increased for longer content
           temperature: 0.7,
         });
         return openaiResponse.choices[0]?.message?.content || '';
@@ -44,7 +44,7 @@ async function callAI(provider: AIProvider, prompt: string, systemPrompt?: strin
       case 'anthropic':
         const anthropicResponse = await anthropic.messages.create({
           model: 'claude-sonnet-4-20250514',
-          max_tokens: 4000,
+          max_tokens: 8000, // Increased for longer content
           messages: [{ role: 'user', content: prompt }],
           ...(systemPrompt ? { system: systemPrompt } : {}),
         });
@@ -57,7 +57,7 @@ async function callAI(provider: AIProvider, prompt: string, systemPrompt?: strin
             ...(systemPrompt ? [{ role: 'system' as const, content: systemPrompt }] : []),
             { role: 'user', content: prompt }
           ],
-          max_tokens: 4000,
+          max_tokens: 8000, // Increased for longer content
           temperature: 0.7,
         });
         return perplexityResponse.choices[0]?.message?.content || '';
@@ -69,7 +69,7 @@ async function callAI(provider: AIProvider, prompt: string, systemPrompt?: strin
             ...(systemPrompt ? [{ role: 'system' as const, content: systemPrompt }] : []),
             { role: 'user', content: prompt }
           ],
-          max_tokens: 4000,
+          max_tokens: 8000, // Increased for longer content
           temperature: 0.7,
         });
         return deepseekResponse.choices[0]?.message?.content || '';
@@ -232,6 +232,21 @@ export async function generatePodcast(request: TextProcessingRequest): Promise<{
   let systemPrompt = "";
   let prompt = "";
   let hosts: { name: string; role: string; }[] = [];
+  
+  // Handle very long content by chunking if necessary
+  let textToProcess = request.selectedText;
+  const maxLength = 15000; // Reasonable length for AI processing
+  
+  if (textToProcess.length > maxLength) {
+    // For very long content, extract key sections and summarize
+    const sections = textToProcess.split(/\n\s*\n/).filter(section => section.trim().length > 50);
+    const importantSections = sections.slice(0, Math.floor(maxLength / 300)); // Take first several sections
+    textToProcess = importantSections.join('\n\n');
+    
+    if (textToProcess.length > maxLength) {
+      textToProcess = textToProcess.substring(0, maxLength) + '...';
+    }
+  }
 
   // Configure prompts based on podcast mode
   switch (mode) {
@@ -240,14 +255,14 @@ export async function generatePodcast(request: TextProcessingRequest): Promise<{
       prompt = `Create a single-host podcast episode based on the following text. Write as a solo narrator speaking directly to listeners. Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters:
 
 Text to discuss:
-${request.selectedText}
+${textToProcess}
 
 Create a complete podcast script with:
 - Engaging introduction
 - Clear explanation of key concepts
 - Conclusion with key takeaways
 
-Keep it conversational and accessible, around 300-500 words for a 3-4 minute podcast.`;
+Keep it conversational and accessible. For longer content, create a comprehensive podcast that covers all key points while maintaining engagement.`;
       hosts = [{ name: "Alex", role: "Host" }];
       break;
 
@@ -256,14 +271,14 @@ Keep it conversational and accessible, around 300-500 words for a 3-4 minute pod
       prompt = `Create a two-host podcast episode based on the following text. Format as a natural conversation between HOST 1 and HOST 2. Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters:
 
 Text to discuss:
-${request.selectedText}
+${textToProcess}
 
 Create a complete podcast script with:
 - HOST 1: Welcome and introduction
 - Natural back-and-forth discussion between hosts
 - HOST 2: Conclusion and wrap-up
 
-Format each line as "HOST 1:" or "HOST 2:" followed by their dialogue. Make it conversational and engaging, around 400-600 words for a 4-5 minute podcast.`;
+Format each line as "HOST 1:" or "HOST 2:" followed by their dialogue. Make it conversational and engaging. For longer content, create a comprehensive discussion that covers all key points while maintaining natural dialogue flow.`;
       hosts = [
         { name: "Alex", role: "Host 1" },
         { name: "Sam", role: "Host 2" }
@@ -275,7 +290,7 @@ Format each line as "HOST 1:" or "HOST 2:" followed by their dialogue. Make it c
       prompt = `Create a single-host podcast episode based on the following text. Follow these custom instructions: ${request.podcastInstructions}. Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters.
 
 Text to discuss:
-${request.selectedText}
+${textToProcess}
 
 Create a complete podcast script following the custom instructions provided. Keep it engaging and accessible.`;
       hosts = [{ name: "Alex", role: "Host" }];
@@ -286,7 +301,7 @@ Create a complete podcast script following the custom instructions provided. Kee
       prompt = `Create a two-host podcast episode based on the following text. Follow these custom instructions: ${request.podcastInstructions}. Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters.
 
 Text to discuss:
-${request.selectedText}
+${textToProcess}
 
 Format as a natural conversation between HOST 1 and HOST 2. Each line should start with "HOST 1:" or "HOST 2:" followed by their dialogue. Follow the custom instructions provided.`;
       hosts = [

@@ -82,6 +82,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
   const [panelPosition, setPanelPosition] = useState({ x: 0, y: 0 });
   const [podcastMode, setPodcastMode] = useState<'normal-one' | 'normal-two' | 'custom-one' | 'custom-two'>('normal-two');
   const [podcastInstructions, setPodcastInstructions] = useState('');
+  const [useEntireArticle, setUseEntireArticle] = useState(false);
 
   // Download audio file function
   const downloadAudio = async (audioUrl: string, filename: string = 'podcast.mp3') => {
@@ -142,11 +143,13 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
     }
   };
 
-  const processWithAI = async (action: ActionType) => {
-    if (!selectedText) {
+  const processWithAI = async (action: ActionType, useEntireArticle = false) => {
+    const textToProcess = useEntireArticle ? content : selectedText;
+    
+    if (!textToProcess) {
       toast({
-        title: "No text selected",
-        description: "Please select some text first.",
+        title: useEntireArticle ? "No content available" : "No text selected",
+        description: useEntireArticle ? "Article content is not available." : "Please select some text first.",
         variant: "destructive"
       });
       return;
@@ -156,7 +159,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
 
     try {
       const request: TextProcessingRequest = {
-        selectedText,
+        selectedText: textToProcess,
         action,
         provider: selectedProvider,
         customInstructions: action === 'rewrite' ? customInstructions : undefined,
@@ -1021,13 +1024,58 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
               )}
             </div>
 
+            {/* Content Source Selection */}
+            <div className="bg-blue-50 rounded-lg p-4 mb-4">
+              <h4 className="font-semibold mb-3">Content Source</h4>
+              <div className="space-y-3">
+                <div 
+                  className={`border-2 rounded-lg p-3 cursor-pointer transition-colors ${
+                    !useEntireArticle ? 'border-blue-500 bg-white' : 'border-gray-200 bg-gray-50'
+                  }`}
+                  onClick={() => setUseEntireArticle(false)}
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="w-4 h-4 rounded-full border-2 border-blue-500 mt-0.5 flex items-center justify-center">
+                      {!useEntireArticle && <div className="w-2 h-2 rounded-full bg-blue-500"></div>}
+                    </div>
+                    <div>
+                      <div className="font-medium">Selected Text</div>
+                      <div className="text-sm text-gray-600">
+                        "{selectedText.substring(0, 150)}{selectedText.length > 150 ? '...' : ''}"
+                      </div>
+                      <div className="text-xs text-gray-500 mt-1">
+                        {selectedText.length} characters selected
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div 
+                  className={`border-2 rounded-lg p-3 cursor-pointer transition-colors ${
+                    useEntireArticle ? 'border-blue-500 bg-white' : 'border-gray-200 bg-gray-50'
+                  }`}
+                  onClick={() => setUseEntireArticle(true)}
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="w-4 h-4 rounded-full border-2 border-blue-500 mt-0.5 flex items-center justify-center">
+                      {useEntireArticle && <div className="w-2 h-2 rounded-full bg-blue-500"></div>}
+                    </div>
+                    <div>
+                      <div className="font-medium">Entire Article</div>
+                      <div className="text-sm text-gray-600">"{title}"</div>
+                      <div className="text-xs text-gray-500 mt-1">
+                        {content.length} characters total
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Generated Script Preview */}
             <div className="bg-gray-50 rounded-lg p-4">
               <h4 className="font-semibold mb-2">Generated Script</h4>
               <div className="text-sm text-gray-600 space-y-2">
-                <div className="font-medium">
-                  Selected Text Preview: "{selectedText.substring(0, 100)}{selectedText.length > 100 ? '...' : ''}"
-                </div>
                 <div>
                   Mode: <span className="font-medium">
                     {podcastMode === 'normal-one' && 'Single narrator discussing the content'}
@@ -1110,7 +1158,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
                 Cancel
               </Button>
               <Button 
-                onClick={() => processWithAI('podcast')} 
+                onClick={() => processWithAI('podcast', useEntireArticle)} 
                 disabled={isProcessing || (podcastMode.includes('custom') && !podcastInstructions.trim())}
               >
                 {isProcessing ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
@@ -1125,6 +1173,30 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
 
   return (
     <div className="relative">
+      {/* AI Functions Header */}
+      <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-200 mb-6 p-4 -mx-4">
+        <div className="flex items-center justify-between">
+          <h3 className="text-lg font-semibold text-gray-900">AI-Powered Analysis</h3>
+          <div className="flex gap-2">
+            <Button
+              onClick={() => {
+                setUseEntireArticle(true);
+                setCurrentAction('podcast');
+                setShowModal(true);
+              }}
+              className="bg-orange-500 hover:bg-orange-600 text-white flex items-center gap-2"
+              size="sm"
+            >
+              <Podcast className="w-4 h-4" />
+              Create Full Article Podcast
+            </Button>
+          </div>
+        </div>
+        <p className="text-sm text-gray-600 mt-2">
+          Select any text below to access 8 AI functions, or use the button above to create a podcast from the entire article.
+        </p>
+      </div>
+
       <div
         ref={contentRef}
         className="prose max-w-none cursor-text"
