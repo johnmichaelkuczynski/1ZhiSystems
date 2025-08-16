@@ -37,6 +37,7 @@ export interface TextProcessingRequest {
   customInstructions?: string;
   includeAudio?: boolean;
   voiceSelection?: string;
+  secondVoiceSelection?: string;
   podcastMode?: 'normal-one' | 'normal-two' | 'custom-one' | 'custom-two';
   podcastInstructions?: string;
 }

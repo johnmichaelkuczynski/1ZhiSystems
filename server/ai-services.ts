@@ -84,22 +84,13 @@ async function callAI(provider: AIProvider, prompt: string, systemPrompt?: strin
 }
 
 // Generate speech using Azure Speech Services and save to public/audio
-async function generateTwoHostAudio(script: string, primaryVoice: string = 'alloy', filename?: string): Promise<string> {
+async function generateTwoHostAudio(script: string, primaryVoice: string = 'alloy', secondaryVoice: string = 'echo', filename?: string): Promise<string> {
   try {
     console.log('Generating two-host audio with different voices...');
     
-    // Define voice pairs for better contrast
-    const voicePairs: Record<string, { host1: string; host2: string }> = {
-      'alloy': { host1: 'alloy', host2: 'echo' },
-      'echo': { host1: 'echo', host2: 'fable' },
-      'fable': { host1: 'fable', host2: 'onyx' },
-      'nova': { host1: 'nova', host2: 'shimmer' },
-      'onyx': { host1: 'onyx', host2: 'alloy' },
-      'shimmer': { host1: 'shimmer', host2: 'nova' }
-    };
-    
-    const voices = voicePairs[primaryVoice] || { host1: 'alloy', host2: 'echo' };
-    console.log(`Using voices: HOST 1 = ${voices.host1}, HOST 2 = ${voices.host2}`);
+    // Use the user-selected voices
+    const voices = { host1: primaryVoice, host2: secondaryVoice };
+    console.log(`Using user-selected voices: ALEX = ${voices.host1}, SAM = ${voices.host2}`);
     
     // Parse the script to create segments with speaker attribution
     const lines = script.split('\n').filter(line => line.trim());
@@ -533,7 +524,7 @@ Format as a natural conversation between Alex and Sam. Each line should start wi
       
       // For two-person podcasts, use different voices and combine them
       if (mode.includes('two')) {
-        audioUrl = await generateTwoHostAudio(finalScript, request.voiceSelection, filename);
+        audioUrl = await generateTwoHostAudio(finalScript, request.voiceSelection, request.secondVoiceSelection || 'echo', filename);
       } else {
         audioUrl = await generateOpenAIAudio(finalScript, request.voiceSelection, filename);
       }

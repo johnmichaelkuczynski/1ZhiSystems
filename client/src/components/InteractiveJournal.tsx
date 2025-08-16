@@ -74,6 +74,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
   const [customInstructions, setCustomInstructions] = useState('');
   const [includeAudio, setIncludeAudio] = useState(true); // Default to true for podcasts
   const [voiceSelection, setVoiceSelection] = useState('alloy'); // Use OpenAI-style voice names
+  const [secondVoiceSelection, setSecondVoiceSelection] = useState('echo'); // Second voice for two-host mode
   const [voiceOptions, setVoiceOptions] = useState<any>({ azure: [], google: [] });
   const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
   const [isMinimized, setIsMinimized] = useState(false);
@@ -165,6 +166,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
         customInstructions: action === 'rewrite' ? customInstructions : undefined,
         includeAudio: action === 'podcast' ? true : false, // Always generate audio for podcasts
         voiceSelection: action === 'podcast' ? voiceSelection : undefined,
+        secondVoiceSelection: action === 'podcast' && (podcastMode === 'normal-two' || podcastMode === 'custom-two') ? secondVoiceSelection : undefined,
         podcastMode: action === 'podcast' ? podcastMode : undefined,
         podcastInstructions: action === 'podcast' && (podcastMode === 'custom-one' || podcastMode === 'custom-two') ? podcastInstructions : undefined
       };
@@ -1005,21 +1007,46 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
               </div>
 
               {includeAudio && (
-                <div>
-                  <Label htmlFor="voice-selection">Voice Selection</Label>
-                  <Select value={voiceSelection} onValueChange={setVoiceSelection}>
-                    <SelectTrigger className="mt-1">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="alloy">Alloy (Neutral)</SelectItem>
-                      <SelectItem value="echo">Echo (Male)</SelectItem>
-                      <SelectItem value="fable">Fable (British Accent)</SelectItem>
-                      <SelectItem value="onyx">Onyx (Deep Male)</SelectItem>
-                      <SelectItem value="nova">Nova (Young Female)</SelectItem>
-                      <SelectItem value="shimmer">Shimmer (Female)</SelectItem>
-                    </SelectContent>
-                  </Select>
+                <div className="space-y-4">
+                  {/* First Voice Selection */}
+                  <div>
+                    <Label htmlFor="voice-selection">
+                      {(podcastMode === 'normal-two' || podcastMode === 'custom-two') ? 'Alex Voice (Host 1)' : 'Voice Selection'}
+                    </Label>
+                    <Select value={voiceSelection} onValueChange={setVoiceSelection}>
+                      <SelectTrigger className="mt-1">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="alloy">Alloy (Neutral)</SelectItem>
+                        <SelectItem value="echo">Echo (Male)</SelectItem>
+                        <SelectItem value="fable">Fable (British Accent)</SelectItem>
+                        <SelectItem value="onyx">Onyx (Deep Male)</SelectItem>
+                        <SelectItem value="nova">Nova (Young Female)</SelectItem>
+                        <SelectItem value="shimmer">Shimmer (Female)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Second Voice Selection - Only show for two-host modes */}
+                  {(podcastMode === 'normal-two' || podcastMode === 'custom-two') && (
+                    <div>
+                      <Label htmlFor="second-voice-selection">Sam Voice (Host 2)</Label>
+                      <Select value={secondVoiceSelection} onValueChange={setSecondVoiceSelection}>
+                        <SelectTrigger className="mt-1">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="alloy">Alloy (Neutral)</SelectItem>
+                          <SelectItem value="echo">Echo (Male)</SelectItem>
+                          <SelectItem value="fable">Fable (British Accent)</SelectItem>
+                          <SelectItem value="onyx">Onyx (Deep Male)</SelectItem>
+                          <SelectItem value="nova">Nova (Young Female)</SelectItem>
+                          <SelectItem value="shimmer">Shimmer (Female)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
