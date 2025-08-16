@@ -84,6 +84,180 @@ async function callAI(provider: AIProvider, prompt: string, systemPrompt?: strin
 }
 
 // Generate speech using Azure Speech Services and save to public/audio
+async function generateTwoHostAudio(script: string, primaryVoice: string = 'alloy', filename?: string): Promise<string> {
+  try {
+    console.log('Generating two-host audio with different voices...');
+    
+    // Define voice pairs for better contrast
+    const voicePairs: Record<string, { host1: string; host2: string }> = {
+      'alloy': { host1: 'alloy', host2: 'echo' },
+      'echo': { host1: 'echo', host2: 'fable' },
+      'fable': { host1: 'fable', host2: 'onyx' },
+      'nova': { host1: 'nova', host2: 'shimmer' },
+      'onyx': { host1: 'onyx', host2: 'alloy' },
+      'shimmer': { host1: 'shimmer', host2: 'nova' }
+    };
+    
+    const voices = voicePairs[primaryVoice] || { host1: 'alloy', host2: 'echo' };
+    console.log(`Using voices: HOST 1 = ${voices.host1}, HOST 2 = ${voices.host2}`);
+    
+    // Parse the script to create segments with speaker attribution
+    const lines = script.split('\n').filter(line => line.trim());
+    interface AudioSegment {
+      speaker: 'host1' | 'host2';
+      text: string;
+      voice: string;
+    }
+    
+    const segments: AudioSegment[] = [];
+    
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (trimmed.startsWith('ALEX:') || trimmed.startsWith('HOST 1:')) {
+        const content = trimmed.replace(/^(ALEX:|HOST 1:)/, '').trim();
+        if (content.length > 0) {
+          segments.push({
+            speaker: 'host1',
+            text: content,
+            voice: voices.host1
+          });
+        }
+      } else if (trimmed.startsWith('SAM:') || trimmed.startsWith('HOST 2:')) {
+        const content = trimmed.replace(/^(SAM:|HOST 2:)/, '').trim();
+        if (content.length > 0) {
+          segments.push({
+            speaker: 'host2',
+            text: content,
+            voice: voices.host2
+          });
+        }
+      } else if (trimmed.length > 0) {
+        // Non-host lines (like narration), assign to ALEX (host1)
+        segments.push({
+          speaker: 'host1',
+          text: trimmed,
+          voice: voices.host1
+        });
+      }
+    }
+    
+    console.log(`Generated ${segments.length} audio segments`);
+    
+    // Generate individual audio files for each segment
+    const fs = await import("fs/promises");
+    const path = await import("path");
+    const timestamp = Date.now();
+    
+    const segmentFiles: string[] = [];
+    
+    for (let i = 0; i < segments.length; i++) {
+      const segment = segments[i];
+      console.log(`Generating segment ${i + 1}/${segments.length}: ${segment.speaker} (${segment.voice})`);
+      
+      try {
+        const segmentAudio = await generateOpenAIAudioAsBuffer(segment.text, segment.voice);
+        const segmentPath = path.join(process.cwd(), "public", "audio", `segment_${timestamp}_${i}.mp3`);
+        await fs.mkdir(path.dirname(segmentPath), { recursive: true });
+        await fs.writeFile(segmentPath, segmentAudio);
+        segmentFiles.push(segmentPath);
+      } catch (error) {
+        console.error(`Error generating segment ${i}:`, error);
+        // Continue with other segments
+      }
+    }
+    
+    if (segmentFiles.length === 0) {
+      throw new Error('No audio segments were generated successfully');
+    }
+    
+    // Create final filename
+    const finalFilename = filename || `podcast_${timestamp}`;
+    const finalPath = path.join(process.cwd(), "public", "audio", `${finalFilename}.mp3`);
+    
+    // Simple concatenation: combine all audio buffers
+    console.log(`Combining ${segmentFiles.length} audio segments...`);
+    
+    if (segmentFiles.length === 1) {
+      // Single segment, just copy it
+      await fs.copyFile(segmentFiles[0], finalPath);
+    } else {
+      // Multiple segments: read all and combine
+      // Note: This is a simple approach; for production, use ffmpeg for proper audio mixing
+      const combinedBuffers: Buffer[] = [];
+      
+      for (const segmentFile of segmentFiles) {
+        try {
+          const segmentBuffer = await fs.readFile(segmentFile);
+          combinedBuffers.push(segmentBuffer);
+        } catch (error) {
+          console.warn('Could not read segment file:', segmentFile);
+        }
+      }
+      
+      if (combinedBuffers.length > 0) {
+        // Simple buffer concatenation (not ideal for MP3, but works as fallback)
+        const totalLength = combinedBuffers.reduce((sum, buf) => sum + buf.length, 0);
+        const combinedBuffer = Buffer.concat(combinedBuffers, totalLength);
+        await fs.writeFile(finalPath, combinedBuffer);
+      } else {
+        // Fallback: copy first available file
+        await fs.copyFile(segmentFiles[0], finalPath);
+      }
+    }
+    
+    // Clean up segment files
+    for (const segmentFile of segmentFiles) {
+      try {
+        await fs.unlink(segmentFile);
+      } catch (error) {
+        console.warn('Could not delete segment file:', segmentFile);
+      }
+    }
+    
+    console.log('Two-host audio generated successfully');
+    return `/audio/${finalFilename}.mp3`;
+    
+  } catch (error) {
+    console.error('Error generating two-host audio:', error);
+    // Fallback to single voice
+    return await generateOpenAIAudio(script, primaryVoice, filename);
+  }
+}
+
+async function generateOpenAIAudioAsBuffer(text: string, voice: string = 'alloy'): Promise<Buffer> {
+  try {
+    const apiKey = process.env.OPENAI_API_KEY;
+
+    if (!apiKey) {
+      throw new Error('OpenAI API key not configured');
+    }
+
+    const response = await fetch("https://api.openai.com/v1/audio/speech", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "tts-1",
+        input: text,
+        voice: voice
+      })
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`OpenAI TTS API error: ${response.status} - ${errorText}`);
+    }
+
+    const buffer = await response.arrayBuffer();
+    return Buffer.from(buffer);
+  } catch (error) {
+    console.error('Error generating speech buffer with OpenAI:', error);
+    throw error;
+  }
+}
+
 async function generateOpenAIAudio(text: string, voice: string = 'alloy', filename?: string): Promise<string> {
   try {
     const apiKey = process.env.OPENAI_API_KEY;
@@ -267,21 +441,21 @@ Keep it conversational and accessible. For longer content, create a comprehensiv
       break;
 
     case 'normal-two':
-      systemPrompt = "You are creating a two-host podcast with natural conversation between hosts. Create engaging dialogue that makes complex topics accessible through discussion between two knowledgeable hosts. Output ONLY plain text without any markdown, formatting, asterisks, or special characters.";
-      prompt = `Create a two-host podcast episode based on the following text. Format as a natural conversation between HOST 1 and HOST 2. Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters:
+      systemPrompt = "You are creating a two-host podcast with natural conversation between hosts. Create engaging dialogue that makes complex topics accessible through discussion between two knowledgeable hosts. Use clear speaker labels but make the actual dialogue sound natural and conversational. Output ONLY plain text without any markdown, formatting, asterisks, or special characters.";
+      prompt = `Create a two-host podcast episode based on the following text. Write it as a natural conversation between two hosts - Alex and Sam. Use ALEX: and SAM: to indicate who is speaking, but make the actual dialogue sound natural without referring to "Host 1" or "Host 2". Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters:
 
 Text to discuss:
 ${textToProcess}
 
 Create a complete podcast script with:
-- HOST 1: Welcome and introduction
-- Natural back-and-forth discussion between hosts
-- HOST 2: Conclusion and wrap-up
+- ALEX: Welcome and introduction
+- Natural back-and-forth discussion between Alex and Sam
+- SAM: Conclusion and wrap-up
 
-Format each line as "HOST 1:" or "HOST 2:" followed by their dialogue. Make it conversational and engaging. For longer content, create a comprehensive discussion that covers all key points while maintaining natural dialogue flow.`;
+Format each line as "ALEX:" or "SAM:" followed by their natural dialogue. Make it conversational and engaging. For longer content, create a comprehensive discussion that covers all key points while maintaining natural dialogue flow.`;
       hosts = [
-        { name: "Alex", role: "Host 1" },
-        { name: "Sam", role: "Host 2" }
+        { name: "Alex", role: "Host" },
+        { name: "Sam", role: "Co-Host" }
       ];
       break;
 
@@ -297,16 +471,16 @@ Create a complete podcast script following the custom instructions provided. Kee
       break;
 
     case 'custom-two':
-      systemPrompt = `You are creating a two-host podcast with natural conversation between hosts. Output ONLY plain text without any markdown, formatting, asterisks, or special characters. ${request.podcastInstructions}`;
-      prompt = `Create a two-host podcast episode based on the following text. Follow these custom instructions: ${request.podcastInstructions}. Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters.
+      systemPrompt = `You are creating a two-host podcast with natural conversation between hosts. Use clear speaker labels but make the actual dialogue sound natural and conversational. Output ONLY plain text without any markdown, formatting, asterisks, or special characters. ${request.podcastInstructions}`;
+      prompt = `Create a two-host podcast episode based on the following text. Follow these custom instructions: ${request.podcastInstructions}. Write it as a natural conversation between two hosts - Alex and Sam. Use ALEX: and SAM: to indicate who is speaking. Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters.
 
 Text to discuss:
 ${textToProcess}
 
-Format as a natural conversation between HOST 1 and HOST 2. Each line should start with "HOST 1:" or "HOST 2:" followed by their dialogue. Follow the custom instructions provided.`;
+Format as a natural conversation between Alex and Sam. Each line should start with "ALEX:" or "SAM:" followed by their natural dialogue. Follow the custom instructions provided.`;
       hosts = [
-        { name: "Alex", role: "Host 1" },
-        { name: "Sam", role: "Host 2" }
+        { name: "Alex", role: "Host" },
+        { name: "Sam", role: "Co-Host" }
       ];
       break;
   }
@@ -351,12 +525,19 @@ Format as a natural conversation between HOST 1 and HOST 2. Each line should sta
   if (request.includeAudio) {
     console.log('Generating audio for podcast...');
     console.log('Voice selection:', request.voiceSelection);
+    console.log('Podcast mode:', mode);
     try {
       // Create a unique filename
       const timestamp = Date.now();
       const filename = `podcast_${timestamp}`;
       
-      audioUrl = await generateOpenAIAudio(finalScript, request.voiceSelection, filename);
+      // For two-person podcasts, use different voices and combine them
+      if (mode.includes('two')) {
+        audioUrl = await generateTwoHostAudio(finalScript, request.voiceSelection, filename);
+      } else {
+        audioUrl = await generateOpenAIAudio(finalScript, request.voiceSelection, filename);
+      }
+      
       console.log('Audio URL generated:', audioUrl);
     } catch (error) {
       console.error('Failed to generate audio:', error);
