@@ -83,14 +83,16 @@ async function callAI(provider: AIProvider, prompt: string, systemPrompt?: strin
   }
 }
 
-// Generate speech using Azure Speech Services and save to public/audio
+// Generate speech using OpenAI TTS and save to public/audio
 async function generateTwoHostAudio(script: string, primaryVoice: string = 'alloy', secondaryVoice: string = 'echo', filename?: string): Promise<string> {
   try {
-    console.log('Generating two-host audio with different voices...');
+    console.log('=== GENERATING TWO-HOST AUDIO ===');
+    console.log(`Primary voice requested: ${primaryVoice}`);
+    console.log(`Secondary voice requested: ${secondaryVoice}`);
     
-    // Use the user-selected voices
+    // CRITICAL: Use the exact user-selected voices
     const voices = { host1: primaryVoice, host2: secondaryVoice };
-    console.log(`Using user-selected voices: ALEX = ${voices.host1}, SAM = ${voices.host2}`);
+    console.log(`FINAL voices to use: ALEX = ${voices.host1}, SAM = ${voices.host2}`);
     
     // Parse the script to create segments with speaker attribution
     const lines = script.split('\n').filter(line => line.trim());
@@ -218,7 +220,16 @@ async function generateTwoHostAudio(script: string, primaryVoice: string = 'allo
 
 async function generateOpenAIAudioAsBuffer(text: string, voice: string = 'alloy'): Promise<Buffer> {
   try {
-    console.log(`[OpenAI TTS] Generating audio with voice: ${voice} for text: "${text.substring(0, 50)}..."`);
+    console.log(`[OpenAI TTS] CRITICAL: Generating audio with voice: ${voice} for text: "${text.substring(0, 50)}..."`);
+    console.log(`[OpenAI TTS] Voice parameter received: "${voice}"`);
+    
+    // Validate voice is one of the allowed OpenAI voices
+    const validVoices = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
+    if (!validVoices.includes(voice.toLowerCase())) {
+      console.error(`INVALID VOICE: ${voice} not in allowed voices:`, validVoices);
+      throw new Error(`Invalid voice selection: ${voice}. Must be one of: ${validVoices.join(', ')}`);
+    }
+    
     const apiKey = process.env.OPENAI_API_KEY;
 
     if (!apiKey) {
@@ -234,9 +245,11 @@ async function generateOpenAIAudioAsBuffer(text: string, voice: string = 'alloy'
       body: JSON.stringify({
         model: "tts-1",
         input: text,
-        voice: voice
+        voice: voice.toLowerCase()
       })
     });
+    
+    console.log(`[OpenAI TTS] API request sent with voice: ${voice.toLowerCase()}`);
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -259,9 +272,9 @@ async function generateOpenAIAudio(text: string, voice: string = 'alloy', filena
       throw new Error('OpenAI API key not configured');
     }
 
-    console.log('Calling OpenAI TTS API');
-    console.log('Using voice:', voice);
-    console.log('Text length:', text.length);
+    console.log('SINGLE VOICE: Calling OpenAI TTS API');
+    console.log('SINGLE VOICE: Using voice:', voice);
+    console.log('SINGLE VOICE: Text length:', text.length);
     
     const response = await fetch("https://api.openai.com/v1/audio/speech", {
       method: "POST",
@@ -272,9 +285,11 @@ async function generateOpenAIAudio(text: string, voice: string = 'alloy', filena
       body: JSON.stringify({
         model: "tts-1",
         input: text,
-        voice: voice
+        voice: voice.toLowerCase()
       })
     });
+    
+    console.log(`SINGLE VOICE: API request sent with voice: ${voice.toLowerCase()}`);
 
     console.log('OpenAI TTS API response status:', response.status);
     console.log('OpenAI TTS API response headers:', Object.fromEntries(response.headers.entries()));
