@@ -172,26 +172,28 @@ async function generateTwoHostAudio(script: string, primaryVoice: string = 'allo
       // Single segment, just copy it
       await fs.copyFile(segmentFiles[0], finalPath);
     } else {
-      // Multiple segments: read all and combine
-      // Note: This is a simple approach; for production, use ffmpeg for proper audio mixing
-      const combinedBuffers: Buffer[] = [];
-      
-      for (const segmentFile of segmentFiles) {
-        try {
+      // Multiple segments: Use Node.js to combine audio properly
+      try {
+        // Create a simple concatenation approach for MP3 files
+        // Read all segments and write them sequentially
+        const writeStream = require('fs').createWriteStream(finalPath);
+        
+        for (const segmentFile of segmentFiles) {
           const segmentBuffer = await fs.readFile(segmentFile);
-          combinedBuffers.push(segmentBuffer);
-        } catch (error) {
-          console.warn('Could not read segment file:', segmentFile);
+          writeStream.write(segmentBuffer);
         }
-      }
-      
-      if (combinedBuffers.length > 0) {
-        // Simple buffer concatenation (not ideal for MP3, but works as fallback)
-        const totalLength = combinedBuffers.reduce((sum, buf) => sum + buf.length, 0);
-        const combinedBuffer = Buffer.concat(combinedBuffers, totalLength);
-        await fs.writeFile(finalPath, combinedBuffer);
-      } else {
-        // Fallback: copy first available file
+        
+        writeStream.end();
+        
+        // Wait for write stream to finish
+        await new Promise((resolve, reject) => {
+          writeStream.on('finish', resolve);
+          writeStream.on('error', reject);
+        });
+        
+      } catch (combineError) {
+        console.error('Error combining audio files:', combineError);
+        // Emergency fallback: copy first file
         await fs.copyFile(segmentFiles[0], finalPath);
       }
     }
@@ -210,8 +212,7 @@ async function generateTwoHostAudio(script: string, primaryVoice: string = 'allo
     
   } catch (error) {
     console.error('Error generating two-host audio:', error);
-    // Fallback to single voice
-    return await generateOpenAIAudio(script, primaryVoice, filename);
+    throw error; // Don't fallback to single voice - show the actual error
   }
 }
 
