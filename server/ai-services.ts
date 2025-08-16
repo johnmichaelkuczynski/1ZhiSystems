@@ -516,6 +516,7 @@ Format as a natural conversation between Alex and Sam. Each line should start wi
   if (request.includeAudio) {
     console.log('Generating audio for podcast...');
     console.log('Voice selection:', request.voiceSelection);
+    console.log('Second voice selection:', request.secondVoiceSelection);
     console.log('Podcast mode:', mode);
     try {
       // Create a unique filename
