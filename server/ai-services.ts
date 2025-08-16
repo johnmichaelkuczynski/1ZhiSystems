@@ -217,6 +217,7 @@ async function generateTwoHostAudio(script: string, primaryVoice: string = 'allo
 
 async function generateOpenAIAudioAsBuffer(text: string, voice: string = 'alloy'): Promise<Buffer> {
   try {
+    console.log(`[OpenAI TTS] Generating audio with voice: ${voice} for text: "${text.substring(0, 50)}..."`);
     const apiKey = process.env.OPENAI_API_KEY;
 
     if (!apiKey) {
