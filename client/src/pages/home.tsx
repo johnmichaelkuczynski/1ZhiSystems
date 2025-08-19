@@ -67,7 +67,8 @@ export default function Home() {
     { title: "Texas Bar Prep", url: "https://texasbarprep.xyz" },
     { title: "Genius Dictation", url: "https://geniusdictation.com" },
     { title: "GPTByPass", url: "https://gptbypass.xyz" },
-    { title: "Improve Your Writing", url: "https://improveyourwriting.xyz" }
+    { title: "Improve Your Writing", url: "https://improveyourwriting.xyz" },
+    { title: "Text Genius", url: "https://textgenius.xyz" }
   ];
 
   const BookItem = ({ title, url, note }: { title: string; url: string | null; note?: string }) => (
