@@ -5,28 +5,49 @@ import fsPromises from 'fs/promises';
 import path from 'path';
 import type { AIProvider, TextProcessingRequest, TestQuestion, PodcastScript, CognitiveMap, SummaryThesis, SuggestedReadings } from '@shared/ai-services';
 
-// Initialize AI clients
+// Initialize AI clients with fallback handling
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY || 'dummy-key',
 });
 
 const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
+  apiKey: process.env.ANTHROPIC_API_KEY || 'dummy-key',
 });
 
 // Perplexity API client (uses OpenAI-compatible interface)
 const perplexity = new OpenAI({
-  apiKey: process.env.PERPLEXITY_API_KEY,
+  apiKey: process.env.PERPLEXITY_API_KEY || 'dummy-key',
   baseURL: 'https://api.perplexity.ai',
 });
 
 // DeepSeek API client (uses OpenAI-compatible interface)
 const deepseek = new OpenAI({
-  apiKey: process.env.DEEPSEEK_API_KEY,
+  apiKey: process.env.DEEPSEEK_API_KEY || 'dummy-key',
   baseURL: 'https://api.deepseek.com',
 });
 
+// Helper function to check if API key is available
+function checkApiKey(provider: AIProvider): boolean {
+  switch (provider) {
+    case 'openai':
+      return !!process.env.OPENAI_API_KEY && process.env.OPENAI_API_KEY !== 'dummy-key';
+    case 'anthropic':
+      return !!process.env.ANTHROPIC_API_KEY && process.env.ANTHROPIC_API_KEY !== 'dummy-key';
+    case 'perplexity':
+      return !!process.env.PERPLEXITY_API_KEY && process.env.PERPLEXITY_API_KEY !== 'dummy-key';
+    case 'deepseek':
+      return !!process.env.DEEPSEEK_API_KEY && process.env.DEEPSEEK_API_KEY !== 'dummy-key';
+    default:
+      return false;
+  }
+}
+
 async function callAI(provider: AIProvider, prompt: string, systemPrompt?: string): Promise<string> {
+  // Check if API key is available
+  if (!checkApiKey(provider)) {
+    throw new Error(`API key for ${provider} is not configured. Please set the appropriate environment variable.`);
+  }
+
   try {
     switch (provider) {
       case 'openai':

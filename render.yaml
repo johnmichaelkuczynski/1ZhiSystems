@@ -14,6 +14,22 @@ services:
         fromDatabase:
           name: zhi-systems-db
           property: connectionString
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: PERPLEXITY_API_KEY
+        sync: false
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: AZURE_SPEECH_ENDPOINT
+        sync: false
+      - key: AZURE_SPEECH_KEY
+        sync: false
+      - key: AZURE_SPEECH_REGION
+        sync: false
+      - key: GOOGLE_SPEECH_API_KEY
+        sync: false
     autoDeploy: false
 
 databases:
