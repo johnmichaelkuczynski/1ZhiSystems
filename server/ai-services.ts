@@ -417,50 +417,50 @@ export async function generatePodcast(request: TextProcessingRequest): Promise<{
   
   // Handle very long content by chunking if necessary
   let textToProcess = request.selectedText;
-  const maxLength = 15000; // Reasonable length for AI processing
+  const maxLength = 50000; // Increased limit for full article processing
   
   if (textToProcess.length > maxLength) {
-    // For very long content, extract key sections and summarize
+    // For very long content, extract key sections intelligently
     const sections = textToProcess.split(/\n\s*\n/).filter(section => section.trim().length > 50);
-    const importantSections = sections.slice(0, Math.floor(maxLength / 300)); // Take first several sections
+    const importantSections = sections.slice(0, Math.floor(maxLength / 500)); // More generous section allocation
     textToProcess = importantSections.join('\n\n');
     
     if (textToProcess.length > maxLength) {
-      textToProcess = textToProcess.substring(0, maxLength) + '...';
+      textToProcess = textToProcess.substring(0, maxLength - 200) + '...\n\n[Content continues with comprehensive discussion of remaining key points]';
     }
   }
 
   // Configure prompts based on podcast mode
   switch (mode) {
     case 'normal-one':
-      systemPrompt = "You are an expert podcast host. Create engaging, conversational podcast content with a single narrator that makes complex topics accessible and interesting. Write in a natural speaking style with smooth transitions. Output ONLY plain text without any markdown, formatting, asterisks, or special characters.";
-      prompt = `Create a single-host podcast episode based on the following text. Write as a solo narrator speaking directly to listeners. Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters:
+      systemPrompt = "You are an expert podcast host. Create engaging, conversational podcast content with a single narrator that makes complex topics accessible and interesting. Write in a natural speaking style with smooth transitions. For comprehensive content, create substantial podcasts of 3-5 minutes speaking time (approximately 2000-4000 words). Output ONLY plain text without any markdown, formatting, asterisks, or special characters.";
+      prompt = `Create a single-host podcast episode based on the following text. Write as a solo narrator speaking directly to listeners. This should be a comprehensive, substantial podcast of 3-5 minutes speaking time. Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters:
 
 Text to discuss:
 ${textToProcess}
 
-Create a complete podcast script with:
-- Engaging introduction
-- Clear explanation of key concepts
-- Conclusion with key takeaways
+Create a complete, comprehensive podcast script with:
+- Engaging introduction that hooks listeners (30-60 seconds)
+- Detailed exploration of key concepts with examples and explanations (main content 3-4 minutes)
+- Strong conclusion with key takeaways and final thoughts (30-60 seconds)
 
-Keep it conversational and accessible. For longer content, create a comprehensive podcast that covers all key points while maintaining engagement.`;
+Ensure the script is substantial and comprehensive. For full articles, cover all major points thoroughly while maintaining engagement. Aim for natural speaking pace with detailed explanations.`;
       hosts = [{ name: "Alex", role: "Host" }];
       break;
 
     case 'normal-two':
-      systemPrompt = "You are creating a two-host podcast with natural conversation between hosts. Create engaging dialogue that makes complex topics accessible through discussion between two knowledgeable hosts. Use clear speaker labels but make the actual dialogue sound natural and conversational. Output ONLY plain text without any markdown, formatting, asterisks, or special characters.";
-      prompt = `Create a two-host podcast episode based on the following text. Write it as a natural conversation between two hosts - Alex and Sam. Use ALEX: and SAM: to indicate who is speaking, but make the actual dialogue sound natural without referring to "Host 1" or "Host 2". Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters:
+      systemPrompt = "You are creating a two-host podcast with natural conversation between hosts. Create engaging dialogue that makes complex topics accessible through discussion between two knowledgeable hosts. For comprehensive content, create substantial podcasts of 4-6 minutes speaking time with rich dialogue. Use clear speaker labels but make the actual dialogue sound natural and conversational. Output ONLY plain text without any markdown, formatting, asterisks, or special characters.";
+      prompt = `Create a two-host podcast episode based on the following text. Write it as a natural conversation between two hosts - Alex and Sam. This should be a comprehensive, substantial podcast of 4-6 minutes speaking time with extensive dialogue. Use ALEX: and SAM: to indicate who is speaking, but make the actual dialogue sound natural without referring to "Host 1" or "Host 2". Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters:
 
 Text to discuss:
 ${textToProcess}
 
-Create a complete podcast script with:
-- ALEX: Welcome and introduction
-- Natural back-and-forth discussion between Alex and Sam
-- SAM: Conclusion and wrap-up
+Create a complete, comprehensive podcast script with:
+- ALEX: Engaging welcome and introduction (30-60 seconds)
+- Extended natural back-and-forth discussion between Alex and Sam covering all major points (main content 4-5 minutes)
+- SAM: Strong conclusion and wrap-up with key takeaways (30-60 seconds)
 
-Format each line as "ALEX:" or "SAM:" followed by their natural dialogue. Make it conversational and engaging. For longer content, create a comprehensive discussion that covers all key points while maintaining natural dialogue flow.`;
+Format each line as "ALEX:" or "SAM:" followed by their natural dialogue. Make it conversational, engaging, and substantial. For full articles, ensure comprehensive coverage of all key points through extended dialogue while maintaining natural conversation flow. Include detailed explanations, examples, and thoughtful exchanges.`;
       hosts = [
         { name: "Alex", role: "Host" },
         { name: "Sam", role: "Co-Host" }
@@ -468,24 +468,24 @@ Format each line as "ALEX:" or "SAM:" followed by their natural dialogue. Make i
       break;
 
     case 'custom-one':
-      systemPrompt = `You are an expert podcast host. Create engaging, conversational podcast content with a single narrator. Output ONLY plain text without any markdown, formatting, asterisks, or special characters. ${request.podcastInstructions}`;
-      prompt = `Create a single-host podcast episode based on the following text. Follow these custom instructions: ${request.podcastInstructions}. Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters.
+      systemPrompt = `You are an expert podcast host. Create engaging, conversational podcast content with a single narrator. For comprehensive content, create substantial podcasts of 3-5 minutes speaking time. Output ONLY plain text without any markdown, formatting, asterisks, or special characters. ${request.podcastInstructions}`;
+      prompt = `Create a single-host podcast episode based on the following text. This should be a comprehensive, substantial podcast of 3-5 minutes speaking time. Follow these custom instructions: ${request.podcastInstructions}. Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters.
 
 Text to discuss:
 ${textToProcess}
 
-Create a complete podcast script following the custom instructions provided. Keep it engaging and accessible.`;
+Create a complete, comprehensive podcast script following the custom instructions provided. Ensure substantial content that thoroughly covers the topic while maintaining engagement and accessibility. For full articles, provide detailed exploration of all key points.`;
       hosts = [{ name: "Alex", role: "Host" }];
       break;
 
     case 'custom-two':
-      systemPrompt = `You are creating a two-host podcast with natural conversation between hosts. Use clear speaker labels but make the actual dialogue sound natural and conversational. Output ONLY plain text without any markdown, formatting, asterisks, or special characters. ${request.podcastInstructions}`;
-      prompt = `Create a two-host podcast episode based on the following text. Follow these custom instructions: ${request.podcastInstructions}. Write it as a natural conversation between two hosts - Alex and Sam. Use ALEX: and SAM: to indicate who is speaking. Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters.
+      systemPrompt = `You are creating a two-host podcast with natural conversation between hosts. For comprehensive content, create substantial podcasts of 4-6 minutes speaking time with rich dialogue. Use clear speaker labels but make the actual dialogue sound natural and conversational. Output ONLY plain text without any markdown, formatting, asterisks, or special characters. ${request.podcastInstructions}`;
+      prompt = `Create a two-host podcast episode based on the following text. This should be a comprehensive, substantial podcast of 4-6 minutes speaking time with extensive dialogue. Follow these custom instructions: ${request.podcastInstructions}. Write it as a natural conversation between two hosts - Alex and Sam. Use ALEX: and SAM: to indicate who is speaking. Do NOT use any markdown formatting, asterisks, bold text, headers with #, or special characters.
 
 Text to discuss:
 ${textToProcess}
 
-Format as a natural conversation between Alex and Sam. Each line should start with "ALEX:" or "SAM:" followed by their natural dialogue. Follow the custom instructions provided.`;
+Format as a natural, comprehensive conversation between Alex and Sam. Each line should start with "ALEX:" or "SAM:" followed by their natural dialogue. Ensure substantial content that thoroughly covers the topic. For full articles, provide detailed exploration through extended dialogue. Follow the custom instructions provided while maintaining comprehensive coverage.`;
       hosts = [
         { name: "Alex", role: "Host" },
         { name: "Sam", role: "Co-Host" }
@@ -521,10 +521,15 @@ Format as a natural conversation between Alex and Sam. Each line should start wi
     mainContent = lines.slice(Math.floor(lines.length * 0.2), Math.floor(lines.length * 0.8)).join('\n');
   }
 
-  // Ensure script is not too long for TTS (max 4000 characters to be safe)
+  // Prepare final script for TTS - OpenAI TTS can handle much longer content
   let finalScript = scriptResponse;
-  if (finalScript.length > 4000) {
-    finalScript = finalScript.substring(0, 3900) + "... Thanks for listening to this episode!";
+  
+  // Only truncate if extremely long (over 15000 characters) to prevent API issues
+  if (finalScript.length > 15000) {
+    console.log(`Script is very long (${finalScript.length} chars), truncating to prevent API limits`);
+    finalScript = finalScript.substring(0, 14500) + "\n\nAnd that concludes our comprehensive discussion. Thanks for listening to this episode!";
+  } else {
+    console.log(`Final script length: ${finalScript.length} characters - suitable for full podcast generation`);
   }
 
   let audioUrl: string | undefined;
@@ -555,6 +560,13 @@ Format as a natural conversation between Alex and Sam. Each line should start wi
     }
   }
   
+  // Calculate more accurate duration estimate based on script length
+  const wordsInScript = finalScript.split(/\s+/).length;
+  const estimatedMinutes = Math.ceil(wordsInScript / 150); // Assuming 150 words per minute speaking rate
+  const estimatedDuration = estimatedMinutes > 1 ? `${estimatedMinutes} minutes` : '1 minute';
+  
+  console.log(`Generated script stats: ${finalScript.length} characters, ${wordsInScript} words, estimated ${estimatedDuration}`);
+  
   // Return script and optional audio URL
   return {
     script: {
@@ -562,7 +574,7 @@ Format as a natural conversation between Alex and Sam. Each line should start wi
       introduction: introduction || 'Welcome to this episode...',
       mainContent: mainContent,
       conclusion: conclusion || 'Thanks for listening!',
-      estimatedDuration: mode.includes('two') ? '4-5 minutes' : '3-4 minutes',
+      estimatedDuration,
       mode,
       hosts
     },
