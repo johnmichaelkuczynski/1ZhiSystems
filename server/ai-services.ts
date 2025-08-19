@@ -177,21 +177,19 @@ async function generateTwoHostAudio(script: string, primaryVoice: string = 'allo
       // Multiple segments: Use Node.js to combine audio properly
       try {
         // Create a simple concatenation approach for MP3 files
-        // Read all segments and write them sequentially
-        const writeStream = require('fs').createWriteStream(finalPath);
+        // Read all segments and combine them into a single buffer
+        const combinedBuffers: Buffer[] = [];
         
         for (const segmentFile of segmentFiles) {
           const segmentBuffer = await fs.readFile(segmentFile);
-          writeStream.write(segmentBuffer);
+          combinedBuffers.push(segmentBuffer);
         }
         
-        writeStream.end();
+        // Combine all buffers and write to final file
+        const finalBuffer = Buffer.concat(combinedBuffers);
+        await fs.writeFile(finalPath, finalBuffer);
         
-        // Wait for write stream to finish
-        await new Promise((resolve, reject) => {
-          writeStream.on('finish', resolve);
-          writeStream.on('error', reject);
-        });
+        console.log(`Successfully combined ${segmentFiles.length} audio segments into ${finalPath}`);
         
       } catch (combineError) {
         console.error('Error combining audio files:', combineError);
@@ -409,25 +407,77 @@ ${request.selectedText}`;
   }
 }
 
+// Helper function to chunk and summarize long articles for podcast creation
+async function chunkAndSummarizeForPodcast(text: string, provider: string): Promise<string> {
+  const words = text.split(/\s+/);
+  console.log(`Processing article with ${words.length} words for podcast generation`);
+  
+  // If less than 500 words, use as-is
+  if (words.length <= 500) {
+    return text;
+  }
+  
+  // Chunk into approximately 500-word segments
+  const chunkSize = 500;
+  const chunks: string[] = [];
+  
+  for (let i = 0; i < words.length; i += chunkSize) {
+    const chunk = words.slice(i, i + chunkSize).join(' ');
+    chunks.push(chunk);
+  }
+  
+  console.log(`Article divided into ${chunks.length} chunks for summarization`);
+  
+  // Determine summary length based on number of chunks
+  const summariesPerChunk = Math.max(1, Math.floor(10 / chunks.length)); // Aim for ~10 total sentences
+  const summaryLength = summariesPerChunk === 1 ? "1-2 sentences" : `${summariesPerChunk} sentences`;
+  
+  // Generate summaries for each chunk
+  const summaries: string[] = [];
+  
+  for (let i = 0; i < chunks.length; i++) {
+    const chunk = chunks[i];
+    console.log(`Summarizing chunk ${i + 1}/${chunks.length}`);
+    
+    const summaryPrompt = `Summarize the following text in exactly ${summaryLength}. Focus on the most important concepts, arguments, and conclusions. Be concise but comprehensive:
+
+${chunk}`;
+
+    try {
+      const summary = await callAI(provider as AIProvider, summaryPrompt, "You are an expert at creating concise, accurate summaries that capture the essential meaning and key points of academic and technical content.");
+      summaries.push(summary.trim());
+    } catch (error) {
+      console.error(`Failed to summarize chunk ${i + 1}:`, error);
+      // Use first few sentences of chunk as fallback
+      const sentences = chunk.split(/[.!?]+/).filter(s => s.trim().length > 10);
+      summaries.push(sentences.slice(0, summariesPerChunk).join('. ') + '.');
+    }
+  }
+  
+  // Combine all summaries into a coherent text for podcast generation
+  const combinedSummary = summaries.join(' ');
+  console.log(`Generated combined summary: ${combinedSummary.length} characters from original ${text.length} characters`);
+  
+  return combinedSummary;
+}
+
 export async function generatePodcast(request: TextProcessingRequest): Promise<{ script: PodcastScript; audioUrl?: string }> {
   const mode = request.podcastMode || 'normal-two';
   let systemPrompt = "";
   let prompt = "";
   let hosts: { name: string; role: string; }[] = [];
   
-  // Handle very long content by chunking if necessary
+  // Handle long content using chunking and summarization strategy
   let textToProcess = request.selectedText;
-  const maxLength = 50000; // Increased limit for full article processing
+  const wordCount = textToProcess.split(/\s+/).length;
   
-  if (textToProcess.length > maxLength) {
-    // For very long content, extract key sections intelligently
-    const sections = textToProcess.split(/\n\s*\n/).filter(section => section.trim().length > 50);
-    const importantSections = sections.slice(0, Math.floor(maxLength / 500)); // More generous section allocation
-    textToProcess = importantSections.join('\n\n');
-    
-    if (textToProcess.length > maxLength) {
-      textToProcess = textToProcess.substring(0, maxLength - 200) + '...\n\n[Content continues with comprehensive discussion of remaining key points]';
-    }
+  // Apply chunking strategy for articles over 500 words
+  if (wordCount > 500) {
+    console.log(`Long article detected (${wordCount} words), applying chunking strategy`);
+    textToProcess = await chunkAndSummarizeForPodcast(textToProcess, request.provider);
+    console.log(`Processed text for podcast: ${textToProcess.length} characters`);
+  } else {
+    console.log(`Short article (${wordCount} words), using full content`);
   }
 
   // Configure prompts based on podcast mode
