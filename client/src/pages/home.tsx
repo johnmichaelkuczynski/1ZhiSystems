@@ -122,10 +122,14 @@ export default function Home() {
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Main Header */}
-        <header className="mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
-            Zhi Systems
-          </h1>
+        <header className="mb-12 text-center">
+          <div className="flex items-center justify-center mb-6">
+            <img 
+              src="/attached_assets/zhi-systems-logo.png" 
+              alt="Zhi Systems Logo" 
+              className="h-20 w-auto"
+            />
+          </div>
           <p className="text-xl text-gray-700">
             High-Performance AI Tools for Writers, Thinkers, and Analysts
           </p>
