@@ -91,7 +91,20 @@ export default function Home() {
 
   return (
     <div className="font-sans bg-white text-gray-900 leading-relaxed min-h-screen">
-      {/* Contact Us - Top Left */}
+      {/* Logo at very top */}
+      <div className="bg-white border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-4 py-6">
+          <div className="flex items-center justify-center">
+            <img 
+              src="/attached_assets/zhi-systems-logo.png" 
+              alt="Zhi Systems Logo" 
+              className="h-16 w-auto"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation */}
       <div className="bg-gray-50 border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
@@ -123,13 +136,6 @@ export default function Home() {
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Main Header */}
         <header className="mb-12 text-center">
-          <div className="flex items-center justify-center mb-6">
-            <img 
-              src="/attached_assets/zhi-systems-logo.png" 
-              alt="Zhi Systems Logo" 
-              className="h-20 w-auto"
-            />
-          </div>
           <p className="text-xl text-gray-700">
             High-Performance AI Tools for Writers, Thinkers, and Analysts
           </p>
