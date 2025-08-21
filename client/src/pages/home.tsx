@@ -68,7 +68,8 @@ export default function Home() {
     { title: "Genius Dictation", url: "https://geniusdictation.com" },
     { title: "GPTByPass", url: "https://gptbypass.xyz" },
     { title: "Improve Your Writing", url: "https://improveyourwriting.xyz" },
-    { title: "Text Genius", url: "https://textgenius.xyz" }
+    { title: "Text Genius", url: "https://textgenius.xyz" },
+    { title: "Photo Psychoanalysis", url: "https://photopsychoanalysis.xyz" }
   ];
 
   const BookItem = ({ title, url, note }: { title: string; url: string | null; note?: string }) => (
