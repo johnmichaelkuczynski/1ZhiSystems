@@ -110,6 +110,31 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
       });
     }
   };
+
+  // Download text content function
+  const downloadContent = (content: string, filename: string, contentType: string = 'text/plain') => {
+    try {
+      const blob = new Blob([content], { type: contentType });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      toast({
+        title: "Success",
+        description: `${filename} downloaded successfully!`,
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to download file. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
   const [testAnswers, setTestAnswers] = useState<Record<number, string>>({});
 
   const contentRef = useRef<HTMLDivElement>(null);
@@ -282,13 +307,22 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
           <div className="space-y-4">
             <div className="flex justify-between items-center">
               <h3 className="text-lg font-semibold">Rewritten Text</h3>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => copyToClipboard(modalContent.result, 'rewrite')}
-              >
-                {copiedStates.rewrite ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-              </Button>
+              <div className="flex space-x-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => copyToClipboard(modalContent.result, 'rewrite')}
+                >
+                  {copiedStates.rewrite ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => downloadContent(modalContent.result, `rewrite-${title}.txt`)}
+                >
+                  <Download className="w-4 h-4" />
+                </Button>
+              </div>
             </div>
             <div className="p-4 bg-gray-50 rounded-lg">
               <p className="whitespace-pre-wrap">{modalContent.result}</p>
@@ -301,13 +335,22 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
           <div className="space-y-4">
             <div className="flex justify-between items-center">
               <h3 className="text-lg font-semibold">Study Guide</h3>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => copyToClipboard(modalContent.result, 'study-guide')}
-              >
-                {copiedStates['study-guide'] ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-              </Button>
+              <div className="flex space-x-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => copyToClipboard(modalContent.result, 'study-guide')}
+                >
+                  {copiedStates['study-guide'] ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => downloadContent(modalContent.result, `study-guide-${title}.txt`)}
+                >
+                  <Download className="w-4 h-4" />
+                </Button>
+              </div>
             </div>
             <div className="p-4 bg-gray-50 rounded-lg">
               <div className="whitespace-pre-wrap">{modalContent.result}</div>
@@ -320,9 +363,31 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
         const testResult = modalContent.testResult;
         
         if (testResult) {
+          // Format test results for download
+          const testResultsContent = `Test Results for: ${title}
+Score: ${testResult.score}%
+Feedback: ${testResult.feedback}
+
+Questions and Answers:
+${questions.map((question, index) => `
+${index + 1}. ${question.question}
+Your answer: ${testAnswers[index]}
+Correct answer: ${question.correctAnswer}
+Explanation: ${question.explanation}
+`).join('\n')}`;
+
           return (
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Test Results</h3>
+              <div className="flex justify-between items-center">
+                <h3 className="text-lg font-semibold">Test Results</h3>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => downloadContent(testResultsContent, `test-results-${title}.txt`)}
+                >
+                  <Download className="w-4 h-4" />
+                </Button>
+              </div>
               <div className="p-4 bg-green-50 rounded-lg">
                 <p className="text-lg font-bold">Score: {testResult.score}%</p>
                 <p>{testResult.feedback}</p>
@@ -341,9 +406,25 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
           );
         }
 
+        // Format test questions for download
+        const testQuestionsContent = `Test Questions for: ${title}
+
+${questions.map((question, index) => `${index + 1}. ${question.question}${question.type === 'multiple-choice' && question.options ? `
+Options:
+${question.options.map((option, i) => `${String.fromCharCode(97 + i)}) ${option}`).join('\n')}` : '\nAnswer: _______________'}`).join('\n\n')}`;
+
         return (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Test Questions</h3>
+            <div className="flex justify-between items-center">
+              <h3 className="text-lg font-semibold">Test Questions</h3>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => downloadContent(testQuestionsContent, `test-questions-${title}.txt`)}
+              >
+                <Download className="w-4 h-4" />
+              </Button>
+            </div>
             <div className="space-y-4">
               {questions.map((question, index) => (
                 <div key={index} className="p-4 border rounded-lg">
@@ -568,13 +649,26 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
               </div>
             )}
 
-            <Button
-              variant="outline"
-              onClick={() => copyToClipboard(`Central Concept: ${map.centralConcept}\n\nNodes: ${map.nodes?.map(n => n.label).join(', ')}\n\nConnections: ${map.connections?.map(c => `${c.from} → ${c.to}: ${c.label}`).join('\n')}`, 'cognitive-map')}
-            >
-              {copiedStates['cognitive-map'] ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
-              Copy Map Data
-            </Button>
+            <div className="flex space-x-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => copyToClipboard(`Central Concept: ${map.centralConcept}\n\nNodes: ${map.nodes?.map(n => n.label).join(', ')}\n\nConnections: ${map.connections?.map(c => `${c.from} → ${c.to}: ${c.label}`).join('\n')}`, 'cognitive-map')}
+              >
+                {copiedStates['cognitive-map'] ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
+                Copy Map Data
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  const mapContent = `Cognitive Map for: ${title}\n\nCentral Concept: ${map.centralConcept}\n\nNodes:\n${map.nodes?.map(n => `- ${n.label} (${n.type})`).join('\n')}\n\nConnections:\n${map.connections?.map(c => `${c.from} → ${c.to}: ${c.label} (${c.type})`).join('\n')}\n\nKey Insights:\n${map.insights?.map(i => `• ${i}`).join('\n') || 'No insights available'}`;
+                  downloadContent(mapContent, `cognitive-map-${title}.txt`);
+                }}
+              >
+                <Download className="w-4 h-4" />
+              </Button>
+            </div>
           </div>
         );
 
@@ -611,6 +705,16 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
                 {copiedStates.summary ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
                 Copy Summary
               </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  const summaryThesisContent = `Summary + Thesis for: ${title}\n\nTHESIS:\n${summaryThesis.thesis}\n\nSUMMARY:\n${summaryThesis.summary}`;
+                  downloadContent(summaryThesisContent, `summary-thesis-${title}.txt`);
+                }}
+              >
+                <Download className="w-4 h-4" />
+              </Button>
             </div>
           </div>
         );
@@ -620,13 +724,22 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
           <div className="space-y-4">
             <div className="flex justify-between items-center">
               <h3 className="text-lg font-semibold">Thesis Deep Dive</h3>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => copyToClipboard(modalContent.result, 'deep-dive')}
-              >
-                {copiedStates['deep-dive'] ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-              </Button>
+              <div className="flex space-x-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => copyToClipboard(modalContent.result, 'deep-dive')}
+                >
+                  {copiedStates['deep-dive'] ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => downloadContent(modalContent.result, `thesis-deep-dive-${title}.txt`)}
+                >
+                  <Download className="w-4 h-4" />
+                </Button>
+              </div>
             </div>
             <div className="p-4 bg-gray-50 rounded-lg">
               <div className="whitespace-pre-wrap">{modalContent.result}</div>
@@ -638,7 +751,19 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
         const readings: SuggestedReadings = modalContent.readings;
         return (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Suggested Readings</h3>
+            <div className="flex justify-between items-center">
+              <h3 className="text-lg font-semibold">Suggested Readings</h3>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  const readingsContent = `Suggested Readings for: ${title}\n\nPRIMARY SOURCES:\n${readings.primarySources.map(s => `\n• ${s.title} by ${s.author}\n  Difficulty: ${s.difficulty}\n  Relevance: ${s.relevance}`).join('\n')}\n\nSUPPLEMENTARY READINGS:\n${readings.supplementaryReadings.map(r => `\n• ${r.title} by ${r.author} (${r.type})\n  Relevance: ${r.relevance}`).join('\n')}`;
+                  downloadContent(readingsContent, `suggested-readings-${title}.txt`);
+                }}
+              >
+                <Download className="w-4 h-4" />
+              </Button>
+            </div>
             
             {readings.primarySources.length > 0 && (
               <div>
