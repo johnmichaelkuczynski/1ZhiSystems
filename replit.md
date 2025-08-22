@@ -123,7 +123,16 @@ Preferred communication style: Simple, everyday language.
 - **URL Structure**: `/journal/vol-[roman]/no-[number]` format for SEO-friendly URLs
 - **Components**: Journal listing, individual issue pages, admin panel for CRUD operations
 - **AI Features**: Text selection with 8 AI-powered functions (rewrite, study guides, tests, podcasts, visual cognitive maps, thesis analysis, deep dives, suggested readings)
-- **Full Article Processing**: August 22, 2025 - Added "CREATE FULL COGNITIVE MAP", "CREATE FULL STUDY GUIDE", "CREATE FULL REWRITE", and "CREATE FULL TEST" buttons alongside existing "CREATE FULL PODCAST" button for processing entire journal articles
+- **Full Article Processing**: August 22, 2025 - Complete suite of 8 full-article analysis buttons implemented:
+  - **CREATE FULL PODCAST** (orange) - Configurable audio generation with OpenAI TTS-1
+  - **CREATE FULL COGNITIVE MAP** (purple) - Visual knowledge mapping of entire article
+  - **CREATE FULL STUDY GUIDE** (green) - Comprehensive study materials generation
+  - **CREATE FULL REWRITE** (blue) - Article rewriting with customizable parameters
+  - **CREATE FULL TEST** (red) - Assessment creation from complete content
+  - **CREATE FULL SUGGESTED READINGS** (yellow) - Related resource recommendations
+  - **CREATE FULL SUMMARY + THESIS** (cyan) - Executive summary with thesis analysis
+  - **CREATE THESIS DEEP DIVE** (indigo) - In-depth thesis argument examination
+  - **UI Design**: Compact button layout with shortened labels, small icons (12px), and color-coded functionality to prevent page overflow
 - **Content**: Four published issues including comprehensive "Veblen Utility Functions" with complete 13-chapter analysis and "The Tarski's World Problem" by J.-M. Kuczynski
 - **Audio System**: OpenAI TTS-1 integration with Alloy voice support, automatic audio generation for all podcasts, saved to public/audio directory
 
