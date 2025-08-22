@@ -115,6 +115,133 @@ export default function JournalIssuePage() {
           />
         </div>
 
+        {/* Individual AI Function Buttons */}
+        <div className="mt-8 pt-6 border-t border-gray-200">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">AI Functions for Full Article</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <button 
+              className="flex flex-col items-center justify-center p-4 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg transition-colors group"
+              onClick={() => {
+                // Trigger rewrite for entire article
+                const event = new CustomEvent('triggerFullArticleAI', { 
+                  detail: { action: 'rewrite' } 
+                });
+                window.dispatchEvent(event);
+              }}
+            >
+              <svg className="w-6 h-6 text-blue-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+              <span className="text-sm font-medium text-blue-700 text-center">Create Full Rewrite</span>
+            </button>
+
+            <button 
+              className="flex flex-col items-center justify-center p-4 bg-green-50 hover:bg-green-100 border border-green-200 rounded-lg transition-colors group"
+              onClick={() => {
+                const event = new CustomEvent('triggerFullArticleAI', { 
+                  detail: { action: 'study-guide' } 
+                });
+                window.dispatchEvent(event);
+              }}
+            >
+              <svg className="w-6 h-6 text-green-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+              <span className="text-sm font-medium text-green-700 text-center">Create Full Study Guide</span>
+            </button>
+
+            <button 
+              className="flex flex-col items-center justify-center p-4 bg-red-50 hover:bg-red-100 border border-red-200 rounded-lg transition-colors group"
+              onClick={() => {
+                const event = new CustomEvent('triggerFullArticleAI', { 
+                  detail: { action: 'test-me' } 
+                });
+                window.dispatchEvent(event);
+              }}
+            >
+              <svg className="w-6 h-6 text-red-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="text-sm font-medium text-red-700 text-center">Create Full Test Me</span>
+            </button>
+
+            <button 
+              className="flex flex-col items-center justify-center p-4 bg-orange-50 hover:bg-orange-100 border border-orange-200 rounded-lg transition-colors group"
+              onClick={() => {
+                const event = new CustomEvent('triggerFullArticleAI', { 
+                  detail: { action: 'podcast' } 
+                });
+                window.dispatchEvent(event);
+              }}
+            >
+              <svg className="w-6 h-6 text-orange-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+              </svg>
+              <span className="text-sm font-medium text-orange-700 text-center">Create Full Podcast</span>
+            </button>
+
+            <button 
+              className="flex flex-col items-center justify-center p-4 bg-purple-50 hover:bg-purple-100 border border-purple-200 rounded-lg transition-colors group"
+              onClick={() => {
+                const event = new CustomEvent('triggerFullArticleAI', { 
+                  detail: { action: 'cognitive-map' } 
+                });
+                window.dispatchEvent(event);
+              }}
+            >
+              <svg className="w-6 h-6 text-purple-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+              <span className="text-sm font-medium text-purple-700 text-center">Create Full Cognitive Map</span>
+            </button>
+
+            <button 
+              className="flex flex-col items-center justify-center p-4 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 rounded-lg transition-colors group"
+              onClick={() => {
+                const event = new CustomEvent('triggerFullArticleAI', { 
+                  detail: { action: 'summary-thesis' } 
+                });
+                window.dispatchEvent(event);
+              }}
+            >
+              <svg className="w-6 h-6 text-indigo-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
+              <span className="text-sm font-medium text-indigo-700 text-center">Create Full Summary + Thesis</span>
+            </button>
+
+            <button 
+              className="flex flex-col items-center justify-center p-4 bg-yellow-50 hover:bg-yellow-100 border border-yellow-200 rounded-lg transition-colors group"
+              onClick={() => {
+                const event = new CustomEvent('triggerFullArticleAI', { 
+                  detail: { action: 'thesis-deep-dive' } 
+                });
+                window.dispatchEvent(event);
+              }}
+            >
+              <svg className="w-6 h-6 text-yellow-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+              <span className="text-sm font-medium text-yellow-700 text-center">Create Full Thesis Deep Dive</span>
+            </button>
+
+            <button 
+              className="flex flex-col items-center justify-center p-4 bg-teal-50 hover:bg-teal-100 border border-teal-200 rounded-lg transition-colors group"
+              onClick={() => {
+                const event = new CustomEvent('triggerFullArticleAI', { 
+                  detail: { action: 'suggested-readings' } 
+                });
+                window.dispatchEvent(event);
+              }}
+            >
+              <svg className="w-6 h-6 text-teal-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+              <span className="text-sm font-medium text-teal-700 text-center">Create Full Suggested Readings</span>
+            </button>
+          </div>
+        </div>
+
         {/* Tags */}
         {journalIssue.tags && journalIssue.tags.length > 0 && (
           <div className="mt-8 pt-6 border-t border-gray-200">
