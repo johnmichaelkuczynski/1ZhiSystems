@@ -1239,10 +1239,22 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
               {isProcessing ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <BookOpen className="w-4 h-4" />}
               Create Full Study Guide
             </Button>
+            <Button
+              onClick={() => {
+                setUseEntireArticle(true);
+                setCurrentAction('rewrite');
+                setShowModal(true);
+              }}
+              className="bg-blue-500 hover:bg-blue-600 text-white flex items-center gap-2"
+              size="sm"
+            >
+              <FileText className="w-4 h-4" />
+              Create Full Rewrite
+            </Button>
           </div>
         </div>
         <p className="text-sm text-gray-600 mt-2">
-          Select any text below to access 8 AI functions, or use the buttons above to create a podcast, cognitive map, or study guide from the entire article.
+          Select any text below to access 8 AI functions, or use the buttons above to create a podcast, cognitive map, study guide, or rewrite from the entire article.
         </p>
       </div>
 
