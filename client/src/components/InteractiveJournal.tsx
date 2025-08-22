@@ -747,28 +747,23 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
     }
   }, [isDragging, dragStart]);
 
-  // Listen for full article AI function triggers
-  useEffect(() => {
-    const handleFullArticleAI = (event: CustomEvent) => {
-      const { action } = event.detail;
-      console.log('Full article AI triggered:', { action, contentAvailable: !!content, contentLength: content?.length });
-      
-      // Call processWithAI directly with the current content
-      if (content && content.length > 0) {
-        processWithAI(action as ActionType, true); // true = use entire article
-      } else {
-        console.error('No content available for full article AI processing');
-      }
-    };
+  // Function to auto-select all text and run AI function
+  const autoSelectAndProcess = useCallback((action: ActionType) => {
+    if (content && content.length > 0) {
+      // Auto-select all article text
+      setSelectedText(content);
+      // Process with the entire article
+      processWithAI(action, true);
+    }
+  }, [content, processWithAI]);
 
-    console.log('Setting up event listener for triggerFullArticleAI');
-    window.addEventListener('triggerFullArticleAI', handleFullArticleAI as EventListener);
-    
+  // Expose this function globally for the buttons
+  useEffect(() => {
+    (window as any).autoSelectAndProcess = autoSelectAndProcess;
     return () => {
-      console.log('Removing event listener for triggerFullArticleAI');
-      window.removeEventListener('triggerFullArticleAI', handleFullArticleAI as EventListener);
+      delete (window as any).autoSelectAndProcess;
     };
-  }, [processWithAI]);
+  }, [autoSelectAndProcess]);
 
   const renderToolbar = () => {
     if (!showToolbar || !selectedText) return null;

@@ -122,11 +122,10 @@ export default function JournalIssuePage() {
             <button 
               className="flex flex-col items-center justify-center p-4 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg transition-colors group"
               onClick={() => {
-                // Trigger rewrite for entire article
-                const event = new CustomEvent('triggerFullArticleAI', { 
-                  detail: { action: 'rewrite' } 
-                });
-                window.dispatchEvent(event);
+                // Auto-select all text and run rewrite
+                if ((window as any).autoSelectAndProcess) {
+                  (window as any).autoSelectAndProcess('rewrite');
+                }
               }}
             >
               <svg className="w-6 h-6 text-blue-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -138,10 +137,10 @@ export default function JournalIssuePage() {
             <button 
               className="flex flex-col items-center justify-center p-4 bg-green-50 hover:bg-green-100 border border-green-200 rounded-lg transition-colors group"
               onClick={() => {
-                const event = new CustomEvent('triggerFullArticleAI', { 
-                  detail: { action: 'study-guide' } 
-                });
-                window.dispatchEvent(event);
+                // Auto-select all text and run study guide
+                if ((window as any).autoSelectAndProcess) {
+                  (window as any).autoSelectAndProcess('study-guide');
+                }
               }}
             >
               <svg className="w-6 h-6 text-green-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -153,10 +152,10 @@ export default function JournalIssuePage() {
             <button 
               className="flex flex-col items-center justify-center p-4 bg-red-50 hover:bg-red-100 border border-red-200 rounded-lg transition-colors group"
               onClick={() => {
-                const event = new CustomEvent('triggerFullArticleAI', { 
-                  detail: { action: 'test-me' } 
-                });
-                window.dispatchEvent(event);
+                // Auto-select all text and run test
+                if ((window as any).autoSelectAndProcess) {
+                  (window as any).autoSelectAndProcess('test-me');
+                }
               }}
             >
               <svg className="w-6 h-6 text-red-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -168,10 +167,10 @@ export default function JournalIssuePage() {
             <button 
               className="flex flex-col items-center justify-center p-4 bg-orange-50 hover:bg-orange-100 border border-orange-200 rounded-lg transition-colors group"
               onClick={() => {
-                const event = new CustomEvent('triggerFullArticleAI', { 
-                  detail: { action: 'podcast' } 
-                });
-                window.dispatchEvent(event);
+                // Auto-select all text and run podcast
+                if ((window as any).autoSelectAndProcess) {
+                  (window as any).autoSelectAndProcess('podcast');
+                }
               }}
             >
               <svg className="w-6 h-6 text-orange-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -183,10 +182,10 @@ export default function JournalIssuePage() {
             <button 
               className="flex flex-col items-center justify-center p-4 bg-purple-50 hover:bg-purple-100 border border-purple-200 rounded-lg transition-colors group"
               onClick={() => {
-                const event = new CustomEvent('triggerFullArticleAI', { 
-                  detail: { action: 'cognitive-map' } 
-                });
-                window.dispatchEvent(event);
+                // Auto-select all text and run cognitive map
+                if ((window as any).autoSelectAndProcess) {
+                  (window as any).autoSelectAndProcess('cognitive-map');
+                }
               }}
             >
               <svg className="w-6 h-6 text-purple-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -198,10 +197,10 @@ export default function JournalIssuePage() {
             <button 
               className="flex flex-col items-center justify-center p-4 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 rounded-lg transition-colors group"
               onClick={() => {
-                const event = new CustomEvent('triggerFullArticleAI', { 
-                  detail: { action: 'summary-thesis' } 
-                });
-                window.dispatchEvent(event);
+                // Auto-select all text and run summary+thesis
+                if ((window as any).autoSelectAndProcess) {
+                  (window as any).autoSelectAndProcess('summary-thesis');
+                }
               }}
             >
               <svg className="w-6 h-6 text-indigo-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -213,10 +212,10 @@ export default function JournalIssuePage() {
             <button 
               className="flex flex-col items-center justify-center p-4 bg-yellow-50 hover:bg-yellow-100 border border-yellow-200 rounded-lg transition-colors group"
               onClick={() => {
-                const event = new CustomEvent('triggerFullArticleAI', { 
-                  detail: { action: 'thesis-deep-dive' } 
-                });
-                window.dispatchEvent(event);
+                // Auto-select all text and run thesis deep dive
+                if ((window as any).autoSelectAndProcess) {
+                  (window as any).autoSelectAndProcess('thesis-deep-dive');
+                }
               }}
             >
               <svg className="w-6 h-6 text-yellow-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -228,10 +227,10 @@ export default function JournalIssuePage() {
             <button 
               className="flex flex-col items-center justify-center p-4 bg-teal-50 hover:bg-teal-100 border border-teal-200 rounded-lg transition-colors group"
               onClick={() => {
-                const event = new CustomEvent('triggerFullArticleAI', { 
-                  detail: { action: 'suggested-readings' } 
-                });
-                window.dispatchEvent(event);
+                // Auto-select all text and run suggested readings
+                if ((window as any).autoSelectAndProcess) {
+                  (window as any).autoSelectAndProcess('suggested-readings');
+                }
               }}
             >
               <svg className="w-6 h-6 text-teal-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
