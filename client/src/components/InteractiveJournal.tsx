@@ -1217,10 +1217,22 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
               <Podcast className="w-4 h-4" />
               Create Full Article Podcast
             </Button>
+            <Button
+              onClick={() => {
+                setUseEntireArticle(true);
+                setCurrentAction('cognitive-map');
+                setShowModal(true);
+              }}
+              className="bg-purple-500 hover:bg-purple-600 text-white flex items-center gap-2"
+              size="sm"
+            >
+              <Brain className="w-4 h-4" />
+              Create Full Cognitive Map
+            </Button>
           </div>
         </div>
         <p className="text-sm text-gray-600 mt-2">
-          Select any text below to access 8 AI functions, or use the button above to create a podcast from the entire article.
+          Select any text below to access 8 AI functions, or use the buttons above to create a podcast or cognitive map from the entire article.
         </p>
       </div>
 
