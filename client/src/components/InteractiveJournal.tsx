@@ -1204,40 +1204,40 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
       <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-200 mb-6 p-4 -mx-4">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold text-gray-900">AI-Powered Analysis</h3>
-          <div className="flex gap-2">
+          <div className="flex gap-1 flex-wrap">
             <Button
               onClick={() => {
                 setUseEntireArticle(true);
                 setCurrentAction('podcast');
                 setShowModal(true);
               }}
-              className="bg-orange-500 hover:bg-orange-600 text-white flex items-center gap-2"
+              className="bg-orange-500 hover:bg-orange-600 text-white flex items-center gap-1 text-xs"
               size="sm"
             >
-              <Podcast className="w-4 h-4" />
-              Create Full Article Podcast
+              <Podcast className="w-3 h-3" />
+              Podcast
             </Button>
             <Button
               onClick={() => {
                 processWithAI('cognitive-map', true);
               }}
-              className="bg-purple-500 hover:bg-purple-600 text-white flex items-center gap-2"
+              className="bg-purple-500 hover:bg-purple-600 text-white flex items-center gap-1 text-xs"
               size="sm"
               disabled={isProcessing}
             >
-              {isProcessing ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Brain className="w-4 h-4" />}
-              Create Full Cognitive Map
+              {isProcessing ? <Loader2 className="w-3 h-3 animate-spin" /> : <Brain className="w-3 h-3" />}
+              Map
             </Button>
             <Button
               onClick={() => {
                 processWithAI('study-guide', true);
               }}
-              className="bg-green-500 hover:bg-green-600 text-white flex items-center gap-2"
+              className="bg-green-500 hover:bg-green-600 text-white flex items-center gap-1 text-xs"
               size="sm"
               disabled={isProcessing}
             >
-              {isProcessing ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <BookOpen className="w-4 h-4" />}
-              Create Full Study Guide
+              {isProcessing ? <Loader2 className="w-3 h-3 animate-spin" /> : <BookOpen className="w-3 h-3" />}
+              Study
             </Button>
             <Button
               onClick={() => {
@@ -1245,44 +1245,44 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
                 setCurrentAction('rewrite');
                 setShowModal(true);
               }}
-              className="bg-blue-500 hover:bg-blue-600 text-white flex items-center gap-2"
+              className="bg-blue-500 hover:bg-blue-600 text-white flex items-center gap-1 text-xs"
               size="sm"
             >
-              <FileText className="w-4 h-4" />
-              Create Full Rewrite
+              <FileText className="w-3 h-3" />
+              Rewrite
             </Button>
             <Button
               onClick={() => {
                 processWithAI('test', true);
               }}
-              className="bg-red-500 hover:bg-red-600 text-white flex items-center gap-2"
+              className="bg-red-500 hover:bg-red-600 text-white flex items-center gap-1 text-xs"
               size="sm"
               disabled={isProcessing}
             >
-              {isProcessing ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <TestTube className="w-4 h-4" />}
-              Create Full Test
+              {isProcessing ? <Loader2 className="w-3 h-3 animate-spin" /> : <TestTube className="w-3 h-3" />}
+              Test
             </Button>
             <Button
               onClick={() => {
                 processWithAI('suggested-readings', true);
               }}
-              className="bg-yellow-500 hover:bg-yellow-600 text-white flex items-center gap-2"
+              className="bg-yellow-500 hover:bg-yellow-600 text-white flex items-center gap-1 text-xs"
               size="sm"
               disabled={isProcessing}
             >
-              {isProcessing ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Lightbulb className="w-4 h-4" />}
-              Create Full Suggested Readings
+              {isProcessing ? <Loader2 className="w-3 h-3 animate-spin" /> : <Lightbulb className="w-3 h-3" />}
+              Readings
             </Button>
             <Button
               onClick={() => {
                 processWithAI('summary-thesis', true);
               }}
-              className="bg-cyan-500 hover:bg-cyan-600 text-white flex items-center gap-2"
+              className="bg-cyan-500 hover:bg-cyan-600 text-white flex items-center gap-1 text-xs"
               size="sm"
               disabled={isProcessing}
             >
-              {isProcessing ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Target className="w-4 h-4" />}
-              Create Full Summary + Thesis
+              {isProcessing ? <Loader2 className="w-3 h-3 animate-spin" /> : <Target className="w-3 h-3" />}
+              Summary
             </Button>
           </div>
         </div>
