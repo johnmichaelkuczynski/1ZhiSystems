@@ -183,10 +183,13 @@ export default function JournalIssuePage() {
             <button 
               className="flex flex-col items-center justify-center p-4 bg-purple-50 hover:bg-purple-100 border border-purple-200 rounded-lg transition-colors group"
               onClick={() => {
+                console.log('Cognitive Map button clicked - dispatching event');
                 const event = new CustomEvent('triggerFullArticleAI', { 
                   detail: { action: 'cognitive-map' } 
                 });
+                console.log('Event created:', event);
                 window.dispatchEvent(event);
+                console.log('Event dispatched');
               }}
             >
               <svg className="w-6 h-6 text-purple-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
