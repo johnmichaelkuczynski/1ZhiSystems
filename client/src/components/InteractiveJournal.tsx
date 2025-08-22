@@ -1219,14 +1219,13 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
             </Button>
             <Button
               onClick={() => {
-                setUseEntireArticle(true);
-                setCurrentAction('cognitive-map');
-                setShowModal(true);
+                processWithAI('cognitive-map', true);
               }}
               className="bg-purple-500 hover:bg-purple-600 text-white flex items-center gap-2"
               size="sm"
+              disabled={isProcessing}
             >
-              <Brain className="w-4 h-4" />
+              {isProcessing ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Brain className="w-4 h-4" />}
               Create Full Cognitive Map
             </Button>
           </div>
