@@ -64,14 +64,6 @@ const ACTION_BUTTONS: ActionButton[] = [
 ];
 
 export default function InteractiveJournal({ content, issueId, title }: InteractiveJournalProps) {
-  // Debug the content prop immediately
-  console.log('InteractiveJournal rendered with content:', { 
-    contentLength: content?.length, 
-    contentPreview: content?.substring(0, 200),
-    contentType: typeof content,
-    issueId,
-    title 
-  });
   const [selectedText, setSelectedText] = useState('');
   const [showToolbar, setShowToolbar] = useState(false);
   const [toolbarPosition, setToolbarPosition] = useState({ x: 0, y: 0 });
@@ -158,11 +150,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
   const processWithAI = useCallback(async (action: ActionType, useEntireArticle = false) => {
     const textToProcess = useEntireArticle ? content : selectedText;
     
-    // Debug logging
-    console.log('processWithAI called with:', { action, useEntireArticle, contentLength: content?.length, selectedTextLength: selectedText?.length, textToProcess: textToProcess?.substring(0, 100) + '...' });
-    
     if (!textToProcess) {
-      console.error('No text to process:', { useEntireArticle, contentExists: !!content, selectedTextExists: !!selectedText });
       toast({
         title: useEntireArticle ? "No content available" : "No text selected",
         description: useEntireArticle ? "Article content is not available." : "Please select some text first.",
