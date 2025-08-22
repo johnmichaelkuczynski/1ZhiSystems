@@ -764,15 +764,23 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
     const handleFullArticleAI = (event: CustomEvent) => {
       const { action } = event.detail;
       console.log('Full article AI triggered:', { action, contentAvailable: !!content, contentLength: content?.length });
-      processWithAI(action as ActionType, true); // true = use entire article
+      
+      // Call processWithAI directly with the current content
+      if (content && content.length > 0) {
+        processWithAI(action as ActionType, true); // true = use entire article
+      } else {
+        console.error('No content available for full article AI processing');
+      }
     };
 
+    console.log('Setting up event listener for triggerFullArticleAI');
     window.addEventListener('triggerFullArticleAI', handleFullArticleAI as EventListener);
     
     return () => {
+      console.log('Removing event listener for triggerFullArticleAI');
       window.removeEventListener('triggerFullArticleAI', handleFullArticleAI as EventListener);
     };
-  }, [content, processWithAI]);
+  }, [processWithAI]);
 
   const renderToolbar = () => {
     if (!showToolbar || !selectedText) return null;
