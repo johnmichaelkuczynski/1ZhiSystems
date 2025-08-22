@@ -133,6 +133,13 @@ Preferred communication style: Simple, everyday language.
   - **CREATE FULL SUMMARY + THESIS** (cyan) - Executive summary with thesis analysis
   - **CREATE THESIS DEEP DIVE** (indigo) - In-depth thesis argument examination
   - **UI Design**: Compact button layout with shortened labels, small icons (12px), and color-coded functionality to prevent page overflow
+- **Download Functionality**: August 22, 2025 - Complete download system for all AI-generated content:
+  - **Text Downloads**: All analysis results can be downloaded as formatted .txt files
+  - **Audio Downloads**: Podcast audio files downloadable as .mp3 format
+  - **File Naming**: Auto-generated filenames include article title for organization
+  - **Content Types**: Cognitive maps, study guides, rewrites, test questions/results, suggested readings, summary+thesis, and thesis deep dives
+  - **Format Structure**: Professional formatting with headers, sections, and proper text organization
+  - **User Experience**: Download buttons (📥) positioned next to existing copy buttons for seamless workflow
 - **Content**: Four published issues including comprehensive "Veblen Utility Functions" with complete 13-chapter analysis and "The Tarski's World Problem" by J.-M. Kuczynski
 - **Audio System**: OpenAI TTS-1 integration with Alloy voice support, automatic audio generation for all podcasts, saved to public/audio directory
 
