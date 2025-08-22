@@ -123,6 +123,7 @@ Preferred communication style: Simple, everyday language.
 - **URL Structure**: `/journal/vol-[roman]/no-[number]` format for SEO-friendly URLs
 - **Components**: Journal listing, individual issue pages, admin panel for CRUD operations
 - **AI Features**: Text selection with 8 AI-powered functions (rewrite, study guides, tests, podcasts, visual cognitive maps, thesis analysis, deep dives, suggested readings)
+- **Full Article Processing**: August 22, 2025 - Added "CREATE FULL COGNITIVE MAP" button alongside existing "CREATE FULL PODCAST" button for processing entire journal articles
 - **Content**: Four published issues including comprehensive "Veblen Utility Functions" with complete 13-chapter analysis and "The Tarski's World Problem" by J.-M. Kuczynski
 - **Audio System**: OpenAI TTS-1 integration with Alloy voice support, automatic audio generation for all podcasts, saved to public/audio directory
 
