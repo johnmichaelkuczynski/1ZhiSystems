@@ -863,7 +863,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && !e.shiftKey && !isProcessing) {
                     e.preventDefault();
-                    processWithAI('rewrite');
+                    processWithAI('rewrite', useEntireArticle);
                   }
                 }}
                 className="mt-1"
@@ -875,7 +875,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
                 Cancel
               </Button>
               <Button 
-                onClick={() => processWithAI('rewrite')} 
+                onClick={() => processWithAI('rewrite', useEntireArticle)} 
                 disabled={isProcessing}
               >
                 {isProcessing ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
