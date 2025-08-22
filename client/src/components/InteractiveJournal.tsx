@@ -1262,10 +1262,21 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
               {isProcessing ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <TestTube className="w-4 h-4" />}
               Create Full Test
             </Button>
+            <Button
+              onClick={() => {
+                processWithAI('suggested-readings', true);
+              }}
+              className="bg-yellow-500 hover:bg-yellow-600 text-white flex items-center gap-2"
+              size="sm"
+              disabled={isProcessing}
+            >
+              {isProcessing ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Lightbulb className="w-4 h-4" />}
+              Create Full Suggested Readings
+            </Button>
           </div>
         </div>
         <p className="text-sm text-gray-600 mt-2">
-          Select any text below to access 8 AI functions, or use the buttons above to create a podcast, cognitive map, study guide, rewrite, or test from the entire article.
+          Select any text below to access 8 AI functions, or use the buttons above to create a podcast, cognitive map, study guide, rewrite, test, or suggested readings from the entire article.
         </p>
       </div>
 
