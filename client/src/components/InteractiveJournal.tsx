@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -35,7 +35,6 @@ import type {
   SuggestedReadings 
 } from '@shared/ai-services';
 import { useToast } from '@/hooks/use-toast';
-import { parseMarkdown } from '@/lib/journal-utils';
 
 interface InteractiveJournalProps {
   content: string;
@@ -43,7 +42,7 @@ interface InteractiveJournalProps {
   title: string;
 }
 
-type ActionType = 'rewrite' | 'study-guide' | 'test-me' | 'podcast' | 'cognitive-map' | 'summary-thesis' | 'thesis-deep-dive' | 'suggested-readings';
+type ActionType = 'rewrite' | 'study-guide' | 'test' | 'podcast' | 'cognitive-map' | 'summary-thesis' | 'thesis-deep-dive' | 'suggested-readings';
 
 interface ActionButton {
   action: ActionType;
@@ -55,7 +54,7 @@ interface ActionButton {
 const ACTION_BUTTONS: ActionButton[] = [
   { action: 'rewrite', label: 'Rewrite', icon: <FileText className="w-4 h-4" />, color: 'bg-blue-500 hover:bg-blue-600' },
   { action: 'study-guide', label: 'Study Guide', icon: <BookOpen className="w-4 h-4" />, color: 'bg-green-500 hover:bg-green-600' },
-  { action: 'test-me', label: 'Test Me', icon: <TestTube className="w-4 h-4" />, color: 'bg-purple-500 hover:bg-purple-600' },
+  { action: 'test', label: 'Test Me', icon: <TestTube className="w-4 h-4" />, color: 'bg-purple-500 hover:bg-purple-600' },
   { action: 'podcast', label: 'Podcast', icon: <Podcast className="w-4 h-4" />, color: 'bg-orange-500 hover:bg-orange-600' },
   { action: 'cognitive-map', label: 'Cognitive Map', icon: <Brain className="w-4 h-4" />, color: 'bg-pink-500 hover:bg-pink-600' },
   { action: 'summary-thesis', label: 'Summary+Thesis', icon: <Target className="w-4 h-4" />, color: 'bg-indigo-500 hover:bg-indigo-600' },
@@ -116,8 +115,6 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
   const contentRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
-
-
   useEffect(() => {
     // Load voice options
     fetch('/api/voice-options')
@@ -147,7 +144,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
     }
   };
 
-  const processWithAI = useCallback(async (action: ActionType, useEntireArticle = false) => {
+  const processWithAI = async (action: ActionType, useEntireArticle = false) => {
     const textToProcess = useEntireArticle ? content : selectedText;
     
     if (!textToProcess) {
@@ -212,7 +209,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
       setIsProcessing(false);
       // Don't clear currentAction until modal is closed
     }
-  }, [content, selectedText, selectedProvider, customInstructions, voiceSelection, secondVoiceSelection, podcastMode, podcastInstructions, toast]);
+  };
 
   const copyToClipboard = async (text: string, key: string) => {
     try {
@@ -266,7 +263,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
         actionType = 'rewrite';
       }
     } else if (modalContent.questions) {
-      actionType = 'test-me';
+      actionType = 'test';
     } else if (modalContent.script || modalContent.audioUrl) {
       actionType = 'podcast';
     } else if (modalContent.map) {
@@ -318,7 +315,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
           </div>
         );
 
-      case 'test-me':
+      case 'test':
         const questions: TestQuestion[] = modalContent.questions || [];
         const testResult = modalContent.testResult;
         
@@ -746,24 +743,6 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
       };
     }
   }, [isDragging, dragStart]);
-
-  // Function to auto-select all text and run AI function
-  const autoSelectAndProcess = useCallback((action: ActionType) => {
-    if (content && content.length > 0) {
-      // Auto-select all article text
-      setSelectedText(content);
-      // Process with the entire article
-      processWithAI(action, true);
-    }
-  }, [content, processWithAI]);
-
-  // Expose this function globally for the buttons
-  useEffect(() => {
-    (window as any).autoSelectAndProcess = autoSelectAndProcess;
-    return () => {
-      delete (window as any).autoSelectAndProcess;
-    };
-  }, [autoSelectAndProcess]);
 
   const renderToolbar = () => {
     if (!showToolbar || !selectedText) return null;
@@ -1225,91 +1204,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
       <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-200 mb-6 p-4 -mx-4">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold text-gray-900">AI-Powered Analysis</h3>
-          <div className="flex flex-wrap gap-2">
-            <Button
-              onClick={() => {
-                setUseEntireArticle(true);
-                setCurrentAction('rewrite');
-                setShowModal(true);
-              }}
-              className="bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2"
-              size="sm"
-            >
-              <FileText className="w-4 h-4" />
-              Create Full Rewrite
-            </Button>
-            <Button
-              onClick={() => {
-                setUseEntireArticle(true);
-                setCurrentAction('study-guide');
-                setShowModal(true);
-              }}
-              className="bg-green-600 hover:bg-green-700 text-white flex items-center gap-2"
-              size="sm"
-            >
-              <BookOpen className="w-4 h-4" />
-              Create Full Study Guide
-            </Button>
-            <Button
-              onClick={() => {
-                setUseEntireArticle(true);
-                setCurrentAction('test-me');
-                setShowModal(true);
-              }}
-              className="bg-red-600 hover:bg-red-700 text-white flex items-center gap-2"
-              size="sm"
-            >
-              <TestTube className="w-4 h-4" />
-              Create Full Test Me
-            </Button>
-            <Button
-              onClick={() => {
-                setUseEntireArticle(true);
-                setCurrentAction('cognitive-map');
-                setShowModal(true);
-              }}
-              className="bg-purple-600 hover:bg-purple-700 text-white flex items-center gap-2"
-              size="sm"
-            >
-              <Brain className="w-4 h-4" />
-              Create Full Cognitive Map
-            </Button>
-            <Button
-              onClick={() => {
-                setUseEntireArticle(true);
-                setCurrentAction('summary-thesis');
-                setShowModal(true);
-              }}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white flex items-center gap-2"
-              size="sm"
-            >
-              <Target className="w-4 h-4" />
-              Create Full Summary+Thesis
-            </Button>
-            <Button
-              onClick={() => {
-                setUseEntireArticle(true);
-                setCurrentAction('thesis-deep-dive');
-                setShowModal(true);
-              }}
-              className="bg-yellow-600 hover:bg-yellow-700 text-white flex items-center gap-2"
-              size="sm"
-            >
-              <Lightbulb className="w-4 h-4" />
-              Create Full Thesis Deep Dive
-            </Button>
-            <Button
-              onClick={() => {
-                setUseEntireArticle(true);
-                setCurrentAction('suggested-readings');
-                setShowModal(true);
-              }}
-              className="bg-teal-600 hover:bg-teal-700 text-white flex items-center gap-2"
-              size="sm"
-            >
-              <BookOpenCheck className="w-4 h-4" />
-              Create Full Suggested Readings
-            </Button>
+          <div className="flex gap-2">
             <Button
               onClick={() => {
                 setUseEntireArticle(true);
@@ -1325,7 +1220,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
           </div>
         </div>
         <p className="text-sm text-gray-600 mt-2">
-          Select any text below to access 8 AI functions, or use the buttons above to run each AI function on the entire article.
+          Select any text below to access 8 AI functions, or use the button above to create a podcast from the entire article.
         </p>
       </div>
 
@@ -1334,7 +1229,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
         className="prose max-w-none cursor-text"
         onMouseUp={handleTextSelection}
         onTouchEnd={handleTextSelection}
-        dangerouslySetInnerHTML={{ __html: parseMarkdown(content) }}
+        dangerouslySetInnerHTML={{ __html: content.replace(/\n/g, '<br>') }}
       />
       
       {renderToolbar()}
@@ -1374,7 +1269,6 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
           {renderModalContent()}
         </DialogContent>
       </Dialog>
-
     </div>
   );
 }

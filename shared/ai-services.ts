@@ -32,7 +32,7 @@ export const AI_PROVIDERS: Record<AIProvider, AIServiceConfig> = {
 
 export interface TextProcessingRequest {
   selectedText: string;
-  action: 'rewrite' | 'study-guide' | 'test-me' | 'podcast' | 'cognitive-map' | 'summary-thesis' | 'thesis-deep-dive' | 'suggested-readings';
+  action: 'rewrite' | 'study-guide' | 'test' | 'podcast' | 'cognitive-map' | 'summary-thesis' | 'thesis-deep-dive' | 'suggested-readings';
   provider: AIProvider;
   customInstructions?: string;
   includeAudio?: boolean;
