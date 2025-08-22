@@ -64,6 +64,14 @@ const ACTION_BUTTONS: ActionButton[] = [
 ];
 
 export default function InteractiveJournal({ content, issueId, title }: InteractiveJournalProps) {
+  // Debug the content prop immediately
+  console.log('InteractiveJournal rendered with content:', { 
+    contentLength: content?.length, 
+    contentPreview: content?.substring(0, 200),
+    contentType: typeof content,
+    issueId,
+    title 
+  });
   const [selectedText, setSelectedText] = useState('');
   const [showToolbar, setShowToolbar] = useState(false);
   const [toolbarPosition, setToolbarPosition] = useState({ x: 0, y: 0 });
