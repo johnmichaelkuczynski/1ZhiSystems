@@ -35,6 +35,7 @@ import type {
   SuggestedReadings 
 } from '@shared/ai-services';
 import { useToast } from '@/hooks/use-toast';
+import { parseMarkdown } from '@/lib/journal-utils';
 
 interface InteractiveJournalProps {
   content: string;
@@ -148,6 +149,9 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
 
   const processWithAI = async (action: ActionType, useEntireArticle = false) => {
     const textToProcess = useEntireArticle ? content : selectedText;
+    
+    // Debug logging
+    console.log('processWithAI called with:', { action, useEntireArticle, contentLength: content?.length, selectedTextLength: selectedText?.length });
     
     if (!textToProcess) {
       toast({
@@ -750,6 +754,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
   useEffect(() => {
     const handleFullArticleAI = (event: CustomEvent) => {
       const { action } = event.detail;
+      console.log('Full article AI triggered:', { action, contentAvailable: !!content, contentLength: content?.length });
       processWithAI(action as ActionType, true); // true = use entire article
     };
 
@@ -758,7 +763,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
     return () => {
       window.removeEventListener('triggerFullArticleAI', handleFullArticleAI as EventListener);
     };
-  }, [content]);
+  }, [content, processWithAI]);
 
   const renderToolbar = () => {
     if (!showToolbar || !selectedText) return null;
@@ -1329,7 +1334,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
         className="prose max-w-none cursor-text"
         onMouseUp={handleTextSelection}
         onTouchEnd={handleTextSelection}
-        dangerouslySetInnerHTML={{ __html: content.replace(/\n/g, '<br>') }}
+        dangerouslySetInnerHTML={{ __html: parseMarkdown(content) }}
       />
       
       {renderToolbar()}
