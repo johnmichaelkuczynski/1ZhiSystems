@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -147,13 +147,14 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
     }
   };
 
-  const processWithAI = async (action: ActionType, useEntireArticle = false) => {
+  const processWithAI = useCallback(async (action: ActionType, useEntireArticle = false) => {
     const textToProcess = useEntireArticle ? content : selectedText;
     
     // Debug logging
-    console.log('processWithAI called with:', { action, useEntireArticle, contentLength: content?.length, selectedTextLength: selectedText?.length });
+    console.log('processWithAI called with:', { action, useEntireArticle, contentLength: content?.length, selectedTextLength: selectedText?.length, textToProcess: textToProcess?.substring(0, 100) + '...' });
     
     if (!textToProcess) {
+      console.error('No text to process:', { useEntireArticle, contentExists: !!content, selectedTextExists: !!selectedText });
       toast({
         title: useEntireArticle ? "No content available" : "No text selected",
         description: useEntireArticle ? "Article content is not available." : "Please select some text first.",
@@ -215,7 +216,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
       setIsProcessing(false);
       // Don't clear currentAction until modal is closed
     }
-  };
+  }, [content, selectedText, selectedProvider, customInstructions, voiceSelection, secondVoiceSelection, podcastMode, podcastInstructions, toast]);
 
   const copyToClipboard = async (text: string, key: string) => {
     try {
