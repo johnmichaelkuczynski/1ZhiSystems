@@ -84,6 +84,9 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
   const [podcastMode, setPodcastMode] = useState<'normal-one' | 'normal-two' | 'custom-one' | 'custom-two'>('normal-two');
   const [podcastInstructions, setPodcastInstructions] = useState('');
   const [useEntireArticle, setUseEntireArticle] = useState(false);
+  const [isRunningFullAnalysis, setIsRunningFullAnalysis] = useState(false);
+  const [fullAnalysisResults, setFullAnalysisResults] = useState<any>(null);
+  const [showFullAnalysisModal, setShowFullAnalysisModal] = useState(false);
 
   // Download audio file function
   const downloadAudio = async (audioUrl: string, filename: string = 'podcast.mp3') => {
@@ -114,6 +117,137 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
 
   const contentRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
+
+  // Function to run comprehensive AI analysis (all 8 functions)
+  const runFullArticleAnalysis = async () => {
+    if (!content || content.trim().length === 0) {
+      toast({
+        title: "Error",
+        description: "No content available for analysis.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsRunningFullAnalysis(true);
+    const results: any = {};
+
+    try {
+      // Run all 8 AI functions in parallel
+      const analysisPromises = [
+        // 1. Rewrite
+        fetch('/api/ai/rewrite', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            text: content,
+            provider: selectedProvider,
+            instructions: 'Rewrite this academic article to improve clarity and flow while maintaining all key arguments and evidence.'
+          })
+        }).then(r => r.json()).then(data => ({ type: 'rewrite', data })),
+
+        // 2. Study Guide
+        fetch('/api/ai/study-guide', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            text: content,
+            provider: selectedProvider
+          })
+        }).then(r => r.json()).then(data => ({ type: 'study-guide', data })),
+
+        // 3. Test Me
+        fetch('/api/ai/test-me', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            text: content,
+            provider: selectedProvider
+          })
+        }).then(r => r.json()).then(data => ({ type: 'test-me', data })),
+
+        // 4. Cognitive Map
+        fetch('/api/ai/cognitive-map', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            text: content,
+            provider: selectedProvider
+          })
+        }).then(r => r.json()).then(data => ({ type: 'cognitive-map', data })),
+
+        // 5. Summary + Thesis
+        fetch('/api/ai/summary-thesis', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            text: content,
+            provider: selectedProvider
+          })
+        }).then(r => r.json()).then(data => ({ type: 'summary-thesis', data })),
+
+        // 6. Thesis Deep Dive
+        fetch('/api/ai/thesis-deep-dive', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            text: content,
+            provider: selectedProvider
+          })
+        }).then(r => r.json()).then(data => ({ type: 'thesis-deep-dive', data })),
+
+        // 7. Suggested Readings
+        fetch('/api/ai/suggested-readings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            text: content,
+            provider: selectedProvider
+          })
+        }).then(r => r.json()).then(data => ({ type: 'suggested-readings', data })),
+
+        // 8. Podcast
+        fetch('/api/ai/podcast', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            text: content,
+            provider: selectedProvider,
+            includeAudio: true,
+            voiceSelection: voiceSelection,
+            secondVoiceSelection: secondVoiceSelection,
+            mode: podcastMode,
+            customInstructions: ''
+          })
+        }).then(r => r.json()).then(data => ({ type: 'podcast', data }))
+      ];
+
+      const analysisResults = await Promise.all(analysisPromises);
+      
+      // Organize results by type
+      analysisResults.forEach(({ type, data }) => {
+        results[type] = data;
+      });
+
+      setFullAnalysisResults(results);
+      setShowFullAnalysisModal(true);
+      
+      toast({
+        title: "Success",
+        description: "Complete AI analysis generated successfully!",
+      });
+
+    } catch (error) {
+      console.error('Error running full analysis:', error);
+      toast({
+        title: "Error",
+        description: "Failed to generate complete analysis. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsRunningFullAnalysis(false);
+    }
+  };
 
   useEffect(() => {
     // Load voice options
@@ -1206,6 +1340,15 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
           <h3 className="text-lg font-semibold text-gray-900">AI-Powered Analysis</h3>
           <div className="flex gap-2">
             <Button
+              onClick={runFullArticleAnalysis}
+              disabled={isRunningFullAnalysis}
+              className="bg-purple-600 hover:bg-purple-700 text-white flex items-center gap-2"
+              size="sm"
+            >
+              {isRunningFullAnalysis ? <Loader2 className="w-4 h-4 animate-spin" /> : <Brain className="w-4 h-4" />}
+              {isRunningFullAnalysis ? 'Generating...' : 'Complete AI Analysis'}
+            </Button>
+            <Button
               onClick={() => {
                 setUseEntireArticle(true);
                 setCurrentAction('podcast');
@@ -1220,7 +1363,7 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
           </div>
         </div>
         <p className="text-sm text-gray-600 mt-2">
-          Select any text below to access 8 AI functions, or use the button above to create a podcast from the entire article.
+          Select any text below to access 8 AI functions, or use the buttons above to run comprehensive AI analysis or create a podcast from the entire article.
         </p>
       </div>
 
@@ -1267,6 +1410,249 @@ export default function InteractiveJournal({ content, issueId, title }: Interact
             AI-generated content based on your selected text
           </div>
           {renderModalContent()}
+        </DialogContent>
+      </Dialog>
+
+      {/* Full Analysis Results Modal */}
+      <Dialog open={showFullAnalysisModal} onOpenChange={setShowFullAnalysisModal}>
+        <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto" aria-describedby="full-analysis-description">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Brain className="w-5 h-5 text-purple-600" />
+              Complete AI Analysis
+            </DialogTitle>
+          </DialogHeader>
+          <div id="full-analysis-description" className="sr-only">
+            Comprehensive AI analysis results for the entire article
+          </div>
+          
+          {fullAnalysisResults && (
+            <div className="space-y-6">
+              
+              {/* Rewrite */}
+              {fullAnalysisResults.rewrite && (
+                <div className="border rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <FileText className="w-5 h-5 text-blue-600" />
+                    <h3 className="font-semibold">Rewritten Article</h3>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => {
+                        navigator.clipboard.writeText(fullAnalysisResults.rewrite.result);
+                        toast({ title: "Copied to clipboard!" });
+                      }}
+                    >
+                      <Copy className="w-4 h-4" />
+                    </Button>
+                  </div>
+                  <div className="prose max-w-none text-sm bg-gray-50 p-3 rounded max-h-40 overflow-y-auto">
+                    {fullAnalysisResults.rewrite.result}
+                  </div>
+                </div>
+              )}
+
+              {/* Study Guide */}
+              {fullAnalysisResults['study-guide'] && (
+                <div className="border rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <BookOpen className="w-5 h-5 text-green-600" />
+                    <h3 className="font-semibold">Study Guide</h3>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => {
+                        navigator.clipboard.writeText(fullAnalysisResults['study-guide'].result);
+                        toast({ title: "Copied to clipboard!" });
+                      }}
+                    >
+                      <Copy className="w-4 h-4" />
+                    </Button>
+                  </div>
+                  <div className="prose max-w-none text-sm bg-gray-50 p-3 rounded max-h-40 overflow-y-auto">
+                    <div dangerouslySetInnerHTML={{ __html: fullAnalysisResults['study-guide'].result.replace(/\n/g, '<br>') }} />
+                  </div>
+                </div>
+              )}
+
+              {/* Test Questions */}
+              {fullAnalysisResults['test-me'] && (
+                <div className="border rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <TestTube className="w-5 h-5 text-red-600" />
+                    <h3 className="font-semibold">Test Questions</h3>
+                  </div>
+                  <div className="space-y-3 max-h-40 overflow-y-auto">
+                    {fullAnalysisResults['test-me'].questions?.map((question: any, index: number) => (
+                      <div key={index} className="bg-gray-50 p-3 rounded">
+                        <p className="font-medium text-sm mb-2">{question.question}</p>
+                        <div className="space-y-1">
+                          {question.options.map((option: string, optIndex: number) => (
+                            <label key={optIndex} className="flex items-center text-sm">
+                              <input type="radio" name={`question-${index}`} className="mr-2" />
+                              {option}
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Cognitive Map */}
+              {fullAnalysisResults['cognitive-map'] && (
+                <div className="border rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Brain className="w-5 h-5 text-purple-600" />
+                    <h3 className="font-semibold">Cognitive Map</h3>
+                  </div>
+                  <div className="bg-gray-50 p-3 rounded max-h-40 overflow-y-auto">
+                    <div className="space-y-2">
+                      {fullAnalysisResults['cognitive-map'].map?.nodes?.map((node: any, index: number) => (
+                        <div key={index} className="bg-white p-2 rounded border text-sm">
+                          <div className="font-medium">{node.label}</div>
+                          {node.description && <div className="text-gray-600 text-xs">{node.description}</div>}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Summary + Thesis */}
+              {fullAnalysisResults['summary-thesis'] && (
+                <div className="border rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Target className="w-5 h-5 text-indigo-600" />
+                    <h3 className="font-semibold">Summary + Thesis</h3>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => {
+                        const content = `Summary: ${fullAnalysisResults['summary-thesis'].result.summary}\n\nThesis: ${fullAnalysisResults['summary-thesis'].result.thesis}`;
+                        navigator.clipboard.writeText(content);
+                        toast({ title: "Copied to clipboard!" });
+                      }}
+                    >
+                      <Copy className="w-4 h-4" />
+                    </Button>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="bg-gray-50 p-3 rounded">
+                      <div className="font-medium text-sm mb-1">Summary:</div>
+                      <div className="text-sm">{fullAnalysisResults['summary-thesis'].result.summary}</div>
+                    </div>
+                    <div className="bg-gray-50 p-3 rounded">
+                      <div className="font-medium text-sm mb-1">Thesis:</div>
+                      <div className="text-sm">{fullAnalysisResults['summary-thesis'].result.thesis}</div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Thesis Deep Dive */}
+              {fullAnalysisResults['thesis-deep-dive'] && (
+                <div className="border rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Lightbulb className="w-5 h-5 text-yellow-600" />
+                    <h3 className="font-semibold">Thesis Deep Dive</h3>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => {
+                        navigator.clipboard.writeText(fullAnalysisResults['thesis-deep-dive'].result);
+                        toast({ title: "Copied to clipboard!" });
+                      }}
+                    >
+                      <Copy className="w-4 h-4" />
+                    </Button>
+                  </div>
+                  <div className="prose max-w-none text-sm bg-gray-50 p-3 rounded max-h-40 overflow-y-auto">
+                    <div dangerouslySetInnerHTML={{ __html: fullAnalysisResults['thesis-deep-dive'].result.replace(/\n/g, '<br>') }} />
+                  </div>
+                </div>
+              )}
+
+              {/* Suggested Readings */}
+              {fullAnalysisResults['suggested-readings'] && (
+                <div className="border rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <BookOpenCheck className="w-5 h-5 text-teal-600" />
+                    <h3 className="font-semibold">Suggested Readings</h3>
+                  </div>
+                  <div className="space-y-2 max-h-40 overflow-y-auto">
+                    {fullAnalysisResults['suggested-readings'].readings?.map((reading: any, index: number) => (
+                      <div key={index} className="bg-gray-50 p-3 rounded">
+                        <div className="font-medium text-sm">{reading.title}</div>
+                        <div className="text-sm text-gray-600">{reading.author}</div>
+                        {reading.relevance && <div className="text-xs text-gray-500 mt-1">{reading.relevance}</div>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Podcast */}
+              {fullAnalysisResults.podcast && (
+                <div className="border rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Podcast className="w-5 h-5 text-orange-600" />
+                    <h3 className="font-semibold">AI Generated Podcast</h3>
+                  </div>
+                  <div className="space-y-3">
+                    {fullAnalysisResults.podcast.audioUrl && (
+                      <div className="bg-gray-50 p-3 rounded">
+                        <audio controls className="w-full">
+                          <source src={fullAnalysisResults.podcast.audioUrl} type="audio/mpeg" />
+                          Your browser does not support the audio element.
+                        </audio>
+                        <div className="flex gap-2 mt-2">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => downloadAudio(fullAnalysisResults.podcast.audioUrl, 'full-analysis-podcast.mp3')}
+                          >
+                            <Download className="w-4 h-4 mr-1" />
+                            Download
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                    <div className="text-xs text-gray-500">
+                      Generated: {fullAnalysisResults.podcast.script?.words} words, ~{fullAnalysisResults.podcast.script?.estimatedDuration} minutes
+                    </div>
+                  </div>
+                </div>
+              )}
+
+            </div>
+          )}
+          
+          <div className="flex justify-between mt-6">
+            <Button variant="outline" onClick={() => setShowFullAnalysisModal(false)}>
+              Close
+            </Button>
+            <Button 
+              onClick={() => {
+                const allText = Object.entries(fullAnalysisResults || {})
+                  .map(([type, data]: [string, any]) => {
+                    let content = `\n=== ${type.toUpperCase().replace('-', ' ')} ===\n`;
+                    if (data.result) content += data.result;
+                    else if (data.questions) content += data.questions.map((q: any) => `Q: ${q.question}\nOptions: ${q.options.join(', ')}`).join('\n\n');
+                    else if (data.readings) content += data.readings.map((r: any) => `${r.title} by ${r.author}`).join('\n');
+                    return content;
+                  })
+                  .join('\n\n');
+                
+                navigator.clipboard.writeText(allText);
+                toast({ title: "All results copied to clipboard!" });
+              }}
+            >
+              <Copy className="w-4 h-4 mr-2" />
+              Copy All Results
+            </Button>
+          </div>
         </DialogContent>
       </Dialog>
     </div>
