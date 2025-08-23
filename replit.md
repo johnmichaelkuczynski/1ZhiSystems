@@ -142,6 +142,7 @@ Preferred communication style: Simple, everyday language.
   - **User Experience**: Download buttons (📥) positioned next to existing copy buttons for seamless workflow
 - **Content**: Four published issues including comprehensive "Veblen Utility Functions" with complete 13-chapter analysis and "The Tarski's World Problem" by J.-M. Kuczynski
 - **Audio System**: OpenAI TTS-1 integration with Alloy voice support, automatic audio generation for all podcasts, saved to public/audio directory
+- **URL Updates**: August 22, 2025 - Updated Intelligence Meter application URL from intelligencemeter.biz to intelligencemeter.xyz in Core Applications section
 
 ### Component Library Choice
 - **Decision**: shadcn/ui over pre-built component libraries
