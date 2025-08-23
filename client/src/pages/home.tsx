@@ -55,7 +55,7 @@ export default function Home() {
     { title: "Living Book Creator", url: "https://livingbook.xyz/" },
     { title: "EZGrader", url: "https://ezgrader.xyz" },
     { title: "Originality Meter", url: "https://originalitymeter.com" },
-    { title: "Intelligence Meter", url: "https://intelligencemeter.biz" },
+    { title: "Intelligence Meter", url: "https://intelligencemeter.xyz" },
     { title: "Book Builder", url: "https://bookbuilder.xyz" },
     { title: "Cognitive Profiler", url: "https://cognitiveprofiler.xyz" },
     { title: "Super Cognitive Profiler", url: "https://supercognitiveprofiler.xyz" },
