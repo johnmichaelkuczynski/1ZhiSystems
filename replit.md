@@ -140,7 +140,10 @@ Preferred communication style: Simple, everyday language.
   - **Content Types**: Cognitive maps, study guides, rewrites, test questions/results, suggested readings, summary+thesis, and thesis deep dives
   - **Format Structure**: Professional formatting with headers, sections, and proper text organization
   - **User Experience**: Download buttons (📥) positioned next to existing copy buttons for seamless workflow
-- **Content**: Four published issues including comprehensive "Veblen Utility Functions" with complete 13-chapter analysis and "The Tarski's World Problem" by J.-M. Kuczynski
+- **Content**: Five published issues across three volumes:
+  - **Volume I**: "On the Optimal Number of Truth Values", "The Incompleteness of Logic", "Veblen Utility Functions" (13-chapter analysis), "The Tarski's World Problem"
+  - **Volume II**: "McTaggart's Proof of the Unreality of Time: A Refutation"  
+  - **Volume III**: "Markets, Value, and the Myth of Worth-as-Wage" (complete with abstract, keywords, and academic formatting)
 - **Audio System**: OpenAI TTS-1 integration with Alloy voice support, automatic audio generation for all podcasts, saved to public/audio directory
 - **URL Updates**: August 22, 2025 - Updated Intelligence Meter application URL from intelligencemeter.biz to intelligencemeter.xyz in Core Applications section
 
