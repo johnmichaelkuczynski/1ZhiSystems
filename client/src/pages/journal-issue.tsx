@@ -109,7 +109,7 @@ export default function JournalIssuePage() {
         {/* Interactive Article Body */}
         <div className="prose prose-lg max-w-none">
           <InteractiveJournal 
-            content={parseMarkdown(journalIssue.body)}
+            content={journalIssue.body}
             issueId={journalIssue.id}
             title={journalIssue.title}
           />
