@@ -58,6 +58,7 @@ export default function Home() {
     { title: "Intelligence Meter", url: "https://intelligencemeter.xyz" },
     { title: "Book Builder", url: "https://bookbuilder.xyz" },
     { title: "Cognitive Profiler", url: "https://cognitiveprofiler.xyz" },
+    { title: "Cognitive Enhancer", url: "https://cognitiveenhancer.xyz" },
     { title: "Super Cognitive Profiler", url: "https://supercognitiveprofiler.xyz" },
     { title: "Psychological Profiler", url: "https://psychologicalprofiler.xyz" },
     { title: "EZ Reader", url: "https://ezreader.ai" },
