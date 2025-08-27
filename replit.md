@@ -140,11 +140,14 @@ Preferred communication style: Simple, everyday language.
   - **Content Types**: Cognitive maps, study guides, rewrites, test questions/results, suggested readings, summary+thesis, and thesis deep dives
   - **Format Structure**: Professional formatting with headers, sections, and proper text organization
   - **User Experience**: Download buttons (📥) positioned next to existing copy buttons for seamless workflow
-- **Content**: Six published issues across four volumes:
+- **Content**: Nine published issues across seven volumes:
   - **Volume I**: "On the Optimal Number of Truth Values", "The Incompleteness of Logic", "Veblen Utility Functions" (13-chapter analysis), "The Tarski's World Problem"
   - **Volume II**: "McTaggart's Proof of the Unreality of Time: A Refutation"  
   - **Volume III**: "Markets, Value, and the Myth of Worth-as-Wage" (complete with abstract, keywords, and academic formatting)
   - **Volume IV**: "Conspicuous Asceticism: A Veblenian Analysis of Self-Abasement as Status Display" (extending Veblen's theory to ascetic practices)
+  - **Volume V**: "Zen as Pseudo-Boot Camp: A Clinical and Cultural Analysis" (examining Zen monastic practice through clinical and cultural lens)
+  - **Volume VI**: "Law as Prosthesis, Law as Prison: Cognitive Divergence in Legal Education and Practice" (analyzing how legal education affects different cognitive types)
+  - **Volume VII**: "Fiction, Translation, and the Perceptualization of Judgment" (literary theory examining Kafka and the nature of artistic representation)
 - **Audio System**: OpenAI TTS-1 integration with Alloy voice support, automatic audio generation for all podcasts, saved to public/audio directory
 - **URL Updates**: August 22, 2025 - Updated Intelligence Meter application URL from intelligencemeter.biz to intelligencemeter.xyz in Core Applications section
 
