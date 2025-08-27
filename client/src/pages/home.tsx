@@ -69,6 +69,7 @@ export default function Home() {
     { title: "GPTByPass", url: "https://gptbypass.xyz" },
     { title: "Improve Your Writing", url: "https://improveyourwriting.xyz" },
     { title: "Text Genius", url: "https://textgenius.xyz" },
+    { title: "Text Evaluator", url: "https://textevaluator.xyz" },
     { title: "Photo Psychoanalysis", url: "https://photopsychoanalysis.xyz" },
     { title: "Mind Read", url: "https://mindread.xyz" },
     { title: "Total Profiler", url: "https://totalprofiler.xyz" },
