@@ -73,7 +73,7 @@ export default function Home() {
     { title: "Text Evaluator", url: "https://textevaluator.xyz" },
     { title: "Photo Psychoanalysis", url: "https://photopsychoanalysis.xyz" },
     { title: "Mind Read", url: "https://mindread.xyz" },
-    { title: "Total Profiler", url: "https://totalprofiler.xyz" },
+    { title: "Cognitive Enhancer", url: "https://cognitiveenhancer.xyz" },
     { title: "Psychology Pro", url: "https://psychologypro.xyz" },
     { title: "Super Profiler", url: "https://superprofiler.xyz" }
   ];
