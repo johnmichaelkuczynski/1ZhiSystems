@@ -18,7 +18,8 @@ export default function Home() {
     { title: "ANALYTIC PHILOSOPHY CHAPTER 1", url: "https://analysisofanalysis.xyz" },
     { title: "WHY WAS SOCRATES EXECUTED?", url: "https://socrates101.xyz" },
     { title: "ANALYTIC PHILOSOPHY CHAPTER 2", url: "https://platonism101.xyz" },
-    { title: "ANALYTIC PHILOSOPHY CHAPTER 3", url: "https://truthandmeaning.xyz" }
+    { title: "ANALYTIC PHILOSOPHY CHAPTER 3", url: "https://truthandmeaning.xyz" },
+    { title: "RUSSELL'S MATHEMATICAL PHILOSOPHY (SECOND EDITION)", url: "https://mathematicalphilosophy.xyz" }
   ];
 
   const classicsBooks = [
@@ -73,7 +74,6 @@ export default function Home() {
     { title: "Text Evaluator", url: "https://textevaluator.xyz" },
     { title: "Photo Psychoanalysis", url: "https://photopsychoanalysis.xyz" },
     { title: "Mind Read", url: "https://mindread.xyz" },
-    { title: "Cognitive Enhancer", url: "https://cognitiveenhancer.xyz" },
     { title: "Psychology Pro", url: "https://psychologypro.xyz" },
     { title: "Super Profiler", url: "https://superprofiler.xyz" }
   ];
