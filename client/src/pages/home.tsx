@@ -75,7 +75,8 @@ export default function Home() {
     { title: "Photo Psychoanalysis", url: "https://photopsychoanalysis.xyz" },
     { title: "Mind Read", url: "https://mindread.xyz" },
     { title: "Psychology Pro", url: "https://psychologypro.xyz" },
-    { title: "Super Profiler", url: "https://superprofiler.xyz" }
+    { title: "Super Profiler", url: "https://superprofiler.xyz" },
+    { title: "HTML Converter", url: "https://htmlconverter.xyz/" }
   ];
 
   const BookItem = ({ title, url, note }: { title: string; url: string | null; note?: string }) => (
