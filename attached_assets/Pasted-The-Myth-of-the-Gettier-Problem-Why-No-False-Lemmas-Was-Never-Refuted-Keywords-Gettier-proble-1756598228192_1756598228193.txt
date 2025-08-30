@@ -1,0 +1,48 @@
+The Myth of the Gettier Problem: Why “No False Lemmas” Was Never Refuted
+
+Keywords: Gettier problem, no false lemmas, epistemic luck, reliabilism, safety, justification
+
+Abstract
+Philosophers often treat the “Gettier problem” as an open wound in epistemology. The standard fix—that knowledge is true justified belief plus the absence of false premises—was declared inadequate. Yet the canonical counterexamples collapse upon inspection. The rejection of “no false lemmas” rests on a mischaracterization of how belief formation works. Once operative background assumptions are counted as premises, the Gettier problem dissolves.
+
+1. Introduction
+
+Since 1963, epistemologists have insisted that Gettier cases show the insufficiency of the “justified true belief” account of knowledge. The dominant consensus is that the no false lemmas amendment, though intuitive, fails. This paper argues that the rejection of this amendment was premature and unsound.
+
+2. The “No False Lemmas” Proposal
+
+The proposal is simple:
+
+S knows that p iff (i) p is true, (ii) S believes that p, (iii) S is justified in believing p, and (iv) S’s belief is not inferred, directly or indirectly, from any false proposition.
+
+The condition is motivated by paradigmatic Gettier cases such as “Smith and Jones and the job” (Gettier, 1963), where the truth of p is reached only through a false lemma (“Jones will get the promotion”).
+
+3. Canonical Objections and Their Collapse
+3.1 The Sheep-in-the-Field Case
+
+Objection: Perceptual Gettier cases involve no inference, so “no false lemma” does not apply.
+Reply: This depends on suppressing the actual content of the perceptual belief. “That animal is a sheep” is the operative belief—false. The existential “there is a sheep in the field” is inferred from it—true. Hence a false lemma is present after all.
+
+3.2 The Stopped Clock
+
+Objection: “The clock says 3:00” (true), “if the clock says 3:00, it is 3:00” (normally true). No false lemma.
+Reply: In fact the subject also believes “this clock is functioning.” That premise is false, and it drives the inference. Again, the counterexample relies on erasing an operative background assumption.
+
+3.3 The Thermometer / Defeater Cases
+
+Objection: Sometimes there are underminers but no false lemmas.
+Reply: The underminer only bites because the subject assumes “this thermometer is functioning now.” That assumption is false when malfunction occurs. Once again, the background premise is present but ignored in the objection.
+
+3.4 The Fake Barn County
+
+Objection: Seeing a real barn in “fake barn county” shows that no false lemmas are needed to explain epistemic luck.
+Reply: On the contrary, the agent assumes “this is a normal environment without facades.” That belief is false, and it explains the luck. The counterexample is parasitic on pretending that such background beliefs are irrelevant.
+
+4. Why the Objections Persisted
+
+The rejection of “no false lemmas” was never based on decisive counterexamples. It was motivated by an aesthetic preference for clean, minimalistic analyses that avoid messy background commitments. By bracketing these premises, philosophers manufactured apparent counterexamples. The field then migrated toward reliabilism, safety, and virtue epistemology—not because “no false lemmas” had failed, but because its defenders refused to enlarge the scope of what counts as a lemma.
+
+5. Conclusion: Signal vs. Noise
+
+The so-called Gettier problem persists only because philosophy treats debates as free-floating exercises in intuition, with no decisive benchmarks. Once background assumptions are included as premises, “no false lemmas” eliminates the problem. The “canonical” counterexamples collapse under scrutiny. The persistence of the Gettier problem is a symptom of disciplinary inertia, not a live problem in epistemology.
+
