@@ -165,6 +165,7 @@ Preferred communication style: Simple, everyday language.
 - **Living Books Update**: Added "Russell's Mathematical Philosophy (Second Edition)" at mathematicalphilosophy.xyz to the Kuczynski/Zhi Systems collection (now 22 total books)
 - **Core Applications Update**: Added "HTML Converter" at htmlconverter.xyz to the applications list (now 19 total apps)
 - **Bug Fix**: Removed duplicate "Cognitive Enhancer" entries that were causing React key warnings
+- **Bug Fix**: Extended Roman numeral conversion function to support Volume XI (xi = 11) and beyond, fixing issue where new articles wouldn't display
 
 ### Component Library Choice
 - **Decision**: shadcn/ui over pre-built component libraries
