@@ -1,0 +1,70 @@
+The Collapse of Logical Form: Why Grammar, Not FOL, Guides Reasoning
+
+Abstract
+For more than a century, analytic philosophy has treated “logical form” as the hidden structure that underwrites valid reasoning. Natural language was thought to be misleading, requiring translation into regimented systems such as first-order logic (FOL). Yet this program failed on its own terms. Only a small fraction of sentences ever received determinate logical forms, and even there the machinery was unwieldy. More importantly, the claim that cognition itself operates through FOL is empirically bankrupt. Recent advances in AI and cognitive science show that grammar itself encodes inferential patterns sufficient for reasoning. Logical form was never the touchstone of thought; grammar always was.
+
+1. The Classical Program
+
+The project of logical form was rooted in three assumptions:
+
+Natural language misleads, so we must uncover hidden structures.
+
+First-order logic (or some regimented cousin) provides the “true” form.
+
+Thought itself is best understood by reference to these logical forms.
+
+This vision promised a universal touchstone for reasoning: translate messy language into canonical form, then evaluate arguments mechanically.
+
+2. Failure of Coverage
+
+The project quickly ran into limits. Clear logical forms were found for only a narrow class of sentences: simple quantifications, basic conditionals, some propositional embeddings. But vast domains of language resisted tidy mapping:
+
+Modality and counterfactuals
+
+Temporal and aspectual distinctions
+
+Attitude reports and intensionality
+
+Plurals, generics, and anaphora
+
+Each case generated entire sub-industries of increasingly baroque formalisms. None achieved consensus. The dream of a uniform logical syntax for natural language collapsed.
+
+3. Failure of Feasibility
+
+Even where forms could be assigned, the machinery was grotesque. Translating sentences into regimented FOL required heroic stipulations and layers of auxiliary notation. What was sold as a “simple hidden form” turned out to be an ever-expanding technical bureaucracy. Far from clarifying inference, it obscured how reasoning actually works.
+
+4. The Myth of Thought in Logic
+
+The underlying conceit was that cognition itself operates in something like first-order logic. This view is indefensible:
+
+Brains do not compute FOL derivations.
+
+FOL cannot even capture ordinary vague predicates without artifice.
+
+Human reasoning is often fast, context-sensitive, and approximate — nothing like regimented proof theory.
+
+The idea that FOL could serve as the scalable “touchstone of thought” is a category mistake, confusing a formal bookkeeping system with actual cognitive architecture.
+
+5. Grammar as Inferentially Sufficient
+
+Empirical evidence shows that natural language grammar itself encodes inferential patterns:
+
+Quantifiers, negatives, and connectives license systematic inferences.
+
+Predication uniformly establishes class relations without translation.
+
+Both humans and modern AI systems process these directly, making valid inferences without detour through logical form.
+
+The success of AI models that reason effectively without explicit FOL is decisive. If reasoning can emerge from grammatical structure plus pattern recognition, then logical form is not explanatorily prior — it is an artifact of our chosen formal systems.
+
+6. Implications
+
+Logical form is cognitively inert. It is constructed after the fact, not consulted in real-time inference.
+
+Grammar is not misleading. Far from requiring translation, grammar already aligns with logical relations at the level of use.
+
+The real task is to study the inferential capacities of grammar and the mechanisms that exploit them, whether in human brains or AI systems.
+
+7. Conclusion
+
+The logical form project promised rigor but delivered only a minuscule coverage, outrageous complexity, and false psychologizing. Its central conceit — that reasoning must be mediated by FOL — is a bald-faced joke. Grammar itself suffices to guide reasoning, as both human practice and AI evidence demonstrate. The collapse of logical form marks not a crisis but a liberation: philosophy can stop propping up a failed construct and turn instead to the actual engines of inference.
