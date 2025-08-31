@@ -13,7 +13,7 @@ export default function JournalIssuePage() {
   // Convert Roman to number (simple conversion for common cases)
   const romanToNumber = (roman: string): number => {
     const romanNumerals: { [key: string]: number } = {
-      'i': 1, 'ii': 2, 'iii': 3, 'iv': 4, 'v': 5, 'vi': 6, 'vii': 7, 'viii': 8, 'ix': 9, 'x': 10
+      'i': 1, 'ii': 2, 'iii': 3, 'iv': 4, 'v': 5, 'vi': 6, 'vii': 7, 'viii': 8, 'ix': 9, 'x': 10, 'xi': 11, 'xii': 12, 'xiii': 13, 'xiv': 14, 'xv': 15
     };
     return romanNumerals[roman.toLowerCase()] || parseInt(roman) || 0;
   };
