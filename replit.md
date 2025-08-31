@@ -140,7 +140,7 @@ Preferred communication style: Simple, everyday language.
   - **Content Types**: Cognitive maps, study guides, rewrites, test questions/results, suggested readings, summary+thesis, and thesis deep dives
   - **Format Structure**: Professional formatting with headers, sections, and proper text organization
   - **User Experience**: Download buttons (📥) positioned next to existing copy buttons for seamless workflow
-- **Content**: Eleven published issues across nine volumes:
+- **Content**: Twelve published issues across ten volumes:
   - **Volume I**: "On the Optimal Number of Truth Values", "The Incompleteness of Logic", "Veblen Utility Functions" (13-chapter analysis), "The Tarski's World Problem"
   - **Volume II**: "McTaggart's Proof of the Unreality of Time: A Refutation"  
   - **Volume III**: "Markets, Value, and the Myth of Worth-as-Wage" (complete with abstract, keywords, and academic formatting)
@@ -150,6 +150,7 @@ Preferred communication style: Simple, everyday language.
   - **Volume VII**: "Fiction, Translation, and the Perceptualization of Judgment" (literary theory examining Kafka and the nature of artistic representation)
   - **Volume VIII**: "Is Love Blind, or Does It See Differently? On the Epistemic Status of Love" (epistemological analysis of love as a form of perception)
   - **Volume IX**: "The Myth of the Gettier Problem: Why 'No False Lemmas' Was Never Refuted" (critical analysis of epistemological counterexamples to the no false lemmas condition)
+  - **Volume X**: "Naturalized Epistemology and Its Aftermath: Why the Rejection Was Premature" (defending Quine's naturalized epistemology program against traditional objections)
 - **Audio System**: OpenAI TTS-1 integration with Alloy voice support, automatic audio generation for all podcasts, saved to public/audio directory
 - **URL Updates**: August 22, 2025 - Updated Intelligence Meter application URL from intelligencemeter.biz to intelligencemeter.xyz in Core Applications section
 
@@ -158,6 +159,7 @@ Preferred communication style: Simple, everyday language.
 ### August 30, 2025
 - **Journal Content**: Added Volume VIII, Issue 1 - "Is Love Blind, or Does It See Differently? On the Epistemic Status of Love" (epistemological analysis of love as a form of perception)
 - **Journal Content**: Added Volume IX, Issue 1 - "The Myth of the Gettier Problem: Why 'No False Lemmas' Was Never Refuted" (critical analysis of epistemological counterexamples)
+- **Journal Content**: Added Volume X, Issue 1 - "Naturalized Epistemology and Its Aftermath: Why the Rejection Was Premature" (defending Quine's naturalized epistemology program)
 - **Living Books Update**: Added "Russell's Mathematical Philosophy (Second Edition)" at mathematicalphilosophy.xyz to the Kuczynski/Zhi Systems collection (now 22 total books)
 - **Core Applications Update**: Added "HTML Converter" at htmlconverter.xyz to the applications list (now 19 total apps)
 - **Bug Fix**: Removed duplicate "Cognitive Enhancer" entries that were causing React key warnings
