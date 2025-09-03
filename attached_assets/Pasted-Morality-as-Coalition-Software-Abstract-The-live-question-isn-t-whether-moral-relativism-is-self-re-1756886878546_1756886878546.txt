@@ -1,0 +1,92 @@
+Morality as Coalition Software
+Abstract
+
+The live question isn’t whether moral relativism is self-refuting; it isn’t. The live question is what morality is and what it does. Morality functions as coalition software: a rule-set that keeps a group stable, disciplined, and effective against threats. On this view, everyday moral talk is the interface for enforcing that rule-set. Cross-group cooperatives don’t threaten morality; they create new groups with their own codes and are usually co-licensed by the parent groups. “Alethic relativism” (truth everywhere is relative) isn’t comparable to moral relativism so framed and, unlike it, often is self-refuting. The usual philosophical slogans are artifacts—too vague to guide action and too clean to survive contact with real coordination problems.
+
+1) The claim in one sentence
+
+A moral code is the control logic a group uses to keep members coordinated, suppress failure modes (free-riding, betrayal, status capture, panic), and win over time.
+
+2) What moral codes actually do
+
+Stabilize cooperation. They turn fragile promises into enforceable expectations.
+
+Allocate costs and rewards. Who sacrifices, who gets protected, who gets paid.
+
+Specify punishments. What happens when someone defects.
+
+Broadcast identity. Stories, rituals, and taboos make the rule-set legible and memorable.
+
+Adapt to scale. Small groups harden insider duties; large networks add trade-and-procedure rules.
+
+This is a functional picture: morality is a survival tool for super-organisms—families, platoons, firms, sects, nations, federations.
+
+3) How moral talk works (without jargon)
+
+When people say “That’s wrong,” they are invoking the live code of a group—family, unit, firm, church, city, nation—depending on the role and the setting. The sentence gets its force from that code, not from a view from nowhere. This doesn’t ban cross-group judgment; it just means judgments are made as someone, from inside a live standard.
+
+4) Cross-group cooperatives are new groups, not exceptions
+
+Alliances, treaties, trade blocs, research consortia, and the like form their own groups with charters, procedures, and sanctions. For these to be stable, their rules must also be acceptable “by the lights of” the parent groups; otherwise the parents exit or sabotage. Cooperation across groups is therefore ordinary group formation at a higher level, not a threat to morality.
+
+5) Why textbook slogans are artifacts
+
+Philosophers often debate polished formulas that don’t govern real behavior.
+
+“Always act only on what you could will as a universal law.” No one can comply with this at driving speed; it under-specifies priorities and exceptions.
+
+“Treat people as ends, not merely as means.” Worthy sentiment, but too vague to settle conflicts of role, duty, and self-interest.
+
+Missing piece: your own welfare and your sub-groups (family, unit) rarely get principled weight inside these abstractions.
+
+Real codes are thick with actionable instructions: who to protect first, when to defect, how to punish, how to forgive, what to do under uncertainty. That is the moral software people actually run.
+
+6) A practical rubric for analyzing any norm
+
+Ask five questions and you’ll usually see what a rule is doing:
+
+Who pays and who benefits? Trace the transfer.
+
+Which failure mode does it prevent? Free-riding, betrayal, capture, panic, contagion, noise.
+
+What is the time horizon? Short-run victory vs long-run legitimacy.
+
+How is it enforced? Law, reputation, exclusion, force, exit costs.
+
+Is it compatible with adjacent codes? Family, firm, church, city, nation, alliance—if not, expect friction or collapse.
+
+This turns moral argument from airy slogans into testable claims about coordination and survival.
+
+7) Objections, briefly
+
+“Relativism is self-refuting.”
+Not here. Saying “moral sentences are evaluated by a live code” is a simple description of how moral talk gets its force. It is not a universal moral command and so doesn’t refute itself. Also: the self-refutation worry belongs to global truth-relativism, not to this domain-specific account of moral practice.
+
+“Relativism implies universal tolerance.”
+No. Tolerance is a local value some codes entrench and others punish. Nothing in this picture forces it.
+
+“Group boundaries are fuzzy.”
+In practice, role and venue settle what code is live: on duty vs off duty, at home vs at work, civilian court vs military law. Overlap is handled by priority rules inside the codes themselves.
+
+“This licenses atrocities if they help the group.”
+It faces that risk honestly. Most durable codes manage it by widening the time horizon, pricing reputational and internal-dissent costs, and building cross-group compatibility so today’s “win” doesn’t become tomorrow’s isolation.
+
+8) Alethic relativism is not the comparator
+
+“Alethic relativism” says all truth is relative; that often eats itself. The view here is about the moral domain only: how moral sentences get authority in practice and why codes take the shapes they do. Different scope, different stakes.
+
+9) What this model predicts (and how to check it)
+
+Scale changes content. As interdependence rises, codes add due-process and trade norms; when fragmentation rises, insider loyalty and punishment rules harden.
+
+“Objectivity” talk is strategic. Groups crank up universal-sounding language when internal defection risk is high; they soften it when flexibility at boundaries pays.
+
+Enforcement capacity shapes morality. Where formal sanctions are weak, honor and purity language do the work; where sanctions are reliable, harm and fairness dominate.
+
+Role conflicts are structured. Live codes specify overrides: which duty beats which in a crunch.
+
+These are empirical handles, not armchair gestures.
+
+Conclusion
+
+Morality isn’t a cloud of noble slogans; it’s the operating system of coalitions. Treat it that way and most puzzles clear: why different groups moralize different things, why “objectivity” language waxes and wanes, why cross-group cooperation creates new moral orders instead of dissolving morality, and why the usual abstractions feel unhelpful at the curbside. The task isn’t to rescue the slogans. It’s to build, compare, and stress-test better moral software for the groups we actually inhabit.
