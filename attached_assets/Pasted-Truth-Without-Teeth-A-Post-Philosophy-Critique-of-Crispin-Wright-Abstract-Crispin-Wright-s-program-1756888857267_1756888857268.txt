@@ -1,0 +1,85 @@
+Truth Without Teeth: A Post-Philosophy Critique of Crispin Wright
+Abstract
+
+Crispin Wright’s program promises objectivity without metaphysical bloat: “thin” truth as platitude, “thicker” add-ons (like superassertibility) in special domains, entitlement to hinge commitments, and a neo-Fregean revival of logicism. This paper argues that none of these moves delivers substantive progress. “Thin truth” drains truth of content; “superassertibility” quietly replaces truth with a social license to speak; hinge “entitlement” restates a banal precondition for inquiry without a principled selection rule; and the neo-Fregean route achieves arithmetic only by hiding the real cost in the background—full second-order resources that function as set theory in a tuxedo. The package reads less like explanatory theory and more like institutional maintenance: careful pieties, soggy prose, and reverence for internal icons. A workable alternative is operational: evaluate claims and frameworks by prediction, control, compression, portability, and counterfactual grip. Taxonomy is not leverage; rules for winning contact with the world are.
+
+1) Introduction: the promise and the swap
+
+Wright’s selling point is familiar: keep the feel of objectivity while dodging heavy metaphysics. The way to do it, we’re told, is to thin “truth” down to a handful of platitudes, then thicken it where needed with domain-specific norms (mathematics, morals, aesthetics), rehabilitate everyday certainty with “entitlement,” and reanimate logicism by abstraction in a richer logic. The result is tidy, teachable, and widely admired. It is also a swap: the question what makes a claim true quietly becomes when am I licensed to assert it. That shift—epistemic and metaphysical to parliamentary—explains why the package feels sophisticated yet weightless.
+
+2) Thin truth: objectivity by subtraction
+
+“Thin” truth preserves truisms (assertion aims at truth; truth outruns justification; if a claim holds, then saying it is true is right). But a notion of truth that never says what fixes truth in any domain is not a lightweight essence; it is an empty label. Either thin truth collapses into “call it true when you must,” or it forces the real work upstairs—into whatever “thick” add-on a domain allegedly needs. In practice, that means truth is “not-truth, but I want it to be truth”: a rhetorical marker without teeth.
+
+Up-shot: nothing here blocks global relativism or skepticism; it only postpones the fight. The hard questions reappear the moment we ask why this domain warrants objectivity talk and on what basis.
+
+3) Superassertibility: changing the subject
+
+Superassertibility says a claim is in best standing if your right to assert it would survive any further checking and correction. That sounds sensible until you ask what it does that ordinary truth and warrant do not.
+
+If it just tracks truth, the new word adds nothing.
+
+If it tracks license to speak under our best norms, the focus has shifted from truth-makers to social permission. That’s a house rule, not a theory.
+
+Worse, superassertibility is untestable in the strong form (“survive any future information” is open-ended) and trivial in the weak form (“survive foreseeable checks” is everyday defeasible warrant). The stock examples show the emptiness:
+“No square is a circle,” “If this metal is pure gold it has atomic number 79,” and “I’m in pain now” are already secure without a super-prefix. The label neither explains their status nor expands our reach.
+
+Net effect: “superassertibility” looks like a veiled way to say “very, very clearly true” while pretending not to be talking about truth.
+
+4) Entitlement and hinge talk: a platitude with no lever
+
+Wright’s “entitlement” for hinge commitments—world exists, memory usually works, words retain meanings—repackages an old point: you need fixed points to reason at all. Fine. But what counts as a hinge, how many, and by what test? Without a selection rule or operational criterion, calling some commitments “entitled” is vocabulary, not leverage. It doesn’t tell us which hinges deserve protection or how to adjudicate disputes about them. The skeptic is not answered; the conversation is renamed.
+
+5) Neo-Fregean logicism: the price is hidden in the background
+
+Wright’s joint work with Hale revives logicism by defining numbers via an abstraction principle and doing arithmetic in second-order logic. The result is elegant on paper and solves Frege’s old bookkeeping snags (like the “Julius Caesar” worry) by stipulation and typing. But the achievement depends on resources that smuggle in the very strength the program claims as a victory. Full second-order semantics is not effectively axiomatizable; it functions as set theory in formalwear. Arithmetic “emerges” only because the background is already carrying the weight.
+
+Choice presented: arithmetic straight, or arithmetic plus a non-axiomatizable background that does the real work. The latter looks like progress only if one ignores where the cost went.
+
+6) Style and incentives: why the reverence
+
+The prose is often soggy and hedged; the posture deferential to internal saints (Frege, Wittgenstein). That is not accidental. The program is institutionally safe. It
+
+supplies neat classroom taxonomies (thin vs thick; domain pluralism),
+
+soothes anxiety about objectivity without choosing a mechanism,
+
+nods to canonical figures,
+
+and generates distinctions that resist decisive testing.
+
+It is priestly maintenance, not engineering. Intelligent, yes. Explanatory, no.
+
+7) What would count as an advance (and how to get it)
+
+If the goal is to understand truth and objectivity as they function, the path isn’t a thicker dictionary of assertion-licenses. It is an operational scorecard that any serious inquiry must face:
+
+Prediction that outperforms rivals. Does the framework make novel, risky forecasts that land?
+
+Control and intervention. Do its commitments guide successful action in the world?
+
+Compression. Can it capture a lot with a little without losing accuracy?
+
+Portability. Does it travel across contexts and domains without constant ad-hoc repair?
+
+Counterfactual grip. Does it support reliable “if-then-otherwise” reasoning?
+
+Frameworks and domain-specific “truths” earn their objectivity talk by clearing these hurdles. That is where the feel of objectivity comes from—not from attaching a new honorific to assertion.
+
+8) Anticipating replies
+
+“But thin truth preserves the essence of truth.”
+An essence that never fixes truth anywhere is not an essence. Either say what makes claims true or admit you’re offering etiquette for speech.
+
+“Superassertibility tracks ideal inquiry.”
+Ideal inquiry is a wish, not a method. Without an independent way to identify when a claim would survive any improvement, the notion is either mystical or empty.
+
+“Entitlement protects our ordinary knowledge from radical doubt.”
+Not without a rule for which hinges are protected and why. Otherwise “entitlement” is a permission slip handed out by taste.
+
+“Neo-Fregeanism shows arithmetic is logic.”
+It shows arithmetic is derivable in a logic that already encodes the needed strength. That is a relocation, not a reduction.
+
+9) Conclusion: from squid ink to contact
+
+Wright’s package is clever taxonomy: thin truth to keep everyone calm, superassertibility to sound robust without saying what makes anything true, entitlement to ward off despair, neo-Fregeanism to keep the Frege dream alive. But taxonomy and reassurance do not amount to explanation. If the aim is truth with teeth, the conversation must move from assertibility—a socially regulated permission—to success in contact with the world. Until then, the program will continue to look like what it is: sophisticated squid ink, spread carefully to avoid choosing the very mechanisms that would make “objectivity” more than a mood.
