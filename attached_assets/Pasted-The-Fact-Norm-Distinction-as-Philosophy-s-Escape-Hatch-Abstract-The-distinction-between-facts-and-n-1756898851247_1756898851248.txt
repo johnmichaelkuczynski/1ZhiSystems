@@ -1,0 +1,86 @@
+The Fact/Norm Distinction as Philosophy’s Escape Hatch
+
+Abstract
+The distinction between facts and norms—famously cast as the “is/ought” divide—has genuine analytic use. Yet philosophers have inflated it into a general-purpose barricade, insulating themselves from empirical accountability and disguising the failures of their own systems. By examining epistemology, ethics, and philosophy of language, we see the same maneuver at work: where a program collapses or is threatened by external evidence, the fact/norm firewall is invoked to declare that such evidence is “irrelevant.”
+
+1. The Distinction in Principle
+
+The fact/norm distinction is one of the oldest and most familiar tools in philosophy. David Hume, in A Treatise of Human Nature (1739–40), famously warned against moving from statements about what is the case to statements about what ought to be the case without additional justification. G.E. Moore, in Principia Ethica (1903), radicalized this into the “naturalistic fallacy”: goodness could never be identified with any natural property because, for any such identification, it remained an “open question” whether the property in question was good.
+
+There is nothing inherently problematic about distinguishing between factual and normative domains. “Is” and “ought” mark different kinds of claims. Confusing them can generate genuine fallacies: from the mere fact that people act in some way, it does not follow that they should act that way. As a conceptual caution, the distinction is unobjectionable.
+
+But what began as a useful reminder metastasized into a barricade. The is/ought firewall became a standing veto on the incorporation of empirical results into philosophy.
+
+2. Epistemology: The Discovery/Justification Firewall
+
+Hans Reichenbach, in Experience and Prediction (1938), introduced the famous distinction between the “context of discovery” and the “context of justification.” Scientific discovery, he argued, is a psychological matter; philosophy’s job is to study justification alone. This division became orthodoxy.
+
+When W.V.O. Quine proposed in “Epistemology Naturalized” (1969) that epistemology should study how we actually form beliefs, philosophers invoked the firewall. Quine, they said, had confused discovery with justification. The study of cognitive mechanisms was dismissed as “mere psychology,” leaving justification to philosophers.
+
+This move also served to cover the failure of formal logic to generate discoveries.
+
+Logic never explained how Einstein discovered relativity or how Darwin generated evolution.
+
+Logic, at its best, merely formalized inferences already visible in the science.
+
+Rather than admit sterility, philosophers retrofitted the fact/norm distinction: logic was not about discovery but about justification.
+
+This justificatory dodge preserved the prestige of logic but ensured it would never be tested against actual cognition.
+
+Example: Formal logic could regiment the statement “All men are mortal; Socrates is a man; therefore Socrates is mortal.” But this contributes no new knowledge. It simply recasts a trivial inference into a different notation. When asked why logic could not do more, philosophers replied that discovery belongs to psychology, justification to logic.
+
+3. Ethics: Moore’s “Open Question” as Perpetual Veto
+
+In ethics, the is/ought barricade took the form of Moore’s Open Question Argument. Moore claimed that for any natural property one might identify with the good—pleasure, desire-satisfaction, flourishing—it always remained an “open question” whether that property really was good. From this he concluded that goodness is non-natural and indefinable.
+
+But this “openness” was manufactured.
+
+Example: Suppose one knows that Smith is a serial killer who murders infants in front of their mothers. According to Moore’s principle, it remains a legitimate open question whether this is “good.” Yet this is absurd. The descriptive facts already settle the moral evaluation. To keep insisting that “the question remains open” is not philosophical rigor but willful obtuseness.
+
+Moore’s argument has functioned ever since as a veto on naturalistic moral theories. Attempts to identify goodness with natural properties have been blocked not by counterevidence but by the stipulative insistence that no factual description could ever close the normative question. The firewall insulated moral philosophy from empirical reality, even at the cost of common sense.
+
+4. Philosophy of Language: Logical Form vs. Grammar
+
+In philosophy of language, the fact/norm maneuver took the form of a grammar/logic split. Since Frege (Begriffsschrift, 1879) and Russell (Principia Mathematica, 1910), philosophers argued that surface grammar is misleading; proper reasoning requires translation into hidden “logical forms.”
+
+Example: Take the sentence “Nobody snores.” Grammatically it is simple subject–predicate. But philosophers insisted that it conceals quantificational structure, to be represented in first-order logic as ¬∃x(Snores(x)). This maneuver allowed them to dismiss the fact that both ordinary speakers and, more recently, AI systems can reason perfectly well from the grammatical form without consulting hidden logical structures.
+
+The firewall here had two functions:
+
+It insulated philosophy from having to acknowledge that grammar itself encodes inferential relations.
+
+It preserved the formal-logical program from its obvious sterility. When logical form failed to scale beyond toy examples, philosophers declared that the divergence between grammar and logic proved that natural language was inherently misleading.
+
+The result was a formal bureaucracy of baroque logical systems, none of which scaled to actual language use. The fact/norm barricade ensured that this failure could be reinterpreted as a principled distinction rather than a collapse.
+
+5. Consequences
+
+The repeated invocation of the fact/norm distinction has had three enduring effects:
+
+Sabotage of research programs. Cognitive science, AI, naturalized ethics, and empirical semantics were all treated as “irrelevant” because they described how things are.
+
+Sterility disguised as principle. Logic and analysis were preserved as “justificatory” frameworks even as they failed to discover or generate anything new.
+
+Loss of accountability. By declaring itself exempt from facts, philosophy ensured it could never be falsified by them.
+
+6. Conclusion
+
+The fact/norm distinction is sound in principle but toxic in practice. It has been inflated into a universal veto that keeps philosophy disconnected from science, morality disconnected from reality, and language disconnected from its inferential functions.
+
+In epistemology, the discovery/justification split barricaded philosophy against psychology and AI. In ethics, the “open question” argument insulated morality from the facts that clearly settle it. In philosophy of language, the grammar/logic divide propped up a failed formal program.
+
+What began as a conceptual caution has become a culture of avoidance. The barricades remain, but their function is obvious: to preserve a domain that cannot generate new knowledge by ensuring it is never forced to.
+
+References
+
+Frege, G. Begriffsschrift (1879).
+
+Hume, D. A Treatise of Human Nature (1739–40).
+
+Moore, G.E. Principia Ethica (1903).
+
+Quine, W.V.O. “Epistemology Naturalized” (1969).
+
+Reichenbach, H. Experience and Prediction (1938).
+
+Russell, B. & Whitehead, A.N. Principia Mathematica (1910).

@@ -140,7 +140,7 @@ Preferred communication style: Simple, everyday language.
   - **Content Types**: Cognitive maps, study guides, rewrites, test questions/results, suggested readings, summary+thesis, and thesis deep dives
   - **Format Structure**: Professional formatting with headers, sections, and proper text organization
   - **User Experience**: Download buttons (📥) positioned next to existing copy buttons for seamless workflow
-- **Content**: Fifteen published issues across thirteen volumes:
+- **Content**: Sixteen published issues across fourteen volumes:
   - **Volume I**: "On the Optimal Number of Truth Values", "The Incompleteness of Logic", "Veblen Utility Functions" (13-chapter analysis), "The Tarski's World Problem"
   - **Volume II**: "McTaggart's Proof of the Unreality of Time: A Refutation"  
   - **Volume III**: "Markets, Value, and the Myth of Worth-as-Wage" (complete with abstract, keywords, and academic formatting)
@@ -154,6 +154,7 @@ Preferred communication style: Simple, everyday language.
   - **Volume XI**: "The Collapse of Logical Form: Why Grammar, Not FOL, Guides Reasoning" (critique of logical form theory in favor of grammatical inference patterns)
   - **Volume XII**: "Morality as Coalition Software" (functional analysis of moral codes as group coordination mechanisms)
   - **Volume XIII**: "Truth Without Teeth: A Post-Philosophy Critique of Crispin Wright" (critique of Wright's minimalist truth theory and neo-Fregean program)
+  - **Volume XIV**: "The Fact/Norm Distinction as Philosophy's Escape Hatch" (meta-philosophical critique of how the is/ought divide shields philosophy from empirical accountability)
 - **Audio System**: OpenAI TTS-1 integration with Alloy voice support, automatic audio generation for all podcasts, saved to public/audio directory
 - **URL Updates**: August 22, 2025 - Updated Intelligence Meter application URL from intelligencemeter.biz to intelligencemeter.xyz in Core Applications section
 
@@ -162,6 +163,7 @@ Preferred communication style: Simple, everyday language.
 ### September 3, 2025
 - **Journal Content**: Added Volume XII, Issue 1 - "Morality as Coalition Software" (functional analysis of moral codes as group coordination mechanisms)
 - **Journal Content**: Added Volume XIII, Issue 1 - "Truth Without Teeth: A Post-Philosophy Critique of Crispin Wright" (comprehensive critique of Wright's minimalist truth theory and neo-Fregean program with detailed examples throughout)
+- **Journal Content**: Added Volume XIV, Issue 1 - "The Fact/Norm Distinction as Philosophy's Escape Hatch" (meta-philosophical critique of how the is/ought divide shields philosophy from empirical accountability)
 - **Branding Update**: Changed Living Books section header from "By Kuczynski / Zhi Systems" to "By Zhi Systems"
 - **Content Enhancement**: Updated Volume XIII article with enhanced formatting, proper paragraph breaks, and extensive "For example:" clauses to illustrate philosophical points
 - **Bug Fix**: Resolved formatting issues in journal article display to ensure proper paragraph structure and readability
