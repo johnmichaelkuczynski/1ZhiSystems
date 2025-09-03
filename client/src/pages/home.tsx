@@ -166,7 +166,7 @@ export default function Home() {
           
           <div className="mb-8">
             <h3 className="text-lg font-medium text-gray-800 mb-4">
-              By Kuczynski / Zhi Systems
+              By Zhi Systems
             </h3>
             
             <div className="grid gap-3">
