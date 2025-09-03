@@ -159,13 +159,18 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### September 3, 2025
+- **Journal Content**: Added Volume XII, Issue 1 - "Morality as Coalition Software" (functional analysis of moral codes as group coordination mechanisms)
+- **Journal Content**: Added Volume XIII, Issue 1 - "Truth Without Teeth: A Post-Philosophy Critique of Crispin Wright" (comprehensive critique of Wright's minimalist truth theory and neo-Fregean program with detailed examples throughout)
+- **Branding Update**: Changed Living Books section header from "By Kuczynski / Zhi Systems" to "By Zhi Systems"
+- **Content Enhancement**: Updated Volume XIII article with enhanced formatting, proper paragraph breaks, and extensive "For example:" clauses to illustrate philosophical points
+- **Bug Fix**: Resolved formatting issues in journal article display to ensure proper paragraph structure and readability
+
 ### August 30, 2025
 - **Journal Content**: Added Volume VIII, Issue 1 - "Is Love Blind, or Does It See Differently? On the Epistemic Status of Love" (epistemological analysis of love as a form of perception)
 - **Journal Content**: Added Volume IX, Issue 1 - "The Myth of the Gettier Problem: Why 'No False Lemmas' Was Never Refuted" (critical analysis of epistemological counterexamples)
 - **Journal Content**: Added Volume X, Issue 1 - "Naturalized Epistemology and Its Aftermath: Why the Rejection Was Premature" (defending Quine's naturalized epistemology program)
 - **Journal Content**: Added Volume XI, Issue 1 - "The Collapse of Logical Form: Why Grammar, Not FOL, Guides Reasoning" (critique of logical form theory in favor of grammatical inference patterns)
-- **Journal Content**: Added Volume XII, Issue 1 - "Morality as Coalition Software" (functional analysis of moral codes as group coordination mechanisms)
-- **Journal Content**: Added Volume XIII, Issue 1 - "Truth Without Teeth: A Post-Philosophy Critique of Crispin Wright" (critique of Wright's minimalist truth theory and neo-Fregean program)
 - **Living Books Update**: Added "Russell's Mathematical Philosophy (Second Edition)" at mathematicalphilosophy.xyz to the Kuczynski/Zhi Systems collection (now 22 total books)
 - **Core Applications Update**: Added "HTML Converter" at htmlconverter.xyz to the applications list (now 19 total apps)
 - **Bug Fix**: Removed duplicate "Cognitive Enhancer" entries that were causing React key warnings
