@@ -1,0 +1,86 @@
+Truth Without Teeth: A Post-Philosophy Critique of Crispin Wright
+
+Abstract
+
+Crispin Wright's program promises objectivity without metaphysical bloat: "thin" truth as platitude, "thicker" add-ons (like superassertibility) in special domains, entitlement to hinge commitments, and a neo-Fregean revival of logicism. This paper argues that none of these moves delivers substantive progress. "Thin truth" drains truth of content; "superassertibility" quietly replaces truth with a social license to speak; hinge "entitlement" restates a banal point without operational criteria; and neo-Fregeanism relocates rather than reduces arithmetic. The program offers taxonomy and reassurance but no contact with what makes claims true. For example: in product analytics, users don’t care whether we’re “licensed” to say latency fell; they care whether videos stop stuttering, which requires specifying metrics, data, and cutoffs—not platitudes. For example: labeling “I’m in pain now” as “superassertible” doesn’t change how doctors treat pain; what matters is observable response to analgesics. For example: saying we’re “entitled” to trust memory gives no rule for when to override memory with conflicting CCTV. For example: deriving arithmetic inside second-order logic is like bragging a tiny app “does everything” while silently bundling a massive runtime.
+
+Introduction: the promise and the swap
+
+Wright's selling point is familiar: keep the feel of objectivity while dodging heavy metaphysics. For example: keep talking as if moral judgments or mathematical claims are “objective,” without specifying what in the world makes them so. The way to do it, we're told, is to thin "truth" down to a handful of platitudes, then thicken it where needed with domain-specific norms (mathematics, morals, aesthetics), rehabilitate everyday certainty with "entitlement," and reanimate logicism by abstraction in a richer logic. For example: in aesthetics talk “truth” becomes “what would survive ideal critique,” in morals “what our best practice would license,” and in math “what follows from an abstraction principle”—three different licenses for saying “true.” The result is tidy, teachable, and widely admired. It is also a swap: the question what makes claims true is replaced with the question how we should talk about truth. For example: an engineer asks “Did latency drop below 1.2s p95?” and gets the answer “We’re justified asserting improvement,” which dodges the metric.
+
+Thin truth: objectivity by subtraction
+
+"Thin" truth preserves truisms (assertion aims at truth; truth outruns justification; if a claim holds, then saying it is true is right). For example: “If it’s raining, then ‘It’s raining’ is true”—a harmless platitude that doesn’t help decide whether it is raining. But a notion of truth that never says what fixes truth in any domain is not a lightweight essence; it is an empty label. For example: climate science fixes truth via thermometer networks, satellite retrievals, and models; “truth outruns justification” doesn’t tell you which dataset to trust. Either thin truth collapses into "call it true when you must," or it forces the real work upstairs—into whatever "thick" add-on a domain allegedly needs. For example: courts don’t rule by platitude; they specify admissible evidence, burdens of proof, and protocols. In practice, that means truth is "not-truth, but I want to sound like I'm talking about truth." For example: saying “superassertible” instead of “true” adds ceremony without adding a truth-maker.
+
+Up-shot: nothing here blocks global relativism or skepticism; it only postpones the fight. For example: a relativist can accept all thin-truth platitudes and still say “truth” in morals is just “our code says so.” The hard questions reappear the moment we ask why this domain warrants objectivity talk and on what basis. For example: unless you name what would count against a claim (a failed prediction, a contradictory measurement), “objectivity” is just tone.
+
+Superassertibility: changing the subject
+
+Superassertibility says a claim is in best standing if your right to assert it would survive any further checking and correction. That sounds sensible until you ask what it does that ordinary truth and warrant do not. For example: in 2011 many physicists were warranted to assert “LHC will see SUSY soon”; later checks killed it—so the label offered no advance warning or new method.
+
+If it just tracks truth, the new word adds nothing. For example: “No square is a circle” needs no “super-” prefix to explain why it’s secure.
+
+If it tracks license to speak under our best norms, the focus has shifted from truth-makers to social permission. That's a house rule, not a theory. For example: a company lets PR assert “Ingredient X is safe” after two internal tests; that’s a speech license that can coexist with X being unsafe in fact.
+
+Worse, superassertibility is untestable in the strong form ("survive any future information" is open-ended) and trivial in the weak form ("survive foreseeable checks" is everyday defeasible warrant). For example: you cannot know today that “this drug has no rare side effects” will survive all future trials; “so far so good” is just ordinary, defeasible status. The stock examples show the emptiness:
+"No square is a circle," "If this metal is pure gold it has atomic number 79," and "I'm in pain now" are already secure without a super-prefix. The label neither explains their status nor expands our reach. For example: doctors already treat first-person pain reports as authoritative at t=now; calling them “superassertible” changes nothing in triage.
+
+Net effect: "superassertibility" looks like a veiled way to say "very, very clearly true" while pretending not to be talking about truth. For example: it functions like stamping “validated” on a claim without adding one new test it must pass.
+
+Entitlement and hinge talk: a platitude with no lever
+
+Wright's "entitlement" for hinge commitments—world exists, memory usually works, words retain meanings—repackages an old point: you need fixed points to reason at all. Fine. For example: you catch a falling glass without proving an external world first. But what counts as a hinge, how many, and by what test? Without a selection rule or operational criterion, calling some commitments "entitled" is vocabulary, not leverage. For example: conspiracy communities treat “the media always lies” as a hinge and refuse all counter-evidence; the label “entitled” gives no way to sort this from aviation’s “trust the altimeter unless cross-checks disagree.” It doesn't tell us which hinges deserve protection or how to adjudicate disputes about them. For example: pilots have a written redundancy rule (altimeter + attitude indicator + visual); hinge talk has no such selector. The skeptic is not answered; the boundaries of knowledge are not demarcated; and the positive account adds nothing to Wittgenstein's original observation. For example: after “On Certainty,” we still need procedures for when to drop a hinge in light of instrument disagreement; “entitlement” supplies none.
+
+Neo-Fregean logicism: the price is hidden in the background
+
+Wright's joint work with Hale revives logicism by defining numbers via an abstraction principle and doing arithmetic in second-order logic. The result is elegant on paper and solves Frege's old bookkeeping snags (like the "Julius Caesar" worry) by stipulation and typing. For example: decree that numbers are a different category than people, so “7 = Julius Caesar” is ill-typed by fiat. But the achievement depends on resources that smuggle in the very strength the program claims as a victory. Full second-order semantics is not effectively axiomatizable; it functions as set theory in formal disguise. For example: it’s like running a “tiny” app that secretly ships with a huge runtime; the workload moved to the background. The abstraction principle looks harmless until you ask what licenses the move from concept to object. For example: why does “the number of Fs” name an object at all, while “the average resident” does not—what pays for that leap?
+
+Choice presented: arithmetic straight, or arithmetic plus a non-axiomatizable background that does the real work. The latter looks like progress only if one ignores where the cost went. For example: working mathematicians already prove arithmetic in standard set theory; calling it “logic” adds a tuxedo, not lift.
+
+Style and incentives: why the reverence
+
+The prose is often soggy and hedged; the posture deferential to internal saints (Frege, Wittgenstein). That is not accidental. The program is institutionally safe. It
+
+supplies neat classroom taxonomies (thin vs thick; domain pluralism), For example: seminars on “truth pluralism” that produce lists of domains but no new tests any claim must pass.
+
+soothes anxiety about objectivity without choosing a mechanism, For example: telling moral realists and anti-realists they can both keep their rhetoric because “truth” here is “superassertible.”
+
+nods to canonical figures, For example: obligatory Frege/Wittgenstein citations that secure in-group legitimacy regardless of empirical payoff.
+
+and generates distinctions that resist decisive testing. For example: debates about whether aesthetics has “thick truth” that never specify what observation could push either side to reverse.
+
+It is priestly maintenance, not engineering. Intelligent, yes. Explanatory, no. For example: it keeps the cathedral tidy while the lights on the runway still flicker.
+
+What would count as an advance (and how to get it)
+
+If the goal is to understand truth and objectivity as they function, the path isn't a thicker dictionary of assertion-licenses. It is an operational scorecard that any serious inquiry must face:
+
+Prediction that outperforms rivals. Does the framework make novel, risky forecasts that land? For example: “This moderation change will cut abuse reports 25% in 30 days,” logged with source and date, then marked pass/fail.
+
+Control and intervention. Do its commitments guide successful action in the world? For example: “This caching tweak will drop p95 latency under 1.2s,” verified in dashboards after rollout.
+
+Compression. Can it capture a lot with a little without losing accuracy? For example: a three-rule fraud model catching 90% of cases that used to require fifty hand-tuned features.
+
+Portability. Does it travel across contexts and domains without constant ad-hoc repair? For example: a grading rubric that works in two departments with no tweaks, not just in the designer’s lab.
+
+Counterfactual grip. Does it support reliable "if-then-otherwise" reasoning? For example: “If we halve the dosage, adverse events should roughly halve,” then confirmed in a randomized arm.
+
+Frameworks and domain-specific "truths" earn their objectivity talk by clearing these hurdles. That is where the feel of objectivity comes from—not from attaching a new honorific to assertion. For example: a green-dot scoreboard of predictions beats an essay full of “superassertible” labels.
+
+Anticipating replies
+
+"But thin truth preserves the essence of truth."
+An essence that never fixes truth anywhere is not an essence. Either say what makes claims true or admit you're offering etiquette for speech. For example: “We aim to hire the best” fixes nothing until you specify criteria (job performance metrics, retention) and how they’ll be measured.
+
+"Superassertibility tracks ideal inquiry."
+Ideal inquiry is a wish, not a method. Without an independent way to identify when a claim would survive any improvement, the notion is either mystical or empty. For example: Europeans once thought “All swans are white” would withstand any checking—until black swans were observed; no prior label told them that.
+
+"Entitlement protects our ordinary knowledge from radical doubt."
+Not without a rule for which hinges are protected and why. Otherwise "entitlement" is a permission slip handed out by taste. For example: aviation’s cross-check rules tell you when to drop an instrument’s reading; hinge talk gives no comparable procedure.
+
+"Neo-Fregeanism shows arithmetic is logic."
+It shows arithmetic is derivable in a logic that already encodes the needed strength. That is a relocation, not a reduction. For example: boiling water “with a candle” after turning on the stove under the pot—heat came from the stove.
+
+Conclusion: from squid ink to contact
+
+Wright's package is clever taxonomy: thin truth to keep everyone calm, superassertibility to sound robust without saying what makes anything true, entitlement to ward off despair, neo-Fregeanism to keep the Frege dream alive. But taxonomy and reassurance do not amount to explanation. If the aim is truth with teeth, the conversation must move from assertibility—a socially regulated permission—to success in contact with the world. Until then, the program will continue to look like high-end intellectual furniture: impressive, comfortable, and decorative. For example: it fills seminars and bookshelves while leaving practitioners to ask the only question that bites—“What, exactly, would prove this wrong on a date we can all read?”

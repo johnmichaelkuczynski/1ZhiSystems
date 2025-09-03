@@ -1,0 +1,107 @@
+Abstract
+
+Crispin Wright promises objectivity without metaphysical bulk: “thin” truth (platitudes), domain add-ons like “superassertibility,” hinge “entitlements,” and a neo-Fregean route to arithmetic. I argue these moves don’t explain truth or practice; they rename problems and shift focus from what makes claims true to when we’re licensed to say them. Below, every claim comes with an example so nothing floats.
+
+1) The promise and the swap
+
+Claim. The program keeps the feel of objectivity by thinning “truth” and thickening “assertibility.”
+Example. In a product review, an engineer asks, “Does the new algorithm cut latency?” (world-facing truth). The manager answers, “We’re justified saying it cuts latency for now” (license-to-say). Users don’t care about the license; they care whether their videos stop stuttering. That’s the swap.
+
+2) “Thin truth” = objectivity by subtraction
+
+Claim. Thin truth keeps platitudes (assertion aims at truth; truth isn’t mere justification) but never says what fixes truth in any domain.
+Example. Climate: “Global mean temperature rose last decade.” Thin truth agrees truth outruns justification—but it won’t say if satellites, thermometers, or models fix the truth. It’s an empty jacket; the body (what makes it true) is elsewhere.
+
+Claim. If the content lives in the “thick” add-ons, thin truth itself does no work.
+Example. Courtroom: “The defendant was in Cleveland at 8pm.” Thin truth adds nothing unless you name what settles it (cell pings? CCTV? a confession?). Without that, “aims at truth” is just a toast.
+
+3) “Superassertibility” changes the subject
+
+Claim. “Superassertible” = your right to assert would survive any future checking. Either that just means “true,” or it’s a social rule about talking.
+Examples.
+
+Adds nothing (trivial cases). “No square is a circle.” “I’m in pain right now.” These don’t need a “super-” medal; they’re settled by meaning or first-person authority.
+
+Unknowable at t₀. 2011: “The LHC will find supersymmetry by 2012.” It was assertible then (lots of warrant), later defeated. You couldn’t have known in 2011 whether it would “survive any future information.”
+
+Social license vs truth. A company policy: “You may assert ‘Our ingredient is safe’ if two internal tests pass.” Passing the tests gives assertibility, not truth. If a third-party study later shows harm, the earlier statement was false despite its “license.”
+
+Claim. In weak form (“survives foreseeable checks”), it collapses into ordinary, defeasible warrant.
+Example. Food label: “Contains no peanuts” after standard cleaning. Foreseeable checks pass; later, a rare cross-contamination appears. That wasn’t “super-” anything—just the usual fallible warrant.
+
+4) Hinge “entitlement” restates a platitude and lacks a selector
+
+Claim. Some background certainties aren’t earned by evidence; we start with them. True—but the view supplies no rule for which ones.
+Examples.
+
+Genuine hinge. You grab a falling glass; you don’t first prove an external world. Fine—banal and right.
+
+No selector. A conspiracy theorist treats “The media always lies” as a hinge and won’t test it. Without a selection rule, “entitlement” blesses whatever a group refuses to examine.
+
+Operational gap. Pilots trust altimeters by default—until cross-checks (visual, GPS) conflict. Aviation has selectors (redundancy rules) for which “hinges” to drop. The hinge view gives no such operational rule.
+
+5) Neo-Fregean logicism hides the price in the background
+
+Claim. Arithmetic “from logic” only goes through if you work in a very strong background (full second-order resources). That’s just set theory in formalwear.
+Examples.
+
+Bookkeeping win, real cost. The “Julius Caesar” worry (“Is 7 Julius Caesar?”) is “solved” by typing: numbers are of one sort, people of another. That’s tidy bookkeeping, not epistemic progress.
+
+Runtime analogy. Saying “arithmetic is just logic” while requiring a powerful background is like bragging, “My app is tiny,” then bundling a 5-gigabyte runtime. The size moved; it didn’t vanish.
+
+Cheaper path exists. Working mathematicians prove theorems in ordinary frameworks (e.g., standard set theory) without insisting “it’s logic.” The neo-Fregean route adds a tuxedo, not lift.
+
+6) Style and incentives explain the reverence
+
+Claim. The prose is soggy and deferential because the project is institutionally safe: it flatters the canon, supplies taxonomies, avoids mechanisms.
+Examples.
+
+Gatekeeping move. In review you hear, “You must engage X, Y, Z” (a literature toll), not “What result would count against you?” (a test).
+
+Priestly maintenance. A symposium hails “thin” vs “thick” distinctions while never naming a single observation that could fail the view. Everyone leaves feeling tidy; nothing changed.
+
+7) What would count as an advance (with grip)
+
+Claim. Treat objectivity as earned by performance: prediction, control, compression, portability, counterfactual grip.
+Examples.
+
+Prediction. “This school policy will cut suspensions 20% in 90 days.” Publish the metric, date, and source; mark pass/fail in public.
+
+Control. “This fix drops API p95 latency under 1.2s.” Roll it; watch the graph.
+
+Compression. “These three rules explain 90% of errors across six services.” Fewer rules, wider coverage.
+
+Portability. “This moderation rule that works on Forum A also works on Forum B with no tweaks.” If it travels, it’s not cargo cult.
+
+Counterfactuals. “If we halve the dose, side-effects fall by about half.” Then test a half-dose arm.
+
+Why this beats assertion-talk. These checks face the world, not the room. They can be passed or failed on dates everyone can read.
+
+8) Anticipating replies — and why they don’t bite (with examples)
+
+Reply. “Thin truth preserves the essence of truth.”
+Counter + Example. An “essence” that never fixes truth anywhere is a sticker. In hiring, “We aim to hire the best” fixes nothing until you define “best” (scores? on-the-job success? retention?). The stickiness isn’t the substance.
+
+Reply. “Superassertibility tracks ideal inquiry.”
+Counter + Example. Ideal inquiry is a wish. Virginia in 2006: “All swans are white” looked stable to Europeans until black swans were observed. You can’t know in advance what any future check would do; so the notion is either mystical or vacuous.
+
+Reply. “Entitlement shields ordinary knowledge.”
+Counter + Example. Shield what? “Trust your instruments unless cross-checks disagree” is a rule with teeth (aviation). “Some beliefs get a pass” is not.
+
+Reply. “Neo-Fregeanism shows arithmetic is logic.”
+Counter + Example. It shows arithmetic follows inside a framework already powerful enough to do the work. Like saying, “I boiled water with a candle”—after you quietly turned on the stove under the pot.
+
+9) The live alternative (what you’re proposing)
+
+Claim. Keep “truth” but cash objectivity out in mechanisms that win: selection, enforcement, reputation, competition, and tests any outsider can run.
+Examples.
+
+Selection. Two rival content policies. One cuts spam across three platforms with minimal false positives; the other doesn’t. The first earns objectivity talk by results, not by saying “it would survive inquiry.”
+
+Enforcement. A code that punishes freeloading keeps a group intact; a code that can’t enforce collapses. The “truth” of “free-riding is wrong here” shows up in survival, not in a seminar.
+
+Public scoreboard. Ship predictions with dates and pass/fail rules. Green dots and red dots beat journal applause.
+
+10) Conclusion
+
+Wright’s kit—thin truth, superassertibility, entitlement, neo-Fregeanism—organizes conversation but doesn’t grip the world. The moves either rename truth as “license to speak” or relocate costs to a background that does the real lifting. If you want objectivity with teeth, stop polishing assertion rules and start scoring prediction, control, compression, portability, and counterfactual grip—in public, with dates. Everything else is squid ink.
