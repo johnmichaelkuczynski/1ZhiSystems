@@ -1,0 +1,47 @@
+Sample 12 — Closure vs. transmission of warrant over deduction
+Author: Crispin Wright
+Extended excerpt.
+“It was widely assumed that recognized valid reasoning from warranted premises transmits warrant to its conclusion—tantamount, many thought, to the Closure of knowledge or warrant over deduction (the knowable consequences of knowable premises are likewise knowable). Both assumptions are now widely doubted. Closure is weaker than Transmission, saying nothing about how warrant is acquired for knowable consequences. Transmission faces counterexamples; particular cases (Moore’s Proof, McKinsey’s paradox, Putnam’s Brains-in-a-Vat) remain controversial. Much turns on the correct classification of these cases. As Pryor emphasizes, ‘warrant transmission’ gestures at several inequivalent ideas. For illustration, consider six proposals. (i) Warrant for undischarged premises A₁…Aₙ transmits to C when the argument, together with warrant for its premises, provides a potentially first-time reason to believe C …”
+Predicted neural profile.
+•	Load/effort: high frontopolar/DLPFC from meta-level taxonomy and long conditional criteria; sparse early concreteness.
+•	Reward/encoding: episodic anchors (Moore, McKinsey, BIV) appear late; without case-first presentation, vmPFC reward and hippocampal binding remain weak for general readers.
+•	Overall pattern: sustained control cost with delayed payoffs.
+Psycho-availability. Low–mid.
+Editorial levers.
+1.	Case-first layout: begin with a 3-row table (Moore, McKinsey, BIV) stating (Premises warrant? Transmission? Closure?) before giving definitions.
+2.	Replace the six abstract proposals with a decision tree (yes/no branches) that routes each canonical case to an outcome.
+3.	Restrict conditional clauses to ≤25 words; move technical variants to boxed side notes to protect working memory.
+________________________________________
+Cross-cutting principles (Samples 10–12)
+•	Example before taxonomy. Case-first presentation reduces control-network load and increases reward pulses.
+•	Replace letters with pictures. Simple continuum or decision-tree figures convert abstract cutoff talk and transmission taxonomies into parietal/visuospatial processing.
+•	Comparator explicitness. For gradable adjectives (poor, tall, smart), specifying the comparison class yields an immediate cutoff and neutralizes Sorites induction without sacrificing classical logic.
+Case Analyses (Samples 13–15)
+Sample 13 — Perceptual Entitlement: Vahid vs. Burge
+Author: [not specified in source]
+Extended excerpt.
+“Hamid Vahid criticizes Tyler Burge’s account of perceptual entitlement. Vahid argues that Burge’s account fails to satisfy a criterion of adequacy any correct account of perceptual warrant must satisfy—namely, that it allow for perceptual beliefs produced by a properly functioning perceptual system that nonetheless lack warrant. The present article argues that Vahid’s critique fails. It presents numerous examples of such beliefs that are consistent with Burge’s account of perceptual entitlement.”
+Predicted neural profile.
+•	Load/effort: elevated DLPFC from abstract adequacy criteria and absence of early cases; ACC engagement at the dialectical clash (“fails/succeeds”).
+•	Reward/encoding: weak until concrete counterexamples appear; authority names provide minimal episodic support by themselves.
+•	Overall pattern: control-heavy with delayed payoffs.
+Psycho-availability. Low–mid.
+Editorial levers.
+1.	Case-first layout. Begin with two vivid, everyday perceptual-error cases (e.g., refraction at a straw-in-water interface; reliable-but-misaligned VR headset), stating for each: proper function? belief warranted? Then state the adequacy criterion and Burge’s diagnosis.
+2.	Replace abstract “criterion of adequacy” with a 3-row table: (Case, Proper Function?, Warrant?, Why/Why not under Burge).
+3.	Limit meta-claims (“fails/succeeds”) to one sentence per section; spend tokens on worked examples.
+________________________________________
+Sample 14 — “Non-evidential Warrant” and Epistemic Entitlement
+Author: Crispin Wright
+Extended excerpt.
+“In earlier work, a notion of non-evidential warrant or epistemic entitlement was defended as a basis for responding to skeptical paradoxes. Further significance is explored here; refinements are suggested; Reichenbach’s ideas on justifying induction are reassessed; objections and difficulties in the literature are addressed. By a ‘non-evidential’ warrant is meant grounds to accept a proposition that consist neither in evidence for its truth nor in a cognitive achievement (e.g., being in a perceptual state presenting that P). Still, a non-evidential warrant is warrant to accept a proposition as true—in a suitably qualified sense of ‘accept’. The operative notion of acceptance is trust.”
+Predicted neural profile.
+•	Load/effort: high frontopolar/DLPFC from hedged definitions, scope-management, and authority navigation; left IFG from nested clauses.
+•	Reward/encoding: limited early payoff; “trust” as acceptance offers a potential anchor but lacks immediate operationalization; hippocampal binding improves only when a concrete entitlement case (e.g., basic memory, induction, testimony) is worked through.
+•	Overall pattern: sustained control demand with modest local rewards.
+Psycho-availability. Low–mid.
+Editorial levers.
+1.	Operational definition box. “Entitlement = permission to accept P without evidence when (i) P is presupposed by any inquiry in domain D; (ii) defeaters absent; (iii) acceptance is practically indispensable.”
+2.	One canonical case per line: induction (Reichenbach), basic memory, other minds. For each, state defeater conditions explicitly.
+3.	Replace literature survey paragraphs with flowchart: Is P framework-presupposed? Are defeaters present? → Entitlement yes/no.
+________________________________________
