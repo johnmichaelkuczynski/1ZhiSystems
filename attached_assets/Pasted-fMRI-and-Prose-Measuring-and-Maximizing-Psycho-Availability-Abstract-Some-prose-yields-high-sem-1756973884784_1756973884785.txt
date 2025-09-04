@@ -1,0 +1,54 @@
+fMRI and Prose: Measuring and Maximizing “Psycho-Availability”
+Abstract
+Some prose yields high semantic uptake with low cognitive cost; other prose consumes effort and leaves little behind. Functional MRI (fMRI), combined with inexpensive physiological measures, can quantify this difference and guide edits toward psycho-availability: maximal uptake and retention per unit neural effort. A practical metric is outlined and applied to three passages (Samples 1–3).
+1. Concept
+Psycho-availability (PA) is the net of encoding and reward minus control cost:
+PA ≈ (semantic integration + memory encoding + reward) − (working-memory + conflict/effort)
+Neurally, higher PA corresponds to relatively greater engagement of angular gyrus, posterior cingulate/precuneus, hippocampus, vmPFC/ventral striatum and relatively lower engagement of dorsolateral prefrontal cortex (DLPFC), dorsal ACC/pre-SMA, anterior insula. Peripheral markers (pupil size, skin conductance, heart-rate variability) index effort/arousal in real time.
+Method: present text sentence-wise in a within-subject design; record BOLD, eye tracking, and physiology; test immediate and delayed comprehension/retention; control for sentence length, syntactic depth, concreteness, and surprisal.
+2. Case Analyses
+Sample 1 — Psychology vs. Empiricism (five consequences)
+Author: John-Michael Kuczynski
+Extended excerpt.
+“Intended for philosophically minded psychologists and psychologically minded philosophers, this book identifies the ways that psychology has hobbled itself by adhering too strictly to empiricism, this being the doctrine that all knowledge is observation-based. In the first part of this two-part work, it is shown that empiricism is false. In the second part, the psychology-relevant consequences of this fact are identified. Five of these are of special importance. First, whereas some psychopathologies (e.g. obsessive-compulsive disorder) corrupt the activity mediated by one’s psychological architecture, others (e.g. sociopathy) corrupt that architecture itself. Second, the basic tenets of psychoanalysis are coherent. Third, all propositional attitudes are beliefs. Fourth, selves are minds that self-evaluate. Fifth, it is by giving our thoughts a perceptible form that we enable ourselves to evaluate them, and it is by expressing ourselves in language and art that we give our thoughts a perceptible form.”
+Predicted profile.
+Reduced control load from enumerated structure (↓DLPFC). Distinct, testable claims produce strong semantic/episodic binding (↑angular gyrus, hippocampus); concise “consequence” payoffs provide small reward pulses (vmPFC/ventral striatum).
+Psycho-availability. High.
+Edit lever. One concrete, one-sentence example per consequence (kept immediately adjacent) to further boost episodic anchoring.
+________________________________________
+Sample 2 — Rationalism vs. Empiricism (Locke, Berkeley, Hume)
+Author: John-Michael Kuczynski
+Extended excerpt.
+“We obviously acquire a great deal of knowledge through ‘sense-perception’ (i.e., through sight, hearing, touch, and so forth). According to a doctrine known as ‘empiricism,’ all knowledge is derived from sense-perception. According to a view known as ‘rationalism,’ some knowledge is acquired entirely through the use of one’s ability to reason. Rationalists almost never hold that no knowledge is acquired through sense-perception; they hold only that reason, as opposed to sense-perception, is the vehicle through which some knowledge is acquired, and that such knowledge is important. … Those who believe that there exist non-spatiotemporal entities are necessarily rationalists. … Those who believe that properties are non-spatiotemporal are Platonists. Therefore Platonists are rationalists. … Empiricism was first rigorously developed by John Locke (1632–1704), George Berkeley (1685–1753), and David Hume (1711–1776). Hume’s beliefs about causality and inductive inference are outgrowths of his empiricism; Berkeley’s belief that objects are identical with our perceptions of them is an outgrowth of his empiricism; Locke’s position that universals are ‘the workmanship of the understanding’ is a derivative of his empiricism.”
+Predicted profile.
+Moderate control demand with strong schema formation via contrasts and canonical anchors (↑angular gyrus, hippocampus; DMN coherence). Proper names act as memory pegs; historical sweep supplies episodic cues.
+Psycho-availability. High.
+Edit lever. Add a compact present-day micro-contrast (e.g., proof vs. experiment) to bind abstractions to contemporary cognition.
+________________________________________
+Sample 3 — Frankfurt-style cases and moral responsibility
+Author: Richard Glatz
+Extended excerpt.
+“Harry Frankfurt has famously criticized the principle of alternate possibilities—the principle that an agent is morally responsible for performing some action only if able to have done otherwise—on the grounds that it is possible for an agent to be morally responsible for performing an action that is inevitable for the agent when the reasons for which the agent lacks alternate possibilities are not the reasons for which the agent has acted. It is argued that an incompatibilist about determinism and moral responsibility can safely ignore so-called ‘Frankfurt-style cases’ and continue to argue for incompatibilism on the grounds that determinism rules out the ability to do otherwise. The argument relies on a simple—indeed, simplistic—weakening of the principle of alternate possibilities explicitly designed to be immune to Frankfurt-style criticism; the addition of one highly plausible premise allows the modified principle to support an argument for incompatibilism that begins with the observation that determinism rules out the ability to do otherwise.”
+Predicted profile.
+Engages social-cognition circuitry via agency/reasons (↑mPFC, TPJ) with moderate control tracking of the principle revision (DLPFC). Reward spike when the weakened principle resolves the Frankfurt tension.
+Psycho-availability. Upper-mid to high.
+Edit lever. Precede the thesis with a two-sentence person-level vignette (a concrete Frankfurt-style setup), then state the modified principle.
+3. Interim Principles
+1.	Structure carries load. Lists, contrasts, and sectioning reduce control-network demand and free capacity for meaning.
+2.	Hooks consolidate. Canonical names, ordinary examples, and compact numerals (“five consequences”) increase distinctiveness and reward.
+3.	Narrative scaffolds abstraction. Brief vignettes allow principles to be encoded through episodic pathways before formalization.
+Case Analyses (Samples 4–6)
+Sample 4 — Computational Theory of Mind (CTM) critique
+Author: [not specified in source]
+Extended excerpt.
+“According to the computational theory of mind, to think is to compute. Every case of computing is a case of manipulating symbols, but not vice versa; a manipulation of symbols must be driven exclusively by the formal properties of those symbols if it is to qualify as a computation. Words like ‘form’ and ‘formal’ are ambiguous (syntactic vs. morphological). CTM fails on each disambiguation, and the arguments for CTM cease to be compelling once that ambiguity is acknowledged. The terms ‘mechanical’ and ‘automatic’ are comparably ambiguous. Once these ambiguities are exposed, there is no possibility of mechanizing thought, even in domains with decision-procedures. The impossibility of mechanizing thought has nothing to do with recherché theorems (Gödel, Rosser). CTM also mischaracterizes ‘algorithm’.”
+Predicted profile.
+•	Load/effort: elevated left IFG (Broca’s) and DLPFC from dense clause structure.
+•	Semantic reward: moderate; the “ambiguity exposure → collapse of CTM” path yields clear payoff (↑vmPFC/ventral striatum) when the hinge move is registered.
+•	Memory/encoding: improved when the ambiguity is tied to a concrete contrast (syntax-only vs. meaning).
+Psycho-availability. Upper-mid. High-value target and short argumentative path offset syntactic density.
+Edit levers.
+1.	One-sentence micro-example of syntactic vs semantic processing (e.g., legal form vs legal meaning).
+2.	Inline gloss of “formal (syntactic) vs morphological” the first time each appears.
+3.	Replace one abstract mention of “mechanical/automatic” with a single concrete automaton example.
+________________________________________
