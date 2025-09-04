@@ -140,7 +140,7 @@ Preferred communication style: Simple, everyday language.
   - **Content Types**: Cognitive maps, study guides, rewrites, test questions/results, suggested readings, summary+thesis, and thesis deep dives
   - **Format Structure**: Professional formatting with headers, sections, and proper text organization
   - **User Experience**: Download buttons (📥) positioned next to existing copy buttons for seamless workflow
-- **Content**: Seventeen published issues across fifteen volumes:
+- **Content**: Eighteen published issues across sixteen volumes:
   - **Volume I**: "On the Optimal Number of Truth Values", "The Incompleteness of Logic", "Veblen Utility Functions" (13-chapter analysis), "The Tarski's World Problem"
   - **Volume II**: "McTaggart's Proof of the Unreality of Time: A Refutation"  
   - **Volume III**: "Markets, Value, and the Myth of Worth-as-Wage" (complete with abstract, keywords, and academic formatting)
@@ -156,6 +156,7 @@ Preferred communication style: Simple, everyday language.
   - **Volume XIII**: "Truth Without Teeth: A Post-Philosophy Critique of Crispin Wright" (critique of Wright's minimalist truth theory and neo-Fregean program)
   - **Volume XIV**: "The Fact/Norm Distinction as Philosophy's Escape Hatch" (meta-philosophical critique of how the is/ought divide shields philosophy from empirical accountability)
   - **Volume XV**: "Right Wing ≠ Conservative, Left Wing ≠ Liberal" (political analysis distinguishing wing politics from institutional attitudes)
+  - **Volume XVI**: "fMRI and Prose: Measuring and Maximizing 'Psycho-Availability'" (cognitive science analysis of prose comprehension using neuroimaging and physiological measures)
 - **Audio System**: OpenAI TTS-1 integration with Alloy voice support, automatic audio generation for all podcasts, saved to public/audio directory
 - **URL Updates**: August 22, 2025 - Updated Intelligence Meter application URL from intelligencemeter.biz to intelligencemeter.xyz in Core Applications section
 
@@ -163,6 +164,7 @@ Preferred communication style: Simple, everyday language.
 
 ### September 4, 2025
 - **Journal Content**: Added Volume XV, Issue 1 - "Right Wing ≠ Conservative, Left Wing ≠ Liberal" (political analysis distinguishing wing politics from institutional attitudes)
+- **Journal Content**: Added Volume XVI, Issue 1 - "fMRI and Prose: Measuring and Maximizing 'Psycho-Availability'" (cognitive science analysis of prose comprehension using neuroimaging and physiological measures)
 
 ### September 3, 2025
 - **Journal Content**: Added Volume XII, Issue 1 - "Morality as Coalition Software" (functional analysis of moral codes as group coordination mechanisms)
