@@ -1,0 +1,47 @@
+Sample 5 — Epistemic possibility → Millianism
+Author: [not specified in source]
+Extended excerpt.
+“A new argument proceeds through epistemic possibility (‘for all S knows, p’), cutting a trail from modality to Millianism, the thesis that the semantic content of a proper name is simply its bearer. New definitions are provided for epistemic modal notions. A theorem: a proposition p can be epistemically necessary for a subject S even though p is a posteriori and S does not know p. Identity behaves well in metaphysically possible worlds but can go rogue in epistemically possible worlds. Whereas it can be epistemically possible that Lewis Carroll is not Charles Lutwidge Dodgson, this is not epistemically possible in the manner anti-Millianism requires.”
+Predicted profile.
+•	Load/effort: moderate DLPFC for modal bookkeeping; ACC engagement at the identity “conflict” point.
+•	Reward: strong local reward when the Carroll/Dodgson puzzle snaps into place (↑ventral striatum).
+•	Encoding: improved by the canonical proper-name case (↑hippocampus/angular gyrus).
+Psycho-availability. Mid-to-high. Technical register, but a sticky identity case provides a reliable hook.
+Edit levers.
+1.	Present the Carroll = Dodgson puzzle before the definitions; then formalize.
+2.	One sentence clarifying “epistemically possible” vs “metaphysically possible” with a concrete contrast.
+3.	Replace one abstract “rogue identity” sentence with a second proper-name mini-case.
+________________________________________
+Sample 6 — Descartes/Arnauld on real distinction, with non-Euclidean geometry
+Author: [not specified in source]
+Extended excerpt.
+“The discussion concerns two strands of the 4th Set of Objections and Replies to Meditations. Arnauld defends that real-distinction proofs require adequate knowledge; Descartes holds they require only complete understanding. Arnauld’s right-angled triangle T and Pythagorean property P are deployed against Descartes’ claim that vivid and clear thought of separability entails knowledge of separability by God. Following Almog, non-Euclidean geometries are considered: at first this seems to aid Descartes by supplying a space where T lacks P, but Arnauld replies by relocating the issue to the essence of T across geometries.”
+Predicted profile.
+•	Load/effort: high early frontopolar/DLPFC from authority-driven setup and abstract distinctions (“adequate” vs “complete” understanding).
+•	Reward: late spike when non-Euclidean geometry appears; visuospatial grounding recruits parietal networks and improves engagement.
+•	Encoding: uneven; improved if the geometric case arrives sooner and is visualized.
+Psycho-availability. Mid. A late visuospatial hook partially compensates for numbing preliminaries.
+Edit levers.
+1.	Lead with the triangle/non-Euclidean case (one figure or sentence), then map to “adequate vs complete.”
+2.	Reduce authority preamble to a single line; move names to parenthetical citations.
+3.	Provide one explicit sentence stating the essence question for T across geometries.
+________________________________________
+Cross-cutting principles from Samples 4–6
+•	Front-load the hook. Put the concrete puzzle (identity case; triangle case) before definitions or authorities.
+•	One-line contrasts beat terminology. Brief operational distinctions (“epistemic vs metaphysical possibility”) lower control cost more than terminological variation.
+•	Local payoff cadence. Each dense paragraph should contain one “click” moment (example, lemma, or diagram) to produce a reward pulse and anchor memory.
+Case Analyses (Samples 7–9)
+Sample 7 — Dispositions (“masked,” “finkish”), qualified subjunctive account
+Author: [not specified in source]
+Extended excerpt.
+“It is generally agreed that dispositions cannot be analyzed in terms of simple subjunctive conditionals (because of what are called ‘masked dispositions’ and ‘finkish dispositions’). I here defend a qualified subjunctive account of dispositions according to which an object is disposed to Φ when conditions C obtain if and only if, if conditions C were to obtain, then the object would Φ, ceteris paribus. I argue that this account does not fall prey to the objections that have been raised in the literature.”
+Predicted profile.
+•	Load/effort: moderate left IFG/DLPFC for counterfactual tracking and clause embedding; low narrative support increases control demands.
+•	Reward/encoding: technical terms (“masked,” “finkish”) are distinctive but semantically thin without concrete cases, limiting hippocampal binding and vmPFC/ventral striatal reward.
+•	Overall pattern: sustained effort with modest payoff unless readers already know the canonical examples.
+Psycho-availability. Mid–low.
+Edit levers.
+1.	Provide one everyday masked case (e.g., a fragile glass consistently protected by bubble wrap) and one finkish case (an electronic fuse that disables the very mechanism that would manifest the disposition) before the formal biconditional.
+2.	Replace Latin ceteris paribus with a one-line operational gloss (“other relevant conditions unchanged”).
+3.	Include a 2×2 mini-table (conditions present/absent × manifestation present/absent) to offload working memory.
+________________________________________
