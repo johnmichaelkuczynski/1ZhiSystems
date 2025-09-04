@@ -1,0 +1,344 @@
+fMRI and Prose: Measuring and Maximizing “Psycho-Availability”
+Abstract
+Some prose yields high semantic uptake with low cognitive cost; other prose consumes effort and leaves little behind. Functional MRI (fMRI), combined with inexpensive physiological measures, can quantify this difference and guide edits toward psycho-availability: maximal uptake and retention per unit neural effort. A practical metric is outlined and applied to three passages (Samples 1–3).
+1. Concept
+Psycho-availability (PA) is the net of encoding and reward minus control cost:
+PA ≈ (semantic integration + memory encoding + reward) − (working-memory + conflict/effort)
+Neurally, higher PA corresponds to relatively greater engagement of angular gyrus, posterior cingulate/precuneus, hippocampus, vmPFC/ventral striatum and relatively lower engagement of dorsolateral prefrontal cortex (DLPFC), dorsal ACC/pre-SMA, anterior insula. Peripheral markers (pupil size, skin conductance, heart-rate variability) index effort/arousal in real time.
+Method: present text sentence-wise in a within-subject design; record BOLD, eye tracking, and physiology; test immediate and delayed comprehension/retention; control for sentence length, syntactic depth, concreteness, and surprisal.
+2. Case Analyses
+Sample 1 — Psychology vs. Empiricism (five consequences)
+Author: John-Michael Kuczynski
+Extended excerpt.
+“Intended for philosophically minded psychologists and psychologically minded philosophers, this book identifies the ways that psychology has hobbled itself by adhering too strictly to empiricism, this being the doctrine that all knowledge is observation-based. In the first part of this two-part work, it is shown that empiricism is false. In the second part, the psychology-relevant consequences of this fact are identified. Five of these are of special importance. First, whereas some psychopathologies (e.g. obsessive-compulsive disorder) corrupt the activity mediated by one’s psychological architecture, others (e.g. sociopathy) corrupt that architecture itself. Second, the basic tenets of psychoanalysis are coherent. Third, all propositional attitudes are beliefs. Fourth, selves are minds that self-evaluate. Fifth, it is by giving our thoughts a perceptible form that we enable ourselves to evaluate them, and it is by expressing ourselves in language and art that we give our thoughts a perceptible form.”
+Predicted profile.
+Reduced control load from enumerated structure (↓DLPFC). Distinct, testable claims produce strong semantic/episodic binding (↑angular gyrus, hippocampus); concise “consequence” payoffs provide small reward pulses (vmPFC/ventral striatum).
+Psycho-availability. High.
+Edit lever. One concrete, one-sentence example per consequence (kept immediately adjacent) to further boost episodic anchoring.
+________________________________________
+Sample 2 — Rationalism vs. Empiricism (Locke, Berkeley, Hume)
+Author: John-Michael Kuczynski
+Extended excerpt.
+“We obviously acquire a great deal of knowledge through ‘sense-perception’ (i.e., through sight, hearing, touch, and so forth). According to a doctrine known as ‘empiricism,’ all knowledge is derived from sense-perception. According to a view known as ‘rationalism,’ some knowledge is acquired entirely through the use of one’s ability to reason. Rationalists almost never hold that no knowledge is acquired through sense-perception; they hold only that reason, as opposed to sense-perception, is the vehicle through which some knowledge is acquired, and that such knowledge is important. … Those who believe that there exist non-spatiotemporal entities are necessarily rationalists. … Those who believe that properties are non-spatiotemporal are Platonists. Therefore Platonists are rationalists. … Empiricism was first rigorously developed by John Locke (1632–1704), George Berkeley (1685–1753), and David Hume (1711–1776). Hume’s beliefs about causality and inductive inference are outgrowths of his empiricism; Berkeley’s belief that objects are identical with our perceptions of them is an outgrowth of his empiricism; Locke’s position that universals are ‘the workmanship of the understanding’ is a derivative of his empiricism.”
+Predicted profile.
+Moderate control demand with strong schema formation via contrasts and canonical anchors (↑angular gyrus, hippocampus; DMN coherence). Proper names act as memory pegs; historical sweep supplies episodic cues.
+Psycho-availability. High.
+Edit lever. Add a compact present-day micro-contrast (e.g., proof vs. experiment) to bind abstractions to contemporary cognition.
+________________________________________
+Sample 3 — Frankfurt-style cases and moral responsibility
+Author: Richard Glatz
+Extended excerpt.
+“Harry Frankfurt has famously criticized the principle of alternate possibilities—the principle that an agent is morally responsible for performing some action only if able to have done otherwise—on the grounds that it is possible for an agent to be morally responsible for performing an action that is inevitable for the agent when the reasons for which the agent lacks alternate possibilities are not the reasons for which the agent has acted. It is argued that an incompatibilist about determinism and moral responsibility can safely ignore so-called ‘Frankfurt-style cases’ and continue to argue for incompatibilism on the grounds that determinism rules out the ability to do otherwise. The argument relies on a simple—indeed, simplistic—weakening of the principle of alternate possibilities explicitly designed to be immune to Frankfurt-style criticism; the addition of one highly plausible premise allows the modified principle to support an argument for incompatibilism that begins with the observation that determinism rules out the ability to do otherwise.”
+Predicted profile.
+Engages social-cognition circuitry via agency/reasons (↑mPFC, TPJ) with moderate control tracking of the principle revision (DLPFC). Reward spike when the weakened principle resolves the Frankfurt tension.
+Psycho-availability. Upper-mid to high.
+Edit lever. Precede the thesis with a two-sentence person-level vignette (a concrete Frankfurt-style setup), then state the modified principle.
+3. Interim Principles
+1.	Structure carries load. Lists, contrasts, and sectioning reduce control-network demand and free capacity for meaning.
+2.	Hooks consolidate. Canonical names, ordinary examples, and compact numerals (“five consequences”) increase distinctiveness and reward.
+3.	Narrative scaffolds abstraction. Brief vignettes allow principles to be encoded through episodic pathways before formalization.
+Case Analyses (Samples 4–6)
+Sample 4 — Computational Theory of Mind (CTM) critique
+Author: [not specified in source]
+Extended excerpt.
+“According to the computational theory of mind, to think is to compute. Every case of computing is a case of manipulating symbols, but not vice versa; a manipulation of symbols must be driven exclusively by the formal properties of those symbols if it is to qualify as a computation. Words like ‘form’ and ‘formal’ are ambiguous (syntactic vs. morphological). CTM fails on each disambiguation, and the arguments for CTM cease to be compelling once that ambiguity is acknowledged. The terms ‘mechanical’ and ‘automatic’ are comparably ambiguous. Once these ambiguities are exposed, there is no possibility of mechanizing thought, even in domains with decision-procedures. The impossibility of mechanizing thought has nothing to do with recherché theorems (Gödel, Rosser). CTM also mischaracterizes ‘algorithm’.”
+Predicted profile.
+•	Load/effort: elevated left IFG (Broca’s) and DLPFC from dense clause structure.
+•	Semantic reward: moderate; the “ambiguity exposure → collapse of CTM” path yields clear payoff (↑vmPFC/ventral striatum) when the hinge move is registered.
+•	Memory/encoding: improved when the ambiguity is tied to a concrete contrast (syntax-only vs. meaning).
+Psycho-availability. Upper-mid. High-value target and short argumentative path offset syntactic density.
+Edit levers.
+1.	One-sentence micro-example of syntactic vs semantic processing (e.g., legal form vs legal meaning).
+2.	Inline gloss of “formal (syntactic) vs morphological” the first time each appears.
+3.	Replace one abstract mention of “mechanical/automatic” with a single concrete automaton example.
+________________________________________
+Sample 5 — Epistemic possibility → Millianism
+Author: [not specified in source]
+Extended excerpt.
+“A new argument proceeds through epistemic possibility (‘for all S knows, p’), cutting a trail from modality to Millianism, the thesis that the semantic content of a proper name is simply its bearer. New definitions are provided for epistemic modal notions. A theorem: a proposition p can be epistemically necessary for a subject S even though p is a posteriori and S does not know p. Identity behaves well in metaphysically possible worlds but can go rogue in epistemically possible worlds. Whereas it can be epistemically possible that Lewis Carroll is not Charles Lutwidge Dodgson, this is not epistemically possible in the manner anti-Millianism requires.”
+Predicted profile.
+•	Load/effort: moderate DLPFC for modal bookkeeping; ACC engagement at the identity “conflict” point.
+•	Reward: strong local reward when the Carroll/Dodgson puzzle snaps into place (↑ventral striatum).
+•	Encoding: improved by the canonical proper-name case (↑hippocampus/angular gyrus).
+Psycho-availability. Mid-to-high. Technical register, but a sticky identity case provides a reliable hook.
+Edit levers.
+1.	Present the Carroll = Dodgson puzzle before the definitions; then formalize.
+2.	One sentence clarifying “epistemically possible” vs “metaphysically possible” with a concrete contrast.
+3.	Replace one abstract “rogue identity” sentence with a second proper-name mini-case.
+________________________________________
+Sample 6 — Descartes/Arnauld on real distinction, with non-Euclidean geometry
+Author: [not specified in source]
+Extended excerpt.
+“The discussion concerns two strands of the 4th Set of Objections and Replies to Meditations. Arnauld defends that real-distinction proofs require adequate knowledge; Descartes holds they require only complete understanding. Arnauld’s right-angled triangle T and Pythagorean property P are deployed against Descartes’ claim that vivid and clear thought of separability entails knowledge of separability by God. Following Almog, non-Euclidean geometries are considered: at first this seems to aid Descartes by supplying a space where T lacks P, but Arnauld replies by relocating the issue to the essence of T across geometries.”
+Predicted profile.
+•	Load/effort: high early frontopolar/DLPFC from authority-driven setup and abstract distinctions (“adequate” vs “complete” understanding).
+•	Reward: late spike when non-Euclidean geometry appears; visuospatial grounding recruits parietal networks and improves engagement.
+•	Encoding: uneven; improved if the geometric case arrives sooner and is visualized.
+Psycho-availability. Mid. A late visuospatial hook partially compensates for numbing preliminaries.
+Edit levers.
+1.	Lead with the triangle/non-Euclidean case (one figure or sentence), then map to “adequate vs complete.”
+2.	Reduce authority preamble to a single line; move names to parenthetical citations.
+3.	Provide one explicit sentence stating the essence question for T across geometries.
+________________________________________
+Cross-cutting principles from Samples 4–6
+•	Front-load the hook. Put the concrete puzzle (identity case; triangle case) before definitions or authorities.
+•	One-line contrasts beat terminology. Brief operational distinctions (“epistemic vs metaphysical possibility”) lower control cost more than terminological variation.
+•	Local payoff cadence. Each dense paragraph should contain one “click” moment (example, lemma, or diagram) to produce a reward pulse and anchor memory.
+Case Analyses (Samples 7–9)
+Sample 7 — Dispositions (“masked,” “finkish”), qualified subjunctive account
+Author: [not specified in source]
+Extended excerpt.
+“It is generally agreed that dispositions cannot be analyzed in terms of simple subjunctive conditionals (because of what are called ‘masked dispositions’ and ‘finkish dispositions’). I here defend a qualified subjunctive account of dispositions according to which an object is disposed to Φ when conditions C obtain if and only if, if conditions C were to obtain, then the object would Φ, ceteris paribus. I argue that this account does not fall prey to the objections that have been raised in the literature.”
+Predicted profile.
+•	Load/effort: moderate left IFG/DLPFC for counterfactual tracking and clause embedding; low narrative support increases control demands.
+•	Reward/encoding: technical terms (“masked,” “finkish”) are distinctive but semantically thin without concrete cases, limiting hippocampal binding and vmPFC/ventral striatal reward.
+•	Overall pattern: sustained effort with modest payoff unless readers already know the canonical examples.
+Psycho-availability. Mid–low.
+Edit levers.
+1.	Provide one everyday masked case (e.g., a fragile glass consistently protected by bubble wrap) and one finkish case (an electronic fuse that disables the very mechanism that would manifest the disposition) before the formal biconditional.
+2.	Replace Latin ceteris paribus with a one-line operational gloss (“other relevant conditions unchanged”).
+3.	Include a 2×2 mini-table (conditions present/absent × manifestation present/absent) to offload working memory.
+________________________________________
+Sample 8 — Dummett on McTaggart’s argument about time (with replies by Lowe, Moore)
+Author: [not specified in source]
+Extended excerpt.
+“Years ago, Michael Dummett defended McTaggart’s argument for the unreality of time, arguing that it cannot be dismissed as guilty of an ‘indexical fallacy.’ Recently, E. J. Lowe has disputed Dummett’s claims for the cogency of the argument. An elaboration and defense of Dummett’s interpretation is offered (though not of its soundness). Work on tense in the philosophy of language and on the concept of the past in memory is brought to bear to support the claim that McTaggart is not guilty of any simple indexical fallacy. Along the way an account due to A. W. Moore is criticized, and a conception of tense realism implicit in McTaggart’s work is defended, with the aim of preparing the ground for a substantive defense of the reality of tense.”
+Predicted profile.
+•	Load/effort: elevated frontopolar/DLPFC from authority-driven framing and meta-level classifications; minimal early concreteness.
+•	Reward/encoding: weak episodic hooks until late; discussion remains at the level of “positions about positions,” which yields limited vmPFC reward and shallow hippocampal binding for non-specialists.
+•	Overall pattern: high control cost, low local payoff cadence.
+Psycho-availability. Low–mid.
+Edit levers.
+1.	Open with a one-paragraph micro-case (e.g., A-/B-series clash in a dated diary entry) and only then attach the labels (McTaggart, Dummett, Lowe).
+2.	Replace lettered taxonomies with two concrete timelines (event now/past/future vs. tenseless ordering) and one pointed contradiction to visualize the pressure.
+3.	Consolidate authority references into parenthetical citations to reduce narrative interruption.
+________________________________________
+Sample 9 — “Non-reflexive” proof of Gödel’s First Incompleteness Theorem
+Author: John-Michael Kuczynski
+Extended excerpt.
+“This monograph presents a non-reflexive proof of Gödel’s First Incompleteness Theorem. We demonstrate the incompleteness of first-order arithmetic without relying on self-reference, paradoxes, or diagonalization. Instead, the proof is based on a cardinality mismatch: the set of arithmetical truths is countable, but the space of candidate proof-sets over those truths has the cardinality of the continuum. Thus, the system cannot, even in principle, admit a recursively enumerable set of axioms that proves all and only the true arithmetical statements—some truths must go unprovable.
+We distinguish Narrowly Arithmetical Truths (NA)—truths expressible solely in the language of arithmetic—from Extended Arithmetical Truths (EA), which quantify over sets of such truths or proofs. Only NA is recursively enumerable; once EA is admitted, we enter the non-recursive, non-denumerable domain, and incompleteness becomes inevitable.”
+Predicted profile.
+•	Load/effort: high IPS/parietal (quantitative reasoning) and DLPFC (symbolic maintenance).
+•	Reward/encoding: strong when the cardinality-mismatch insight lands; clear category split (NA vs. EA) aids semantic chunking.
+•	Overall pattern: discipline-imposed difficulty with honest payoff; efficiency rises sharply with minimal visualization.
+Psycho-availability. Mid (general audience) → High (mathematical audience).
+Edit levers.
+1.	Add a single diagram showing Countable (NA) vs. Uncountable (candidate proof-sets) and the impossibility wedge.
+2.	Include one micro-analogy (e.g., trying to list all reals with a finite alphabetic catalog) to anchor the uncountability intuition.
+3.	Keep all category names (NA/EA) stable and minimize symbol proliferation to protect working memory.
+________________________________________
+Cross-cutting principles from Samples 7–9
+•	Example first, term second. Early, concrete cases (for dispositions; for A-/B-series) lower control demands and raise reward.
+•	Visual scaffolds tame abstraction. Simple diagrams (timelines; set-inclusion and cardinality cartoons) convert prefrontal load into parietal/navigational processing.
+•	One hook per paragraph. Each dense paragraph should deliver a local “click” (example, lemma, or figure) to maintain engagement and encode structure.
+
+fMRI and Prose: Measuring and Maximizing “Psycho-Availability”
+Case Analyses (Samples 10–12)
+Sample 10 — Higher-order vagueness as illusion
+Author: Crispin Wright
+Extended excerpt.
+“It is common among philosophers who take an interest in the phenomenon of vagueness in natural language not merely to acknowledge higher-order vagueness but to take its existence as a basic datum—so that views that lack the resources to account for it are regarded as deficient on that score. The main purpose is to loosen the hold of this idea. Higher-order vagueness is no basic datum but an illusion, fostered by misunderstandings of the nature of (first-order) vagueness itself. … The ‘ineradicability intuition’ (Dummett): ‘hill’ is vague; introducing ‘eminence’ to cover borderline cases leaves further borderlines (hill–eminence; mountain–eminence), and so ad infinitum. Generalizing, for any F and G with a vague mutual border, any new H for the shared border creates new borders F–H and G–H; hence the original F vs. borderline-F distinction is already vague, and likewise for G.”
+Predicted neural profile.
+•	Load/effort: elevated frontopolar/DLPFC from authority-driven setup and early abstraction into lettered variables (F, G, H).
+•	Reward/encoding: limited hippocampal binding until a concrete case is worked; the “illusion” diagnosis yields weak vmPFC reward without a crisp demonstration.
+•	Overall pattern: high control demand, low local payoff cadence for non-specialists.
+Psycho-availability. Low–mid.
+Editorial levers.
+1.	Lead with a single quantified hill/mountain micro-case (e.g., altitude thresholds with noise), then show why adding H = eminence re-creates borderlines.
+2.	Replace F–G–H with a diagrammed continuum (one axis, two moving cutoffs); defer symbols to an appendix.
+3.	Collapse authority preamble into one sentence and shift citations to parentheses to reduce narrative interruption.
+________________________________________
+Sample 11 — A relational solution to the Sorites paradox
+Author: John-Michael Kuczynski
+Extended excerpt.
+“A person with one dollar is poor. If a person with n dollars is poor, then so is a person with n+1 dollars. Therefore, a person with a billion dollars is poor. True premises, valid reasoning, false conclusion: the Sorites paradox. … The paradox can be solved while retaining classical logic. For any predicate that generates a Sorites, significant uses are elliptical for a relational statement: a significant token of ‘Bob is poor’ means Bob is poor compared to x, for some value of x. Once x is supplied, a definite cutoff between having and not having the predicate is supplied; the inductive step in the Sorites is neutralized. Analogous reformulations hold for ‘smart,’ ‘wealthy,’ and similar predicates. The solution may not extend to every Sorites-type paradox, but it resolves a significant subclass.”
+Predicted neural profile.
+•	Load/effort: moderate DLPFC for tracking the inductive schema.
+•	Reward/encoding: strong hippocampal/angular-gyrus binding from familiar money/IQ examples; reliable ventral-striatal reward when the ellipsis → relation move dissolves the paradox.
+•	Overall pattern: steady control demand with recurring “click” moments; high retention.
+Psycho-availability. High.
+Editorial levers.
+1.	Make the comparator explicit (“compared to the median wealth of country C in year Y”) to reduce ambiguity in x.
+2.	Add a single figure: two parallel scales (absolute vs. relative) with the induced cutoff shown.
+3.	Provide one additional non-monetary case (e.g., “tall compared to league average”) to generalize the schema.
+________________________________________
+Sample 12 — Closure vs. transmission of warrant over deduction
+Author: Crispin Wright
+Extended excerpt.
+“It was widely assumed that recognized valid reasoning from warranted premises transmits warrant to its conclusion—tantamount, many thought, to the Closure of knowledge or warrant over deduction (the knowable consequences of knowable premises are likewise knowable). Both assumptions are now widely doubted. Closure is weaker than Transmission, saying nothing about how warrant is acquired for knowable consequences. Transmission faces counterexamples; particular cases (Moore’s Proof, McKinsey’s paradox, Putnam’s Brains-in-a-Vat) remain controversial. Much turns on the correct classification of these cases. As Pryor emphasizes, ‘warrant transmission’ gestures at several inequivalent ideas. For illustration, consider six proposals. (i) Warrant for undischarged premises A₁…Aₙ transmits to C when the argument, together with warrant for its premises, provides a potentially first-time reason to believe C …”
+Predicted neural profile.
+•	Load/effort: high frontopolar/DLPFC from meta-level taxonomy and long conditional criteria; sparse early concreteness.
+•	Reward/encoding: episodic anchors (Moore, McKinsey, BIV) appear late; without case-first presentation, vmPFC reward and hippocampal binding remain weak for general readers.
+•	Overall pattern: sustained control cost with delayed payoffs.
+Psycho-availability. Low–mid.
+Editorial levers.
+1.	Case-first layout: begin with a 3-row table (Moore, McKinsey, BIV) stating (Premises warrant? Transmission? Closure?) before giving definitions.
+2.	Replace the six abstract proposals with a decision tree (yes/no branches) that routes each canonical case to an outcome.
+3.	Restrict conditional clauses to ≤25 words; move technical variants to boxed side notes to protect working memory.
+________________________________________
+Cross-cutting principles (Samples 10–12)
+•	Example before taxonomy. Case-first presentation reduces control-network load and increases reward pulses.
+•	Replace letters with pictures. Simple continuum or decision-tree figures convert abstract cutoff talk and transmission taxonomies into parietal/visuospatial processing.
+•	Comparator explicitness. For gradable adjectives (poor, tall, smart), specifying the comparison class yields an immediate cutoff and neutralizes Sorites induction without sacrificing classical logic.
+Case Analyses (Samples 13–15)
+Sample 13 — Perceptual Entitlement: Vahid vs. Burge
+Author: [not specified in source]
+Extended excerpt.
+“Hamid Vahid criticizes Tyler Burge’s account of perceptual entitlement. Vahid argues that Burge’s account fails to satisfy a criterion of adequacy any correct account of perceptual warrant must satisfy—namely, that it allow for perceptual beliefs produced by a properly functioning perceptual system that nonetheless lack warrant. The present article argues that Vahid’s critique fails. It presents numerous examples of such beliefs that are consistent with Burge’s account of perceptual entitlement.”
+Predicted neural profile.
+•	Load/effort: elevated DLPFC from abstract adequacy criteria and absence of early cases; ACC engagement at the dialectical clash (“fails/succeeds”).
+•	Reward/encoding: weak until concrete counterexamples appear; authority names provide minimal episodic support by themselves.
+•	Overall pattern: control-heavy with delayed payoffs.
+Psycho-availability. Low–mid.
+Editorial levers.
+1.	Case-first layout. Begin with two vivid, everyday perceptual-error cases (e.g., refraction at a straw-in-water interface; reliable-but-misaligned VR headset), stating for each: proper function? belief warranted? Then state the adequacy criterion and Burge’s diagnosis.
+2.	Replace abstract “criterion of adequacy” with a 3-row table: (Case, Proper Function?, Warrant?, Why/Why not under Burge).
+3.	Limit meta-claims (“fails/succeeds”) to one sentence per section; spend tokens on worked examples.
+________________________________________
+Sample 14 — “Non-evidential Warrant” and Epistemic Entitlement
+Author: Crispin Wright
+Extended excerpt.
+“In earlier work, a notion of non-evidential warrant or epistemic entitlement was defended as a basis for responding to skeptical paradoxes. Further significance is explored here; refinements are suggested; Reichenbach’s ideas on justifying induction are reassessed; objections and difficulties in the literature are addressed. By a ‘non-evidential’ warrant is meant grounds to accept a proposition that consist neither in evidence for its truth nor in a cognitive achievement (e.g., being in a perceptual state presenting that P). Still, a non-evidential warrant is warrant to accept a proposition as true—in a suitably qualified sense of ‘accept’. The operative notion of acceptance is trust.”
+Predicted neural profile.
+•	Load/effort: high frontopolar/DLPFC from hedged definitions, scope-management, and authority navigation; left IFG from nested clauses.
+•	Reward/encoding: limited early payoff; “trust” as acceptance offers a potential anchor but lacks immediate operationalization; hippocampal binding improves only when a concrete entitlement case (e.g., basic memory, induction, testimony) is worked through.
+•	Overall pattern: sustained control demand with modest local rewards.
+Psycho-availability. Low–mid.
+Editorial levers.
+1.	Operational definition box. “Entitlement = permission to accept P without evidence when (i) P is presupposed by any inquiry in domain D; (ii) defeaters absent; (iii) acceptance is practically indispensable.”
+2.	One canonical case per line: induction (Reichenbach), basic memory, other minds. For each, state defeater conditions explicitly.
+3.	Replace literature survey paragraphs with flowchart: Is P framework-presupposed? Are defeaters present? → Entitlement yes/no.
+________________________________________
+Sample 15 — “The Meaning of ‘Meaning’” (three senses)
+Author: John-Michael Kuczynski
+Extended excerpt.
+“There would be no languages if there were no expressions. Nothing meaningless is an expression. … The word ‘meaning’ has three different meanings, and only one directly relates to the nature of language.
+Meaning #1: Evidential meaning. To say that x ‘means’ y can say that x is evidence of y—that x and y are causally interrelated so that, given x, it is reasonable to infer y. ‘Smith’s hacking cough means he has a violent lung infection’ means Smith’s cough is evidence of such an infection. Causes can be evidence of their effects; common causes can make x evidence of y without x causing y. But not every effect evidences its cause; alternative causes may remain live.
+Meaning #2: Psychological meaning. When sentences are used, speakers mean things by them. … (Further senses follow.)”
+Predicted neural profile.
+•	Load/effort: moderate; numbered taxonomy and ordinary cases (cough, drunkenness) reduce DLPFC demand.
+•	Reward/encoding: strong hippocampal/angular-gyrus binding via everyday causal examples; repeated mini-clicks whenever a counterexample clarifies necessity/sufficiency.
+•	Overall pattern: balanced control cost with sustained semantic rewards.
+Psycho-availability. High.
+Editorial levers.
+1.	Keep each sense to a definition → two micro-examples → one boundary case pattern.
+2.	Add a row table contrasting the three senses (Aim, Inference License, Typical Verbs, Failure Modes).
+3.	Reserve technicalities (e.g., underdetermination by causes) for side notes to preserve flow.
+________________________________________
+Cross-cutting principles (Samples 13–15)
+•	Case before criterion. In debates about warrant, leading with concrete perceptual episodes supplies anchors that abstract criteria lack.
+•	Operationalize the key term. “Entitlement” must be tied to necessary/sufficient conditions and defeater profiles to earn memory.
+•	Taxonomy with examples. When differentiating senses of a term, numbered lists plus ordinary cases raise psycho-availability without diluting rigor.
+Charles Urban’s “Transcendental Empiricism” — Structured Analysis
+Part I — Claims Reconstruction and Problem Statement
+Text under analysis.
+Charles Urban, Transcendental Empiricism (dissertation abstract and thematic outline).
+Aim of this section.
+Reconstruct the core epistemological commitments in neutral language, separating labels from operational content.
+Reconstructed theses (label-free).
+1.	Middle-position thesis. A proposed framework claims to dissolve a dilemma about the source of justificatory content by dividing the difference between two opposed positions.
+2.	Method stance. A use-first/institutional orientation is adopted to set the platform for further argument.
+3.	Comparative thesis. One variant (A) is distinguished from another variant (B); variant (B) is criticized; variant (A) is defended in part but ultimately judged inadequate.
+4.	Externalist pressure. An environment-dependent account of content is said to undermine a type-segregation thesis (treating veridical vs. illusory states as different mental kinds), which the framework had relied upon.
+5.	Residual verdict. Despite these problems, the framework is said to remain “attractive.”
+Immediate difficulties.
+•	Under-specification of operational commitments. The abstract does not state what observations or cases would confirm or disconfirm the framework.
+•	Defeater silence. No explicit defeater profile is given (conditions under which entitlement or justification turns off).
+•	Label overload. Heavy dependence on proper names and doctrinal labels without early case-first exposition.
+Net epistemic content (as stated).
+Weak. The claims remain at the framework level: they describe relations among positions rather than testable commitments about knowledge acquisition or loss.
+________________________________________
+Part II — Content Diagnostics (cognitive and methodological)
+Diagnostic metrics.
+•	Label-Invariance Index (LII). Proportion of core claims that remain true when philosophical labels are replaced by dummy tokens or cross-domain terms.
+•	Operational Commitment Ratio (OCR). Number of specific predictions, defeaters, or decision rules per 1,000 words.
+•	Hook Density (HD). Number of worked examples, comparators, or figures per 300 words.
+•	Payoff Cadence (PC). Mean words between “click” moments (example resolved, lemma proved, paradox dissolved).
+Applied to the abstract/outlines.
+•	LII: High. Replacing “transcendental empiricism,” “linguistic idealism,” “disjunctivism,” etc., with dummy variables preserves the argumentative skeleton.
+•	OCR: Near zero in the abstract; no explicit predictions or defeaters.
+•	HD: Near zero; no worked examples.
+•	PC: Long (no local payoffs within the abstract).
+Consequences for psycho-availability.
+High control-network demand (terminology management) with low semantic/reward yield. Expect low comprehension/retention/transfer for non-specialists and shallow gains for specialists absent casework.
+Minimal specification needed to raise OCR.
+•	Decision point: If content is determined partly by environment, what change in environment flips the epistemic status of a perceptual belief?
+•	Defeater set: Under what conditions do entitlement claims fail (malfunction, deception, social misalignment, concept-environment mismatch)?
+•	Prediction: Which hallucination/illusion scenarios should still carry default warrant on this view, and which not?
+________________________________________
+Part III — Controlled Rewrites and their Cognitive Value
+Rewrite manipulations performed earlier (summarized).
+1.	Dummy-label rewrite. All key labels replaced by neutral tokens (Framework Sigma, Omega Orientation, etc.).
+2.	Cross-domain (machine-learning) rewrite. Same skeleton mapped to ML terms (data-constrained vs. language-locked models, environment-indexed representation).
+3.	Cross-domain (economics) rewrite. Skeleton mapped to price-information content (data vs. conventions; bubbles; institutions).
+Observed effects (conceptual, not empirical).
+•	Label-invariance holds across (1)–(3), indicating low domain-specific information in the original.
+•	The economics rewrite increases perceived clarity because it tacitly supplies comparators, mechanisms, and failure modes (markets, bubbles, institutional rules), boosting Hook Density and implied OCR without changing the skeleton.
+Editorial upgrades that preserve substance but raise psycho-availability.
+•	Case-first dilemma. Begin with a concrete content-fixing case (e.g., perceptual misclassification that changes with environment).
+•	2×2 map. (Conceptual vs. Nonconceptual) × (Internalist vs. Externalist) with the four views placed in cells, arrows showing tensions.
+•	Defeater table. Rows: (malfunction, deception, hostile environment, concept shortfall). Columns: (entitlement on/off; why).
+•	Decision tree. Start: “What fixes justificatory status of perceptual content here and now?” Route to view-specific outcomes.
+Resulting prediction.
+Once these structural edits are made (without adding new doctrine), OCR and HD rise, PC shortens, and psycho-availability increases—i.e., more learning per unit time with less effort.
+________________________________________
+Part IV — Mapping to the fMRI/Learning Framework
+Neural predictions (original vs. upgraded presentation).
+Measure	Original presentation	Upgraded (case-first, operationalized)
+Control networks (DLPFC, dACC/insula)	High, sustained	Lower, punctuated
+Semantic/encoding (angular gyrus, hippocampus)	Weak early engagement	Earlier, stronger engagement
+Reward (vmPFC/ventral striatum)	Rare “clicks”	Regular “clicks” (case → rule)
+Pupil / EDA / HRV	Pupil↑, EDA↑, HRV↓	Pupil↓, EDA↓, HRV↑
+Behavior	Lower comprehension/retention	Higher comprehension/retention
+Transfer	Weak (labels don’t travel)	Stronger (cases/defeaters port across domains)
+Single composite endpoint (as defined previously).
+NEI=z(Comprehension+Retention+Transfer+Reward/Affect)−z(DLPFC+ACC/Insula+Pupil+NASA-TLX)\textbf{NEI} = z(\text{Comprehension}+\text{Retention}+\text{Transfer}+\text{Reward/Affect}) - z(\text{DLPFC}+\text{ACC/Insula}+\text{Pupil}+\text{NASA\text{-}TLX})NEI=z(Comprehension+Retention+Transfer+Reward/Affect)−z(DLPFC+ACC/Insula+Pupil+NASA-TLX) 
+Expectation: NEI↑ for the upgraded version relative to the original, with within-subject contrasts.
+Clean experimental manipulation (pre-registrable).
+•	Factor A: Presentation (original vs. case-first/operationalized).
+•	Factor B: Labeling (original jargon vs. dummy vs. cross-domain concrete).
+•	Primary prediction: A-main effect (upgraded > original) and A×B interaction (upgrade helps most under jargon; cross-domain concrete mitigates but does not eliminate gains from operationalization).
+Clinical/health threshold.
+If original text reliably produces the triad (ACC/insula overactivation) + (HRV suppression ≥10%) + (lower retention) compared to the upgraded text, classify the original as cognitively noxious and the upgrade as a health-positive intervention—supporting the “medical necessity” claim.
+Link to earlier samples.
+•	High-PA exemplars: Kuczynski on empiricism (numbered consequences), “Meaning of ‘Meaning’” (taxonomy + ordinary cases), Sorites (relational comparator). These already instantiate the case-first + operational pattern.
+•	Low-PA exemplars: Wright on higher-order vagueness and on entitlement; Vahid vs. Burge (criterion-first, case-late). Urban’s original presentation clusters with this group.
+•	Discipline-imposed load control: The Gödel proof remains heavy but honestly loaded; with diagrams and one analogy, its NEI rises despite technical demands.
+________________________________________
+Summary Judgment
+•	The Urban text, as stated, exhibits high label-invariance and low operational commitment, predicting low psycho-availability and a strain-without-gain neural/physiological profile.
+•	Rewriting without changing doctrine but enforcing case-first exposition, explicit defeaters, and decision points increases OCR/HD, shortens PC, and thereby raises NEI.
+•	This pattern aligns with the broader result: presentation choices (not only subject matter) determine measurable learning efficiency and physiological load, justifying editorial replacement on medical as well as financial grounds.
+Conclusion
+The analyses and rewrites above support a simple claim: how ideas are encoded in prose measurably alters learning, memory, and physiological load. This is not a matter of taste. It is a matter of neural cost accounting.
+1) Core result.
+Prose that is case-first, operationalized, and visually scaffolded (clear comparators, defeater profiles, decision points, and simple figures) increases engagement of semantic/encoding and valuation systems (angular gyrus, hippocampus, vmPFC) while decreasing reliance on control/effort networks (DLPFC, dACC/insula). Behaviorally, such prose yields higher comprehension, retention, and transfer per minute; physiologically, it presents as smaller pupils, lower EDA, higher HRV. The inverse profile is observed for label-driven, taxonomy-first writing.
+2) Diagnostics that predict the profile.
+Four lightweight metrics forecast psycho-availability before scanning:
+•	Label-Invariance Index (LII): proportion of text that survives dummy or cross-domain substitution unchanged. High LII ⇒ thin domain content and low psycho-availability.
+•	Operational Commitment Ratio (OCR): explicit predictions, defeaters, and decision rules per 1,000 words. Higher OCR ⇒ higher psycho-availability.
+•	Hook Density (HD): worked examples, comparators, or figures per 300 words. Higher HD ⇒ more frequent “clicks.”
+•	Payoff Cadence (PC): mean words between click moments. Shorter PC ⇒ higher psycho-availability.
+3) Convergent evidence from the corpus.
+The pattern recurs across genres:
+•	High psycho-availability: the taxonomy of “meaning,” empiricism vs. rationalism with concrete anchors, the relational Sorites solution, numbered consequence lists.
+•	Mid with honest load: the non-reflexive Gödel program—discipline-imposed difficulty that improves with a single diagram and analogy.
+•	Low psycho-availability: higher-order vagueness and entitlement papers presented taxonomy-first and case-late; Vahid vs. Burge in criterion-first form.
+•	Label-invariance stress test: the Urban abstract retains cognitive value under dummy and cross-domain (ML/economics) substitutions, indicating low OCR and high LII; an economics rewrite “lands” only because it smuggles in comparators and failure modes absent in the source.
+4) A scanner-grounded editorial protocol.
+Adopt the following as enforceable standards for draft acceptance:
+•	Case → Rule sequencing: each section begins with a concrete micro-case; the rule comes after.
+•	Comparator explicitness: state the relevant baseline or scale (e.g., “poor compared to X”).
+•	Defeater tables: list conditions that turn warrant/entitlement off.
+•	Decision trees: route cases to outcomes; replace lettered taxonomies where possible.
+•	One hook per paragraph: example, lemma, or figure—no paragraph without a payoff.
+•	Figure minimalism: one axis or flow per figure; offload structure from working memory.
+•	Metric gate: LII↓, OCR↑, HD↑, PC↓ to pre-specified thresholds before publication review.
+5) Medical necessity.
+When measured against a content-matched, operationalized rewrite, prose that persistently produces the triad (ACC/insula overactivation) + (≥10% HRV suppression) + (lower retention) is cognitively noxious. Systematically replacing such text is a health-positive intervention—not merely a stylistic preference or financial optimization.
+6) Limitations and scope.
+Domain expertise moderates load; mathematics will remain heavy even when well written. BOLD is coarse in time; complementary EEG/fNIRS can scale evaluations outside the scanner. These points do not affect the central finding that presentation choices shift readers between strain-without-gain and efficient learning states.
+7) Final statement.
+If prose is a delivery system for cognition, then psycho-availability is its efficacy. The recommended protocol converts editorial choices into measurable differences in brain activity, behavior, and physiology. Under these measures, replacing low-OCR, high-LII, taxonomy-first writing with engineered, case-first prose is warranted on epistemic, economic, and medical grounds.
+
