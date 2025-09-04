@@ -38,6 +38,8 @@ Preferred communication style: Simple, everyday language.
   - **AI Features**: Text selection and full-article analysis via 8 AI-powered functions (rewrite, study guides, tests, podcasts, visual cognitive maps, thesis analysis, deep dives, suggested readings, summary + thesis).
   - **Audio**: OpenAI TTS-1 integration with Alloy voice for podcast generation.
   - **Download Functionality**: Ability to download all AI-generated content (text as .txt, audio as .mp3) with structured formatting and auto-generated filenames.
+  - **Current Status**: 21 issues across 18 volumes (as of September 2025), featuring interdisciplinary research in philosophy, cognitive science, political analysis, psychology, and AI studies.
+  - **Recent Volumes**: Volume XVII - "The Psychodynamics of Mass Violence: Sexuality, Aggression, and the Khmer Rouge" (psychological analysis of violence patterns); Volume XVIII - "Friction and Error-Tolerance: How Human Prose Differs from AI Prose" (cognitive science analysis distinguishing human from AI writing engines).
 - **Deployment**: Configured for Render, including all dependencies and PostgreSQL setup.
 
 ### Architectural Decisions
