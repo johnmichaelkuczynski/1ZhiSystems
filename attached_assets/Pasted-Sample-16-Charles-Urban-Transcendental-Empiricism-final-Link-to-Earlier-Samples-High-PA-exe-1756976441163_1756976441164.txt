@@ -1,0 +1,73 @@
+Sample 16 — Charles Urban, Transcendental Empiricism (final)
+Link to Earlier Samples
+•	High-PA exemplars.
+o	Kuczynski on empiricism (numbered consequences)
+o	The Meaning of “Meaning” (taxonomy + ordinary cases)
+o	Sorites (relational comparator)
+→ All of these already instantiate the case-first + operational pattern.
+•	Low-PA exemplars.
+o	Wright on higher-order vagueness
+o	Wright on entitlement
+o	Vahid vs. Burge (criterion-first, case-late)
+→ Urban’s original presentation clusters with this group.
+•	Discipline-imposed load control.
+o	The Gödel proof remains heavy but “honestly” so. With diagrams and one analogy, its NEI rises despite technical demands.
+________________________________________
+Summary Judgment
+•	Urban’s text, in its given form, shows high label-invariance and low operational commitment.
+•	Predicted outcome: low psycho-availability, with a strain-without-gain neural/physiological profile.
+•	Rewriting the text — while leaving doctrine intact — but enforcing case-first exposition, explicit defeaters, and decision points yields:
+o	↑ OCR
+o	↑ HD
+o	↓ PC
+o	↑ NEI
+This aligns with the broader finding: presentation choices, not just subject matter, determine measurable learning efficiency and physiological load. Editorial replacement is justified not only epistemically but also medically and financially.
+________________________________________
+Conclusion
+1) Core result.
+Case-first, operationalized, and visually scaffolded prose (comparators, defeater profiles, decision points, simple figures) →
+•	↑ semantic/encoding and valuation systems (angular gyrus, hippocampus, vmPFC)
+•	↓ control/effort networks (DLPFC, dACC/insula)
+•	Behaviorally: higher comprehension, retention, transfer per minute
+•	Physiologically: smaller pupils, ↓ EDA, ↑ HRV
+Inverse profile: taxonomy-first, label-driven writing.
+________________________________________
+2) Diagnostics that predict the profile.
+Four lightweight metrics allow pre-scan forecasting:
+•	Label-Invariance Index (LII). High = thin domain content, low PA.
+•	Operational Commitment Ratio (OCR). Higher = higher PA.
+•	Hook Density (HD). Higher = more frequent “clicks.”
+•	Payoff Cadence (PC). Shorter = higher PA.
+________________________________________
+3) Convergent evidence from the corpus.
+•	High PA. Taxonomy of “meaning,” empiricism vs. rationalism (with anchors), relational Sorites, numbered consequence lists.
+•	Mid, honest load. Non-reflexive Gödel proof — hard but disciplined, improved by diagram + analogy.
+•	Low PA. Wright on higher-order vagueness, Wright on entitlement, Vahid vs. Burge.
+•	Urban abstract. Stress test shows: dummy/cross-domain substitutions preserve structure, proving low OCR + high LII. Economics rewrite “lands” only because it imports comparators and failure modes absent in the original.
+________________________________________
+4) A scanner-grounded editorial protocol.
+Adopt the following standards for acceptance:
+•	Case → Rule sequencing. Always lead with a concrete micro-case.
+•	Comparator explicitness. Always state the baseline/scale.
+•	Defeater tables. List off-conditions explicitly.
+•	Decision trees. Replace lettered taxonomies.
+•	One hook per paragraph. No section without a payoff.
+•	Figure minimalism. One axis or flow per figure.
+•	Metric gate. Enforce thresholds: ↓ LII, ↑ OCR, ↑ HD, ↓ PC.
+________________________________________
+5) Medical necessity.
+When matched against a case-first rewrite, prose that reliably produces:
+•	ACC/insula overactivation,
+•	≥10% HRV suppression,
+•	Lower retention →
+counts as cognitively noxious.
+Replacing such text is health-positive, not a matter of taste or style.
+________________________________________
+6) Limitations and scope.
+•	Expertise moderates load: math will remain heavy, even when well-written.
+•	BOLD has coarse time resolution; EEG/fNIRS can scale evaluations outside the scanner.
+•	These do not affect the central result: presentation choices shift readers between strain-without-gain vs. efficient-learning states.
+________________________________________
+7) Final statement.
+If prose is a delivery system for cognition, then psycho-availability is its efficacy.
+Replacing low-OCR, high-LII, taxonomy-first writing with case-first, operationalized prose is justified on epistemic, economic, and medical grounds
