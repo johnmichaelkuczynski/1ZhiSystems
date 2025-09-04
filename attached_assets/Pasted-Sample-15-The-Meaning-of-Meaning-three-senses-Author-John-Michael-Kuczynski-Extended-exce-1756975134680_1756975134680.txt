@@ -1,0 +1,57 @@
+Sample 15 — “The Meaning of ‘Meaning’” (three senses)
+Author: John-Michael Kuczynski
+Extended excerpt.
+“There would be no languages if there were no expressions. Nothing meaningless is an expression. … The word ‘meaning’ has three different meanings, and only one directly relates to the nature of language.
+Meaning #1: Evidential meaning. To say that x ‘means’ y can say that x is evidence of y—that x and y are causally interrelated so that, given x, it is reasonable to infer y. ‘Smith’s hacking cough means he has a violent lung infection’ means Smith’s cough is evidence of such an infection. Causes can be evidence of their effects; common causes can make x evidence of y without x causing y. But not every effect evidences its cause; alternative causes may remain live.
+Meaning #2: Psychological meaning. When sentences are used, speakers mean things by them. … (Further senses follow.)”
+Predicted neural profile.
+•	Load/effort: moderate; numbered taxonomy and ordinary cases (cough, drunkenness) reduce DLPFC demand.
+•	Reward/encoding: strong hippocampal/angular-gyrus binding via everyday causal examples; repeated mini-clicks whenever a counterexample clarifies necessity/sufficiency.
+•	Overall pattern: balanced control cost with sustained semantic rewards.
+Psycho-availability. High.
+Editorial levers.
+1.	Keep each sense to a definition → two micro-examples → one boundary case pattern.
+2.	Add a row table contrasting the three senses (Aim, Inference License, Typical Verbs, Failure Modes).
+3.	Reserve technicalities (e.g., underdetermination by causes) for side notes to preserve flow.
+________________________________________
+Cross-cutting principles (Samples 13–15)
+•	Case before criterion. In debates about warrant, leading with concrete perceptual episodes supplies anchors that abstract criteria lack.
+•	Operationalize the key term. “Entitlement” must be tied to necessary/sufficient conditions and defeater profiles to earn memory.
+•	Taxonomy with examples. When differentiating senses of a term, numbered lists plus ordinary cases raise psycho-availability without diluting rigor.
+Charles Urban’s “Transcendental Empiricism” — Structured Analysis
+Part I — Claims Reconstruction and Problem Statement
+Text under analysis.
+Charles Urban, Transcendental Empiricism (dissertation abstract and thematic outline).
+Aim of this section.
+Reconstruct the core epistemological commitments in neutral language, separating labels from operational content.
+Reconstructed theses (label-free).
+1.	Middle-position thesis. A proposed framework claims to dissolve a dilemma about the source of justificatory content by dividing the difference between two opposed positions.
+2.	Method stance. A use-first/institutional orientation is adopted to set the platform for further argument.
+3.	Comparative thesis. One variant (A) is distinguished from another variant (B); variant (B) is criticized; variant (A) is defended in part but ultimately judged inadequate.
+4.	Externalist pressure. An environment-dependent account of content is said to undermine a type-segregation thesis (treating veridical vs. illusory states as different mental kinds), which the framework had relied upon.
+5.	Residual verdict. Despite these problems, the framework is said to remain “attractive.”
+Immediate difficulties.
+•	Under-specification of operational commitments. The abstract does not state what observations or cases would confirm or disconfirm the framework.
+•	Defeater silence. No explicit defeater profile is given (conditions under which entitlement or justification turns off).
+•	Label overload. Heavy dependence on proper names and doctrinal labels without early case-first exposition.
+Net epistemic content (as stated).
+Weak. The claims remain at the framework level: they describe relations among positions rather than testable commitments about knowledge acquisition or loss.
+________________________________________
+Part II — Content Diagnostics (cognitive and methodological)
+Diagnostic metrics.
+•	Label-Invariance Index (LII). Proportion of core claims that remain true when philosophical labels are replaced by dummy tokens or cross-domain terms.
+•	Operational Commitment Ratio (OCR). Number of specific predictions, defeaters, or decision rules per 1,000 words.
+•	Hook Density (HD). Number of worked examples, comparators, or figures per 300 words.
+•	Payoff Cadence (PC). Mean words between “click” moments (example resolved, lemma proved, paradox dissolved).
+Applied to the abstract/outlines.
+•	LII: High. Replacing “transcendental empiricism,” “linguistic idealism,” “disjunctivism,” etc., with dummy variables preserves the argumentative skeleton.
+•	OCR: Near zero in the abstract; no explicit predictions or defeaters.
+•	HD: Near zero; no worked examples.
+•	PC: Long (no local payoffs within the abstract).
+Consequences for psycho-availability.
+High control-network demand (terminology management) with low semantic/reward yield. Expect low comprehension/retention/transfer for non-specialists and shallow gains for specialists absent casework.
+Minimal specification needed to raise OCR.
+•	Decision point: If content is determined partly by environment, what change in environment flips the epistemic status of a perceptual belief?
+•	Defeater set: Under what conditions do entitlement claims fail (malfunction, deception, social misalignment, concept-environment mismatch)?
+•	Prediction: Which hallucination/illusion scenarios should still carry default warrant on this view, and which not?
+________________________________________
