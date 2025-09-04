@@ -1,0 +1,64 @@
+Sample 8 — Dummett on McTaggart’s argument about time (with replies by Lowe, Moore)
+Author: Kevin Falvey
+Extended excerpt.
+“Years ago, Michael Dummett defended McTaggart’s argument for the unreality of time, arguing that it cannot be dismissed as guilty of an ‘indexical fallacy.’ Recently, E. J. Lowe has disputed Dummett’s claims for the cogency of the argument. An elaboration and defense of Dummett’s interpretation is offered (though not of its soundness). Work on tense in the philosophy of language and on the concept of the past in memory is brought to bear to support the claim that McTaggart is not guilty of any simple indexical fallacy. Along the way an account due to A. W. Moore is criticized, and a conception of tense realism implicit in McTaggart’s work is defended, with the aim of preparing the ground for a substantive defense of the reality of tense.”
+Predicted profile.
+•	Load/effort: elevated frontopolar/DLPFC from authority-driven framing and meta-level classifications; minimal early concreteness.
+•	Reward/encoding: weak episodic hooks until late; discussion remains at the level of “positions about positions,” which yields limited vmPFC reward and shallow hippocampal binding for non-specialists.
+•	Overall pattern: high control cost, low local payoff cadence.
+Psycho-availability. Low–mid.
+Edit levers.
+1.	Open with a one-paragraph micro-case (e.g., A-/B-series clash in a dated diary entry) and only then attach the labels (McTaggart, Dummett, Lowe).
+2.	Replace lettered taxonomies with two concrete timelines (event now/past/future vs. tenseless ordering) and one pointed contradiction to visualize the pressure.
+3.	Consolidate authority references into parenthetical citations to reduce narrative interruption.
+________________________________________
+Sample 9 — “Non-reflexive” proof of Gödel’s First Incompleteness Theorem
+Author: John-Michael Kuczynski
+Extended excerpt.
+“This monograph presents a non-reflexive proof of Gödel’s First Incompleteness Theorem. We demonstrate the incompleteness of first-order arithmetic without relying on self-reference, paradoxes, or diagonalization. Instead, the proof is based on a cardinality mismatch: the set of arithmetical truths is countable, but the space of candidate proof-sets over those truths has the cardinality of the continuum. Thus, the system cannot, even in principle, admit a recursively enumerable set of axioms that proves all and only the true arithmetical statements—some truths must go unprovable.
+We distinguish Narrowly Arithmetical Truths (NA)—truths expressible solely in the language of arithmetic—from Extended Arithmetical Truths (EA), which quantify over sets of such truths or proofs. Only NA is recursively enumerable; once EA is admitted, we enter the non-recursive, non-denumerable domain, and incompleteness becomes inevitable.”
+Predicted profile.
+•	Load/effort: high IPS/parietal (quantitative reasoning) and DLPFC (symbolic maintenance).
+•	Reward/encoding: strong when the cardinality-mismatch insight lands; clear category split (NA vs. EA) aids semantic chunking.
+•	Overall pattern: discipline-imposed difficulty with honest payoff; efficiency rises sharply with minimal visualization.
+Psycho-availability. Mid (general audience) → High (mathematical audience).
+Edit levers.
+1.	Add a single diagram showing Countable (NA) vs. Uncountable (candidate proof-sets) and the impossibility wedge.
+2.	Include one micro-analogy (e.g., trying to list all reals with a finite alphabetic catalog) to anchor the uncountability intuition.
+3.	Keep all category names (NA/EA) stable and minimize symbol proliferation to protect working memory.
+________________________________________
+Cross-cutting principles from Samples 7–9
+•	Example first, term second. Early, concrete cases (for dispositions; for A-/B-series) lower control demands and raise reward.
+•	Visual scaffolds tame abstraction. Simple diagrams (timelines; set-inclusion and cardinality cartoons) convert prefrontal load into parietal/navigational processing.
+•	One hook per paragraph. Each dense paragraph should deliver a local “click” (example, lemma, or figure) to maintain engagement and encode structure.
+
+fMRI and Prose: Measuring and Maximizing “Psycho-Availability”
+Case Analyses (Samples 10–12)
+Sample 10 — Higher-order vagueness as illusion
+Author: Crispin Wright
+Extended excerpt.
+“It is common among philosophers who take an interest in the phenomenon of vagueness in natural language not merely to acknowledge higher-order vagueness but to take its existence as a basic datum—so that views that lack the resources to account for it are regarded as deficient on that score. The main purpose is to loosen the hold of this idea. Higher-order vagueness is no basic datum but an illusion, fostered by misunderstandings of the nature of (first-order) vagueness itself. … The ‘ineradicability intuition’ (Dummett): ‘hill’ is vague; introducing ‘eminence’ to cover borderline cases leaves further borderlines (hill–eminence; mountain–eminence), and so ad infinitum. Generalizing, for any F and G with a vague mutual border, any new H for the shared border creates new borders F–H and G–H; hence the original F vs. borderline-F distinction is already vague, and likewise for G.”
+Predicted neural profile.
+•	Load/effort: elevated frontopolar/DLPFC from authority-driven setup and early abstraction into lettered variables (F, G, H).
+•	Reward/encoding: limited hippocampal binding until a concrete case is worked; the “illusion” diagnosis yields weak vmPFC reward without a crisp demonstration.
+•	Overall pattern: high control demand, low local payoff cadence for non-specialists.
+Psycho-availability. Low–mid.
+Editorial levers.
+1.	Lead with a single quantified hill/mountain micro-case (e.g., altitude thresholds with noise), then show why adding H = eminence re-creates borderlines.
+2.	Replace F–G–H with a diagrammed continuum (one axis, two moving cutoffs); defer symbols to an appendix.
+3.	Collapse authority preamble into one sentence and shift citations to parentheses to reduce narrative interruption.
+________________________________________
+Sample 11 — A relational solution to the Sorites paradox
+Author: John-Michael Kuczynski
+Extended excerpt.
+“A person with one dollar is poor. If a person with n dollars is poor, then so is a person with n+1 dollars. Therefore, a person with a billion dollars is poor. True premises, valid reasoning, false conclusion: the Sorites paradox. … The paradox can be solved while retaining classical logic. For any predicate that generates a Sorites, significant uses are elliptical for a relational statement: a significant token of ‘Bob is poor’ means Bob is poor compared to x, for some value of x. Once x is supplied, a definite cutoff between having and not having the predicate is supplied; the inductive step in the Sorites is neutralized. Analogous reformulations hold for ‘smart,’ ‘wealthy,’ and similar predicates. The solution may not extend to every Sorites-type paradox, but it resolves a significant subclass.”
+Predicted neural profile.
+•	Load/effort: moderate DLPFC for tracking the inductive schema.
+•	Reward/encoding: strong hippocampal/angular-gyrus binding from familiar money/IQ examples; reliable ventral-striatal reward when the ellipsis → relation move dissolves the paradox.
+•	Overall pattern: steady control demand with recurring “click” moments; high retention.
+Psycho-availability. High.
+Editorial levers.
+1.	Make the comparator explicit (“compared to the median wealth of country C in year Y”) to reduce ambiguity in x.
+2.	Add a single figure: two parallel scales (absolute vs. relative) with the induced cutoff shown.
+3.	Provide one additional non-monetary case (e.g., “tall compared to league average”) to generalize the schema.
+________________________________________
