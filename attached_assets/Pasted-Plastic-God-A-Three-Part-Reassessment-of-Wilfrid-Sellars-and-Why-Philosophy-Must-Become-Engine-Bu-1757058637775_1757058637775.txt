@@ -1,0 +1,25 @@
+Plastic God: A Three-Part Reassessment of Wilfrid Sellars — and Why Philosophy Must Become Engine-Building
+Abstract
+Sellars’ reputation rests on four oft-repeated “contributions”: the reasons/causes distinction; the manifest/scientific image contrast; the demolition of the “Myth of the Given” (exemplified by the “Jones in the tie shop” vignette); and a Ramsey-style functionalism about theoretical terms (mirrored in his inferentialist semantics). On inspection, each either reduces to a truism left undeveloped or collapses under pressure. By contrast, Berkeley’s New Theory of Vision anticipates, clarifies, and generalizes the core anti-foundationalist insight with a specificity Sellars never achieved, a point argued in detail in the author’s earlier paper (and from which several arguments here are drawn)
+FOUNDATIONALISM AND BERKELEY
+. The upshot is methodological: canonical slogans must be replaced by epistemic engines—operational systems that implement, benchmark, and falsify philosophical theses. Where discourse stalls, engines settle. The article proceeds in three parts: (I) an audit of the “contributions”; (II) a focused critique of inferentialism/functionalism; (III) a constructive program for replacing discursive philosophy with engine construction.
+________________________________________
+Part I — The Legend and the Ledger: What Sellars Is Said to Have Done (and What He Actually Did)
+1) Reasons vs. Causes: True—but undeveloped
+Sellars insists that normative justification (the “space of reasons”) must not be reduced to mere causal explanation. That thesis is correct but boilerplate. What’s missing is the hard part:
+•	Can reasons also be causes in rational action, and if so, how?
+•	What distinguishes purposive action from reflex such that reasons are constitutive of agency rather than post-hoc gloss?
+Sellars offers no substantive model that connects justificatory status to action-production. The distinction remains a slogan; no account of mechanism, interface, or constraints follows.
+2) Manifest vs. Scientific Image: Correct contrast—empirically empty
+The everyday “manifest image” and theory-laden “scientific image” do diverge. But without worked examples that adjudicate conflict, measure priority, or specify translation conditions, the contrast is a promissory note. A research-level claim would, at minimum, (i) identify specific points of friction (e.g., secondary qualities, agency, norms), (ii) propose decision procedures, and (iii) report outcomes. None of this appears with sufficient determination to be testable.
+3) The “Myth of the Given” and the Tie-Shop Vignette: A fragment masked as a revolution
+The tie-shop story—learning to read colors under deviant illumination—does illustrate that perception depends on background knowledge. But the fragment is both narrow (color only; contrived conditions) and under-generalized. As the author has shown, Berkeley not only anticipated this point; he systematically extended it to distance, shape, size, motion, and more, under ordinary conditions, and explained how kinesthetic/tactile cues integrate with vision to produce representational content
+FOUNDATIONALISM AND BERKELEY
+. Berkeley thereby addresses both:
+•	Scope: the point applies across perceptual properties, not merely color
+FOUNDATIONALISM AND BERKELEY
+;
+•	Mechanism: how non-representational “raw feels” are integrated into representational percepts (mitigating regress)
+FOUNDATIONALISM AND BERKELEY
+.
+Sellars, by contrast, leaves both the generalization and the mechanism largely implicit or obscure. The tie-shop remains a gesture unless someone else does the heavy lifting—which Berkeley already did.
