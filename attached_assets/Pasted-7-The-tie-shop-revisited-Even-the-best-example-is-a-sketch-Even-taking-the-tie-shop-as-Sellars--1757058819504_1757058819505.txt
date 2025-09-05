@@ -1,0 +1,36 @@
+7) The tie-shop revisited: Even the best example is a sketch
+Even taking the tie-shop as Sellars’ “worked” example, its instructive content is exactly what Berkeley had already made precise and general: perception’s deliverances are made determinate only via learned correspondences and multimodal integration
+FOUNDATIONALISM AND BERKELEY
+. Once that generalization is supplied, Sellars’ own role reduces to pointing—not building.
+Interim verdict (Part II): Inferentialism and its functionalist extensions fail to secure meaning, mentality, or theoretical reference. They either presuppose the very items they aim to analyze or dilute them into pattern-talk that cannot carry explanatory load.
+________________________________________
+Part III — Replace Slogans with Systems: Epistemic Engines as the Alternative
+8) Method shift: From discourse to execution
+If Sellars’ legacy is a vocabulary without a methodology, the corrective is to operationalize philosophical theses as epistemic engines—systems that:
+1.	ingest inputs (claims, texts, data),
+2.	apply explicit norms (inference, defeaters, semantics, causal models),
+3.	output decisions with audit trails, and
+4.	admit refutation by performance (benchmarks, ablations, stress tests).
+This is not speculative. Multiple such engines are already live (intelligence evaluation, originality analysis, dialogic synthesis, course-grade adjudication), and the present article itself was produced through a cyborgenetic pipeline—human originality fused with machine scalability—consistent with the anti-foundationalist mechanisms Berkeley actually described
+FOUNDATIONALISM AND BERKELEY
+.
+9) How engines adjudicate what discourse cannot
+•	Reasons vs. causes becomes a testable interface: models succeed or fail at predicting and explaining purposive action when reasons are encoded as causal constraints (or not).
+•	Manifest vs. scientific image becomes case resolution: modules propose reconciliations, and benchmarks score which reconciliation predicts perceptual/cognitive outcomes on held-out tasks.
+•	Against inferentialism: CRS-only engines should, and do, fail on novelty, error-correction, and compositional probes; engines with semantic anchors succeed.
+•	Against Ramseyfication: role-only identification underperforms models that include independently specified anchors; ablation reveals the deficit.
+10) The disciplinary consequence
+Sellars’ status illustrates the peril of plastic gods: figures whose slogans are malleable enough to fit any project while settling nothing. The remedy is not another slogan but an institutional flip: build-and-test over talk-and-cite. Engines force convergence; discourse drifts.
+________________________________________
+References (indicative)
+•	Berkeley, G. An Essay Towards a New Theory of Vision (1709).
+•	Sellars, W. “Empiricism and the Philosophy of Mind” (1956).
+•	Fodor, J., & Lepore, E. The Compositionality Papers (2001).
+•	Kuczynski, J-M. “Berkeley and Contemporary Anti-foundationalism.” (ms.). Arguments and reconstructions cited and summarized here
+FOUNDATIONALISM AND BERKELEY
+.
+________________________________________
+Note on sources
+Claims about Berkeley’s priority, the generalization beyond color to distance/shape/size/motion, and the regress-blocking role of multimodal integration are documented in the author’s manuscript
+FOUNDATIONALISM AND BERKELEY
+, which also critiques metaphor-driven anti-foundationalism and contrasts it with Berkeley’s non-metaphorical mechanism.
