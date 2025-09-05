@@ -1,0 +1,26 @@
+4) Ramsey-Style Functionalism about Theoretical Terms: Roles without anchors
+In keeping with his inferentialism, Sellars reads theoretical terms via their functional roles in a network of laws and inferences (a Ramseyfication move: replace “electron,” “belief,” “pain,” etc., with variables bound by the roles they occupy). The difficulty is familiar and acute:
+•	Bridge-law fragility: the links from role to observation are defeasible, time-delayed, and routinely overridden; they resist lawlike statement without smuggling in the very target concept (e.g., “heart attack”) as a unifier.
+•	Reference circularity: “whatever plays the pain-role” individuates by pain, not by independently specifiable observables; the analysis collapses into re-description.
+•	Explanatory loss: multiple realizability does not license explanatory thinness. Often what matters is the concrete state that explains the downstream pattern, not the pattern abstracted from its anchor.
+Interim verdict (Part I): Each marquee item either states a truism and stops, or proposes a reduction that, once sharpened, becomes circular or vacuous. Where substance is needed, Sellars supplies vocabulary; where evidence is needed, he supplies illustration by anecdote. Berkeley, remarkably, had the substance two centuries earlier
+FOUNDATIONALISM AND BERKELEY
+.
+________________________________________
+Part II — Inferentialism and Functionalism: Why the Program Fails
+5) Inferentialism/CRS (meaning as conceptual role)
+Sellars’ semantics—amplified later by Brandom—makes meaning a function of inferential position. Four problems (among others) are decisive:
+1.	Guidance from prior meaning
+Appropriate use is guided by prior grasp of meaning; use does not constitute it. If the waiter asks your order, you say “clam chowder,” not “rotten entrails,” because you already know what those expressions mean. Treating use as constitutive inverts the dependence.
+2.	Noises vs. linguistic items
+Mere sounds are not words. Only sounds-with-meanings are linguistic. So there is nothing to “use” as a word until coupling with meaning has occurred. “Meaning = use” presupposes what it purports to analyze.
+3.	Novel-sentence competence
+Infinitely many English sentences have never been uttered yet are instantly understood. If meaning were constituted by communal use, novel sentences would lack meaning until after the fact—which is absurd. Compositional semantics + prior lexical meaning explains novelty; CRS cannot.
+4.	Error and inference
+If meaning = inferential role, widespread mistaken inferences would shift meaning. But false community inferences do not retrodefine truth-conditions. Meaning can constrain use and correct it; it is not exhausted by it.
+These points jointly show that inferential role may be a causal factor in change of meaning, but it cannot be the constitutive basis of meaning. (For earlier development of the anti-CRS line, see the author’s published arguments; for an independent demolition of CRS-style views, see Fodor & Lepore 2001.)
+6) From semantics to mentality: Functionalism without foundations
+Sellars’ functionalism about the mind generalizes the same mistake: treating mental kinds as what fills the role in a pattern linking inputs, other states, and outputs. The objections mirror §4:
+•	Role individuation presupposes content (the “belief-that-p” role cannot be specified without content-involving generalizations).
+•	Defeasibility wrecks reduction (masking, finks, compensation: the observables underdetermine the mental kind unless content is already in play).
+•	Explanatory regress: the role network needs semantic and causal anchors to explain why this physical realization plays that role across counterfactuals. Without anchors, functionalism is bookkeeping, not explanation.
