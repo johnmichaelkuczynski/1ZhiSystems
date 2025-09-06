@@ -1,25 +1,25 @@
 export default function Home() {
   const livingBooksByKuczynski = [
-    { title: "ETHICS", url: "https://ethics101.xyz" },
-    { title: "FREEDOM", url: "https://freedom101.xyz" },
-    { title: "CAUSATION", url: "https://causality101.xyz" },
-    { title: "EPISTEMOLOGY", url: "https://epistemology101.xyz" },
-    { title: "EMPIRICISM AND ITS LIMITS", url: "https://empiricism101.xyz" },
-    { title: "DICTIONARY OF ANALYTIC PHILOSOPHY", url: "https://philosophydictionary.xyz" },
     { title: "AI AND PHILOSOPHY", url: "https://aiandphilosophy.com" },
-    { title: "SYMBOLIC LOGIC", url: "https://symboliclogic.xyz" },
-    { title: "MATHEMATICAL LOGIC", url: "https://mathematicallogic.xyz" },
     { title: "AI LOGIC", url: "https://ailogic101.xyz" },
-    { title: "CRITICAL REASONING", url: "https://criticalreasoning.xyz" },
-    { title: "WRITING COURSE", url: "https://writing101.xyz" },
-    { title: "ON THE CARDINALITY OF PROOF SPACES", url: "https://godel101.xyz" },
-    { title: "SEMANTICS", url: "https://semantics101.xyz" },
     { title: "ANALYTIC PHILOSOPHY (COMPLETE)", url: "https://analyticphilosophy.xyz" },
     { title: "ANALYTIC PHILOSOPHY CHAPTER 1", url: "https://analysisofanalysis.xyz" },
-    { title: "WHY WAS SOCRATES EXECUTED?", url: "https://socrates101.xyz" },
     { title: "ANALYTIC PHILOSOPHY CHAPTER 2", url: "https://platonism101.xyz" },
     { title: "ANALYTIC PHILOSOPHY CHAPTER 3", url: "https://truthandmeaning.xyz" },
-    { title: "RUSSELL'S MATHEMATICAL PHILOSOPHY (SECOND EDITION)", url: "https://mathematicalphilosophy.xyz" }
+    { title: "CAUSATION", url: "https://causality101.xyz" },
+    { title: "CRITICAL REASONING", url: "https://criticalreasoning.xyz" },
+    { title: "DICTIONARY OF ANALYTIC PHILOSOPHY", url: "https://philosophydictionary.xyz" },
+    { title: "EMPIRICISM AND ITS LIMITS", url: "https://empiricism101.xyz" },
+    { title: "EPISTEMOLOGY", url: "https://epistemology101.xyz" },
+    { title: "ETHICS", url: "https://ethics101.xyz" },
+    { title: "FREEDOM", url: "https://freedom101.xyz" },
+    { title: "MATHEMATICAL LOGIC", url: "https://mathematicallogic.xyz" },
+    { title: "ON THE CARDINALITY OF PROOF SPACES", url: "https://godel101.xyz" },
+    { title: "RUSSELL'S MATHEMATICAL PHILOSOPHY (SECOND EDITION)", url: "https://mathematicalphilosophy.xyz" },
+    { title: "SEMANTICS", url: "https://semantics101.xyz" },
+    { title: "SYMBOLIC LOGIC", url: "https://symboliclogic.xyz" },
+    { title: "WHY WAS SOCRATES EXECUTED?", url: "https://socrates101.xyz" },
+    { title: "WRITING COURSE", url: "https://writing101.xyz" }
   ];
 
   const classicsBooks = [
