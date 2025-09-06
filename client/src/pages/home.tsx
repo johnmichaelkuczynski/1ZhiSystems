@@ -77,7 +77,8 @@ export default function Home() {
     { title: "Psychology Pro", url: "https://psychologypro.xyz" },
     { title: "Super Profiler", url: "https://superprofiler.xyz" },
     { title: "HTML Converter", url: "https://htmlconverter.xyz" },
-    { title: "Humanizer Plus", url: "https://humanizerplus.xyz" }
+    { title: "Humanizer Plus", url: "https://humanizerplus.xyz" },
+    { title: "Podcast Creator", url: "https://ezpodcast.xyz" }
   ];
 
   const BookItem = ({ title, url, note }: { title: string; url: string | null; note?: string }) => (
