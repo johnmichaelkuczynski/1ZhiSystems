@@ -23,25 +23,25 @@ export default function Home() {
   ];
 
   const classicsBooks = [
+    { title: "A ROOM WITH A VIEW", url: "https://aroomwithaview101.xyz" },
+    { title: "ANARCHISM AND OTHER ESSAYS", url: "https://anarchismandotheressays.xyz" },
     { title: "ART OF WAR", url: "https://theartofwarbysuntzu.xyz" },
     { title: "BOOK OF MORMON", url: "https://bookofmormon101.xyz" },
+    { title: "CIVILIZATION AND ITS DISCONTENTS", url: "https://civilizationanditsdiscontents.xyz" },
+    { title: "DEATH OF IVAN ILYCH", url: "https://ivanilych.xyz" },
+    { title: "DRACULA", url: "https://dracula101.xyz" },
+    { title: "DREAM PSYCHOLOGY", url: "https://dreampsychology.xyz" },
+    { title: "FRANKENSTEIN", url: "https://frankenstein101.xyz" },
+    { title: "INDUSTRIAL SOCIETY AND ITS FUTURE", url: "https://unabombermanifesto.xyz" },
     { title: "KING JAMES BIBLE", url: "https://kingjamesbible.xyz" },
     { title: "OUR KNOWLEDGE OF THE EXTERNAL WORLD", url: "https://ourknowledgeoftheexternalworld.xyz" },
-    { title: "DREAM PSYCHOLOGY", url: "https://dreampsychology.xyz" },
-    { title: "ANARCHISM AND OTHER ESSAYS", url: "https://anarchismandotheressays.xyz" },
-    { title: "FRANKENSTEIN", url: "https://frankenstein101.xyz" },
-    { title: "DRACULA", url: "https://dracula101.xyz" },
-    { title: "A ROOM WITH A VIEW", url: "https://aroomwithaview101.xyz" },
-    { title: "SHAKESPEARE COMPLETE WORKS", url: "https://shakespeare101.xyz" },
-    { title: "TOTEM AND TABOO", url: "https://totemandtaboo.xyz" },
-    { title: "THE COMMUNIST MANIFESTO", url: "https://communistmanifesto.xyz" },
-    { title: "INDUSTRIAL SOCIETY AND ITS FUTURE", url: "https://unabombermanifesto.xyz" },
-    { title: "THE LAWS", url: "https://thelawsbyplato.xyz" },
-    { title: "TRACTATUS LOGICO-PHILOSOPHICUS", url: "https://tractatuslogicophilosophicus.xyz" },
-    { title: "DEATH OF IVAN ILYCH", url: "https://ivanilych.xyz" },
     { title: "PRINCIPLES OF PSYCHOLOGY", url: "https://herbertspencer.xyz" },
     { title: "SEVEN SECRETS OF A STRESS FREE LIFE", url: "https://sevensecrets.xyz" },
-    { title: "CIVILIZATION AND ITS DISCONTENTS", url: "https://civilizationanditsdiscontents.xyz" }
+    { title: "SHAKESPEARE COMPLETE WORKS", url: "https://shakespeare101.xyz" },
+    { title: "THE COMMUNIST MANIFESTO", url: "https://communistmanifesto.xyz" },
+    { title: "THE LAWS", url: "https://thelawsbyplato.xyz" },
+    { title: "TOTEM AND TABOO", url: "https://totemandtaboo.xyz" },
+    { title: "TRACTATUS LOGICO-PHILOSOPHICUS", url: "https://tractatuslogicophilosophicus.xyz" }
   ];
 
   const courses = [
