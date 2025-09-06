@@ -18,7 +18,7 @@ Preferred communication style: Simple, everyday language.
 - **Routing**: Wouter
 - **State Management**: TanStack Query
 - **Design**: Mobile-first, responsive, minimal animations, direct functionality.
-- **Components**: Home Page, Journal System (listing, individual issues, admin), reusable shadcn/ui components.
+- **Components**: Home Page (with categorized app sections), Journal System (listing, individual issues, admin), reusable shadcn/ui components.
 
 ### Backend
 - **Runtime**: Node.js with Express.js
@@ -40,6 +40,7 @@ Preferred communication style: Simple, everyday language.
   - **Download Functionality**: Ability to download all AI-generated content (text as .txt, audio as .mp3) with structured formatting and auto-generated filenames.
   - **Current Status**: 24 issues across 21 volumes (as of September 2025), featuring interdisciplinary research in philosophy, cognitive science, political analysis, psychology, film studies, and AI studies.
   - **Recent Volumes**: Volume XIX - "Podsters and Bureaucrats: On Agency, Identity, and the Horror of Absorption" (cultural analysis connecting Invasion of the Body Snatchers to bureaucratic psychology and modern institutional thinking); Volume XX - "Plastic God: A Three-Part Reassessment of Wilfrid Sellars — and Why Philosophy Must Become Engine-Building" (systematic critique of analytic philosophy's most revered figure with constructive program for epistemic engines over discursive philosophy); Volume XXI - "The Mafia Is Finished: Power, Myth, and the End of an Era" (cultural analysis of the complete organizational, symbolic, and representational death of the American Mafia).
+- **Core Applications**: 21 apps organized into 6 categories (Writing & Books, Education & Learning, Intelligence & Psychology, Visual & Multimedia, Audio & Interactive Media, Utility & Conversion) with emoji-categorized interface for improved user experience.
 - **Deployment**: Configured for Render, including all dependencies and PostgreSQL setup.
 
 ### Architectural Decisions
