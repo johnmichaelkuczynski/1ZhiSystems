@@ -48,6 +48,7 @@ Preferred communication style: Simple, everyday language.
 - **Database Integration**: Shifted from in-memory to PostgreSQL for persistent storage.
 - **Component Library**: Chose shadcn/ui for control over styling and accessibility, accepting higher setup.
 - **Static Content**: Hardcoded book and application data due to their static nature, simplifying architecture.
+- **Content Organization**: All book collections now alphabetically sorted for improved discoverability.
 
 ## External Dependencies
 
