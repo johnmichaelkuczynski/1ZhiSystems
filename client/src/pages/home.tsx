@@ -52,34 +52,46 @@ export default function Home() {
 
 
 
-  const coreApplications = [
-    { title: "Living Book Creator", url: "https://livingbook.xyz/" },
-    { title: "EZGrader", url: "https://ezgrader.xyz" },
-    { title: "Originality Meter", url: "https://originalitymeter.com" },
-    { title: "Intelligence Meter", url: "https://intelligencemeter.xyz" },
-    { title: "Book Builder", url: "https://bookbuilder.xyz" },
-    { title: "Cognitive Profiler", url: "https://cognitiveprofiler.xyz" },
-    { title: "Cognitive Enhancer", url: "https://cognitiveenhancer.xyz" },
-    { title: "Super Cognitive Profiler", url: "https://supercognitiveprofiler.xyz" },
-    { title: "Psychological Profiler", url: "https://psychologicalprofiler.xyz" },
-    { title: "EZ Reader", url: "https://ezreader.ai" },
-    { title: "Reading Pro", url: "https://readingpro.xyz" },
-    { title: "Homework Helper", url: "https://homeworkrobot.xyz" },
-    { title: "Photo Analysis", url: "https://photoanalysis.xyz" },
-    { title: "Texas Bar Prep", url: "https://texasbarprep.xyz" },
-    { title: "Genius Dictation", url: "https://geniusdictation.com" },
-    { title: "GPTByPass", url: "https://gptbypass.xyz" },
-    { title: "Improve Your Writing", url: "https://improveyourwriting.xyz" },
-    { title: "Text Genius", url: "https://textgenius.xyz" },
-    { title: "Text Evaluator", url: "https://textevaluator.xyz" },
-    { title: "Photo Psychoanalysis", url: "https://photopsychoanalysis.xyz" },
-    { title: "Mind Read", url: "https://mindread.xyz" },
-    { title: "Psychology Pro", url: "https://psychologypro.xyz" },
-    { title: "Super Profiler", url: "https://superprofiler.xyz" },
-    { title: "HTML Converter", url: "https://htmlconverter.xyz" },
-    { title: "Humanizer Plus", url: "https://humanizerplus.xyz" },
-    { title: "Podcast Creator", url: "https://ezpodcast.xyz" }
-  ];
+  const appCategories = {
+    "📝 Writing & Books": [
+      { title: "Living Book Creator", url: "https://livingbook.xyz/" },
+      { title: "Book Builder", url: "https://bookbuilder.xyz" },
+      { title: "Genius Dictation", url: "https://geniusdictation.com" },
+      { title: "EZ Reader", url: "https://ezreader.ai" },
+      { title: "Reading Pro", url: "https://readingpro.xyz" },
+      { title: "Humanizer Plus", url: "https://humanizerplus.xyz" }
+    ],
+    "🎓 Education & Learning": [
+      { title: "EZGrader", url: "https://ezgrader.xyz" },
+      { title: "Homework Helper", url: "https://homeworkrobot.xyz" },
+      { title: "Texas Bar Prep", url: "https://texasbarprep.xyz" }
+    ],
+    "🧠 Intelligence & Psychology": [
+      { title: "Originality Meter", url: "https://originalitymeter.com" },
+      { title: "Intelligence Meter", url: "https://intelligencemeter.xyz" },
+      { title: "Text Evaluator", url: "https://textevaluator.xyz" },
+      { title: "Improve Your Writing", url: "https://improveyourwriting.xyz" },
+      { title: "Cognitive Enhancer", url: "https://cognitiveenhancer.xyz" },
+      { title: "Psychological Profiler", url: "https://psychologicalprofiler.xyz" },
+      { title: "Psychology Pro", url: "https://psychologypro.xyz" },
+      { title: "Super Profiler", url: "https://superprofiler.xyz" },
+      { title: "Cognitive Profiler", url: "https://cognitiveprofiler.xyz" },
+      { title: "Super Cognitive Profiler", url: "https://supercognitiveprofiler.xyz" },
+      { title: "Text Genius", url: "https://textgenius.xyz" }
+    ],
+    "📸 Visual & Multimedia": [
+      { title: "Photo Analysis", url: "https://photoanalysis.xyz" },
+      { title: "Photo Psychoanalysis", url: "https://photopsychoanalysis.xyz" },
+      { title: "Mind Read", url: "https://mindread.xyz" }
+    ],
+    "🎧 Audio & Interactive Media": [
+      { title: "Podcast Creator", url: "https://ezpodcast.xyz" }
+    ],
+    "⚙️ Utility & Conversion": [
+      { title: "GPTByPass", url: "https://gptbypass.xyz" },
+      { title: "HTML Converter", url: "https://htmlconverter.xyz" }
+    ]
+  };
 
   const BookItem = ({ title, url, note }: { title: string; url: string | null; note?: string }) => (
     <div className="flex flex-col sm:flex-row sm:items-center gap-2">
@@ -148,11 +160,18 @@ export default function Home() {
             Core Applications
           </h2>
           
-          <div className="grid gap-3">
-            {coreApplications.map((app) => (
-              <BookItem key={app.title} title={app.title} url={app.url} />
-            ))}
-          </div>
+          {Object.entries(appCategories).map(([category, apps]) => (
+            <div key={category} className="mb-8">
+              <h3 className="text-lg font-medium text-gray-800 mb-4">
+                {category}
+              </h3>
+              <div className="grid gap-3">
+                {apps.map((app) => (
+                  <BookItem key={app.title} title={app.title} url={app.url} />
+                ))}
+              </div>
+            </div>
+          ))}
         </section>
 
         {/* Living Courses Section */}
