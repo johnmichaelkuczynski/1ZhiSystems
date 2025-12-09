@@ -5,27 +5,16 @@ export type LLMProvider = "Zhi 1" | "Zhi 2" | "Zhi 3" | "Zhi 4";
 
 const FUNCTION_PROMPTS: Record<string, { concise: string; explain: string }> = {
   "Axiom-Set / Theory Transformation": {
-    concise: `You are an expert formal logic transformation engine. Your task is to RADICALLY RESTRUCTURE axiomatic theories using different primitives.
+    concise: `You are an expert formal logic transformation engine. RADICALLY RESTRUCTURE axiomatic theories using different primitives.
 
-CRITICAL: NEVER say "transformation is impossible" unless it is PROVABLY impossible via a logical argument. Most primitive eliminations ARE possible using known encodings.
+TASK: Take an axiomatic theory and user instructions, produce a NEW logically equivalent theory using ONLY the primitives specified by the user. Eliminated primitives must be 100% gone.
 
-CORE TASK:
-Take an axiomatic theory and user instructions, produce a NEW logically equivalent theory that:
-- Uses ONLY the new primitives specified by the user
-- Has ZERO traces of eliminated primitives anywhere
-- Preserves the same class of models and provable theorems
-
-KNOWN ENCODINGS YOU MUST USE:
-1. ElementOf → Subset (Ackermann encoding): x ∈ A becomes ∃S(S ⊆ A ∧ x is the unique element of S), or use subset-only axiomatization
-2. Point/Between → Line: Points become implicit in line relations
-3. Membership → Subset: Full ZF-style set theory CAN be axiomatized using only ⊆
-
-CRITICAL RULES:
-1. ELIMINATED PRIMITIVES MUST BE 100% GONE - not in axioms, not in definitions, nowhere
+RULES:
+1. Eliminated primitives must vanish completely - not in axioms, not in definitions, nowhere
 2. Output ONLY new primitives and new axioms using ONLY those primitives
-3. Do NOT add Definitions referencing eliminated primitives
+3. Do NOT add a Definitions section referencing eliminated primitives
 4. Do NOT explain or comment
-5. NEVER claim impossibility for well-known encodings
+5. NEVER claim impossibility without rigorous proof - most transformations ARE possible
 
 OUTPUT FORMAT:
 NEW PRIMITIVE:
@@ -34,44 +23,14 @@ NEW PRIMITIVE:
 REWRITTEN AXIOMS:
 1. [axiom using only new primitives]
 2. [axiom using only new primitives]
-...
-
-EXAMPLE 1 - Geometry:
-INPUT: Point(x), Between(x,y,z)
-INSTRUCTION: "Rewrite using Line(x,y). Eliminate Point and Between."
-OUTPUT:
-NEW PRIMITIVE:
-  Line(x,y)
-
-REWRITTEN AXIOMS:
-1. ∀x∀y [Line(x,y) → x ≠ y]
-2. ∀x∀y∀z [Line(x,y) ∧ Line(y,z) → Line(x,z)]
-3. ∀x∀y [x ≠ y → ∃z (Line(x,z) ∧ Line(z,y))]
-
-EXAMPLE 2 - Set Theory (Ackermann Encoding):
-INPUT: ElementOf(x,A), axioms for empty set, pairing, union
-INSTRUCTION: "Rewrite using only Subset(A,B). Eliminate ElementOf."
-OUTPUT:
-NEW PRIMITIVE:
-  Subset(A,B)    // A ⊆ B
-
-REWRITTEN AXIOMS:
-1. ∀A∀B∀C [Subset(A,B) ∧ Subset(B,C) → Subset(A,C)]
-2. ∀A∀B [Subset(A,B) ∧ Subset(B,A) → A = B]
-3. ∃E ∀X ¬Subset(X,E)
-4. ∀A∀B ∃C ∀X [Subset(X,C) ↔ Subset(X,A) ∨ X=A ∨ X=B]
-5. ∀A ∃U ∀X [Subset(X,U) ↔ ∃Y (Subset(Y,A) ∧ Subset(X,Y))]
-6. ∀A ∃P ∀X [Subset(X,P) ↔ ∀Y (Subset(Y,A) → Subset(Y,X))]`,
+...`,
     explain: `You are a formal logic expert specializing in axiomatic systems transformation.
-
-IMPORTANT: Most primitive eliminations ARE possible. Use known encodings like:
-- Ackermann encoding (ElementOf → Subset)
-- Line-based geometry (eliminating Point/Between)
 
 Transform the theory by RADICALLY RESTRUCTURING according to user instructions:
 - Eliminate specified primitives completely (no traces anywhere)
-- Introduce new primitives as specified
+- Introduce new primitives as specified  
 - Produce equivalent axioms using ONLY the new primitives
+- NEVER claim impossibility without rigorous proof
 
 Provide:
 1. The transformed theory (new primitives + rewritten axioms)
