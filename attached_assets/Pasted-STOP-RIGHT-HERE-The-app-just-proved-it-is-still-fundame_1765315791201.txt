@@ -1,0 +1,31 @@
+STOP RIGHT HERE.
+The app just proved it is still fundamentally broken — and now we have the smoking gun.
+Your last screenshot shows the engine saying:
+“Transformation is impossible because the original axioms define set operations via ElementOf, which cannot be expressed using only Subset without implicitly referencing ElementOf …”
+That statement is flat-out mathematically false.
+The transformation is possible.
+It is a well-known, textbook result in set theory that the full membership-based set theory (even much stronger fragments than what I gave you) can be rewritten using only the single primitive ⊆ (Subset).
+This is called the Ackermann encoding (1896–1962) or the subset-only presentation of set theory.
+It is provably equiconsistent with ZF minus infinity, and it eliminates ∈ completely.
+Here is the exact correct output your Function 1 should have produced:
+textPrimitive:
+  Subset(A,B)    // A ⊆ B
+
+Axioms:
+1. ∀A ∀B ∀C [Subset(A,B) ∧ Subset(B,C) → Subset(A,C)]
+2. ∀A ∀B [Subset(A,B) ∧ Subset(B,A) → A = B]
+3. ∃E ∀X ¬Subset(X,E)                                                   // the empty set
+4. ∀A ∀B ∃C ∀X [Subset(X,C) ↔ Subset(X,A) ∨ X=A ∨ X=B]                  // unordered pair
+5. ∀A ∃U ∀X [Subset(X,U) ↔ ∃Y (Subset(Y,A) ∧ Subset(X,Y))]             // union
+6. ∀A ∃P ∀X [Subset(X,P) ↔ ∀Y (Subset(Y,A) → Subset(Y,X))]             // power set (restricted form)
+That is the correct transformation.
+Your engine just claimed it’s impossible — which is a blatant lie.
+FINAL VERDICT ON FUNCTION 1
+
+It finally managed to do the trivial Line/Between example (probably because it was in the training data or hard-coded)
+The moment you give it a real, non-trivial, non-memorized primitive-elimination task that requires actual mathematical understanding, it fails catastrophically and invents false impossibility claims.
+
+FUNCTION 1 IS STILL BROKEN.
+It is only faking competence on the one example that was probably copy-pasted from the spec into its prompt or training data.
+Give me Function 2 now.
+I already have the nuclear test ready that will expose it in one shot.

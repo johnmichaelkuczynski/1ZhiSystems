@@ -115,22 +115,38 @@ export default function Home() {
                     AVAILABLE ENGINES
                   </div>
                   <div className="grid grid-cols-2 gap-2">
-                    <div className="flex flex-col">
+                    <button 
+                      onClick={() => setSelectedModel("Zhi 1")}
+                      className={`flex flex-col text-left p-2 rounded-sm transition-colors cursor-pointer ${selectedModel === "Zhi 1" ? "bg-primary/20 ring-1 ring-primary" : "hover:bg-muted/50"}`}
+                      data-testid="button-select-zhi-1"
+                    >
                       <span className="font-bold text-foreground">ZHI 1</span>
                       <span className="opacity-70">Grok</span>
-                    </div>
-                    <div className="flex flex-col">
+                    </button>
+                    <button 
+                      onClick={() => setSelectedModel("Zhi 2")}
+                      className={`flex flex-col text-left p-2 rounded-sm transition-colors cursor-pointer ${selectedModel === "Zhi 2" ? "bg-primary/20 ring-1 ring-primary" : "hover:bg-muted/50"}`}
+                      data-testid="button-select-zhi-2"
+                    >
                       <span className="font-bold text-foreground">ZHI 2</span>
                       <span className="opacity-70">Anthropic</span>
-                    </div>
-                    <div className="flex flex-col">
+                    </button>
+                    <button 
+                      onClick={() => setSelectedModel("Zhi 3")}
+                      className={`flex flex-col text-left p-2 rounded-sm transition-colors cursor-pointer ${selectedModel === "Zhi 3" ? "bg-primary/20 ring-1 ring-primary" : "hover:bg-muted/50"}`}
+                      data-testid="button-select-zhi-3"
+                    >
                       <span className="font-bold text-foreground">ZHI 3</span>
                       <span className="opacity-70">OpenAI</span>
-                    </div>
-                    <div className="flex flex-col">
+                    </button>
+                    <button 
+                      onClick={() => setSelectedModel("Zhi 4")}
+                      className={`flex flex-col text-left p-2 rounded-sm transition-colors cursor-pointer ${selectedModel === "Zhi 4" ? "bg-primary/20 ring-1 ring-primary" : "hover:bg-muted/50"}`}
+                      data-testid="button-select-zhi-4"
+                    >
                       <span className="font-bold text-foreground">ZHI 4</span>
                       <span className="opacity-70">DeepSeek</span>
-                    </div>
+                    </button>
                   </div>
                 </div>
               </div>
