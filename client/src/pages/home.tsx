@@ -18,12 +18,12 @@ export default function Home() {
     { id: 1, title: "Axiom-Set / Theory Transformation", description: "Rewrite primitives and axioms." },
     { id: 2, title: "Schema Equivalence", description: "Model-theoretic sameness check." },
     { id: 3, title: "Definitional Equivalence", description: "Bi-directional definitional translation." },
-    { id: 4, title: "Model Finding & Counter-Examples", description: "Find models satisfying constraints." },
-    { id: 5, title: "Consistency Check", description: "Verify internal consistency of axioms." },
-    { id: 6, title: "Independence Proofs", description: "Prove axiom independence." },
-    { id: 7, title: "Completeness Analysis", description: "Analyze theory completeness." },
-    { id: 8, title: "Ontological Reduction", description: "Reduce ontological commitments." },
-    { id: 9, title: "Theorem Derivation", description: "Derive theorems from axioms." },
+    { id: 4, title: "Model-Preserving Rewrite", description: "Rewrite theory preserving all models." },
+    { id: 5, title: "Conservative Extension Analysis", description: "Analyze extensions for conservativity." },
+    { id: 6, title: "Compare Conceptual Schemes", description: "Compare primitive/derived classifications." },
+    { id: 7, title: "Ontological Dependence", description: "Analyze primitive dependencies." },
+    { id: 8, title: "Generate Alternative Conceptualizations", description: "Generate equivalent conceptualizations." },
+    { id: 9, title: "Identify Representational Biases", description: "Detect biases in primitive choices." },
   ];
 
   const handleSelectPreset = (preset: Preset) => {

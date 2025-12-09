@@ -14,305 +14,273 @@ export interface Preset {
 }
 
 const PRESETS: Preset[] = [
+  // FUNCTION 1: Axiom-Set / Theory Transformation
   {
-    id: "transform-primitive-swap",
+    id: "f1-primitive-swap",
     name: "Primitive Swap",
     functionId: 1,
-    input: `Primitives:
-  Point(x)
-  Between(x, y, z)
-
-Axioms:
-1. ∀x∀y∀z [Between(x, y, z) → Point(x) ∧ Point(y) ∧ Point(z)]
-2. ∀x∀y [x ≠ y → ∃z Between(x, z, y)]
-3. ∀x∀y∀z∀w [(Between(x, y, z) ∧ Between(y, z, w)) → Between(x, y, w)]`,
-    instructions: `Swap primitives: Make "Line(x, y)" primitive instead of "Point". Define Point in terms of Line. Preserve all theorems.`
+    input: ``,
+    instructions: `Rewrite the theory so that a selected primitive becomes defined and another selected symbol becomes primitive. Keep all theorems equivalent.`
   },
   {
-    id: "transform-signature-change",
+    id: "f1-signature-change",
     name: "Signature Change",
     functionId: 1,
-    input: `Primitives:
-  Connected(x, y)   // 2-place relation: x is connected to y
-
-Axioms:
-1. ∀x∀y [Connected(x, y) → Connected(y, x)]     (Symmetry)
-2. ∀x [Connected(x, x)]                          (Reflexivity)
-3. ∀x∀y∀z [(Connected(x, y) ∧ Connected(y, z)) → Connected(x, z)]  (Transitivity)`,
-    instructions: `Change the signature: Replace the 2-place relation Connected(x, y) with a 1-place predicate Component(x) and a function component(x) that returns the component ID. Preserve equivalence.`
+    input: ``,
+    instructions: `Rewrite the theory using new primitives with different arities or types. Replace each old primitive with its new signature while preserving meaning.`
   },
   {
-    id: "transform-vocab-compress",
+    id: "f1-vocab-compression",
     name: "Vocabulary Compression",
     functionId: 1,
-    input: `Primitives:
-  Red(x)
-  Blue(x)
-  Green(x)
-  Yellow(x)
-  Colored(x)
-  Primary(x)
-  Secondary(x)
-
-Axioms:
-1. ∀x [Red(x) → Colored(x)]
-2. ∀x [Blue(x) → Colored(x)]
-3. ∀x [Green(x) → Colored(x)]
-4. ∀x [Yellow(x) → Colored(x)]
-5. ∀x [Red(x) → Primary(x)]
-6. ∀x [Blue(x) → Primary(x)]
-7. ∀x [Yellow(x) → Primary(x)]
-8. ∀x [Green(x) → Secondary(x)]
-9. ∀x [Colored(x) → (Red(x) ∨ Blue(x) ∨ Green(x) ∨ Yellow(x))]`,
-    instructions: `Compress vocabulary: Reduce to the minimal set of primitives that can express this entire theory. Eliminate redundant predicates.`
+    input: ``,
+    instructions: `Rewrite the theory using the smallest possible set of primitives that can express all the original axioms. Remove redundant primitives.`
   },
   {
-    id: "transform-vocab-expand",
+    id: "f1-vocab-expansion",
     name: "Vocabulary Expansion",
     functionId: 1,
-    input: `Primitives:
-  < (less-than on natural numbers)
-
-Axioms:
-1. ∀x ¬(x < x)                           (Irreflexivity)
-2. ∀x∀y∀z [(x < y ∧ y < z) → x < z]      (Transitivity)
-3. ∀x∀y [x < y ∨ x = y ∨ y < x]          (Trichotomy)
-4. ∀x ∃y [x < y]                          (No maximum)
-5. ∃x ∀y [x < y ∨ x = y]                  (Minimum exists)`,
-    instructions: `Expand vocabulary: Introduce additional primitives like Successor(x, y), Zero(x), and ≤ that simplify or shorten the axioms while preserving all theorems.`
+    input: ``,
+    instructions: `Introduce new helper primitives and rewrite the axioms so that they become simpler while preserving all models and theorems.`
   },
   {
-    id: "transform-non-iso",
+    id: "f1-non-iso-equivalent",
     name: "Non-Isomorphic Equivalent",
     functionId: 1,
-    input: `Primitives:
-  Person(x)
-  Parent(x, y)   // x is a parent of y
-
-Axioms:
-1. ∀x∀y [Parent(x, y) → Person(x) ∧ Person(y)]
-2. ∀x∀y [Parent(x, y) → x ≠ y]
-3. ∀x∀y∀z [(Parent(x, z) ∧ Parent(y, z)) → (x = y ∨ Spouse(x, y))]
-4. ∀x [Person(x) → ∃y∃z (Parent(y, x) ∧ Parent(z, x) ∧ y ≠ z)]`,
-    instructions: `Generate a non-isomorphic equivalent theory: Create a structurally different theory using different primitives (e.g., Child(x,y), Ancestor(x,y)) that produces the same models up to interpretation.`
+    input: ``,
+    instructions: `Generate a theory that is not structurally isomorphic but yields the same set of theorems under translation. Preserve truth conditions, not structure.`
   },
+  // FUNCTION 2: Schema Equivalence
   {
-    id: "schema-direct-vocab",
+    id: "f2-direct-vocab",
     name: "Direct Vocabulary Mapping",
     functionId: 2,
-    input: `Schema A:
-Primitives:
-  Point(x)
-  Line(x)
-  On(p, l)    // point p is on line l
-
-Axioms:
-1. ∀p∀l [On(p, l) → Point(p) ∧ Line(l)]
-2. ∀p∀q [Point(p) ∧ Point(q) ∧ p ≠ q → ∃!l (Line(l) ∧ On(p, l) ∧ On(q, l))]
-
----
-
-Schema B:
-Primitives:
-  Vertex(v)
-  Edge(e)
-  Incident(v, e)    // vertex v is incident to edge e
-
-Axioms:
-1. ∀v∀e [Incident(v, e) → Vertex(v) ∧ Edge(e)]
-2. ∀v∀w [Vertex(v) ∧ Vertex(w) ∧ v ≠ w → ∃!e (Edge(e) ∧ Incident(v, e) ∧ Incident(w, e))]`,
-    instructions: `Try to map primitive symbols 1-to-1. Find the direct vocabulary mapping: Point ↔ Vertex, Line ↔ Edge, On ↔ Incident. Verify that axioms translate correctly under this mapping.`
+    input: ``,
+    instructions: `Attempt a direct symbol-by-symbol mapping between the vocabularies of the two theories.`
   },
   {
-    id: "schema-arity-preserve",
+    id: "f2-arity-preserving",
     name: "Arity-Preserving Mapping",
     functionId: 2,
-    input: `Schema A:
-Primitives:
-  R(x, y)        // 2-place relation
-  S(x, y, z)     // 3-place relation
-  P(x)           // 1-place predicate
-
-Axioms:
-1. ∀x∀y [R(x, y) → P(x) ∧ P(y)]
-2. ∀x∀y∀z [S(x, y, z) → R(x, y) ∧ R(y, z)]
-
----
-
-Schema B:
-Primitives:
-  Connected(a, b)     // 2-place
-  Between(a, b, c)    // 3-place
-  Element(a)          // 1-place
-
-Axioms:
-1. ∀a∀b [Connected(a, b) → Element(a) ∧ Element(b)]
-2. ∀a∀b∀c [Between(a, b, c) → Connected(a, b) ∧ Connected(b, c)]`,
-    instructions: `Only allow mappings between primitives of the same arity. Match: P ↔ Element (1-place), R ↔ Connected (2-place), S ↔ Between (3-place). Verify structural preservation.`
+    input: ``,
+    instructions: `Only consider mappings between primitives with the same arity.`
   },
   {
-    id: "schema-structural-role",
+    id: "f2-structural-role",
     name: "Structural Role Mapping",
     functionId: 2,
-    input: `Schema A (Geometry):
-Primitives:
-  Point(x)
-  Line(x)
-  Parallel(l₁, l₂)     // order-relation on lines
-  Incidence(p, l)       // point lies on line
-
-Axioms:
-1. ∀l [Parallel(l, l)]
-2. ∀l₁∀l₂ [Parallel(l₁, l₂) → Parallel(l₂, l₁)]
-3. ∀p∀l₁∀l₂ [(Incidence(p, l₁) ∧ Incidence(p, l₂) ∧ l₁ ≠ l₂) → ¬Parallel(l₁, l₂)]
-
----
-
-Schema B (Graph Theory):
-Primitives:
-  Node(x)
-  Component(x)
-  SameComponent(c₁, c₂)   // equivalence on components
-  Adjacency(n, c)          // node belongs to component
-
-Axioms:
-1. ∀c [SameComponent(c, c)]
-2. ∀c₁∀c₂ [SameComponent(c₁, c₂) → SameComponent(c₂, c₁)]
-3. ∀n∀c₁∀c₂ [(Adjacency(n, c₁) ∧ Adjacency(n, c₂) ∧ c₁ ≠ c₂) → ¬SameComponent(c₁, c₂)]`,
-    instructions: `Map primitives based on their structural roles: Parallel ↔ SameComponent (both are equivalence-like relations), Incidence ↔ Adjacency (both are membership/containment relations). Analyze whether the role-based mapping preserves all theorems.`
+    input: ``,
+    instructions: `Attempt to map primitives based on their structural roles in the axioms, not symbol identity.`
   },
   {
-    id: "schema-obstruction",
+    id: "f2-obstruction",
     name: "Minimal Obstruction Report",
     functionId: 2,
-    input: `Schema A:
-Primitives:
-  Likes(x, y)
-
-Axioms:
-1. ∀x [Likes(x, x)]                              (Reflexive)
-2. ∀x∀y [Likes(x, y) → Likes(y, x)]              (Symmetric)
-
----
-
-Schema B:
-Primitives:
-  Prefers(x, y)
-
-Axioms:
-1. ∀x [Prefers(x, x)]                            (Reflexive)
-2. ∀x∀y [Prefers(x, y) ∧ Prefers(y, x) → x = y]  (Antisymmetric)`,
-    instructions: `If equivalence fails, return the smallest obstruction automatically. Identify the minimal axiom or axiom pair that blocks the equivalence mapping. Expected obstruction: symmetry vs antisymmetry conflict.`
+    input: ``,
+    instructions: `If no schema equivalence is possible, return the smallest structural obstruction.`
   },
+  // FUNCTION 3: Definitional Equivalence
   {
-    id: "defn-3a",
-    name: "Less-Than vs Greater",
+    id: "f3-mutual-explicit",
+    name: "Mutual Explicit Definitions",
     functionId: 3,
-    input: `Theory A:
-Primitives: < (less-than relation)
-Axioms:
-1. ∀x ∀y ¬(x < x)
-2. ∀x ∀y ∀z [(x < y ∧ y < z) → x < z]
-
----
-
-Theory B:
-Primitives: Greater(x, y)
-Axioms:
-1. ∀x ∀y [Greater(x, y) → ¬Greater(y, x)]
-2. ∀x ∀y ∀z [(Greater(x, y) ∧ Greater(y, z)) → Greater(x, z)]`,
-    instructions: `Determine whether Theory A and Theory B are definitionally equivalent. If they are, give the explicit definitions in both directions.`
+    input: ``,
+    instructions: `Attempt to explicitly define each primitive of Theory A using Theory B, and each primitive of Theory B using Theory A.`
   },
   {
-    id: "defn-3b",
-    name: "Eligibility vs Qualification",
+    id: "f3-one-direction",
+    name: "One-Direction Definability",
     functionId: 3,
-    input: `Text A:
-A person is "eligible" if they satisfy all job requirements.
-A requirement is "met" if the person's profile contains the corresponding skill.
-
----
-
-Text B:
-A person is "qualified" if every required skill appears in their skill list.
-A skill is "required" for a job if the job description lists it.`,
-    instructions: `Are these definitional equivalents? Provide the definitions if so.`
+    input: ``,
+    instructions: `Test definability only in the direction the user specifies (A→B or B→A).`
   },
   {
-    id: "model-4",
-    name: "Group Theory Model",
+    id: "f3-minimization",
+    name: "Definition Minimization",
+    functionId: 3,
+    input: ``,
+    instructions: `Search for the shortest explicit definitions possible.`
+  },
+  {
+    id: "f3-conservative",
+    name: "Conservative Definability",
+    functionId: 3,
+    input: ``,
+    instructions: `Only return definitions that preserve the original provability relations without introducing new theorems.`
+  },
+  // FUNCTION 4: Model-Preserving Rewrite
+  {
+    id: "f4-reduced-primitive",
+    name: "Reduced Primitive Set",
     functionId: 4,
-    input: `Axioms:
-1. ∀x∀y∀z [(x * y) * z = x * (y * z)]  (Associativity)
-2. ∃e ∀x [e * x = x ∧ x * e = x]       (Identity)
-3. ∀x ∃y [x * y = e ∧ y * x = e]       (Inverse)`,
-    instructions: `Find a finite model (group) with exactly 3 elements. Provide the multiplication table.`
+    input: ``,
+    instructions: `Rewrite the theory using the minimal set of primitives that preserves the same models.`
   },
   {
-    id: "consistency-5",
-    name: "Set Theory Subset",
+    id: "f4-expanded-primitive",
+    name: "Expanded Primitive Set",
+    functionId: 4,
+    input: ``,
+    instructions: `Add new primitives and rewrite axioms so they become shorter or simpler while preserving all models.`
+  },
+  {
+    id: "f4-algebraic",
+    name: "Algebraic Reconstruction",
+    functionId: 4,
+    input: ``,
+    instructions: `Rewrite the theory in algebraic form using functions and operations instead of relations.`
+  },
+  {
+    id: "f4-pure-relational",
+    name: "Pure Relational Reconstruction",
+    functionId: 4,
+    input: ``,
+    instructions: `Rewrite the theory using relations only, eliminating functions and constants.`
+  },
+  // FUNCTION 5: Conservative Extension Analysis
+  {
+    id: "f5-new-primitives",
+    name: "New Primitives Test",
     functionId: 5,
-    input: `Axioms:
-1. ∀x [x ∈ A → x ∈ B]      (A ⊆ B)
-2. ∃x [x ∈ A]              (A is non-empty)
-3. ∀x [x ∈ B → x ∉ A]      (B and A are disjoint)`,
-    instructions: `Check whether this axiom set is consistent. If not, identify the contradiction.`
+    input: ``,
+    instructions: `Determine whether adding a new primitive preserves all original theorems.`
   },
   {
-    id: "independence-6",
-    name: "Parallel Postulate",
+    id: "f5-new-axioms",
+    name: "New Axioms Test",
+    functionId: 5,
+    input: ``,
+    instructions: `Determine whether adding new axioms changes any theorems expressible in the original vocabulary.`
+  },
+  {
+    id: "f5-weak-extension",
+    name: "Weak Extension Test",
+    functionId: 5,
+    input: ``,
+    instructions: `Check whether the extension is conservative under definitional abbreviations only.`
+  },
+  {
+    id: "f5-independence",
+    name: "Independence Check",
+    functionId: 5,
+    input: ``,
+    instructions: `Detect whether the added axiom is independent of the base theory.`
+  },
+  // FUNCTION 6: Compare Conceptual Schemes
+  {
+    id: "f6-primitive-derived",
+    name: "Primitive vs. Derived Classification",
     functionId: 6,
-    input: `Base Axioms (Neutral Geometry):
-1. Two points determine a unique line
-2. A line segment can be extended indefinitely
-3. A circle can be drawn with any center and radius
-4. All right angles are equal
-
-Target Axiom (Parallel Postulate):
-Given a line and a point not on it, exactly one line through the point is parallel to the given line.`,
-    instructions: `Prove that the parallel postulate is independent of the other axioms by constructing a model.`
+    input: ``,
+    instructions: `Classify all concepts into primitive and derived categories and return a dependency graph.`
   },
   {
-    id: "complete-7",
-    name: "Dense Linear Order",
+    id: "f6-depth-map",
+    name: "Conceptual Depth Map",
+    functionId: 6,
+    input: ``,
+    instructions: `Compute the conceptual depth of each notion (number of definitional layers).`
+  },
+  {
+    id: "f6-bottleneck",
+    name: "Bottleneck Detection",
+    functionId: 6,
+    input: ``,
+    instructions: `Identify which primitives all other concepts ultimately depend on.`
+  },
+  {
+    id: "f6-rebalancing",
+    name: "Conceptual Rebalancing",
+    functionId: 6,
+    input: ``,
+    instructions: `Suggest alternative choices of primitives that distribute conceptual load more evenly.`
+  },
+  // FUNCTION 7: Ontological Dependence
+  {
+    id: "f7-remove-one",
+    name: "Remove One Primitive",
     functionId: 7,
-    input: `Theory of Dense Linear Orders without endpoints:
-1. ∀x ¬(x < x)                           (Irreflexivity)
-2. ∀x∀y∀z [(x < y ∧ y < z) → x < z]      (Transitivity)  
-3. ∀x∀y [x < y ∨ x = y ∨ y < x]          (Trichotomy)
-4. ∀x∀y [x < y → ∃z (x < z ∧ z < y)]     (Density)
-5. ∀x ∃y∃z [y < x ∧ x < z]               (No endpoints)`,
-    instructions: `Analyze whether this theory is complete. If not, provide an example of an undecidable sentence.`
+    input: ``,
+    instructions: `Remove a selected primitive and evaluate the structural collapse.`
   },
   {
-    id: "reduction-8",
-    name: "Natural Numbers",
+    id: "f7-minimal-set",
+    name: "Minimal Primitive Set",
+    functionId: 7,
+    input: ``,
+    instructions: `Find the smallest subset of primitives that allows the theory to remain functional.`
+  },
+  {
+    id: "f7-replacement",
+    name: "Replacement Test",
+    functionId: 7,
+    input: ``,
+    instructions: `Attempt to replace a primitive with a definable surrogate.`
+  },
+  {
+    id: "f7-load-bearing",
+    name: "Load-Bearing Ranking",
+    functionId: 7,
+    input: ``,
+    instructions: `Rank all primitives in order of ontological importance.`
+  },
+  // FUNCTION 8: Generate Alternative Conceptualizations
+  {
+    id: "f8-invert-ontology",
+    name: "Invert Ontology",
     functionId: 8,
-    input: `Current ontology:
-- Natural numbers as primitive objects: 0, 1, 2, 3, ...
-- Successor function: S(n)
-- Addition: n + m
-- Multiplication: n × m
-
-Peano Axioms:
-1. 0 is a natural number
-2. For every natural number n, S(n) is a natural number
-3. For no natural number n does S(n) = 0
-4. S is injective
-5. Induction axiom schema`,
-    instructions: `Reduce the ontological commitment by showing how natural numbers can be constructed from sets alone (Frege-Russell or von Neumann construction).`
+    input: ``,
+    instructions: `Make derived notions primitive and rewrite the old primitives as definitions.`
   },
   {
-    id: "theorem-9",
-    name: "Propositional Logic",
+    id: "f8-behavioral",
+    name: "Behavioral Reconstruction",
+    functionId: 8,
+    input: ``,
+    instructions: `Rewrite the theory using observable behavioral primitives only.`
+  },
+  {
+    id: "f8-structural",
+    name: "Structural Reconstruction",
+    functionId: 8,
+    input: ``,
+    instructions: `Rewrite the theory using structural or relational primitives only.`
+  },
+  {
+    id: "f8-physicalization",
+    name: "Physicalization",
+    functionId: 8,
+    input: ``,
+    instructions: `Rewrite the theory using physical, geometric, or metric primitives.`
+  },
+  // FUNCTION 9: Identify Representational Biases
+  {
+    id: "f9-privilege",
+    name: "Privilege Detection",
     functionId: 9,
-    input: `Axioms:
-1. P → (Q → P)
-2. (P → (Q → R)) → ((P → Q) → (P → R))
-3. (¬P → ¬Q) → (Q → P)
-
-Rule: Modus Ponens - from P and P → Q, infer Q`,
-    instructions: `Derive the theorem: P → P (identity/reflexivity of implication)`
+    input: ``,
+    instructions: `Identify what the theory makes easy to express.`
+  },
+  {
+    id: "f9-blind-spot",
+    name: "Blind-Spot Detection",
+    functionId: 9,
+    input: ``,
+    instructions: `Identify what the theory makes hard or impossible to express.`
+  },
+  {
+    id: "f9-worldview",
+    name: "Worldview Extraction",
+    functionId: 9,
+    input: ``,
+    instructions: `Extract the implicit worldview embedded in the choice of primitives.`
+  },
+  {
+    id: "f9-bias-ranking",
+    name: "Bias Severity Ranking",
+    functionId: 9,
+    input: ``,
+    instructions: `Rank representational biases from strongest to weakest.`
   }
 ];
 
@@ -327,12 +295,12 @@ export function PresetsSidebar({ onSelectPreset }: PresetsSidebarProps) {
     "Axiom-Set / Theory Transformation",
     "Schema Equivalence",
     "Definitional Equivalence",
-    "Model Finding & Counter-Examples",
-    "Consistency Check",
-    "Independence Proofs",
-    "Completeness Analysis",
-    "Ontological Reduction",
-    "Theorem Derivation"
+    "Model-Preserving Rewrite",
+    "Conservative Extension Analysis",
+    "Compare Conceptual Schemes",
+    "Ontological Dependence",
+    "Generate Alternative Conceptualizations",
+    "Identify Representational Biases"
   ];
 
   const toggleSection = (id: number) => {

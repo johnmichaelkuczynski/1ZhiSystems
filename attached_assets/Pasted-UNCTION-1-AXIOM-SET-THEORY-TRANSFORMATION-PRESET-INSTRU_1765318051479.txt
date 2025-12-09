@@ -1,0 +1,165 @@
+UNCTION 1 — AXIOM-SET / THEORY TRANSFORMATION — PRESET INSTRUCTIONS
+
+PRESET 1: Primitive Swap
+
+“Rewrite the theory so that a selected primitive becomes defined and another selected symbol becomes primitive. Keep all theorems equivalent.”
+
+PRESET 2: Signature Change
+
+“Rewrite the theory using new primitives with different arities or types. Replace each old primitive with its new signature while preserving meaning.”
+
+PRESET 3: Vocabulary Compression
+
+“Rewrite the theory using the smallest possible set of primitives that can express all the original axioms. Remove redundant primitives.”
+
+PRESET 4: Vocabulary Expansion
+
+“Introduce new helper primitives and rewrite the axioms so that they become simpler while preserving all models and theorems.”
+
+PRESET 5: Non-Isomorphic Equivalent Theory
+
+“Generate a theory that is not structurally isomorphic but yields the same set of theorems under translation. Preserve truth conditions, not structure.”
+
+✅ FUNCTION 2 — SCHEMA EQUIVALENCE — PRESET INSTRUCTIONS
+
+PRESET A: Direct Vocabulary Mapping
+
+“Attempt a direct symbol-by-symbol mapping between the vocabularies of the two theories.”
+
+PRESET B: Arity-Preserving Mapping
+
+“Only consider mappings between primitives with the same arity.”
+
+PRESET C: Structural Role Mapping
+
+“Attempt to map primitives based on their structural roles in the axioms, not symbol identity.”
+
+PRESET D: Minimal Obstruction Report
+
+“If no schema equivalence is possible, return the smallest structural obstruction.”
+
+✅ FUNCTION 3 — DEFINITIONAL EQUIVALENCE — PRESET INSTRUCTIONS
+
+PRESET A: Mutual Explicit Definitions
+
+“Attempt to explicitly define each primitive of Theory A using Theory B, and each primitive of Theory B using Theory A.”
+
+PRESET B: One-Direction Definability
+
+“Test definability only in the direction the user specifies (A→B or B→A).”
+
+PRESET C: Definition Minimization
+
+“Search for the shortest explicit definitions possible.”
+
+PRESET D: Conservative Definability
+
+“Only return definitions that preserve the original provability relations without introducing new theorems.”
+
+✅ FUNCTION 4 — MODEL-PRESERVING REWRITE — PRESET INSTRUCTIONS
+
+PRESET A: Reduced Primitive Set
+
+“Rewrite the theory using the minimal set of primitives that preserves the same models.”
+
+PRESET B: Expanded Primitive Set
+
+“Add new primitives and rewrite axioms so they become shorter or simpler while preserving all models.”
+
+PRESET C: Algebraic Reconstruction
+
+“Rewrite the theory in algebraic form using functions and operations instead of relations.”
+
+PRESET D: Pure Relational Reconstruction
+
+“Rewrite the theory using relations only, eliminating functions and constants.”
+
+✅ FUNCTION 5 — CONSERVATIVE EXTENSION ANALYSIS — PRESET INSTRUCTIONS
+
+PRESET A: New Primitives Test
+
+“Determine whether adding a new primitive preserves all original theorems.”
+
+PRESET B: New Axioms Test
+
+“Determine whether adding new axioms changes any theorems expressible in the original vocabulary.”
+
+PRESET C: Weak Extension Test
+
+“Check whether the extension is conservative under definitional abbreviations only.”
+
+PRESET D: Independence Check
+
+“Detect whether the added axiom is independent of the base theory.”
+
+✅ FUNCTION 6 — COMPARE CONCEPTUAL SCHEMES — PRESET INSTRUCTIONS
+
+PRESET A: Primitive vs. Derived Classification
+
+“Classify all concepts into primitive and derived categories and return a dependency graph.”
+
+PRESET B: Conceptual Depth Map
+
+“Compute the conceptual depth of each notion (number of definitional layers).”
+
+PRESET C: Bottleneck Detection
+
+“Identify which primitives all other concepts ultimately depend on.”
+
+PRESET D: Conceptual Rebalancing
+
+“Suggest alternative choices of primitives that distribute conceptual load more evenly.”
+
+✅ FUNCTION 7 — ONTOLOGICAL DEPENDENCE — PRESET INSTRUCTIONS
+
+PRESET A: Remove One Primitive
+
+“Remove a selected primitive and evaluate the structural collapse.”
+
+PRESET B: Minimal Primitive Set
+
+“Find the smallest subset of primitives that allows the theory to remain functional.”
+
+PRESET C: Replacement Test
+
+“Attempt to replace a primitive with a definable surrogate.”
+
+PRESET D: Load-Bearing Ranking
+
+“Rank all primitives in order of ontological importance.”
+
+✅ FUNCTION 8 — GENERATE ALTERNATIVE CONCEPTUALIZATIONS — PRESET INSTRUCTIONS
+
+PRESET A: Invert Ontology
+
+“Make derived notions primitive and rewrite the old primitives as definitions.”
+
+PRESET B: Behavioral Reconstruction
+
+“Rewrite the theory using observable behavioral primitives only.”
+
+PRESET C: Structural Reconstruction
+
+“Rewrite the theory using structural or relational primitives only.”
+
+PRESET D: Physicalization
+
+“Rewrite the theory using physical, geometric, or metric primitives.”
+
+✅ FUNCTION 9 — IDENTIFY REPRESENTATIONAL BIASES — PRESET INSTRUCTIONS
+
+PRESET A: Privilege Detection
+
+“Identify what the theory makes easy to express.”
+
+PRESET B: Blind-Spot Detection
+
+“Identify what the theory makes hard or impossible to express.”
+
+PRESET C: Worldview Extraction
+
+“Extract the implicit worldview embedded in the choice of primitives.”
+
+PRESET D: Bias Severity Ranking
+
+“Rank representational biases from strongest to weakest.”
