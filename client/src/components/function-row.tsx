@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { Loader2, Play, ArrowRight, AlertCircle, Copy, Check } from "lucide-react";
+import { Loader2, Play, ArrowRight, AlertCircle, Copy, Check, Trash2 } from "lucide-react";
 import { type LLM, processTheory } from "@/lib/api";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
@@ -32,6 +32,14 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
     await navigator.clipboard.writeText(output);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleClear = () => {
+    setInput("");
+    setInstructions("");
+    setOutput("");
+    setError(null);
+    setUsedModel(null);
   };
 
   useEffect(() => {
@@ -87,6 +95,17 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
               EXPLAIN
             </Label>
           </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleClear}
+            disabled={isProcessing || (!input && !output && !instructions)}
+            className="rounded-sm font-mono text-xs text-muted-foreground hover:text-foreground"
+            data-testid={`clear-button-${id}`}
+          >
+            <Trash2 className="mr-1 h-3 w-3" />
+            CLEAR
+          </Button>
           <Button 
             variant="default" 
             size="sm" 
