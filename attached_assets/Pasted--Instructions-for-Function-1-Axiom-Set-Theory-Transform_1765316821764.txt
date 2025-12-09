@@ -1,0 +1,90 @@
+### Instructions for Function 1: Axiom-Set / Theory Transformation
+
+**IMPORTANT IMPLEMENTATION RULE (NON-NEGOTIABLE):**  
+The app **must not** use any hardcoded logic, predefined responses, if-then rules, or pre-computed outputs for Function 1. Under no circumstances may the app generate, modify, or filter the output itself based on keyword matching, memorized examples, or any internal scripting. Instead, the app **must** forward the user's input theory (primitives + axioms), custom instructions, and the full set of paradigms (examples of successful transformations) directly to the LLM as part of a single, comprehensive prompt. The LLM must perform all reasoning, transformation, and output generation independently. The app's only role is to package the user data + paradigms into the prompt and relay the LLM's raw response as the output without alteration. If the LLM says "impossible," the app must display it as-is without overriding. This ensures all logic comes from the LLM, preventing any app-side cheating or faking.
+
+**Prompt Structure the App Must Use for the LLM (Exact Template):**  
+You are a theory transformation engine. Transform the given axiomatic theory according to the user's custom instructions. The output must be a new theory that is logically equivalent (same models up to isomorphism, same theorems) to the original, unless impossible. Eliminate, introduce, or restructure primitives and axioms as instructed. Do not keep eliminated primitives in definitions or anywhere else. If impossible, explain why.
+
+User's Input Theory:  
+[INSERT USER'S INPUT HERE]
+
+User's Custom Instructions:  
+[INSERT USER'S CUSTOM INSTRUCTIONS HERE]
+
+Paradigms (Use these as examples to guide your transformation; do not copy them verbatim unless the user input matches exactly):  
+Paradigm 1: Geometry Betweenness to Line  
+Input:  
+Primitives:  
+  Point(x)  
+  Between(x,y,z)  
+
+Axioms:  
+1. ∀x∀y∀z [Between(x,y,z) → Point(x) ∧ Point(y) ∧ Point(z)]  
+2. ∀x∀y [x ≠ y → ∃z Between(x,z,y)]  
+3. ∀x∀y∀z∀w [(Between(x,y,z) ∧ Between(y,z,w)) → Between(x,y,w)]  
+
+Custom Instructions: Rewrite using "Line(x,y)" as the sole primitive. Eliminate both Point and Between. Preserve the same models if possible.  
+
+Output:  
+NEW PRIMITIVE:  
+  Line(x,y)   // x and y determine a unique line  
+
+REWRITTEN AXIOMS:  
+1. ∀x∀y [Line(x,y) → x ≠ y]  
+2. ∀x∀y∀z [Line(x,y) ∧ Line(y,z) → Line(x,z)]  
+3. ∀x∀y [x ≠ y → ∃z (Line(x,z) ∧ Line(z,y))]  
+
+Paradigm 2: Set Membership to Subset (Ackermann Encoding)  
+Input:  
+Primitives:  
+  Set(x)  
+  ElementOf(a,x)   // a ∈ x  
+
+Axioms:  
+1. ∀x ∃y (Set(y) ∧ ¬∃z (ElementOf(z,y)))                               // empty set  
+2. ∀x ∀y (Set(x) ∧ Set(y) → ∃z (Set(z) ∧ ∀w (ElementOf(w,z) ↔ ElementOf(w,x) ∨ w=x ∨ w=y)))  // pair  
+3. ∀x (Set(x) → ∃y (Set(y) ∧ ∀z (ElementOf(z,y) ↔ ∃w (ElementOf(z,w) ∧ ElementOf(w,x))))) // union  
+4. ∀x (Set(x) → ∃y (Set(y) ∧ ∀z (ElementOf(z,y) ↔ Set(z) ∧ ∀w (ElementOf(w,z) → ElementOf(w,x))))) // power set  
+
+Custom Instructions: Completely eliminate ElementOf(a,x). Use only the single primitive Subset(A,B) meaning "A is a subset of B". Do not use ElementOf anywhere in the output. Produce a theory with the same models (up to isomorphism).  
+
+Output:  
+Primitive:  
+  Subset(A,B)   // A ⊆ B  
+
+Axioms:  
+1. ∀A ∀B ∀C [Subset(A,B) ∧ Subset(B,C) → Subset(A,C)]  // transitivity  
+2. ∀A ∀B [Subset(A,B) ∧ Subset(B,A) → A = B]            // antisymmetry  
+3. ∃E ∀X ¬Subset(X,E)                                   // empty set  
+4. ∀A ∀B ∃C ∀X [Subset(X,C) ↔ Subset(X,A) ∨ X=A ∨ X=B]  // pair  
+5. ∀A ∃U ∀X [Subset(X,U) ↔ ∃Y (Subset(Y,A) ∧ Subset(X,Y))]  // union  
+6. ∀A ∃P ∀X [Subset(X,P) ↔ ∀Y (Subset(Y,A) → Subset(Y,X))]  // power set  
+
+Paradigm 3: Peano Arithmetic to Successor-Only  
+Input:  
+Primitives:  
+  NaturalNumber(n)  
+  Zero(0)  
+  Successor(s,n)   // s = successor of n  
+
+Axioms:  
+1. ∃z NaturalNumber(z) ∧ ∀n ¬Successor(n,z)  // zero exists, no predecessor  
+2. ∀n (NaturalNumber(n) → ∃s NaturalNumber(s) ∧ Successor(n,s))  // every n has successor  
+3. ∀n ∀m ∀s (Successor(n,s) ∧ Successor(m,s) → n = m)  // successors unique  
+4. ∀P [(P(z) ∧ ∀n (P(n) → P(s(n)))) → ∀n P(n)]  // induction (second-order)  
+
+Custom Instructions: Eliminate Zero(0) and NaturalNumber(n). Use only the single primitive Successor(x,y) meaning "y is the successor of x". Produce an equivalent theory without zero as a primitive.  
+
+Output:  
+Primitive:  
+  Successor(x,y)   // y = x + 1  
+
+Axioms:  
+1. ∀x ∃!y Successor(x,y)  // every x has unique successor  
+2. ∀x ¬Successor(x,x)  // no self-successor  
+3. ∀x ∀y ∀z [Successor(x,y) ∧ Successor(y,z) → ¬Successor(z,x)]  // no cycles of 3  
+4. ¬∃x ∀y Successor(y,x) ∨ Successor(x,y)  // no universal predecessor/successor  
+5. ∀P [∃x (P(x) ∧ ∀y ¬Successor(y,x)) ∧ ∀x (P(x) → P(s(x))) → ∀x P(x)]  // induction starting from minimal elements  
+
+Now perform the transformation on the user's input. Output only the transformed theory or impossibility explanation.
