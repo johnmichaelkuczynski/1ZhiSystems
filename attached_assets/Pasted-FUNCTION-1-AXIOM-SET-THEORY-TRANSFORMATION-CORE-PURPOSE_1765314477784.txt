@@ -1,0 +1,61 @@
+FUNCTION 1: AXIOM-SET / THEORY TRANSFORMATION
+CORE PURPOSE AND BEHAVIOR (MUST BE IMPLEMENTED EXACTLY AS BELOW)
+Function 1 takes an axiomatic theory (primitives + axioms, formal or informal) and a set of explicit user instructions.
+It must produce a new, logically equivalent theory (same class of models up to isomorphism, same theorems provable) that satisfies the user’s instructions by radically restructuring the foundation of the theory.
+Allowed operations (the user can request any combination):
+
+Eliminate one or more existing primitives completely
+Change the stock of primitive predicates/notions
+Introduce entirely new primitives
+Replace old primitives with new ones
+Restructure, split, or merge axioms
+Invert the entire conceptual scheme
+Switch from one style of formalization to a completely different one
+
+Crucially:
+
+The output theory must not mention the eliminated primitives anywhere — not in axioms, not in definitions, not in comments. They must be 100% gone from the final presentation.
+The output is allowed and expected to use only the new primitives (plus standard logical symbols).
+If the user asks to “preserve the same models if possible”, the new axiom set must be equiconsistent and (when possible) categorically equivalent or bi-interpretable with the original.
+If the requested transformation is mathematically impossible, the function must clearly state why and what is lost.
+
+MANDATORY FLAGSHIP EXAMPLE THAT MUST WORK PERFECTLY
+(Exact input from page 3 of the spec → exact output from page 3 of the spec)
+INPUT (user provides):
+textPrimitives:
+  Point(x)
+  Between(x,y,z)
+
+Axioms:
+1. ∀x∀y∀z [Between(x,y,z) → Point(x) ∧ Point(y) ∧ Point(z)]
+2. ∀x∀y [x ≠ y → ∃z Between(x,z,y)]
+3. ∀x∀y∀z∀w [(Between(x,y,z) ∧ Between(y,z,w)) → Between(x,y,w)]
+CUSTOM INSTRUCTIONS:
+textRewrite this theory using "Line(x,y)" as the sole primitive. Eliminate both Point and Between. Preserve the same models if possible.
+REQUIRED OUTPUT (must be reproduced almost verbatim, up to minor formatting):
+textNEW PRIMITIVE:
+  Line(x,y)   // x and y determine a unique line
+
+REWRITTEN AXIOMS (model-preserving version):
+1. ∀x∀y [Line(x,y) → x ≠ y]
+2. ∀x∀y∀z [Line(x,y) ∧ Line(y,z) → Line(x,z)]
+3. ∀x∀y [x ≠ y → ∃z (Line(x,z) ∧ Line(z,y))]
+No definitions section, no mention of Point(…), no mention of Between(…), no “Definitions: Point(x) = …” nonsense.
+Just the new primitive and the new axioms — exactly as shown in the official spec.
+ADDITIONAL EXAMPLES OF WHAT FUNCTION 1 MUST BE ABLE TO DO
+
+Take Peano arithmetic and rewrite it with successor as the only primitive (eliminate 0 and + entirely)
+Take standard ZFC set theory and rewrite it using only the membership relation with different axiom groupings
+Take classical propositional logic (with ∧, ∨, ¬) and rewrite it using only NAND as primitive
+Take Hilbert’s incidence/betweenness/order axioms and rewrite them using only congruence of segments as primitive
+Take any first-order theory and produce a many-sorted version or a single-sorted version, eliminating sorts when requested
+
+WHAT FUNCTION 1 IS NOT
+
+It is NOT a conservative extension tool that just adds definitions on top
+It is NOT allowed to keep eliminated primitives hidden in definitions
+It is NOT allowed to output “impossible” for transformations that are known to exist (especially the Line(x,y) example above)
+It is NOT allowed to merely translate to natural language or rephrase the same axioms
+
+This is the single most important function in the entire application.
+Until the exact Example 1A from page 3 works perfectly — with zero trace of Point or Between in the output — Function 1 is broken and does not match the published specification.
