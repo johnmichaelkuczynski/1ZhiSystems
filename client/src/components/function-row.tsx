@@ -170,19 +170,17 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
 
       <div className="mt-4">
         <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2 block">Custom Instructions</label>
-        <div className="flex gap-2">
-          <div className="relative flex-1">
-            <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-              <ArrowRight className="h-4 w-4 text-muted-foreground/50" />
-            </div>
-            <Input 
-              placeholder="E.g., Rewrite using 'Line(x,y)' as sole primitive..."
-              className="pl-9 font-mono text-sm border-border rounded-sm bg-background"
-              value={instructions}
-              onChange={(e) => setInstructions(e.target.value)}
-              data-testid={`instructions-${id}`}
-            />
+        <div className="relative">
+          <div className="absolute top-3 left-3 pointer-events-none">
+            <ArrowRight className="h-4 w-4 text-muted-foreground/50" />
           </div>
+          <Textarea 
+            placeholder="E.g., Rewrite using 'Line(x,y)' as sole primitive. Eliminate 'set' as a primitive, make 'element' the only domain type, define 'set' as equivalence class..."
+            className="pl-9 min-h-[80px] font-mono text-sm border-border rounded-sm bg-background resize-none"
+            value={instructions}
+            onChange={(e) => setInstructions(e.target.value)}
+            data-testid={`instructions-${id}`}
+          />
         </div>
       </div>
     </div>
