@@ -201,22 +201,18 @@ export interface AIResponse {
 }
 
 function buildPrompt(functionName: string, input: string, instructions: string, explain: boolean = false): string {
-  const prompts = FUNCTION_PROMPTS[functionName] || FUNCTION_PROMPTS["Axiom-Set / Theory Transformation"];
-  const systemContext = explain ? prompts.explain : prompts.concise;
+  // Pure passthrough - just send user input and instructions directly to LLM
+  let prompt = input;
   
-  const outputInstruction = explain 
-    ? "Provide a detailed response with explanations."
-    : "Output ONLY the result. No commentary. No explanations.";
+  if (instructions && instructions.trim()) {
+    prompt += `\n\n${instructions}`;
+  }
   
-  return `${systemContext}
-
-USER INPUT:
-${input}
-
-USER INSTRUCTIONS:
-${instructions || "Process this input according to the function's purpose."}
-
-${outputInstruction}`;
+  if (!explain) {
+    prompt += `\n\nOutput only the result. No commentary.`;
+  }
+  
+  return prompt;
 }
 
 async function callGrok(prompt: string): Promise<AIResponse> {
