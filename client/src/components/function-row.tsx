@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { Loader2, Play, ArrowRight } from "lucide-react";
-import { type LLM, mockProcess } from "@/lib/mock-ai";
+import { Loader2, Play, ArrowRight, AlertCircle } from "lucide-react";
+import { type LLM, processTheory } from "@/lib/api";
 import { Badge } from "@/components/ui/badge";
 
 interface FunctionRowProps {
@@ -19,20 +18,29 @@ export function FunctionRow({ id, title, description, selectedModel }: FunctionR
   const [instructions, setInstructions] = useState("");
   const [output, setOutput] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [usedModel, setUsedModel] = useState<string | null>(null);
 
   const handleRun = async () => {
     if (!input) return;
     setIsProcessing(true);
+    setError(null);
+    setUsedModel(null);
+    
     try {
-      const response = await mockProcess(input, instructions, title, selectedModel);
-      setOutput(response.result + (response.notes ? `\n\nNOTES:\n${response.notes}` : ""));
+      const response = await processTheory(input, instructions, title, selectedModel);
+      setOutput(response.result);
+      setUsedModel(`${response.provider} - ${response.model}`);
+    } catch (err: any) {
+      setError(err.message || "Processing failed");
+      setOutput("");
     } finally {
       setIsProcessing(false);
     }
   };
 
   return (
-    <div className="w-full border-b border-border py-8 last:border-0">
+    <div className="w-full border-b border-border py-8 px-6 last:border-0" data-testid={`function-row-${id}`}>
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Badge variant="outline" className="font-mono text-xs rounded-sm">FUNC {id}</Badge>
@@ -44,6 +52,7 @@ export function FunctionRow({ id, title, description, selectedModel }: FunctionR
           onClick={handleRun} 
           disabled={isProcessing || !input}
           className="rounded-sm font-mono text-xs"
+          data-testid={`run-button-${id}`}
         >
           {isProcessing ? (
             <Loader2 className="mr-2 h-3 w-3 animate-spin" />
@@ -55,7 +64,6 @@ export function FunctionRow({ id, title, description, selectedModel }: FunctionR
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Input Column */}
         <div className="space-y-3">
           <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Input</label>
           <Textarea 
@@ -63,31 +71,38 @@ export function FunctionRow({ id, title, description, selectedModel }: FunctionR
             className="min-h-[500px] font-mono text-sm bg-secondary/30 resize-none border-border rounded-sm focus-visible:ring-1 focus-visible:ring-ring"
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            data-testid={`input-${id}`}
           />
         </div>
 
-        {/* Output Column */}
         <div className="space-y-3">
-          <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Output</label>
+          <div className="flex items-center justify-between">
+            <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Output</label>
+            {usedModel && (
+              <Badge variant="secondary" className="text-[10px] font-mono rounded-sm">
+                {usedModel}
+              </Badge>
+            )}
+          </div>
           <div className="relative">
-            <Textarea 
-              readOnly
-              placeholder="// Output will appear here..."
-              className="min-h-[500px] font-mono text-sm bg-muted/50 resize-none border-border rounded-sm focus-visible:ring-0 text-muted-foreground"
-              value={output}
-            />
-            {output && (
-              <div className="absolute top-2 right-2">
-                <Badge variant="secondary" className="text-[10px] font-mono rounded-sm">
-                  GENERATED
-                </Badge>
+            {error ? (
+              <div className="min-h-[500px] font-mono text-sm bg-destructive/10 border border-destructive/50 rounded-sm p-4 flex items-start gap-2">
+                <AlertCircle className="h-4 w-4 text-destructive shrink-0 mt-0.5" />
+                <span className="text-destructive">{error}</span>
               </div>
+            ) : (
+              <Textarea 
+                readOnly
+                placeholder="// Output will appear here..."
+                className="min-h-[500px] font-mono text-sm bg-muted/50 resize-none border-border rounded-sm focus-visible:ring-0"
+                value={output}
+                data-testid={`output-${id}`}
+              />
             )}
           </div>
         </div>
       </div>
 
-      {/* Instructions Row */}
       <div className="mt-4">
         <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2 block">Custom Instructions</label>
         <div className="flex gap-2">
@@ -100,6 +115,7 @@ export function FunctionRow({ id, title, description, selectedModel }: FunctionR
               className="pl-9 font-mono text-sm border-border rounded-sm bg-background"
               value={instructions}
               onChange={(e) => setInstructions(e.target.value)}
+              data-testid={`instructions-${id}`}
             />
           </div>
         </div>
