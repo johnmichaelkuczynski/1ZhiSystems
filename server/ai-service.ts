@@ -49,96 +49,113 @@ export interface AIResponse {
   provider: string;
 }
 
-const FUNCTION_1_PROMPT = `You are a theory transformation engine. Transform the given axiomatic theory according to the user's custom instructions. The output must be a new theory that is logically equivalent (same models up to isomorphism, same theorems) to the original, unless impossible. Eliminate, introduce, or restructure primitives and axioms as instructed. Do not keep eliminated primitives in definitions or anywhere else. If impossible, explain why.
+const FUNCTION_1_PROMPT = `You are the world's best expert in first-order theory transformation and primitive elimination.
 
-User's Input Theory:
-[USER_INPUT]
+Transform the theory below according to the user's instructions.  
+The new theory must have exactly the same models (up to isomorphism) as the original.  
+Any primitive the user asks to eliminate MUST disappear completely – it may not appear anywhere in your final output.
 
-User's Custom Instructions:
-[USER_INSTRUCTIONS]
+USER THEORY:
+<<<INPUT>>>
 
-Paradigms (Use these as examples to guide your transformation; do not copy them verbatim unless the user input matches exactly):
+USER INSTRUCTIONS:
+<<<INSTRUCTIONS>>>
 
-Paradigm 1: Geometry Betweenness to Line
+You have exactly these five perfect paradigms. Imitate their style and rigor.
+
+Paradigm 1 – Betweenness → Line
 Input:
-Primitives:
-  Point(x)
-  Between(x,y,z)
-
+Primitives: Point(x) Between(x,y,z)
 Axioms:
 1. ∀x∀y∀z [Between(x,y,z) → Point(x) ∧ Point(y) ∧ Point(z)]
 2. ∀x∀y [x ≠ y → ∃z Between(x,z,y)]
 3. ∀x∀y∀z∀w [(Between(x,y,z) ∧ Between(y,z,w)) → Between(x,y,w)]
-
-Custom Instructions: Rewrite using "Line(x,y)" as the sole primitive. Eliminate both Point and Between. Preserve the same models if possible.
-
+Instructions: Rewrite using "Line(x,y)" as the sole primitive. Eliminate both Point and Between.
 Output:
-NEW PRIMITIVE:
-  Line(x,y)   // x and y determine a unique line
-
-REWRITTEN AXIOMS:
+Primitive: Line(x,y)
+Axioms:
 1. ∀x∀y [Line(x,y) → x ≠ y]
 2. ∀x∀y∀z [Line(x,y) ∧ Line(y,z) → Line(x,z)]
 3. ∀x∀y [x ≠ y → ∃z (Line(x,z) ∧ Line(z,y))]
 
-Paradigm 2: Set Membership to Subset (Ackermann Encoding)
+Paradigm 2 – Membership → Subset (Ackermann)
 Input:
-Primitives:
-  Set(x)
-  ElementOf(a,x)   // a ∈ x
-
+Primitives: Set(x) ElementOf(a,x)
 Axioms:
-1. ∀x ∃y (Set(y) ∧ ¬∃z (ElementOf(z,y)))                               // empty set
-2. ∀x ∀y (Set(x) ∧ Set(y) → ∃z (Set(z) ∧ ∀w (ElementOf(w,z) ↔ ElementOf(w,x) ∨ w=x ∨ w=y)))  // pair
-3. ∀x (Set(x) → ∃y (Set(y) ∧ ∀z (ElementOf(z,y) ↔ ∃w (ElementOf(z,w) ∧ ElementOf(w,x))))) // union
-4. ∀x (Set(x) → ∃y (Set(y) ∧ ∀z (ElementOf(z,y) ↔ Set(z) ∧ ∀w (ElementOf(w,z) → ElementOf(w,x))))) // power set
-
-Custom Instructions: Completely eliminate ElementOf(a,x). Use only the single primitive Subset(A,B) meaning "A is a subset of B". Do not use ElementOf anywhere in the output. Produce a theory with the same models (up to isomorphism).
-
+1. ∃e ∀x ¬ElementOf(x,e)
+2. ∀x∀y ∃z ∀w [ElementOf(w,z) ↔ (w=x ∨ w=y)]
+3. ∀x ∃z ∀w [ElementOf(w,z) ↔ ∃y (ElementOf(y,x) ∧ ElementOf(w,y))]
+4. ∀x ∃z ∀w [ElementOf(w,z) ↔ ∀y (ElementOf(y,x) → ElementOf(y,w))]
+Instructions: Eliminate ElementOf completely, use only Subset(A,B)
 Output:
-Primitive:
-  Subset(A,B)   // A ⊆ B
-
+Primitive: Subset(A,B)
 Axioms:
-1. ∀A ∀B ∀C [Subset(A,B) ∧ Subset(B,C) → Subset(A,C)]  // transitivity
-2. ∀A ∀B [Subset(A,B) ∧ Subset(B,A) → A = B]            // antisymmetry
-3. ∃E ∀X ¬Subset(X,E)                                   // empty set
-4. ∀A ∀B ∃C ∀X [Subset(X,C) ↔ Subset(X,A) ∨ X=A ∨ X=B]  // pair
-5. ∀A ∃U ∀X [Subset(X,U) ↔ ∃Y (Subset(Y,A) ∧ Subset(X,Y))]  // union
-6. ∀A ∃P ∀X [Subset(X,P) ↔ ∀Y (Subset(Y,A) → Subset(Y,X))]  // power set
+1. ∀A∀B∀C [Subset(A,B) ∧ Subset(B,C) → Subset(A,C)]
+2. ∀A∀B [Subset(A,B) ∧ Subset(B,A) → A = B]
+3. ∃E ∀X ¬Subset(X,E)
+4. ∀A∀B ∃C ∀X [Subset(X,C) ↔ Subset(X,A) ∨ X=A ∨ X=B]
+5. ∀A ∃U ∀X [Subset(X,U) ↔ ∃Y (Subset(Y,A) ∧ Subset(X,Y))]
+6. ∀A ∃P ∀X [Subset(X,P) ↔ ∀Y (Subset(Y,A) → Subset(Y,X))]
 
-Paradigm 3: Peano Arithmetic to Successor-Only
+Paradigm 3 – Vector space → LinearCombination
 Input:
-Primitives:
-  NaturalNumber(n)
-  Zero(0)
-  Successor(s,n)   // s = successor of n
-
-Axioms:
-1. ∃z NaturalNumber(z) ∧ ∀n ¬Successor(n,z)  // zero exists, no predecessor
-2. ∀n (NaturalNumber(n) → ∃s NaturalNumber(s) ∧ Successor(n,s))  // every n has successor
-3. ∀n ∀m ∀s (Successor(n,s) ∧ Successor(m,s) → n = m)  // successors unique
-4. ∀P [(P(z) ∧ ∀n (P(n) → P(s(n)))) → ∀n P(n)]  // induction (second-order)
-
-Custom Instructions: Eliminate Zero(0) and NaturalNumber(n). Use only the single primitive Successor(x,y) meaning "y is the successor of x". Produce an equivalent theory without zero as a primitive.
-
+Primitives: Vector(v) Addition(u,v,w) ScalarMultiplication(r,v,w)
+Axioms: (standard 8–10 vector space axioms)
+Instructions: Eliminate Addition and ScalarMultiplication completely. Use only LinearCombination(a,u,b,v,w) meaning w = a·u + b·v.
 Output:
-Primitive:
-  Successor(x,y)   // y = x + 1
-
+Primitive: LinearCombination(a,u,b,v,w)
 Axioms:
-1. ∀x ∃!y Successor(x,y)  // every x has unique successor
-2. ∀x ¬Successor(x,x)  // no self-successor
-3. ∀x ∀y ∀z [Successor(x,y) ∧ Successor(y,z) → ¬Successor(z,x)]  // no cycles of 3
-4. ¬∃x ∀y Successor(y,x) ∨ Successor(x,y)  // no universal predecessor/successor
-5. ∀P [∃x (P(x) ∧ ∀y ¬Successor(y,x)) ∧ ∀x (P(x) → P(s(x))) → ∀x P(x)]  // induction starting from minimal elements
+1. ∀a∀u∀b∀v ∃!w LinearCombination(a,u,b,v,w)
+2. ∀a∀b∀c∀d∀u∀v∀w∀x [LinearCombination(a,u,b,v,w) ∧ LinearCombination(c,w,d,x,y) → LinearCombination(a·c + b·d, u, a·d + b·x, v, y)]
+3. ∀u∀v∀w [LinearCombination(1,u,1,v,w) ↔ LinearCombination(1,v,1,u,w)]
+4. ∃z ∀v LinearCombination(0,v,0,v,z)
+5. ∀v ∃w LinearCombination(1,v,-1,w,z) where z is the zero from axiom 4
+6. ∀a∀b∀u∀v∀w [LinearCombination(a+b,u,1,v,w) ↔ ∃x∃y (LinearCombination(a,u,0,v,x) ∧ LinearCombination(b,u,0,v,y) ∧ LinearCombination(1,x,1,y,w))]
+7. ∀r∀u∀v∀w [LinearCombination(r,u,r,v,w) ↔ ∃x (LinearCombination(1,u,1,v,x) ∧ LinearCombination(r,x,0,x,w))]
+8. LinearCombination(1,v,0,v,v)
 
-Now perform the transformation on the user's input. Output only the transformed theory or impossibility explanation.`;
+Paradigm 4 – Ternary Operation → infix · (Loop)
+Input:
+Primitives: Element(x) Operation(x,y,z)
+Axioms:
+1. ∀x∀y∃!z Operation(x,y,z)
+2. ∀w∀x∀y∀z [Operation(w,x,y) ∧ Operation(x,y,z) → Operation(w,x,z)]
+3. ∀w∀x∀y∀z [Operation(x,y,w) ∧ Operation(y,z,x) → Operation(w,x,z)]
+4. ∃e ∀x Operation(e,x,x) ∧ Operation(x,e,x)
+5. ∀x ∃y Operation(x,y,e) ∧ Operation(y,x,e)
+Instructions: Eliminate Operation completely, use only infix binary ·
+Output:
+Binary operation: x · y
+Axioms:
+1. ∀x∀y ∃!z (x · y = z)
+2. ∀x∀y∀z (x · y = z → ∃u (u · x = y ∧ y · u = x))
+3. ∃e ∀x (e · x = x ∧ x · e = x)
+4. ∀x ∃y (x · y = e ∧ y · x = e)
+5. ∀a∀b∀c (a · b = c → ∀x ∃!y (x · y = c) ∧ ∃!w (w · x = c))
+
+Paradigm 5 – Circle incidence → Point-Line-Incidence
+Input:
+Primitives: Point(p) Circle(c) LiesOn(p,c)
+Axioms:
+1. ∀c ∃p∃q∃r (LiesOn(p,c) ∧ LiesOn(q,c) ∧ LiesOn(r,c) ∧ p≠q∧q≠r∧r≠p)
+2. ∀p∀q∀r (p≠q∧q≠r∧r≠p → ∃!c (LiesOn(p,c) ∧ LiesOn(q,c) ∧ LiesOn(r,c)))
+3. ∀p∀q (p≠q → ∃c∃d (LiesOn(p,c) ∧ LiesOn(q,c) ∧ LiesOn(p,d) ∧ LiesOn(q,d) ∧ c≠d))
+Instructions: Eliminate Circle and LiesOn completely. Use only Point, Line, Incidence(p,l)
+Output:
+Primitives: Point(p) Line(l) Incidence(p,l)
+Axioms:
+1. ∀p∀q (p≠q → ∃l Incidence(p,l) ∧ Incidence(q,l))
+2. ∀p∀q∀l∀m (Incidence(p,l) ∧ Incidence(q,l) ∧ Incidence(p,m) ∧ Incidence(q,m) ∧ l≠m → ∃r∃s (Incidence(r,l) ∧ ¬Incidence(r,m) ∧ Incidence(s,m) ∧ ¬Incidence(s,l)))
+3. ∀l ∃p∃q∃r (Incidence(p,l) ∧ Incidence(q,l) ∧ Incidence(r,l) ∧ p≠q∧q≠r∧r≠p)
+
+Now transform the user's theory.  
+Output ONLY the new primitives and axioms, or "Impossible because …".  
+No extra text.`;
 
 function buildPromptForFunction1(input: string, instructions: string): string {
   return FUNCTION_1_PROMPT
-    .replace("[USER_INPUT]", input)
-    .replace("[USER_INSTRUCTIONS]", instructions || "Transform this theory.");
+    .replace("<<<INPUT>>>", input)
+    .replace("<<<INSTRUCTIONS>>>", instructions || "Transform this theory.");
 }
 
 function buildPromptGeneric(input: string, instructions: string): string {

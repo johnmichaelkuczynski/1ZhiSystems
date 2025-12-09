@@ -1,0 +1,116 @@
+REPLIT AGENT – IMPLEMENT THIS EXACTLY, NO FILTERING, NO HARDCODING, NO EXCUSES
+
+From now on Function 1 works EXACTLY like this:
+
+When the user clicks RUN:
+1. Build ONE prompt using the template below.
+2. Replace only <<<INPUT>>> and <<<INSTRUCTIONS>>> with the user's exact text.
+3. Send the full prompt to the selected LLM.
+4. Display the LLM’s raw response verbatim in the OUTPUT box. Nothing else. No filtering ever.
+
+EXACT PROMPT TEMPLATE (copy-paste this verbatim into your code):
+
+You are the world’s best expert in first-order theory transformation and primitive elimination.
+
+Transform the theory below according to the user’s instructions.  
+The new theory must have exactly the same models (up to isomorphism) as the original.  
+Any primitive the user asks to eliminate MUST disappear completely – it may not appear anywhere in your final output.
+
+USER THEORY:
+<<<INPUT>>>
+
+USER INSTRUCTIONS:
+<<<INSTRUCTIONS>>>
+
+You have exactly these five perfect paradigms. Imitate their style and rigor.
+
+Paradigm 1 – Betweenness → Line
+Input:
+Primitives: Point(x) Between(x,y,z)
+Axioms:
+1. ∀x∀y∀z [Between(x,y,z) → Point(x) ∧ Point(y) ∧ Point(z)]
+2. ∀x∀y [x ≠ y → ∃z Between(x,z,y)]
+3. ∀x∀y∀z∀w [(Between(x,y,z) ∧ Between(y,z,w)) → Between(x,y,w)]
+Instructions: Rewrite using "Line(x,y)" as the sole primitive. Eliminate both Point and Between.
+Output:
+Primitive: Line(x,y)
+Axioms:
+1. ∀x∀y [Line(x,y) → x ≠ y]
+2. ∀x∀y∀z [Line(x,y) ∧ Line(y,z) → Line(x,z)]
+3. ∀x∀y [x ≠ y → ∃z (Line(x,z) ∧ Line(z,y))]
+
+Paradigm 2 – Membership → Subset (Ackermann)
+Input:
+Primitives: Set(x) ElementOf(a,x)
+Axioms:
+1. ∃e ∀x ¬ElementOf(x,e)
+2. ∀x∀y ∃z ∀w [ElementOf(w,z) ↔ (w=x ∨ w=y)]
+3. ∀x ∃z ∀w [ElementOf(w,z) ↔ ∃y (ElementOf(y,x) ∧ ElementOf(w,y))]
+4. ∀x ∃z ∀w [ElementOf(w,z) ↔ ∀y (ElementOf(y,x) → ElementOf(y,w))]
+Instructions: Eliminate ElementOf completely, use only Subset(A,B)
+Output:
+Primitive: Subset(A,B)
+Axioms:
+1. ∀A∀B∀C [Subset(A,B) ∧ Subset(B,C) → Subset(A,C)]
+2. ∀A∀B [Subset(A,B) ∧ Subset(B,A) → A = B]
+3. ∃E ∀X ¬Subset(X,E)
+4. ∀A∀B ∃C ∀X [Subset(X,C) ↔ Subset(X,A) ∨ X=A ∨ X=B]
+5. ∀A ∃U ∀X [Subset(X,U) ↔ ∃Y (Subset(Y,A) ∧ Subset(X,Y))]
+6. ∀A ∃P ∀X [Subset(X,P) ↔ ∀Y (Subset(Y,A) → Subset(Y,X))]
+
+Paradigm 3 – Vector space → LinearCombination
+Input:
+Primitives: Vector(v) Addition(u,v,w) ScalarMultiplication(r,v,w)
+Axioms: (standard 8–10 vector space axioms)
+Instructions: Eliminate Addition and ScalarMultiplication completely. Use only LinearCombination(a,u,b,v,w) meaning w = a·u + b·v.
+Output:
+Primitive: LinearCombination(a,u,b,v,w)
+Axioms:
+1. ∀a∀u∀b∀v ∃!w LinearCombination(a,u,b,v,w)
+2. ∀a∀b∀c∀d∀u∀v∀w∀x [LinearCombination(a,u,b,v,w) ∧ LinearCombination(c,w,d,x,y) → LinearCombination(a·c + b·d, u, a·d + b·x, v, y)]
+3. ∀u∀v∀w [LinearCombination(1,u,1,v,w) ↔ LinearCombination(1,v,1,u,w)]
+4. ∃z ∀v LinearCombination(0,v,0,v,z)
+5. ∀v ∃w LinearCombination(1,v,-1,w,z) where z is the zero from axiom 4
+6. ∀a∀b∀u∀v∀w [LinearCombination(a+b,u,1,v,w) ↔ ∃x∃y (LinearCombination(a,u,0,v,x) ∧ LinearCombination(b,u,0,v,y) ∧ LinearCombination(1,x,1,y,w))]
+7. ∀r∀u∀v∀w [LinearCombination(r,u,r,v,w) ↔ ∃x (LinearCombination(1,u,1,v,x) ∧ LinearCombination(r,x,0,x,w))]
+8. LinearCombination(1,v,0,v,v)
+
+Paradigm 4 – Ternary Operation → infix · (Loop)
+Input:
+Primitives: Element(x) Operation(x,y,z)
+Axioms:
+1. ∀x∀y∃!z Operation(x,y,z)
+2. ∀w∀x∀y∀z [Operation(w,x,y) ∧ Operation(x,y,z) → Operation(w,x,z)]
+3. ∀w∀x∀y∀z [Operation(x,y,w) ∧ Operation(y,z,x) → Operation(w,x,z)]
+4. ∃e ∀x Operation(e,x,x) ∧ Operation(x,e,x)
+5. ∀x ∃y Operation(x,y,e) ∧ Operation(y,x,e)
+Instructions: Eliminate Operation completely, use only infix binary ·
+Output:
+Binary operation: x · y
+Axioms:
+1. ∀x∀y ∃!z (x · y = z)
+2. ∀x∀y∀z (x · y = z → ∃u (u · x = y ∧ y · u = x))
+3. ∃e ∀x (e · x = x ∧ x · e = x)
+4. ∀x ∃y (x · y = e ∧ y · x = e)
+5. ∀a∀b∀c (a · b = c → ∀x ∃!y (x · y = c) ∧ ∃!w (w · x = c))
+
+Paradigm 5 – Circle incidence → Point-Line-Incidence
+Input:
+Primitives: Point(p) Circle(c) LiesOn(p,c)
+Axioms:
+1. ∀c ∃p∃q∃r (LiesOn(p,c) ∧ LiesOn(q,c) ∧ LiesOn(r,c) ∧ p≠q∧q≠r∧r≠p)
+2. ∀p∀q∀r (p≠q∧q≠r∧r≠p → ∃!c (LiesOn(p,c) ∧ LiesOn(q,c) ∧ LiesOn(r,c)))
+3. ∀p∀q (p≠q → ∃c∃d (LiesOn(p,c) ∧ LiesOn(q,c) ∧ LiesOn(p,d) ∧ LiesOn(q,d) ∧ c≠d))
+Instructions: Eliminate Circle and LiesOn completely. Use only Point, Line, Incidence(p,l)
+Output:
+Primitives: Point(p) Line(l) Incidence(p,l)
+Axioms:
+1. ∀p∀q (p≠q → ∃l Incidence(p,l) ∧ Incidence(q,l))
+2. ∀p∀q∀l∀m (Incidence(p,l) ∧ Incidence(q,l) ∧ Incidence(p,m) ∧ Incidence(q,m) ∧ l≠m → ∃r∃s (Incidence(r,l) ∧ ¬Incidence(r,m) ∧ Incidence(s,m) ∧ ¬Incidence(s,l)))
+3. ∀l ∃p∃q∃r (Incidence(p,l) ∧ Incidence(q,l) ∧ Incidence(r,l) ∧ p≠q∧q≠r∧r≠p)
+
+Now transform the user’s theory.  
+Output ONLY the new primitives and axioms, or “Impossible because …”.  
+No extra text.
+
+Deploy this exact system immediately. No discussion.
