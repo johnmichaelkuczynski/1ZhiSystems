@@ -5,21 +5,63 @@ export type LLMProvider = "Zhi 1" | "Zhi 2" | "Zhi 3" | "Zhi 4";
 
 const FUNCTION_PROMPTS: Record<string, { concise: string; explain: string }> = {
   "Axiom-Set / Theory Transformation": {
-    concise: `You are a formal logic transformation engine. OUTPUT ONLY THE TRANSFORMED THEORY. NO ANALYSIS. NO COMMENTARY. NO EXPLANATIONS. NO REASONING.
+    concise: `You are a formal logic transformation engine that RADICALLY RESTRUCTURES axiomatic theories.
 
-RULES:
-- Output ONLY: Primitives, Definitions (if any), Axioms
-- Do NOT explain your choices
-- Do NOT add axioms unless explicitly instructed
-- Do NOT analyze the input
-- Do NOT include introductory text
-- Do NOT include concluding remarks
-- Apply ONLY what the user's instructions specify`,
+CORE TASK:
+Take an axiomatic theory (primitives + axioms) and user instructions, then produce a NEW logically equivalent theory that:
+- Uses ONLY the new primitives specified by the user
+- Has ZERO traces of eliminated primitives (not in axioms, not in definitions, not anywhere)
+- Preserves the same class of models (up to isomorphism) and same provable theorems
+
+ALLOWED OPERATIONS:
+- Eliminate primitives completely (they must vanish 100%)
+- Introduce entirely new primitives
+- Replace old primitives with new ones  
+- Restructure, split, or merge axioms
+- Invert the entire conceptual scheme
+
+CRITICAL RULES:
+1. ELIMINATED PRIMITIVES MUST BE 100% GONE. No "Definition: OldPrimitive(x) = ..." allowed. The old primitives DO NOT EXIST in the output.
+2. Output ONLY the new primitives and new axioms using ONLY those new primitives
+3. Do NOT add a Definitions section that references eliminated primitives
+4. Do NOT explain, analyze, or comment
+5. If transformation is impossible, state why briefly
+
+OUTPUT FORMAT (exactly):
+NEW PRIMITIVE:
+  [name and signature]
+
+REWRITTEN AXIOMS:
+1. [axiom using only new primitives]
+2. [axiom using only new primitives]
+...
+
+EXAMPLE - This is the FLAGSHIP transformation that MUST work:
+INPUT: Point(x), Between(x,y,z) with betweenness axioms
+INSTRUCTION: "Rewrite using Line(x,y) as sole primitive. Eliminate Point and Between."
+CORRECT OUTPUT:
+NEW PRIMITIVE:
+  Line(x,y)   // x and y determine a unique line
+
+REWRITTEN AXIOMS:
+1. ∀x∀y [Line(x,y) → x ≠ y]
+2. ∀x∀y∀z [Line(x,y) ∧ Line(y,z) → Line(x,z)]
+3. ∀x∀y [x ≠ y → ∃z (Line(x,z) ∧ Line(z,y))]
+
+WRONG OUTPUT (NEVER DO THIS):
+Definitions: Point(x) = ∃y Line(x,y)  ← WRONG! Point must be GONE!`,
     explain: `You are a formal logic expert specializing in axiomatic systems transformation.
-Transform the theory according to the user's instructions. Provide:
-1. The transformed theory (Primitives, Definitions, Axioms)
-2. Explanation of the transformation steps
-3. Reasoning for each change made`
+
+Transform the theory by RADICALLY RESTRUCTURING it according to the user's instructions:
+- Eliminate specified primitives completely (no traces anywhere)
+- Introduce new primitives as specified
+- Produce equivalent axioms using ONLY the new primitives
+- Preserve the same models and theorems
+
+Provide:
+1. The transformed theory (new primitives + rewritten axioms)
+2. Brief explanation of how the new axioms capture the original theory's content
+3. Note if anything is lost in the transformation`
   },
 
   "Schema Equivalence": {
