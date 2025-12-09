@@ -1,0 +1,97 @@
+FUNCTION 3: Definitional Equivalence — PRESETS
+
+Preset A: Try Mutual Explicit Definitions
+Attempt to define each primitive of Theory A using Theory B, and vice versa.
+
+Preset B: One-Direction Definability
+Check only A→B or B→A (user chooses direction).
+
+Preset C: Definition Minimization
+Return the shortest definitional scheme (fewest symbols).
+
+Preset D: Conservative Definability
+Allow definitions only if they preserve provability without adding new theorems.
+
+✅ FUNCTION 4: Model-Preserving Rewrite — PRESETS
+
+Preset A: Rewrite Using Reduced Primitive Set
+Use the smallest set of primitives that still preserves the same models.
+
+Preset B: Rewrite Using Expanded Primitive Set
+Add helper primitives to shorten axioms while preserving models.
+
+Preset C: Algebraic Reconstruction
+Rewrite the theory into algebraic operations (e.g., relations → functions).
+
+Preset D: Pure Relational Reconstruction
+Rewrite all primitives as relations (no functions, no constants).
+
+✅ FUNCTION 5: Conservative Extension Analysis — PRESETS
+
+Preset A: Check New Primitives Only
+Determine whether adding a new primitive changes old theorems.
+
+Preset B: Check New Axioms Only
+Determine whether adding new axioms is conservative.
+
+Preset C: Weak Extension Test
+Allow definitional extensions but forbid new existential commitments.
+
+Preset D: Full Independence Test
+Detect whether the added axiom is independent (neither provable nor refutable).
+
+✅ FUNCTION 6: Compare Conceptual Schemes — PRESETS
+
+Preset A: Primitive vs Derived Map
+Identify primitives and definitions and generate a dependency diagram.
+
+Preset B: Conceptual Dependency Depth
+Compute how many layers deep each concept is in the hierarchy.
+
+Preset C: Bottleneck Detection
+Find which primitives everything depends on.
+
+Preset D: Conceptual Rebalancing
+Suggest alternative choices of primitives to distribute conceptual load more evenly.
+
+✅ FUNCTION 7: Ontological Dependence — PRESETS
+
+Preset A: Remove One Primitive
+Return collapse severity score for removing a single primitive.
+
+Preset B: Remove All Non-Essential Primitives
+Return the minimal set of primitives required for theory survival.
+
+Preset C: Replace Primitive With Defined Term
+Test whether a primitive can be replaced with a definable notion.
+
+Preset D: Load-Bearing Analysis
+Rank primitives by importance (0–1 scale).
+
+✅ FUNCTION 8: Generate Alternative Conceptualizations — PRESETS
+
+Preset A: Invert Ontology
+Make derived concepts primitive and make old primitives definable.
+
+Preset B: Behavioral Reconstruction
+Rewrite theory using external/observable primitives only.
+
+Preset C: Structural Reconstruction
+Rewrite theory using purely structural primitives (relations, graphs, networks).
+
+Preset D: Physicalization
+Rewrite theory in physical terms (geometry, metric, topology, etc.) where possible.
+
+✅ FUNCTION 9: Identify Representational Biases — PRESETS
+
+Preset A: Privilege Detection
+List what the theory makes easy to express.
+
+Preset B: Blind-Spot Detection
+List what the theory makes hard or impossible to express.
+
+Preset C: Worldview Reconstruction
+Identify the implicit worldview built into the primitive choices.
+
+Preset D: Bias Severity Ranking
+Rank the representational distortions from strongest to weakest.

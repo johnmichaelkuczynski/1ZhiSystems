@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -11,15 +11,29 @@ interface FunctionRowProps {
   title: string;
   description?: string;
   selectedModel: LLM;
+  presetInput?: string;
+  presetInstructions?: string;
 }
 
-export function FunctionRow({ id, title, description, selectedModel }: FunctionRowProps) {
+export function FunctionRow({ id, title, description, selectedModel, presetInput, presetInstructions }: FunctionRowProps) {
   const [input, setInput] = useState("");
   const [instructions, setInstructions] = useState("");
   const [output, setOutput] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [usedModel, setUsedModel] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (presetInput !== undefined) {
+      setInput(presetInput);
+    }
+  }, [presetInput]);
+
+  useEffect(() => {
+    if (presetInstructions !== undefined) {
+      setInstructions(presetInstructions);
+    }
+  }, [presetInstructions]);
 
   const handleRun = async () => {
     if (!input) return;
@@ -107,9 +121,9 @@ export function FunctionRow({ id, title, description, selectedModel }: FunctionR
         <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2 block">Custom Instructions</label>
         <div className="flex gap-2">
           <div className="relative flex-1">
-             <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-                <ArrowRight className="h-4 w-4 text-muted-foreground/50" />
-             </div>
+            <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+              <ArrowRight className="h-4 w-4 text-muted-foreground/50" />
+            </div>
             <Input 
               placeholder="E.g., Rewrite using 'Line(x,y)' as sole primitive..."
               className="pl-9 font-mono text-sm border-border rounded-sm bg-background"
