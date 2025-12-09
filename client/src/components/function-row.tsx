@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { Loader2, Play, ArrowRight, AlertCircle } from "lucide-react";
+import { Loader2, Play, ArrowRight, AlertCircle, Copy, Check } from "lucide-react";
 import { type LLM, processTheory } from "@/lib/api";
 import { Badge } from "@/components/ui/badge";
 
@@ -22,6 +22,14 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [usedModel, setUsedModel] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    if (!output) return;
+    await navigator.clipboard.writeText(output);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   useEffect(() => {
     if (presetInput !== undefined) {
@@ -91,7 +99,30 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
 
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Output</label>
+            <div className="flex items-center gap-2">
+              <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Output</label>
+              {output && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleCopy}
+                  className="h-6 px-2 text-xs text-muted-foreground hover:text-foreground"
+                  data-testid={`copy-output-${id}`}
+                >
+                  {copied ? (
+                    <>
+                      <Check className="h-3 w-3 mr-1" />
+                      Copied
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="h-3 w-3 mr-1" />
+                      Copy
+                    </>
+                  )}
+                </Button>
+              )}
+            </div>
             {usedModel && (
               <Badge variant="secondary" className="text-[10px] font-mono rounded-sm">
                 {usedModel}
