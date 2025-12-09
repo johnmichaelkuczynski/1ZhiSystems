@@ -60,7 +60,7 @@ export function FunctionRow({ id, title, description, selectedModel }: FunctionR
           <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Input</label>
           <Textarea 
             placeholder="// Enter formal axioms or plain English theory here..."
-            className="min-h-[200px] font-mono text-sm bg-secondary/30 resize-none border-border rounded-sm focus-visible:ring-1 focus-visible:ring-ring"
+            className="min-h-[500px] font-mono text-sm bg-secondary/30 resize-none border-border rounded-sm focus-visible:ring-1 focus-visible:ring-ring"
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
@@ -73,7 +73,7 @@ export function FunctionRow({ id, title, description, selectedModel }: FunctionR
             <Textarea 
               readOnly
               placeholder="// Output will appear here..."
-              className="min-h-[200px] font-mono text-sm bg-muted/50 resize-none border-border rounded-sm focus-visible:ring-0 text-muted-foreground"
+              className="min-h-[500px] font-mono text-sm bg-muted/50 resize-none border-border rounded-sm focus-visible:ring-0 text-muted-foreground"
               value={output}
             />
             {output && (

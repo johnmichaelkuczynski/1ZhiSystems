@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ChatInterface } from "@/components/chat-interface";
 import { type LLM } from "@/lib/mock-ai";
 import { FunctionRow } from "@/components/function-row";
+import generatedLogo from "@assets/generated_images/minimalist_geometric_logo_representing_logic_transformation.png";
 
 export default function Home() {
   const [selectedModel, setSelectedModel] = useState<LLM>("Zhi 1");
@@ -23,9 +24,9 @@ export default function Home() {
       <header className="border-b border-border sticky top-0 z-50 bg-background/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-             {/* Logo will be added here */}
-            <div className="h-8 w-8 bg-primary rounded-sm flex items-center justify-center text-primary-foreground font-bold font-mono text-xs">
-              TT
+             {/* Logo added */}
+            <div className="h-8 w-8 bg-primary rounded-sm flex items-center justify-center overflow-hidden">
+              <img src={generatedLogo} alt="TT Logo" className="h-full w-full object-cover invert dark:invert-0" />
             </div>
             <h1 className="font-semibold tracking-tight text-lg">Theory Transformation App</h1>
           </div>
