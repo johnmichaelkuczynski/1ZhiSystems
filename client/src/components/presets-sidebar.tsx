@@ -97,45 +97,112 @@ Axioms:
     instructions: `Generate a non-isomorphic equivalent theory: Create a structurally different theory using different primitives (e.g., Child(x,y), Ancestor(x,y)) that produces the same models up to interpretation.`
   },
   {
-    id: "schema-2a",
-    name: "Parent vs Ancestor",
-    functionId: 2,
-    input: `Schema A — Using "Parent(x, y)"
-
-Primitives:
-  Parent(x, y)
-
-Axioms:
-1. ∀x∀y [Parent(x, y) → x ≠ y]
-2. ∀x∀y∀z [(Parent(x, y) ∧ Parent(y, z)) → Parent(x, z)]
-
----
-
-Schema B — Using "Ancestor(x, y)"
-
-Primitives:
-  Ancestor(x, y)
-
-Axioms:
-1. ∀x∀y [Ancestor(x, y) → x ≠ y]
-2. ∀x∀y∀z [(Ancestor(x, y) ∧ Ancestor(y, z)) → Ancestor(x, z)]
-3. ∀x∀y [Parent(x, y) → Ancestor(x, y)]`,
-    instructions: `Determine whether Schema A and Schema B are schema-equivalent.`
-  },
-  {
-    id: "schema-2b",
-    name: "Employment Schemas",
+    id: "schema-direct-vocab",
+    name: "Direct Vocabulary Mapping",
     functionId: 2,
     input: `Schema A:
-A company employs a person if that person works for it full-time or part-time.
-A contractor is someone who performs paid labor for a company but is not employed by it.
+Primitives:
+  Point(x)
+  Line(x)
+  On(p, l)    // point p is on line l
+
+Axioms:
+1. ∀p∀l [On(p, l) → Point(p) ∧ Line(l)]
+2. ∀p∀q [Point(p) ∧ Point(q) ∧ p ≠ q → ∃!l (Line(l) ∧ On(p, l) ∧ On(q, l))]
 
 ---
 
 Schema B:
-A worker is anyone who performs labor for a company.
-Workers divide into employees (full-time or part-time) and contractors (not employees).`,
-    instructions: `Are these two schemas equivalent? Produce the mapping if they are.`
+Primitives:
+  Vertex(v)
+  Edge(e)
+  Incident(v, e)    // vertex v is incident to edge e
+
+Axioms:
+1. ∀v∀e [Incident(v, e) → Vertex(v) ∧ Edge(e)]
+2. ∀v∀w [Vertex(v) ∧ Vertex(w) ∧ v ≠ w → ∃!e (Edge(e) ∧ Incident(v, e) ∧ Incident(w, e))]`,
+    instructions: `Try to map primitive symbols 1-to-1. Find the direct vocabulary mapping: Point ↔ Vertex, Line ↔ Edge, On ↔ Incident. Verify that axioms translate correctly under this mapping.`
+  },
+  {
+    id: "schema-arity-preserve",
+    name: "Arity-Preserving Mapping",
+    functionId: 2,
+    input: `Schema A:
+Primitives:
+  R(x, y)        // 2-place relation
+  S(x, y, z)     // 3-place relation
+  P(x)           // 1-place predicate
+
+Axioms:
+1. ∀x∀y [R(x, y) → P(x) ∧ P(y)]
+2. ∀x∀y∀z [S(x, y, z) → R(x, y) ∧ R(y, z)]
+
+---
+
+Schema B:
+Primitives:
+  Connected(a, b)     // 2-place
+  Between(a, b, c)    // 3-place
+  Element(a)          // 1-place
+
+Axioms:
+1. ∀a∀b [Connected(a, b) → Element(a) ∧ Element(b)]
+2. ∀a∀b∀c [Between(a, b, c) → Connected(a, b) ∧ Connected(b, c)]`,
+    instructions: `Only allow mappings between primitives of the same arity. Match: P ↔ Element (1-place), R ↔ Connected (2-place), S ↔ Between (3-place). Verify structural preservation.`
+  },
+  {
+    id: "schema-structural-role",
+    name: "Structural Role Mapping",
+    functionId: 2,
+    input: `Schema A (Geometry):
+Primitives:
+  Point(x)
+  Line(x)
+  Parallel(l₁, l₂)     // order-relation on lines
+  Incidence(p, l)       // point lies on line
+
+Axioms:
+1. ∀l [Parallel(l, l)]
+2. ∀l₁∀l₂ [Parallel(l₁, l₂) → Parallel(l₂, l₁)]
+3. ∀p∀l₁∀l₂ [(Incidence(p, l₁) ∧ Incidence(p, l₂) ∧ l₁ ≠ l₂) → ¬Parallel(l₁, l₂)]
+
+---
+
+Schema B (Graph Theory):
+Primitives:
+  Node(x)
+  Component(x)
+  SameComponent(c₁, c₂)   // equivalence on components
+  Adjacency(n, c)          // node belongs to component
+
+Axioms:
+1. ∀c [SameComponent(c, c)]
+2. ∀c₁∀c₂ [SameComponent(c₁, c₂) → SameComponent(c₂, c₁)]
+3. ∀n∀c₁∀c₂ [(Adjacency(n, c₁) ∧ Adjacency(n, c₂) ∧ c₁ ≠ c₂) → ¬SameComponent(c₁, c₂)]`,
+    instructions: `Map primitives based on their structural roles: Parallel ↔ SameComponent (both are equivalence-like relations), Incidence ↔ Adjacency (both are membership/containment relations). Analyze whether the role-based mapping preserves all theorems.`
+  },
+  {
+    id: "schema-obstruction",
+    name: "Minimal Obstruction Report",
+    functionId: 2,
+    input: `Schema A:
+Primitives:
+  Likes(x, y)
+
+Axioms:
+1. ∀x [Likes(x, x)]                              (Reflexive)
+2. ∀x∀y [Likes(x, y) → Likes(y, x)]              (Symmetric)
+
+---
+
+Schema B:
+Primitives:
+  Prefers(x, y)
+
+Axioms:
+1. ∀x [Prefers(x, x)]                            (Reflexive)
+2. ∀x∀y [Prefers(x, y) ∧ Prefers(y, x) → x = y]  (Antisymmetric)`,
+    instructions: `If equivalence fails, return the smallest obstruction automatically. Identify the minimal axiom or axiom pair that blocks the equivalence mapping. Expected obstruction: symmetry vs antisymmetry conflict.`
   },
   {
     id: "defn-3a",
