@@ -6,7 +6,7 @@ import { PresetsSidebar, type Preset } from "@/components/presets-sidebar";
 import generatedLogo from "@assets/generated_images/minimalist_geometric_logo_representing_logic_transformation.png";
 
 interface FunctionInputs {
-  [key: number]: { input: string; instructions: string };
+  [key: number]: { input: string; instructions: string; trigger: number };
 }
 
 export default function Home() {
@@ -29,7 +29,11 @@ export default function Home() {
   const handleSelectPreset = (preset: Preset) => {
     setFunctionInputs(prev => ({
       ...prev,
-      [preset.functionId]: { input: preset.input, instructions: preset.instructions }
+      [preset.functionId]: { 
+        input: prev[preset.functionId]?.input || preset.input, 
+        instructions: preset.instructions,
+        trigger: Date.now()
+      }
     }));
 
     setTimeout(() => {
@@ -95,6 +99,7 @@ export default function Home() {
                       selectedModel={selectedModel}
                       presetInput={functionInputs[f.id]?.input}
                       presetInstructions={functionInputs[f.id]?.instructions}
+                      triggerRun={functionInputs[f.id]?.trigger}
                     />
                   </div>
                 ))}

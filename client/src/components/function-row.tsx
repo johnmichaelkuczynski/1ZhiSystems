@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -15,9 +15,10 @@ interface FunctionRowProps {
   selectedModel: LLM;
   presetInput?: string;
   presetInstructions?: string;
+  triggerRun?: number;
 }
 
-export function FunctionRow({ id, title, description, selectedModel, presetInput, presetInstructions }: FunctionRowProps) {
+export function FunctionRow({ id, title, description, selectedModel, presetInput, presetInstructions, triggerRun }: FunctionRowProps) {
   const [input, setInput] = useState("");
   const [instructions, setInstructions] = useState("");
   const [output, setOutput] = useState("");
@@ -26,6 +27,8 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
   const [usedModel, setUsedModel] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [explain, setExplain] = useState(false);
+  const [pendingRun, setPendingRun] = useState(false);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const handleCopy = async () => {
     if (!output) return;
@@ -54,14 +57,29 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
     }
   }, [presetInstructions]);
 
-  const handleRun = async () => {
-    if (!input) return;
+  useEffect(() => {
+    if (triggerRun && triggerRun > 0) {
+      setPendingRun(true);
+    }
+  }, [triggerRun]);
+
+  useEffect(() => {
+    if (pendingRun && input && instructions && !isProcessing) {
+      setPendingRun(false);
+      runTransformation(input, instructions);
+    } else if (pendingRun && !input) {
+      setPendingRun(false);
+      inputRef.current?.focus();
+    }
+  }, [pendingRun, input, instructions]);
+
+  const runTransformation = async (inputText: string, instructionsText: string) => {
     setIsProcessing(true);
     setError(null);
     setUsedModel(null);
     
     try {
-      const response = await processTheory(input, instructions, title, selectedModel, explain);
+      const response = await processTheory(inputText, instructionsText, title, selectedModel, explain);
       setOutput(response.result);
       setUsedModel(`${response.provider} - ${response.model}`);
     } catch (err: any) {
@@ -70,6 +88,11 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
     } finally {
       setIsProcessing(false);
     }
+  };
+
+  const handleRun = async () => {
+    if (!input) return;
+    await runTransformation(input, instructions);
   };
 
   return (
@@ -128,6 +151,7 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
         <div className="space-y-3">
           <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Input</label>
           <Textarea 
+            ref={inputRef}
             placeholder="// Enter formal axioms or plain English theory here..."
             className="min-h-[500px] font-mono text-sm bg-secondary/30 resize-none border-border rounded-sm focus-visible:ring-1 focus-visible:ring-ring"
             value={input}
