@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Loader2, Play, ArrowRight, AlertCircle, Copy, Check } from "lucide-react";
 import { type LLM, processTheory } from "@/lib/api";
 import { Badge } from "@/components/ui/badge";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 interface FunctionRowProps {
   id: number;
@@ -23,6 +25,7 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
   const [error, setError] = useState<string | null>(null);
   const [usedModel, setUsedModel] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [explain, setExplain] = useState(false);
 
   const handleCopy = async () => {
     if (!output) return;
@@ -50,7 +53,7 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
     setUsedModel(null);
     
     try {
-      const response = await processTheory(input, instructions, title, selectedModel);
+      const response = await processTheory(input, instructions, title, selectedModel, explain);
       setOutput(response.result);
       setUsedModel(`${response.provider} - ${response.model}`);
     } catch (err: any) {
@@ -68,21 +71,38 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
           <Badge variant="outline" className="font-mono text-xs rounded-sm">FUNC {id}</Badge>
           <h3 className="text-lg font-medium tracking-tight text-foreground">{title}</h3>
         </div>
-        <Button 
-          variant="default" 
-          size="sm" 
-          onClick={handleRun} 
-          disabled={isProcessing || !input}
-          className="rounded-sm font-mono text-xs"
-          data-testid={`run-button-${id}`}
-        >
-          {isProcessing ? (
-            <Loader2 className="mr-2 h-3 w-3 animate-spin" />
-          ) : (
-            <Play className="mr-2 h-3 w-3" />
-          )}
-          RUN WITH {selectedModel}
-        </Button>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <Switch
+              id={`explain-${id}`}
+              checked={explain}
+              onCheckedChange={setExplain}
+              className="data-[state=checked]:bg-primary"
+              data-testid={`explain-toggle-${id}`}
+            />
+            <Label 
+              htmlFor={`explain-${id}`} 
+              className="text-xs font-mono text-muted-foreground cursor-pointer"
+            >
+              EXPLAIN
+            </Label>
+          </div>
+          <Button 
+            variant="default" 
+            size="sm" 
+            onClick={handleRun} 
+            disabled={isProcessing || !input}
+            className="rounded-sm font-mono text-xs"
+            data-testid={`run-button-${id}`}
+          >
+            {isProcessing ? (
+              <Loader2 className="mr-2 h-3 w-3 animate-spin" />
+            ) : (
+              <Play className="mr-2 h-3 w-3" />
+            )}
+            RUN WITH {selectedModel}
+          </Button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

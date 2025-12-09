@@ -3,43 +3,106 @@ import Anthropic from "@anthropic-ai/sdk";
 
 export type LLMProvider = "Zhi 1" | "Zhi 2" | "Zhi 3" | "Zhi 4";
 
-const FUNCTION_PROMPTS: Record<string, string> = {
-  "Axiom-Set / Theory Transformation": `You are a formal logic expert specializing in axiomatic systems transformation.
-Your task is to take a user's theory (formal axioms OR plain text) and rewrite it according to their instructions.
-You can: change primitives, eliminate primitives, introduce new primitives, restructure axioms, invert the conceptual scheme, produce equivalent theories, or explain why a transformation is impossible.
-Always provide the new primitives, rewritten axioms, and notes explaining your reasoning.`,
+const FUNCTION_PROMPTS: Record<string, { concise: string; explain: string }> = {
+  "Axiom-Set / Theory Transformation": {
+    concise: `You are a formal logic transformation engine. OUTPUT ONLY THE TRANSFORMED THEORY. NO ANALYSIS. NO COMMENTARY. NO EXPLANATIONS. NO REASONING.
 
-  "Schema Equivalence": `You are a model-theoretic analysis expert.
-Your task is to check whether two formal systems or representations are schema-equivalent - whether they define the same class of models despite different primitives or syntax.
-Determine if they are equivalent, explain differences if not, and show mappings between primitives if equivalence exists.`,
+RULES:
+- Output ONLY: Primitives, Definitions (if any), Axioms
+- Do NOT explain your choices
+- Do NOT add axioms unless explicitly instructed
+- Do NOT analyze the input
+- Do NOT include introductory text
+- Do NOT include concluding remarks
+- Apply ONLY what the user's instructions specify`,
+    explain: `You are a formal logic expert specializing in axiomatic systems transformation.
+Transform the theory according to the user's instructions. Provide:
+1. The transformed theory (Primitives, Definitions, Axioms)
+2. Explanation of the transformation steps
+3. Reasoning for each change made`
+  },
 
-  "Definitional Equivalence": `You are a formal logic expert specializing in definitional equivalence.
-Two theories are definitionally equivalent when each can fully define the vocabulary of the other with no loss of information.
-Check if each theory can define the other's primitives. If yes, return bi-directional definitions. If no, explain the failure.`,
+  "Schema Equivalence": {
+    concise: `You are a schema equivalence checker. OUTPUT ONLY THE RESULT. NO COMMENTARY.
 
-  "Model Finding & Counter-Examples": `You are a model-theoretic expert.
-Your task is to find models that satisfy given constraints, or find counter-examples that disprove claims.
-Provide concrete models with explicit interpretations of all primitives.`,
+RULES:
+- State EQUIVALENT or NOT EQUIVALENT
+- If equivalent: provide the mapping between primitives
+- If not equivalent: state the minimal obstruction
+- Do NOT explain your reasoning unless asked`,
+    explain: `You are a model-theoretic analysis expert. Check schema equivalence and explain your analysis in detail.`
+  },
 
-  "Consistency Check": `You are a formal logic expert.
-Your task is to verify the internal consistency of an axiom set.
-Check for contradictions, analyze logical dependencies, and report whether the system is consistent or identify specific inconsistencies.`,
+  "Definitional Equivalence": {
+    concise: `You are a definitional equivalence checker. OUTPUT ONLY THE RESULT. NO COMMENTARY.
 
-  "Independence Proofs": `You are a formal logic expert specializing in independence proofs.
-Your task is to prove whether a given axiom is independent from others (cannot be derived from them).
-Construct models that satisfy all other axioms but not the target axiom.`,
+RULES:
+- State DEFINITIONALLY EQUIVALENT or NOT DEFINITIONALLY EQUIVALENT
+- If equivalent: provide bi-directional definitions
+- If not: state what cannot be defined
+- No explanations`,
+    explain: `You are a formal logic expert. Check definitional equivalence and explain your reasoning step by step.`
+  },
 
-  "Completeness Analysis": `You are a formal logic expert.
-Analyze whether a theory is complete - whether for every sentence in its language, either it or its negation is provable.
-Identify gaps, undecidable propositions, or confirm completeness with reasoning.`,
+  "Model Finding & Counter-Examples": {
+    concise: `You are a model finder. OUTPUT ONLY THE MODEL. NO COMMENTARY.
 
-  "Ontological Reduction": `You are a philosophical logic expert.
-Your task is to reduce ontological commitments of a theory - showing how to express the same content with fewer primitive kinds of entities.
-Provide the reduced theory and explain what ontological commitments have been eliminated.`,
+RULES:
+- Provide the model directly
+- Show interpretations of all primitives
+- No explanations or analysis`,
+    explain: `You are a model-theoretic expert. Find models and explain how they satisfy the constraints.`
+  },
 
-  "Theorem Derivation": `You are a formal logic expert.
-Derive theorems from given axioms. Show step-by-step logical derivations with justifications for each step.
-Use formal proof notation where appropriate.`
+  "Consistency Check": {
+    concise: `You are a consistency checker. OUTPUT ONLY THE RESULT. NO COMMENTARY.
+
+RULES:
+- State CONSISTENT or INCONSISTENT
+- If inconsistent: show the contradiction
+- No explanations`,
+    explain: `You are a formal logic expert. Check consistency and explain your analysis.`
+  },
+
+  "Independence Proofs": {
+    concise: `You are an independence prover. OUTPUT ONLY THE RESULT. NO COMMENTARY.
+
+RULES:
+- State INDEPENDENT or NOT INDEPENDENT
+- If independent: provide the separating model
+- No explanations`,
+    explain: `You are a formal logic expert. Prove independence and explain the construction.`
+  },
+
+  "Completeness Analysis": {
+    concise: `You are a completeness analyzer. OUTPUT ONLY THE RESULT. NO COMMENTARY.
+
+RULES:
+- State COMPLETE or INCOMPLETE
+- If incomplete: provide an undecidable sentence
+- No explanations`,
+    explain: `You are a formal logic expert. Analyze completeness and explain your reasoning.`
+  },
+
+  "Ontological Reduction": {
+    concise: `You are an ontological reducer. OUTPUT ONLY THE REDUCED THEORY. NO COMMENTARY.
+
+RULES:
+- Output only the reduced Primitives and Axioms
+- Show how eliminated entities are defined
+- No explanations`,
+    explain: `You are a philosophical logic expert. Reduce the ontology and explain what commitments are eliminated.`
+  },
+
+  "Theorem Derivation": {
+    concise: `You are a theorem deriver. OUTPUT ONLY THE DERIVATION. NO COMMENTARY.
+
+RULES:
+- Show the proof steps
+- Use formal notation
+- No meta-commentary`,
+    explain: `You are a formal logic expert. Derive the theorem and explain each step in detail.`
+  }
 };
 
 function getOpenAIClient(): OpenAI {
@@ -85,6 +148,7 @@ export interface AIRequest {
   instructions: string;
   functionName: string;
   model: LLMProvider;
+  explain?: boolean;
 }
 
 export interface AIResponse {
@@ -93,8 +157,13 @@ export interface AIResponse {
   provider: string;
 }
 
-function buildPrompt(functionName: string, input: string, instructions: string): string {
-  const systemContext = FUNCTION_PROMPTS[functionName] || FUNCTION_PROMPTS["Axiom-Set / Theory Transformation"];
+function buildPrompt(functionName: string, input: string, instructions: string, explain: boolean = false): string {
+  const prompts = FUNCTION_PROMPTS[functionName] || FUNCTION_PROMPTS["Axiom-Set / Theory Transformation"];
+  const systemContext = explain ? prompts.explain : prompts.concise;
+  
+  const outputInstruction = explain 
+    ? "Provide a detailed response with explanations."
+    : "Output ONLY the result. No commentary. No explanations.";
   
   return `${systemContext}
 
@@ -104,7 +173,7 @@ ${input}
 USER INSTRUCTIONS:
 ${instructions || "Process this input according to the function's purpose."}
 
-Provide a clear, structured response with the analysis results.`;
+${outputInstruction}`;
 }
 
 async function callGrok(prompt: string): Promise<AIResponse> {
@@ -172,7 +241,7 @@ async function callDeepSeek(prompt: string): Promise<AIResponse> {
 }
 
 export async function processWithAI(request: AIRequest): Promise<AIResponse> {
-  const prompt = buildPrompt(request.functionName, request.input, request.instructions);
+  const prompt = buildPrompt(request.functionName, request.input, request.instructions, request.explain || false);
 
   switch (request.model) {
     case "Zhi 1":

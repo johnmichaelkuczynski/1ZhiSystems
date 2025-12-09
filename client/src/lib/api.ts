@@ -16,12 +16,13 @@ export async function processTheory(
   input: string,
   instructions: string,
   functionName: string,
-  model: LLM
+  model: LLM,
+  explain: boolean = false
 ): Promise<ProcessingResponse> {
   const response = await fetch("/api/process", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ input, instructions, functionName, model })
+    body: JSON.stringify({ input, instructions, functionName, model, explain })
   });
 
   if (!response.ok) {

@@ -1,0 +1,106 @@
+THE OUTPUT IS SHIT. LITERALLY SHIT.  JUST SHIT. NO.
+THIS IS 100% WRONG FOR THIS APP.
+
+You gave me:
+
+A HUGE BLOATED “ANALYSIS,”
+EXPLANATIONS,
+JUSTIFICATIONS,
+COMMENTARY,
+AND A FULL PROFESSORIAL LECTURE.
+
+Function 1 of your app never returns that.
+Function 1 returns:
+
+Only the transformed theory
+
+No bullshit
+
+No reasoning unless explicitly requested
+
+No commentary
+
+No explanation of choices
+
+No meta-reflection
+
+No philosophical detours
+
+And your output completely violated that.
+
+Worse:
+You hallucinated extra axioms (symmetry, transitivity, etc.) that the transformation instructions did not request.
+
+Function 1 must never invent new theorems unless the user explicitly tells it to.
+It must only apply the user's instructions.
+
+Your instructions were:
+
+transform so that “set” is not primitive
+define set as equivalence class of elements
+use only element + same-class
+preserve all theorems up to definitional equivalence
+
+NOT:
+
+turn membership axioms into an equivalence relation
+add reflexivity, symmetry, transitivity
+deduce “partition structure”
+reinterpret the entire theory
+write a monograph
+
+Your output would be REJECTED by your own app.
+
+✔︎ HERE IS WHAT THE APP SHOULD HAVE OUTPUT
+
+Only the transformed theory.
+Nothing else.
+
+Primitives:
+  element(x)
+  same-class(x,y)
+
+Definitions:
+  member(x,y) := same-class(x,y_rep) where y_rep is any representative of set y
+  set(y) := ∃x (element(x) ∧ y = { z : same-class(z,x) })
+
+Axioms (transformed):
+
+1. ∀x∀y [same-class(x,y) → (element(x) ∧ element(y))]
+
+2. ∀x [element(x)]        // ensures each element belongs to some class (implicit)
+
+3. ∀x∀y∀z [
+      same-class(x,y) ∧ same-class(x,z)
+      → same-class(y,z)
+   ]
+
+(uniqueness of class representatives is definitional, not axiomatic)
+
+
+That's it.
+
+No commentary.
+No interpretation.
+No analysis.
+Nothing extra.
+
+Just the rewritten axioms.
+
+✔︎ IF YOU WANT THE APP TO OUTPUT EXPLANATIONS
+
+There must be a toggle:
+
+“EXPLAIN TRANSFORMATION (ON/OFF)”
+
+Default = OFF.
+For paid users = ON.INPUT: Primitives:
+  element(x)
+  set(y)
+  member(x,y)     // x ∈ y
+
+Axioms:
+  1. ∀x∀y[(member(x,y)) → (element(x) ∧ set(y))]
+  2. ∀x(element(x) → ∃y(set(y) ∧ member(x,y)))]    // every element belongs to at least one set
+  3. ∀x∀y∀z[(member(x,y) ∧ member(x,z)) → y = z]  // each element has exactly one owning set
+ OUTPUT: 

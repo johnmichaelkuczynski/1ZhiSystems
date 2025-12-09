@@ -10,7 +10,7 @@ export async function registerRoutes(
   
   app.post("/api/process", async (req, res) => {
     try {
-      const { input, instructions, functionName, model } = req.body;
+      const { input, instructions, functionName, model, explain } = req.body;
 
       if (!input || !functionName || !model) {
         return res.status(400).json({ 
@@ -22,7 +22,8 @@ export async function registerRoutes(
         input,
         instructions: instructions || "",
         functionName,
-        model: model as LLMProvider
+        model: model as LLMProvider,
+        explain: explain || false
       });
 
       res.json(result);
