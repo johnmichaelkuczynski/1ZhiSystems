@@ -1,0 +1,36 @@
+Here are the exact default instructions that must be automatically inserted into the Custom Instructions box (or internally used by the prompt) when the user leaves it blank for each of the nine functions.
+Copy-paste these verbatim into your Replit agent / code.
+FUNCTION 1: Axiom-Set / Theory Transformation
+Default (when user leaves blank):
+"Transform the input axiomatic theory into a radically different but logically equivalent form. You may eliminate primitives, introduce new ones, change arity, switch from predicates to functions or vice versa, or completely invert the conceptual foundation. The new theory must prove exactly the same theorems and have isomorphic models. Do not keep eliminated primitives anywhere in the output, not even in definitions or comments. If impossible, explain why."
+FUNCTION 2: Schema Equivalence
+Default:
+"Determine whether the two input theories (or schemas) are logically equivalent: i.e., they prove exactly the same theorems in all models. Answer with one of:
+— YES, they are equivalent (bi-interpretable or mutually embeddable)
+— NO, they are not equivalent (give a clear counterexample or separating property)
+— UNKNOWN (with justification).
+Then briefly explain the reasoning."
+FUNCTION 3: Definitional Equivalence
+Default:
+"Determine whether one theory is a definitional extension of the other: i.e., one can be obtained from the other by adding explicit definitions (conservative extension with new symbols explicitly defined). State which direction holds (A defines B, B defines A, mutual, or neither) and show the explicit definitions if they exist."
+FUNCTION 4: Model-Preserving Rewrite
+Default:
+"Rewrite the input theory using a completely different vocabulary and axiom set, but such that every model of the original is isomorphic to a model of the new theory and vice versa. The two theories must be categorically equivalent. Do not use conservative extensions — the output must not be a definitional extension."
+FUNCTION 5: Conservative Extension Analysis
+Default:
+"Analyze whether adding the given new axioms or primitives to the base theory constitutes a conservative extension (no new theorems in the original language are provable). Answer YES or NO and prove it: either exhibit a proof of a new old-language theorem or prove independence using a model where the extension fails."
+FUNCTION 6: Compare Conceptual Schemes
+Default:
+"Take the two input conceptual schemes/theories and compare their expressive power, ontological commitments, and primitive concepts. Highlight what one can express that the other cannot, what is gained or lost in each formulation, and which is more natural or parsimonious."
+FUNCTION 7: Ontological Dependence
+Default:
+"Determine the hierarchy of ontological dependence between the primitives in the input theory. For each primitive, state whether it is ontologically reducible to the others (explicitly definable or eliminable) or whether it is primitive/independent. Provide explicit definitions where possible."
+FUNCTION 8: Generate Alternative Conceptualizations
+Default:
+"Generate three distinct, non-trivial, logically equivalent reformulations of the input theory using completely different primitive concepts (e.g., algebraic, topological, order-theoretic, mereological, etc.). Each reformulation must be categorical or at least bi-interpretable with the original."
+FUNCTION 9: Identify Representational Biases
+Default:
+"Analyze the input theory and identify hidden representational biases, implicit ontological assumptions, and historical or notational prejudices baked into the choice of primitives and axioms. Suggest how these biases affect what the theory makes easy or difficult to express, and propose a bias-minimized alternative formulation."
+These are the gold-standard defaults that make the app behave exactly as the original 26-page spec intended when the user provides no instructions.
+Implement them exactly as written — no summarization, no filtering, no hardcoding.
+Now your nine functions will actually do what they’re supposed to even when the user is lazy.
