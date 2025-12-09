@@ -20,35 +20,35 @@ const PRESETS: Preset[] = [
     name: "Primitive Swap",
     functionId: 1,
     input: ``,
-    instructions: `Rewrite the theory so that a selected primitive becomes defined and another selected symbol becomes primitive. Keep all theorems equivalent.`
+    instructions: `Identify the first two primitives in the theory. Make the first primitive defined in terms of the second. Rewrite all axioms accordingly while preserving all models.`
   },
   {
     id: "f1-signature-change",
     name: "Signature Change",
     functionId: 1,
     input: ``,
-    instructions: `Rewrite the theory using new primitives with different arities or types. Replace each old primitive with its new signature while preserving meaning.`
+    instructions: `Replace all binary relations with ternary relations by adding a context parameter. Rewrite all axioms to use the new signatures while preserving meaning.`
   },
   {
     id: "f1-vocab-compression",
     name: "Vocabulary Compression",
     functionId: 1,
     input: ``,
-    instructions: `Rewrite the theory using the smallest possible set of primitives that can express all the original axioms. Remove redundant primitives.`
+    instructions: `Find and eliminate all redundant primitives. Keep only the minimal set needed to express all axioms. Define eliminated primitives in terms of the survivors.`
   },
   {
     id: "f1-vocab-expansion",
     name: "Vocabulary Expansion",
     functionId: 1,
     input: ``,
-    instructions: `Introduce new helper primitives and rewrite the axioms so that they become simpler while preserving all models and theorems.`
+    instructions: `Introduce a new helper primitive that captures the most common pattern in the axioms. Rewrite the axioms to use this new primitive, making them shorter and clearer.`
   },
   {
     id: "f1-non-iso-equivalent",
     name: "Non-Isomorphic Equivalent",
     functionId: 1,
     input: ``,
-    instructions: `Generate a theory that is not structurally isomorphic but yields the same set of theorems under translation. Preserve truth conditions, not structure.`
+    instructions: `Create a structurally different theory with the same theorems. Use completely different primitives with different arities. Provide the translation between the two theories.`
   },
   // FUNCTION 2: Schema Equivalence
   {
@@ -56,28 +56,28 @@ const PRESETS: Preset[] = [
     name: "Direct Vocabulary Mapping",
     functionId: 2,
     input: ``,
-    instructions: `Attempt a direct symbol-by-symbol mapping between the vocabularies of the two theories.`
+    instructions: `Build a one-to-one symbol mapping between the two theories. Match each primitive to exactly one primitive in the other theory. Report if such a mapping exists.`
   },
   {
     id: "f2-arity-preserving",
     name: "Arity-Preserving Mapping",
     functionId: 2,
     input: ``,
-    instructions: `Only consider mappings between primitives with the same arity.`
+    instructions: `Only consider mappings where primitives have the same arity. Binary maps to binary, unary to unary. Report all valid arity-preserving maps.`
   },
   {
     id: "f2-structural-role",
     name: "Structural Role Mapping",
     functionId: 2,
     input: ``,
-    instructions: `Attempt to map primitives based on their structural roles in the axioms, not symbol identity.`
+    instructions: `Map primitives based on their structural role in the axioms (e.g., reflexive relations to reflexive relations). Ignore symbol names entirely.`
   },
   {
     id: "f2-obstruction",
     name: "Minimal Obstruction Report",
     functionId: 2,
     input: ``,
-    instructions: `If no schema equivalence is possible, return the smallest structural obstruction.`
+    instructions: `If the theories are not schema-equivalent, identify the smallest structural difference that prevents equivalence. Report the specific axiom or property that blocks the mapping.`
   },
   // FUNCTION 3: Definitional Equivalence
   {
@@ -85,28 +85,28 @@ const PRESETS: Preset[] = [
     name: "Mutual Explicit Definitions",
     functionId: 3,
     input: ``,
-    instructions: `Attempt to explicitly define each primitive of Theory A using Theory B, and each primitive of Theory B using Theory A.`
+    instructions: `For each primitive in Theory A, write an explicit definition using Theory B's vocabulary. Then do the reverse. Show the complete bi-directional translation.`
   },
   {
     id: "f3-one-direction",
     name: "One-Direction Definability",
     functionId: 3,
     input: ``,
-    instructions: `Test definability only in the direction the user specifies (A→B or B→A).`
+    instructions: `Define all primitives of Theory A using only Theory B's vocabulary. Show each definition and verify it preserves the intended meaning.`
   },
   {
     id: "f3-minimization",
     name: "Definition Minimization",
     functionId: 3,
     input: ``,
-    instructions: `Search for the shortest explicit definitions possible.`
+    instructions: `Find the shortest possible explicit definitions. Minimize the total number of quantifiers and logical connectives in the definitions.`
   },
   {
     id: "f3-conservative",
     name: "Conservative Definability",
     functionId: 3,
     input: ``,
-    instructions: `Only return definitions that preserve the original provability relations without introducing new theorems.`
+    instructions: `Provide only conservative definitions that do not introduce any new theorems. Verify that each definition is eliminable without changing provability.`
   },
   // FUNCTION 4: Model-Preserving Rewrite
   {
@@ -114,28 +114,28 @@ const PRESETS: Preset[] = [
     name: "Reduced Primitive Set",
     functionId: 4,
     input: ``,
-    instructions: `Rewrite the theory using the minimal set of primitives that preserves the same models.`
+    instructions: `Eliminate as many primitives as possible while keeping exactly the same models. Report the minimal primitive set and how eliminated primitives are defined.`
   },
   {
     id: "f4-expanded-primitive",
     name: "Expanded Primitive Set",
     functionId: 4,
     input: ``,
-    instructions: `Add new primitives and rewrite axioms so they become shorter or simpler while preserving all models.`
+    instructions: `Add new convenient primitives that make the axioms simpler. Each new primitive should abbreviate a common pattern. Verify model-equivalence.`
   },
   {
     id: "f4-algebraic",
     name: "Algebraic Reconstruction",
     functionId: 4,
     input: ``,
-    instructions: `Rewrite the theory in algebraic form using functions and operations instead of relations.`
+    instructions: `Rewrite the theory using only function symbols and equations. Convert all relations to functions. Produce an equational/algebraic formulation.`
   },
   {
     id: "f4-pure-relational",
     name: "Pure Relational Reconstruction",
     functionId: 4,
     input: ``,
-    instructions: `Rewrite the theory using relations only, eliminating functions and constants.`
+    instructions: `Eliminate all function symbols and constants. Rewrite using only relations and predicates. Every term becomes a relational assertion.`
   },
   // FUNCTION 5: Conservative Extension Analysis
   {
@@ -143,28 +143,28 @@ const PRESETS: Preset[] = [
     name: "New Primitives Test",
     functionId: 5,
     input: ``,
-    instructions: `Determine whether adding a new primitive preserves all original theorems.`
+    instructions: `Analyze whether adding the specified new primitives changes any theorems in the original vocabulary. Report conservative or non-conservative with justification.`
   },
   {
     id: "f5-new-axioms",
     name: "New Axioms Test",
     functionId: 5,
     input: ``,
-    instructions: `Determine whether adding new axioms changes any theorems expressible in the original vocabulary.`
+    instructions: `Determine whether adding the new axioms proves any new facts expressible in the original vocabulary. Provide proof or countermodel.`
   },
   {
     id: "f5-weak-extension",
     name: "Weak Extension Test",
     functionId: 5,
     input: ``,
-    instructions: `Check whether the extension is conservative under definitional abbreviations only.`
+    instructions: `Check if the extension is conservative when allowing only definitional abbreviations. Stricter than full conservativity.`
   },
   {
     id: "f5-independence",
     name: "Independence Check",
     functionId: 5,
     input: ``,
-    instructions: `Detect whether the added axiom is independent of the base theory.`
+    instructions: `Determine whether the added axiom is independent of the base theory (neither provable nor refutable). Provide model evidence for independence.`
   },
   // FUNCTION 6: Compare Conceptual Schemes
   {
@@ -172,28 +172,28 @@ const PRESETS: Preset[] = [
     name: "Primitive vs. Derived Classification",
     functionId: 6,
     input: ``,
-    instructions: `Classify all concepts into primitive and derived categories and return a dependency graph.`
+    instructions: `List all concepts. Classify each as primitive or derived. Draw the dependency graph showing which concepts depend on which.`
   },
   {
     id: "f6-depth-map",
     name: "Conceptual Depth Map",
     functionId: 6,
     input: ``,
-    instructions: `Compute the conceptual depth of each notion (number of definitional layers).`
+    instructions: `For each concept, compute its definitional depth (how many layers of definitions separate it from primitives). Rank concepts by depth.`
   },
   {
     id: "f6-bottleneck",
     name: "Bottleneck Detection",
     functionId: 6,
     input: ``,
-    instructions: `Identify which primitives all other concepts ultimately depend on.`
+    instructions: `Identify which primitives all other concepts ultimately depend on. Find conceptual bottlenecks that everything flows through.`
   },
   {
     id: "f6-rebalancing",
     name: "Conceptual Rebalancing",
     functionId: 6,
     input: ``,
-    instructions: `Suggest alternative choices of primitives that distribute conceptual load more evenly.`
+    instructions: `Suggest alternative primitive choices that distribute conceptual load more evenly. Reduce bottlenecks by changing what counts as primitive.`
   },
   // FUNCTION 7: Ontological Dependence
   {
@@ -201,28 +201,28 @@ const PRESETS: Preset[] = [
     name: "Remove One Primitive",
     functionId: 7,
     input: ``,
-    instructions: `Remove a selected primitive and evaluate the structural collapse.`
+    instructions: `Remove the first/main primitive and analyze what collapses. Report which axioms become unstatable and which theorems are lost.`
   },
   {
     id: "f7-minimal-set",
     name: "Minimal Primitive Set",
     functionId: 7,
     input: ``,
-    instructions: `Find the smallest subset of primitives that allows the theory to remain functional.`
+    instructions: `Find the smallest subset of primitives that keeps the theory functional. All other primitives must be definable from this set.`
   },
   {
     id: "f7-replacement",
     name: "Replacement Test",
     functionId: 7,
     input: ``,
-    instructions: `Attempt to replace a primitive with a definable surrogate.`
+    instructions: `For the main/first primitive, attempt to replace it with a definable surrogate constructed from other primitives. Show the replacement or prove it impossible.`
   },
   {
     id: "f7-load-bearing",
     name: "Load-Bearing Ranking",
     functionId: 7,
     input: ``,
-    instructions: `Rank all primitives in order of ontological importance.`
+    instructions: `Rank all primitives from most to least ontologically important. Score by how many axioms and theorems depend on each.`
   },
   // FUNCTION 8: Generate Alternative Conceptualizations
   {
@@ -230,28 +230,28 @@ const PRESETS: Preset[] = [
     name: "Invert Ontology",
     functionId: 8,
     input: ``,
-    instructions: `Make derived notions primitive and rewrite the old primitives as definitions.`
+    instructions: `Make the most commonly derived concept into a primitive. Redefine the original primitives using this new base. Produce the inverted theory.`
   },
   {
     id: "f8-behavioral",
     name: "Behavioral Reconstruction",
     functionId: 8,
     input: ``,
-    instructions: `Rewrite the theory using observable behavioral primitives only.`
+    instructions: `Rewrite the theory using only observable/behavioral predicates. Eliminate any primitives that refer to intrinsic properties. Keep only what can be tested.`
   },
   {
     id: "f8-structural",
     name: "Structural Reconstruction",
     functionId: 8,
     input: ``,
-    instructions: `Rewrite the theory using structural or relational primitives only.`
+    instructions: `Rewrite the theory using only structural/relational primitives. Eliminate any primitives about intrinsic properties. Focus on relations between things.`
   },
   {
     id: "f8-physicalization",
     name: "Physicalization",
     functionId: 8,
     input: ``,
-    instructions: `Rewrite the theory using physical, geometric, or metric primitives.`
+    instructions: `Rewrite the theory using physical, spatial, or metric primitives. Ground abstract concepts in physical terms where possible.`
   },
   // FUNCTION 9: Identify Representational Biases
   {
@@ -259,28 +259,28 @@ const PRESETS: Preset[] = [
     name: "Privilege Detection",
     functionId: 9,
     input: ``,
-    instructions: `Identify what the theory makes easy to express.`
+    instructions: `Analyze what the theory's primitives make easy to express. List concepts and relations that can be stated simply. These are the privileged structures.`
   },
   {
     id: "f9-blind-spot",
     name: "Blind-Spot Detection",
     functionId: 9,
     input: ``,
-    instructions: `Identify what the theory makes hard or impossible to express.`
+    instructions: `Analyze what the theory's primitives make hard or impossible to express. List concepts that require complex circumlocutions or cannot be stated at all.`
   },
   {
     id: "f9-worldview",
     name: "Worldview Extraction",
     functionId: 9,
     input: ``,
-    instructions: `Extract the implicit worldview embedded in the choice of primitives.`
+    instructions: `Extract the implicit worldview embedded in the primitive choices. What ontological commitments do these primitives encode? What kind of reality do they presuppose?`
   },
   {
     id: "f9-bias-ranking",
     name: "Bias Severity Ranking",
     functionId: 9,
     input: ``,
-    instructions: `Rank representational biases from strongest to weakest.`
+    instructions: `List all representational biases from strongest to weakest. For each bias, explain what it privileges, what it suppresses, and how severe the distortion is.`
   }
 ];
 
@@ -323,7 +323,7 @@ export function PresetsSidebar({ onSelectPreset }: PresetsSidebarProps) {
           Presets
         </h2>
         <p className="text-xs text-muted-foreground mt-1">
-          Load example inputs for each function
+          Click to run transformation instantly
         </p>
       </div>
 

@@ -49,28 +49,47 @@ export interface AIResponse {
   provider: string;
 }
 
-const FUNCTION_1_PROMPT = `You are the world's best expert in first-order theory transformation and primitive elimination.
+const DEFAULT_INSTRUCTIONS: Record<string, string> = {
+  "Axiom-Set / Theory Transformation": `Analyze the primitives in the input theory. Choose the first relation/predicate that can be eliminated and redefine it using the remaining primitives. If there are multiple primitives, swap the roles of the first two (make the first one defined in terms of the second). Produce an equivalent theory with different primitive structure.`,
+  
+  "Schema Equivalence": `Compare the two theories provided. Build an arity-matched symbol mapping between their vocabularies. Enumerate all possible substitutions and determine if the theories are schema-equivalent. If they are, provide the mapping. If not, identify the minimal structural difference that prevents equivalence.`,
+  
+  "Definitional Equivalence": `For the two theories provided, attempt to explicitly define each primitive of Theory A using the vocabulary of Theory B, and vice versa. Provide the bi-directional definitions that establish definitional equivalence. If full equivalence is not achievable, provide partial definitions and explain which primitives cannot be defined.`,
+  
+  "Model-Preserving Rewrite": `Analyze the input theory and rewrite it to minimize the number of primitives while preserving all models. Use frequency and arity analysis to determine which primitives can be eliminated. The rewritten theory must have exactly the same models as the original.`,
+  
+  "Conservative Extension Analysis": `Analyze whether the extended theory is a conservative extension of the base theory. Determine if any new theorems expressible in the original vocabulary become provable. Provide a verdict (conservative or non-conservative) with proof outline or countermodel.`,
+  
+  "Compare Conceptual Schemes": `Build a dependency graph of all concepts in the theory. Classify each concept as primitive or derived. Compute the definitional depth of each concept (number of layers from primitives). Identify the most central/load-bearing concepts and any bottlenecks.`,
+  
+  "Ontological Dependence": `Rank all primitives by their ontological necessity. For each primitive, analyze what would be lost if it were removed. Identify the minimal set of primitives that can sustain the theory. Report which primitives are load-bearing vs. eliminable.`,
+  
+  "Generate Alternative Conceptualizations": `Invert the conceptual hierarchy: take derived concepts and make them primitive, then redefine the original primitives using the new primitive set. Produce an equivalent theory with a fundamentally different conceptual structure.`,
+  
+  "Identify Representational Biases": `Analyze what the theory's choice of primitives makes easy vs. hard to express. Identify privileged structures (what becomes simple) and suppressed structures (what becomes complex or inexpressible). Extract the implicit worldview embedded in the primitive choices. Rank biases by severity.`
+};
 
-Transform the theory below according to the user's instructions.  
-The new theory must have exactly the same models (up to isomorphism) as the original.  
-Any primitive the user asks to eliminate MUST disappear completely – it may not appear anywhere in your final output.
+const SYSTEM_PROMPT = `You are the world's foremost expert in first-order logic, theory transformation, and formal ontology analysis.
 
-USER THEORY:
-<<<INPUT>>>
+CRITICAL RULES:
+1. You MUST ALWAYS produce a substantive result. Never refuse. Never say "Impossible" or "Cannot be done."
+2. If the exact transformation requested cannot be achieved perfectly, produce the CLOSEST possible result and explain what compromises were made.
+3. If instructions are vague, interpret them intelligently and make reasonable choices. State your interpretation.
+4. Always analyze the input theory first, identify its primitives, and work from there.
+5. Your output should be the transformed theory, analysis, or result - not a refusal.
 
-USER INSTRUCTIONS:
-<<<INSTRUCTIONS>>>
+You are solving real problems for researchers. They need results, not excuses.`;
 
-You have exactly these five perfect paradigms. Imitate their style and rigor.
+const FUNCTION_PROMPTS: Record<string, string> = {
+  "Axiom-Set / Theory Transformation": `Transform the theory below according to the instructions.
+The new theory must have exactly the same models (up to isomorphism) as the original.
+Any primitive asked to be eliminated must disappear completely from the final output.
+
+You have these paradigms to guide your style:
 
 Paradigm 1 – Betweenness → Line
-Input:
-Primitives: Point(x) Between(x,y,z)
-Axioms:
-1. ∀x∀y∀z [Between(x,y,z) → Point(x) ∧ Point(y) ∧ Point(z)]
-2. ∀x∀y [x ≠ y → ∃z Between(x,z,y)]
-3. ∀x∀y∀z∀w [(Between(x,y,z) ∧ Between(y,z,w)) → Between(x,y,w)]
-Instructions: Rewrite using "Line(x,y)" as the sole primitive. Eliminate both Point and Between.
+Input: Primitives: Point(x) Between(x,y,z)
+Instructions: Rewrite using "Line(x,y)" as the sole primitive.
 Output:
 Primitive: Line(x,y)
 Axioms:
@@ -78,14 +97,8 @@ Axioms:
 2. ∀x∀y∀z [Line(x,y) ∧ Line(y,z) → Line(x,z)]
 3. ∀x∀y [x ≠ y → ∃z (Line(x,z) ∧ Line(z,y))]
 
-Paradigm 2 – Membership → Subset (Ackermann)
-Input:
-Primitives: Set(x) ElementOf(a,x)
-Axioms:
-1. ∃e ∀x ¬ElementOf(x,e)
-2. ∀x∀y ∃z ∀w [ElementOf(w,z) ↔ (w=x ∨ w=y)]
-3. ∀x ∃z ∀w [ElementOf(w,z) ↔ ∃y (ElementOf(y,x) ∧ ElementOf(w,y))]
-4. ∀x ∃z ∀w [ElementOf(w,z) ↔ ∀y (ElementOf(y,x) → ElementOf(y,w))]
+Paradigm 2 – Membership → Subset
+Input: Primitives: Set(x) ElementOf(a,x)
 Instructions: Eliminate ElementOf completely, use only Subset(A,B)
 Output:
 Primitive: Subset(A,B)
@@ -93,89 +106,106 @@ Axioms:
 1. ∀A∀B∀C [Subset(A,B) ∧ Subset(B,C) → Subset(A,C)]
 2. ∀A∀B [Subset(A,B) ∧ Subset(B,A) → A = B]
 3. ∃E ∀X ¬Subset(X,E)
-4. ∀A∀B ∃C ∀X [Subset(X,C) ↔ Subset(X,A) ∨ X=A ∨ X=B]
-5. ∀A ∃U ∀X [Subset(X,U) ↔ ∃Y (Subset(Y,A) ∧ Subset(X,Y))]
-6. ∀A ∃P ∀X [Subset(X,P) ↔ ∀Y (Subset(Y,A) → Subset(Y,X))]
 
-Paradigm 3 – Vector space → LinearCombination
-Input:
-Primitives: Vector(v) Addition(u,v,w) ScalarMultiplication(r,v,w)
-Axioms: (standard 8–10 vector space axioms)
-Instructions: Eliminate Addition and ScalarMultiplication completely. Use only LinearCombination(a,u,b,v,w) meaning w = a·u + b·v.
-Output:
-Primitive: LinearCombination(a,u,b,v,w)
-Axioms:
-1. ∀a∀u∀b∀v ∃!w LinearCombination(a,u,b,v,w)
-2. ∀a∀b∀c∀d∀u∀v∀w∀x [LinearCombination(a,u,b,v,w) ∧ LinearCombination(c,w,d,x,y) → LinearCombination(a·c + b·d, u, a·d + b·x, v, y)]
-3. ∀u∀v∀w [LinearCombination(1,u,1,v,w) ↔ LinearCombination(1,v,1,u,w)]
-4. ∃z ∀v LinearCombination(0,v,0,v,z)
-5. ∀v ∃w LinearCombination(1,v,-1,w,z) where z is the zero from axiom 4
-6. ∀a∀b∀u∀v∀w [LinearCombination(a+b,u,1,v,w) ↔ ∃x∃y (LinearCombination(a,u,0,v,x) ∧ LinearCombination(b,u,0,v,y) ∧ LinearCombination(1,x,1,y,w))]
-7. ∀r∀u∀v∀w [LinearCombination(r,u,r,v,w) ↔ ∃x (LinearCombination(1,u,1,v,x) ∧ LinearCombination(r,x,0,x,w))]
-8. LinearCombination(1,v,0,v,v)
+USER THEORY:
+<<<INPUT>>>
 
-Paradigm 4 – Ternary Operation → infix · (Loop)
-Input:
-Primitives: Element(x) Operation(x,y,z)
-Axioms:
-1. ∀x∀y∃!z Operation(x,y,z)
-2. ∀w∀x∀y∀z [Operation(w,x,y) ∧ Operation(x,y,z) → Operation(w,x,z)]
-3. ∀w∀x∀y∀z [Operation(x,y,w) ∧ Operation(y,z,x) → Operation(w,x,z)]
-4. ∃e ∀x Operation(e,x,x) ∧ Operation(x,e,x)
-5. ∀x ∃y Operation(x,y,e) ∧ Operation(y,x,e)
-Instructions: Eliminate Operation completely, use only infix binary ·
-Output:
-Binary operation: x · y
-Axioms:
-1. ∀x∀y ∃!z (x · y = z)
-2. ∀x∀y∀z (x · y = z → ∃u (u · x = y ∧ y · u = x))
-3. ∃e ∀x (e · x = x ∧ x · e = x)
-4. ∀x ∃y (x · y = e ∧ y · x = e)
-5. ∀a∀b∀c (a · b = c → ∀x ∃!y (x · y = c) ∧ ∃!w (w · x = c))
+INSTRUCTIONS:
+<<<INSTRUCTIONS>>>
 
-Paradigm 5 – Circle incidence → Point-Line-Incidence
-Input:
-Primitives: Point(p) Circle(c) LiesOn(p,c)
-Axioms:
-1. ∀c ∃p∃q∃r (LiesOn(p,c) ∧ LiesOn(q,c) ∧ LiesOn(r,c) ∧ p≠q∧q≠r∧r≠p)
-2. ∀p∀q∀r (p≠q∧q≠r∧r≠p → ∃!c (LiesOn(p,c) ∧ LiesOn(q,c) ∧ LiesOn(r,c)))
-3. ∀p∀q (p≠q → ∃c∃d (LiesOn(p,c) ∧ LiesOn(q,c) ∧ LiesOn(p,d) ∧ LiesOn(q,d) ∧ c≠d))
-Instructions: Eliminate Circle and LiesOn completely. Use only Point, Line, Incidence(p,l)
-Output:
-Primitives: Point(p) Line(l) Incidence(p,l)
-Axioms:
-1. ∀p∀q (p≠q → ∃l Incidence(p,l) ∧ Incidence(q,l))
-2. ∀p∀q∀l∀m (Incidence(p,l) ∧ Incidence(q,l) ∧ Incidence(p,m) ∧ Incidence(q,m) ∧ l≠m → ∃r∃s (Incidence(r,l) ∧ ¬Incidence(r,m) ∧ Incidence(s,m) ∧ ¬Incidence(s,l)))
-3. ∀l ∃p∃q∃r (Incidence(p,l) ∧ Incidence(q,l) ∧ Incidence(r,l) ∧ p≠q∧q≠r∧r≠p)
+Output the new primitives and axioms. If you must make choices, state them clearly.`,
 
-Now transform the user's theory.  
-Output ONLY the new primitives and axioms, or "Impossible because …".  
-No extra text.`;
+  "Schema Equivalence": `Determine if the two theories below are schema-equivalent (same up to renaming of symbols).
 
-function buildPromptForFunction1(input: string, instructions: string): string {
-  return FUNCTION_1_PROMPT
+<<<INPUT>>>
+
+INSTRUCTIONS:
+<<<INSTRUCTIONS>>>
+
+Build a symbol mapping between vocabularies. Test all arity-preserving mappings. Report whether schema equivalence holds. If yes, give the mapping. If no, give the minimal obstruction.`,
+
+  "Definitional Equivalence": `Test whether the two theories below are definitionally equivalent.
+
+<<<INPUT>>>
+
+INSTRUCTIONS:
+<<<INSTRUCTIONS>>>
+
+For each primitive of Theory A, provide an explicit definition using Theory B's vocabulary.
+For each primitive of Theory B, provide an explicit definition using Theory A's vocabulary.
+Show the bi-directional translation that establishes equivalence.`,
+
+  "Model-Preserving Rewrite": `Rewrite the theory below while preserving exactly the same class of models.
+
+<<<INPUT>>>
+
+INSTRUCTIONS:
+<<<INSTRUCTIONS>>>
+
+Analyze which primitives can be eliminated or combined. Produce a rewritten theory with different primitives but identical models.`,
+
+  "Conservative Extension Analysis": `Analyze whether the extension is conservative.
+
+<<<INPUT>>>
+
+INSTRUCTIONS:
+<<<INSTRUCTIONS>>>
+
+Determine if adding the new axioms/primitives changes what can be proved in the original vocabulary. Provide verdict with justification.`,
+
+  "Compare Conceptual Schemes": `Analyze the conceptual structure of this theory.
+
+<<<INPUT>>>
+
+INSTRUCTIONS:
+<<<INSTRUCTIONS>>>
+
+Build a dependency graph. Classify concepts as primitive vs derived. Compute definitional depth. Identify bottlenecks and central concepts.`,
+
+  "Ontological Dependence": `Analyze the ontological dependencies in this theory.
+
+<<<INPUT>>>
+
+INSTRUCTIONS:
+<<<INSTRUCTIONS>>>
+
+For each primitive, determine its ontological load. Rank primitives by importance. Find the minimal sustaining set. Report which primitives are eliminable.`,
+
+  "Generate Alternative Conceptualizations": `Generate an alternative conceptualization of this theory.
+
+<<<INPUT>>>
+
+INSTRUCTIONS:
+<<<INSTRUCTIONS>>>
+
+Invert the conceptual hierarchy. Make derived notions primitive. Redefine original primitives. Produce an equivalent theory with different conceptual structure.`,
+
+  "Identify Representational Biases": `Identify representational biases in this theory.
+
+<<<INPUT>>>
+
+INSTRUCTIONS:
+<<<INSTRUCTIONS>>>
+
+Analyze what the primitive choices privilege vs suppress. Extract the implicit worldview. Rank biases by severity. Suggest debiasing alternatives.`
+};
+
+function buildPrompt(input: string, instructions: string, functionName: string): string {
+  const template = FUNCTION_PROMPTS[functionName] || FUNCTION_PROMPTS["Axiom-Set / Theory Transformation"];
+  const effectiveInstructions = instructions?.trim() || DEFAULT_INSTRUCTIONS[functionName] || "Perform the standard transformation for this function.";
+  
+  return template
     .replace("<<<INPUT>>>", input)
-    .replace("<<<INSTRUCTIONS>>>", instructions || "Transform this theory.");
-}
-
-function buildPromptGeneric(input: string, instructions: string): string {
-  let prompt = input;
-  if (instructions && instructions.trim()) {
-    prompt += "\n\n" + instructions;
-  }
-  return prompt;
+    .replace("<<<INSTRUCTIONS>>>", effectiveInstructions);
 }
 
 export async function processWithAI(request: AIRequest): Promise<AIResponse> {
-  let prompt: string;
+  const prompt = buildPrompt(request.input, request.instructions, request.functionName);
   
-  if (request.functionName === "Axiom-Set / Theory Transformation") {
-    prompt = buildPromptForFunction1(request.input, request.instructions);
-  } else {
-    prompt = buildPromptGeneric(request.input, request.instructions);
-  }
-
-  const messages = [{ role: "user" as const, content: prompt }];
+  const messages = [
+    { role: "system" as const, content: SYSTEM_PROMPT },
+    { role: "user" as const, content: prompt }
+  ];
 
   switch (request.model) {
     case "Zhi 1": {
@@ -196,7 +226,8 @@ export async function processWithAI(request: AIRequest): Promise<AIResponse> {
       const response = await client.messages.create({
         model: "claude-sonnet-4-20250514",
         max_tokens: 4096,
-        messages
+        system: SYSTEM_PROMPT,
+        messages: [{ role: "user", content: prompt }]
       });
       const text = response.content.find(c => c.type === 'text');
       return {
