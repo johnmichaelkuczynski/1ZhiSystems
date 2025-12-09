@@ -114,38 +114,34 @@ export default function Home() {
                     <span className="text-[10px] bg-primary text-primary-foreground px-1 py-0.5 rounded-[1px]">INFO</span>
                     AVAILABLE ENGINES
                   </div>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-4 gap-2">
                     <button 
                       onClick={() => setSelectedModel("Zhi 1")}
-                      className={`flex flex-col text-left p-2 rounded-sm transition-colors cursor-pointer ${selectedModel === "Zhi 1" ? "bg-primary/20 ring-1 ring-primary" : "hover:bg-muted/50"}`}
+                      className={`text-center p-2 rounded-sm transition-colors cursor-pointer font-bold ${selectedModel === "Zhi 1" ? "bg-primary/20 ring-1 ring-primary text-foreground" : "hover:bg-muted/50 text-foreground"}`}
                       data-testid="button-select-zhi-1"
                     >
-                      <span className="font-bold text-foreground">ZHI 1</span>
-                      <span className="opacity-70">Grok</span>
+                      ZHI 1
                     </button>
                     <button 
                       onClick={() => setSelectedModel("Zhi 2")}
-                      className={`flex flex-col text-left p-2 rounded-sm transition-colors cursor-pointer ${selectedModel === "Zhi 2" ? "bg-primary/20 ring-1 ring-primary" : "hover:bg-muted/50"}`}
+                      className={`text-center p-2 rounded-sm transition-colors cursor-pointer font-bold ${selectedModel === "Zhi 2" ? "bg-primary/20 ring-1 ring-primary text-foreground" : "hover:bg-muted/50 text-foreground"}`}
                       data-testid="button-select-zhi-2"
                     >
-                      <span className="font-bold text-foreground">ZHI 2</span>
-                      <span className="opacity-70">Anthropic</span>
+                      ZHI 2
                     </button>
                     <button 
                       onClick={() => setSelectedModel("Zhi 3")}
-                      className={`flex flex-col text-left p-2 rounded-sm transition-colors cursor-pointer ${selectedModel === "Zhi 3" ? "bg-primary/20 ring-1 ring-primary" : "hover:bg-muted/50"}`}
+                      className={`text-center p-2 rounded-sm transition-colors cursor-pointer font-bold ${selectedModel === "Zhi 3" ? "bg-primary/20 ring-1 ring-primary text-foreground" : "hover:bg-muted/50 text-foreground"}`}
                       data-testid="button-select-zhi-3"
                     >
-                      <span className="font-bold text-foreground">ZHI 3</span>
-                      <span className="opacity-70">OpenAI</span>
+                      ZHI 3
                     </button>
                     <button 
                       onClick={() => setSelectedModel("Zhi 4")}
-                      className={`flex flex-col text-left p-2 rounded-sm transition-colors cursor-pointer ${selectedModel === "Zhi 4" ? "bg-primary/20 ring-1 ring-primary" : "hover:bg-muted/50"}`}
+                      className={`text-center p-2 rounded-sm transition-colors cursor-pointer font-bold ${selectedModel === "Zhi 4" ? "bg-primary/20 ring-1 ring-primary text-foreground" : "hover:bg-muted/50 text-foreground"}`}
                       data-testid="button-select-zhi-4"
                     >
-                      <span className="font-bold text-foreground">ZHI 4</span>
-                      <span className="opacity-70">DeepSeek</span>
+                      ZHI 4
                     </button>
                   </div>
                 </div>

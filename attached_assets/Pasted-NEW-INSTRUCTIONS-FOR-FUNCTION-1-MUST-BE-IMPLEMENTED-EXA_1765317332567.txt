@@ -1,0 +1,62 @@
+NEW INSTRUCTIONS FOR FUNCTION 1 – MUST BE IMPLEMENTED EXACTLY, NO EXCUSES, NO HARDCODED LOGIC
+
+From now on, Function 1 must work like this and ONLY like this:
+
+1. The app itself MUST NEVER generate, modify, or filter the output using any internal logic, keyword matching, if-then rules, or hard-coded responses.
+2. When the user clicks “Run”, the app must do ONLY these things:
+   a. Take the exact text from the INPUT box and the Custom Instructions box.
+   b. Insert them into the prompt template below (replace the placeholders exactly, no extra text).
+   c. Send that full prompt to the selected LLM (OpenAI / Claude / Grok / DeepSeek – whichever the user chose).
+   d. Display the LLM’s raw response verbatim in the OUTPUT box – no post-processing, no “pretty-printing”, no rejection, no override.
+3. If the LLM returns “impossible” or garbage, that is what the user sees. No second chances, no retries inside the app.
+
+Here is the EXACT prompt template you must now use (copy-paste it literally into the code, do not change a single character except the two placeholders):
+
+You are an expert mathematical logician specializing in theory transformation and primitive elimination.
+
+Transform the following first-order theory according to the user’s instructions.  
+The new theory must prove exactly the same theorems (or have isomorphic models) as the original.  
+Eliminate completely every primitive the user asks to eliminate – the forbidden symbols must appear NOWHERE in your final output (not in axioms, not in definitions, not in comments).
+
+User's theory to transform:
+<<<INPUT>>>
+
+User's exact instructions:
+<<<INSTRUCTIONS>>>
+
+Use the following 5 paradigms as your ONLY guide. Study them carefully and imitate their style and rigor.
+
+Paradigm 1 – Betweenness → Line (incidence geometry)
+[exact example from the PDF page 3 – copy verbatim]
+
+Paradigm 2 – Membership → Subset (Ackermann-style set theory)
+[exact example I gave you earlier – copy verbatim]
+
+Paradigm 3 – Vector addition + scalar multiplication → LinearCombination
+Input: [the full vector space input I sent]
+Correct output must contain only the primitive LinearCombination(a,u,b,v,w) and 6–8 clean, syntactically correct axioms that fully capture a vector space over ℝ (no malformed 4-place calls, no broken quantifiers).
+
+Paradigm 4 – Ternary operation → infix binary function (loop / quasigroup)
+Input: [the exact loop input I sent with Operation(x,y,z)]
+Correct output must contain only infix · and the five standard loop axioms (totality, identity, inverses, left and right divisibility expressed via unique solvability of equations).
+
+Paradigm 5 – Circle incidence geometry (Miquel’s theorem fragment)
+Input:
+Primitives: Point(p), Circle(c), LiesOn(p,c)
+Axioms:
+1. Every circle has at least three points
+2. Any three non-collinear points determine exactly one circle
+3. Any two distinct points lie on at least two distinct circles
+Correct output: pure three-primitive incidence geometry using only Point, Line, Incidence (no circles left).
+
+Now transform the user’s theory.  
+Output ONLY the transformed primitives and axioms (or a clear “impossible” explanation).  
+Never add extra commentary unless the user explicitly asks.
+
+Do it now.
+
+Implement this change immediately.  
+After you deploy it, run the LinearCombination vector-space test and the Loop test again – both must now return clean, syntactically correct, mathematically complete outputs with zero trace of the old primitives.  
+If they don’t, the prompt is still too weak and we add more paradigms.
+
+No discussion, no “but”, no hardcoding. Deploy this exact system now.

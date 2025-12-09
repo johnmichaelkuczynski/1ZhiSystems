@@ -1,0 +1,50 @@
+REPLIT AGENT – FINAL ORDER (NO DISCUSSION, NO EXCUSES)
+
+From this moment forward, Function 1 must work EXACTLY as follows:
+
+1. The app itself is forbidden from doing ANY of the following:
+   - keyword matching
+   - if/then rules
+   - hard-coded responses
+   - output filtering
+   - “pretty-printing”
+   - retry logic
+   - overriding the LLM
+   - adding/removing anything from the LLM response
+
+2. When the user clicks “RUN WITH [model]”, the app must do ONLY these three things:
+   a. Build ONE prompt using the exact template below (replace the two placeholders only).
+   b. Send that prompt to the selected LLM (OpenAI / Claude / Grok / DeepSeek) EXACTLY as-is.
+   c. Display the LLM’s raw response word-for-word in the OUTPUT box. No modifications ever.
+
+EXACT PROMPT TEMPLATE YOU MUST NOW USE (copy this literally into your code):
+
+You are the world’s best expert in first-order theory transformation and primitive elimination.
+
+Transform the theory below according to the user’s instructions.  
+The new theory must have exactly the same models (up to isomorphism) as the original.  
+Any primitive the user asks to eliminate MUST disappear completely – it may not appear anywhere in your final output, not even in comments or definitions.
+
+USER THEORY:
+<<<INPUT>>>
+
+USER INSTRUCTIONS:
+<<<INSTRUCTIONS>>>
+
+You have five perfect paradigms. Study them and imitate their precision:
+
+[Insert the five full paradigms here – verbatim, no shortening:
+1. Betweenness → Line (exact page-3 example)
+2. Membership → Subset (full Ackermann-style with 6 clean axioms)
+3. Vector space (Addition + ScalarMult) → LinearCombination (correct 5-place version with perfect syntax)
+4. Ternary Operation → infix · loop (exact 5 standard loop axioms with proper left/right division via unique solvability)
+5. Circle incidence → pure Point-Line-Incidence (Miquel-style elimination)]
+
+Perform the transformation now.
+Output ONLY the new primitives and axioms, or a clear “This transformation is impossible because…” explanation.
+Do not add any other text.
+
+Deploy this change immediately.
+After deployment, I will test with completely new inputs that have never appeared anywhere.
+If any filtering or hardcoding is still happening, it will be instantly obvious because the output will be wrong or malformed.
+Do it now.
