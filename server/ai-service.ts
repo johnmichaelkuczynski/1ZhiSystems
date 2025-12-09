@@ -80,6 +80,111 @@ CRITICAL RULES:
 
 You are solving real problems for researchers. They need results, not excuses.`;
 
+const INSTRUCTION_REFINEMENT_PROMPT = `You are an expert in first-order logic and theory transformation. Your job is to take user instructions that may be vague, incomplete, or defective, and rewrite them into PERFECT, PRECISE, ACTIONABLE instructions.
+
+RULES:
+1. Stay as close to the user's original intent as possible
+2. Make vague references specific (e.g., "a primitive" → name the specific primitive from the theory)
+3. Add missing details needed for execution
+4. Fix logical impossibilities by choosing the closest achievable goal
+5. Ensure the instructions are executable without ambiguity
+6. If the user's instructions are already perfect, return them unchanged
+
+OUTPUT FORMAT:
+Return ONLY the refined instructions. No explanations, no preamble. Just the improved instruction text.
+
+EXAMPLES:
+
+User instructions: "swap primitives"
+Theory has: Point(x), Line(x,y), Between(x,y,z)
+Refined: "Make Line(x,y) the primary primitive. Define Point(x) in terms of Line. Eliminate Between by defining it using Line relationships."
+
+User instructions: "simplify"
+Theory has: Set(x), Element(a,x), Subset(A,B)
+Refined: "Reduce the primitive count by eliminating Element(a,x). Define element membership using the Subset relation: a ∈ X iff {a} ⊆ X. Rewrite all axioms using only Set and Subset."
+
+User instructions: "make it better"
+Theory about geometry with Point, Line, Plane
+Refined: "Reduce to a two-primitive basis. Eliminate Plane by defining it as a collection of Lines. Keep Point and Line as primitives. Ensure all geometric relationships are preserved."`;
+
+async function refineInstructions(
+  userInstructions: string,
+  input: string,
+  functionName: string,
+  model: LLMProvider
+): Promise<string> {
+  if (!userInstructions?.trim()) {
+    return DEFAULT_INSTRUCTIONS[functionName] || "Perform the standard transformation for this function.";
+  }
+
+  const prompt = `FUNCTION: ${functionName}
+
+USER'S THEORY/INPUT:
+${input}
+
+USER'S INSTRUCTIONS (may be vague or defective):
+${userInstructions}
+
+Rewrite these instructions to be PERFECT and PRECISE while staying as close to the user's intent as possible. Output ONLY the refined instructions.`;
+
+  try {
+    switch (model) {
+      case "Zhi 1": {
+        const client = getXAIClient();
+        const response = await client.chat.completions.create({
+          model: "grok-3-mini-beta",
+          messages: [
+            { role: "system", content: INSTRUCTION_REFINEMENT_PROMPT },
+            { role: "user", content: prompt }
+          ],
+          max_tokens: 1024
+        });
+        return response.choices[0]?.message?.content?.trim() || userInstructions;
+      }
+      case "Zhi 2": {
+        const client = getAnthropicClient();
+        const response = await client.messages.create({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1024,
+          system: INSTRUCTION_REFINEMENT_PROMPT,
+          messages: [{ role: "user", content: prompt }]
+        });
+        const text = response.content.find(c => c.type === 'text');
+        return text?.text?.trim() || userInstructions;
+      }
+      case "Zhi 3": {
+        const client = getOpenAIClient();
+        const response = await client.chat.completions.create({
+          model: "gpt-4o",
+          messages: [
+            { role: "system", content: INSTRUCTION_REFINEMENT_PROMPT },
+            { role: "user", content: prompt }
+          ],
+          max_tokens: 1024
+        });
+        return response.choices[0]?.message?.content?.trim() || userInstructions;
+      }
+      case "Zhi 4": {
+        const client = getDeepSeekClient();
+        const response = await client.chat.completions.create({
+          model: "deepseek-chat",
+          messages: [
+            { role: "system", content: INSTRUCTION_REFINEMENT_PROMPT },
+            { role: "user", content: prompt }
+          ],
+          max_tokens: 1024
+        });
+        return response.choices[0]?.message?.content?.trim() || userInstructions;
+      }
+      default:
+        return userInstructions;
+    }
+  } catch (error) {
+    console.error("Instruction refinement failed, using original:", error);
+    return userInstructions;
+  }
+}
+
 const FUNCTION_PROMPTS: Record<string, string> = {
   "Axiom-Set / Theory Transformation": `Transform the theory below according to the instructions.
 The new theory must have exactly the same models (up to isomorphism) as the original.
@@ -200,7 +305,14 @@ function buildPrompt(input: string, instructions: string, functionName: string):
 }
 
 export async function processWithAI(request: AIRequest): Promise<AIResponse> {
-  const prompt = buildPrompt(request.input, request.instructions, request.functionName);
+  const refinedInstructions = await refineInstructions(
+    request.instructions,
+    request.input,
+    request.functionName,
+    request.model
+  );
+  
+  const prompt = buildPrompt(request.input, refinedInstructions, request.functionName);
   
   const messages = [
     { role: "system" as const, content: SYSTEM_PROMPT },
