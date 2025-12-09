@@ -122,7 +122,14 @@ export function ChatInterface({ selectedModel, onModelChange }: ChatInterfacePro
       </ScrollArea>
 
       <div className="p-3 border-t border-border bg-background space-y-3">
-        <Select value={selectedModel} onValueChange={(val) => onModelChange(val as LLM)}>
+        <Select value={selectedModel} onValueChange={(val) => {
+          onModelChange(val as LLM);
+          setMessages(prev => [...prev, { 
+            role: "assistant", 
+            content: `SYSTEM UPDATE: Switched reasoning engine to ${val}.`, 
+            model: val as LLM 
+          }]);
+        }}>
           <SelectTrigger className="w-full h-8 text-xs font-mono bg-secondary/50 border-border">
             <SelectValue placeholder="Select Model" />
           </SelectTrigger>
