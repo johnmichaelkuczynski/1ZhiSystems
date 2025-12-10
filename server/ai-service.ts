@@ -50,23 +50,27 @@ export interface AIResponse {
 }
 
 const DEFAULT_INSTRUCTIONS: Record<string, string> = {
-  "Axiom-Set / Theory Transformation": `Analyze the primitives in the input theory. Choose the first relation/predicate that can be eliminated and redefine it using the remaining primitives. If there are multiple primitives, swap the roles of the first two (make the first one defined in terms of the second). Produce an equivalent theory with different primitive structure.`,
+  "Axiom-Set / Theory Transformation": `Transform the input axiomatic theory into a radically different but logically equivalent form. You may eliminate primitives, introduce new ones, change arity, switch from predicates to functions or vice versa, or completely invert the conceptual foundation. The new theory must prove exactly the same theorems and have isomorphic models. Do not keep eliminated primitives anywhere in the output, not even in definitions or comments. If impossible, explain why.`,
   
-  "Schema Equivalence": `Compare the two theories provided. Build an arity-matched symbol mapping between their vocabularies. Enumerate all possible substitutions and determine if the theories are schema-equivalent. If they are, provide the mapping. If not, identify the minimal structural difference that prevents equivalence.`,
+  "Schema Equivalence": `Determine whether the two input theories (or schemas) are logically equivalent: i.e., they prove exactly the same theorems in all models. Answer with one of:
+— YES, they are equivalent (bi-interpretable or mutually embeddable)
+— NO, they are not equivalent (give a clear counterexample or separating property)
+— UNKNOWN (with justification).
+Then briefly explain the reasoning.`,
   
-  "Definitional Equivalence": `For the two theories provided, attempt to explicitly define each primitive of Theory A using the vocabulary of Theory B, and vice versa. Provide the bi-directional definitions that establish definitional equivalence. If full equivalence is not achievable, provide partial definitions and explain which primitives cannot be defined.`,
+  "Definitional Equivalence": `Determine whether one theory is a definitional extension of the other: i.e., one can be obtained from the other by adding explicit definitions (conservative extension with new symbols explicitly defined). State which direction holds (A defines B, B defines A, mutual, or neither) and show the explicit definitions if they exist.`,
   
-  "Model-Preserving Rewrite": `Analyze the input theory and rewrite it to minimize the number of primitives while preserving all models. Use frequency and arity analysis to determine which primitives can be eliminated. The rewritten theory must have exactly the same models as the original.`,
+  "Model-Preserving Rewrite": `Rewrite the input theory using a completely different vocabulary and axiom set, but such that every model of the original is isomorphic to a model of the new theory and vice versa. The two theories must be categorically equivalent. Do not use conservative extensions — the output must not be a definitional extension.`,
   
-  "Conservative Extension Analysis": `Analyze whether the extended theory is a conservative extension of the base theory. Determine if any new theorems expressible in the original vocabulary become provable. Provide a verdict (conservative or non-conservative) with proof outline or countermodel.`,
+  "Conservative Extension Analysis": `Analyze whether adding the given new axioms or primitives to the base theory constitutes a conservative extension (no new theorems in the original language are provable). Answer YES or NO and prove it: either exhibit a proof of a new old-language theorem or prove independence using a model where the extension fails.`,
   
-  "Compare Conceptual Schemes": `Build a dependency graph of all concepts in the theory. Classify each concept as primitive or derived. Compute the definitional depth of each concept (number of layers from primitives). Identify the most central/load-bearing concepts and any bottlenecks.`,
+  "Compare Conceptual Schemes": `Take the two input conceptual schemes/theories and compare their expressive power, ontological commitments, and primitive concepts. Highlight what one can express that the other cannot, what is gained or lost in each formulation, and which is more natural or parsimonious.`,
   
-  "Ontological Dependence": `Rank all primitives by their ontological necessity. For each primitive, analyze what would be lost if it were removed. Identify the minimal set of primitives that can sustain the theory. Report which primitives are load-bearing vs. eliminable.`,
+  "Ontological Dependence": `Determine the hierarchy of ontological dependence between the primitives in the input theory. For each primitive, state whether it is ontologically reducible to the others (explicitly definable or eliminable) or whether it is primitive/independent. Provide explicit definitions where possible.`,
   
-  "Generate Alternative Conceptualizations": `Invert the conceptual hierarchy: take derived concepts and make them primitive, then redefine the original primitives using the new primitive set. Produce an equivalent theory with a fundamentally different conceptual structure.`,
+  "Generate Alternative Conceptualizations": `Generate three distinct, non-trivial, logically equivalent reformulations of the input theory using completely different primitive concepts (e.g., algebraic, topological, order-theoretic, mereological, etc.). Each reformulation must be categorical or at least bi-interpretable with the original.`,
   
-  "Identify Representational Biases": `Analyze what the theory's choice of primitives makes easy vs. hard to express. Identify privileged structures (what becomes simple) and suppressed structures (what becomes complex or inexpressible). Extract the implicit worldview embedded in the primitive choices. Rank biases by severity.`
+  "Identify Representational Biases": `Analyze the input theory and identify hidden representational biases, implicit ontological assumptions, and historical or notational prejudices baked into the choice of primitives and axioms. Suggest how these biases affect what the theory makes easy or difficult to express, and propose a bias-minimized alternative formulation.`
 };
 
 const SYSTEM_PROMPT = `You are the world's foremost expert in first-order logic, theory transformation, and formal ontology analysis.
