@@ -1,0 +1,135 @@
+Completely delete all existing logic for the sub-function:
+"GENERATE ALTERNATIVE CONCEPTUALIZATIONS: STRUCTURAL RECONSTRUCTION".
+
+Do NOT modify the parent function "Generate Alternative Conceptualizations".
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+STRUCTURAL RECONSTRUCTION (1 ARG)
+=========================================================
+
+TASK:
+Rewrite theory T using ONLY **structural / relational predicates**.
+
+This reconstruction eliminates all primitives referring to:
+- intrinsic natures,
+- internal essences,
+- qualitative or non-relational attributes.
+
+The result is a theory grounded purely in **relations between objects**.
+
+=========================================================
+INPUT
+=========================================================
+
+A single theory T with:
+- LANGUAGE: L = {P₁, …, P_k}
+- AXIOMS: A
+- Classification of predicates:
+    • Structural / relational: R₁, R₂, …
+    • Intrinsic / qualitative: Q₁, Q₂, …
+- EXPLAIN toggle ON/OFF
+
+=========================================================
+MECHANICAL RECONSTRUCTION PROCEDURE
+=========================================================
+
+STEP 1 — ISOLATE STRUCTURAL VOCABULARY
+---------------------------------------
+New language:
+    L* = { all structural predicates R_i }
+
+Intrinsic predicates Q_i are targeted for elimination.
+
+STEP 2 — ATTEMPT DEFINABILITY OF INTRINSIC PRIMITIVES
+------------------------------------------------------
+For each intrinsic predicate Q:
+
+Attempt to syntactically define Q(x̄) using only relational predicates:
+
+      Q(x̄) ↔ φ_Q(x̄)
+
+where φ_Q is constructed solely from R_i.
+
+Use the standard definability mechanism:
+- pattern matching only,
+- no inference,
+- no semantic assumptions.
+
+If definable:
+    Record definition Q → φ_Q.
+If not:
+    Mark Q as **eliminated**.
+
+STEP 3 — REWRITE ALL AXIOMS
+----------------------------
+For each original axiom α:
+
+1. Replace Q(x̄) with φ_Q(x̄) for all definable Q,
+2. If α contains any Q not definable in L*, the axiom is removed,
+3. All remaining axioms must contain only relational vocabulary.
+
+Resulting axiom-set: A*.
+
+STEP 4 — FORM THE PURELY STRUCTURAL THEORY T*
+----------------------------------------------
+T* consists of:
+- LANGUAGE: L*
+- DEFINITIONS: Q_i(x̄) ↔ φ_Q_i(x̄)
+- AXIOMS: A*
+
+=========================================================
+SUCCESS CONDITION
+=========================================================
+
+Structural reconstruction will produce:
+
+- A fully relational language,
+- A set of relational axioms,
+- Eliminations of any concept not expressible structurally.
+
+Equivalence with the original theory is *not* required.
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+STRUCTURAL LANGUAGE:
+{ R₁, R₂, ... }
+
+DEFINABLE INTRINSICS:
+Q₁(x̄) ↔ φ₁(x̄)
+Q₂(x̄) ↔ φ₂(x̄)
+...
+
+ELIMINATED INTRINSICS:
+{ Q_i not definable }
+
+REWRITTEN AXIOMS:
+1. <structural axiom>
+2. ...
+
+REMOVED AXIOMS:
+1. <unstatable axiom>
+2. ...
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as above)
+
+EXPLANATION:
+- Only relational predicates survive.
+- Intrinsic attributes are removed unless relationally definable.
+- Axioms depending on intrinsic notions are eliminated.
+- The resulting theory emphasizes structural relations rather than
+  internal natures.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
