@@ -127,6 +127,17 @@ Explain the approach/algorithm used to arrive at this result.
 
 === END FORMAT ===
 
+=== CRITICAL FORMATTING RULES ===
+
+DO NOT use LaTeX, MathJax, or any markup syntax. Output PLAIN TEXT only.
+- Use unicode symbols: ∀ ∃ ∧ ∨ → ↔ ¬ ∈ ⊆ ⊂ ≠ ≤ ≥
+- Write "for all x" or "∀x", NOT "\\forall x" or "\( \\forall x \)"
+- Write "Subset(A,B)" NOT "\\text{Subset}(A,B)"
+- Write "x ∈ M" NOT "\( x \\in M \)"
+- NO backslashes, NO \text{}, NO \mathcal{}, NO \( \) delimiters
+
+The output appears in a plain text box. LaTeX will NOT render - it will show as ugly code.
+
 DO NOT bury the result under commentary. The result comes FIRST.`;
 
 const INSTRUCTION_REFINEMENT_PROMPT = `You are an expert in first-order logic and theory transformation. Your job is to take user instructions that may be vague, incomplete, or defective, and rewrite them into PERFECT, PRECISE, ACTIONABLE instructions.
