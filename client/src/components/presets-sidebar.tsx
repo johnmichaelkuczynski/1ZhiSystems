@@ -657,7 +657,83 @@ EXPLANATION:
     name: "Algebraic Reconstruction",
     functionId: 4,
     input: ``,
-    instructions: `Rewrite the theory using only function symbols and equations. Convert all relations to functions. Produce an equational/algebraic formulation.`
+    instructions: `MODEL-PRESERVING REWRITE (ALGEBRAIC RECONSTRUCTION)
+
+TASK:
+Given a theory T written in a relational first-order language, rewrite it into a PURELY ALGEBRAIC (equational) formulation:
+- Only function symbols (including constants) are permitted
+- All predicates must be eliminated
+- Every relation must be converted into one or more functions
+- All axioms must be rewritten as equations between terms
+
+The resulting theory must:
+1. Be definitionally equivalent to the original
+2. Characterize EXACTLY the same class of models (up to isomorphism)
+
+INPUT:
+A single theory T with:
+- LANGUAGE: predicates P1,...,Pk (arity ≥ 1)
+- AXIOMS: any first-order sentences
+- EXPLAIN toggle (ON or OFF)
+
+MECHANICAL ALGEBRAIC REWRITE PROCEDURE:
+
+STEP 1 — FUNCTIONALIZE EACH RELATION:
+For each predicate Pi(x1,...,x_ni):
+1. Introduce a NEW function symbol Fi of arity ni whose outputs live in a new designated "boolean" sort (treated algebraically)
+2. Introduce two constant symbols: tt (representing "true") and ff (representing "false")
+3. Replace every atomic formula Pi(t1,...,t_ni) with the equation: Fi(t1,...,t_ni) = tt
+4. Replace ¬Pi(t1,...,t_ni) with: Fi(t1,...,t_ni) = ff
+
+STEP 2 — ELIMINATE LOGICAL CONNECTIVES:
+Rewrite all logical operations using algebraic equalities:
+- (A ∧ B) becomes: min(F_A(...), F_B(...)) = tt
+- (A ∨ B) becomes: max(F_A(...), F_B(...)) = tt
+- (A ↔ B) becomes: Fi(...) = Fj(...)
+- (A → B) becomes: (Fi(...)=ff) ∨ (Fj(...)=tt), rewritten using max/min
+Add function symbols min and max if needed, defined algebraically:
+- min(tt,tt)=tt; min(tt,ff)=ff; min(ff,ff)=ff
+- max(ff,ff)=ff; max(tt,ff)=tt; max(tt,tt)=tt
+
+STEP 3 — ELIMINATE QUANTIFIERS:
+Quantifiers are algebraized using Skolem functions:
+- ∀x φ(x) becomes an equation stating φ(x) holds for an arbitrary Skolem variable chosen by a fresh function S∀
+- ∃x φ(x) becomes φ applied to a Skolem function S∃(params)
+This preserves model-equivalence via standard Skolemization.
+
+STEP 4 — PRODUCE FINAL EQUATIONAL THEORY:
+All axioms must now be:
+- equalities between terms
+- using only function symbols (old Skolem and new Fi, min, max)
+- with no predicate symbols remaining
+
+SUCCESS CONDITION:
+
+Algebraic reconstruction ALWAYS succeeds. The output theory must:
+- Contain NO predicates
+- Contain ONLY function symbols and equations
+- Be definitionally equivalent to the original
+- Allow every original model to expand uniquely into a model of the algebraic form
+
+OUTPUT (EXPLAIN = OFF):
+
+LANGUAGE:
+{ all new Fi functions, tt, ff, min, max, and Skolem functions }
+
+EQUATIONAL AXIOMS:
+1. <first axiom rewritten as an equation>
+2. <second axiom rewritten as an equation>
+...
+
+OUTPUT (EXPLAIN = ON):
+
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Every relation is replaced by a "truth-valued" function
+- Logical structure is coded algebraically using tt, ff, min, max
+- Quantifiers are eliminated by Skolemization
+- The resulting equational theory is definitionally equivalent and preserves all models`
   },
   {
     id: "f4-pure-relational",
