@@ -1,0 +1,92 @@
+Completely delete the existing logic for 
+"Ontological Dependence (One Argument)". 
+Do NOT modify it. REPLACE it entirely with the following rules.
+
+========================================
+NEW LOGIC FOR THIS FUNCTION
+========================================
+
+1. The input contains ONE conceptual scheme. 
+   It includes:
+      - LANGUAGE
+      - PRIMITIVES
+      - DEFINITIONS (optional)
+      - AXIOMS (optional)
+
+2. The purpose of this function is ONLY:
+      Identify which symbols are primitive
+      and identify which symbols ontologically depend on others.
+
+3. RULE FOR DEPENDENCE:
+      A symbol S ontologically depends on symbols T1, …, Tn 
+      if and only if there is an EXPLICIT definition:
+            S(...) ↔ φ(...)
+      and φ contains T1, …, Tn.
+      If no definition is given, S is primitive.
+
+4. The function MUST NOT:
+      - infer definability from axioms,
+      - guess dependencies,
+      - reason about models,
+      - add symbols,
+      - philosophize or narrate,
+      - produce explanations longer than one sentence.
+
+5. OUTPUT FORMAT MUST BE EXACTLY:
+
+RESULT
+
+Primitive symbols:
+(list primitive predicates/functions from PRIMITIVES block)
+
+Derived symbols and their dependencies:
+S depends on {T1, T2, …}
+S2 depends on {…}
+(If none exist, output “None.”)
+
+Dependency Graph:
+T1 → S
+T2 → S
+(If none exist, output “None.”)
+
+6. EXAMPLES THE APP MUST IMITATE:
+
+EXAMPLE 1
+INPUT:
+LANGUAGE: {Parent, Male, Female, Father}
+PRIMITIVES:
+Parent(x,y)
+Male(x)
+Female(x)
+DEFINITIONS:
+Father(x,y) ↔ Parent(x,y) ∧ Male(x)
+
+OUTPUT:
+RESULT
+Primitive symbols:
+Parent, Male, Female
+
+Derived symbols and their dependencies:
+Father depends on {Parent, Male}
+
+Dependency Graph:
+Parent → Father
+Male → Father
+
+----------------------------------------
+
+EXAMPLE 2
+INPUT:
+LANGUAGE: {R, S, T}
+PRIMITIVES:
+R(x)
+S(x,y)
+DEFINITIONS:
+T(x,y) ↔ R(x) ∧ S(x,y)
+
+OUTPUT:
+RESULT
+Primitive symbols:
+R, S
+
+Derived symbols and their depe

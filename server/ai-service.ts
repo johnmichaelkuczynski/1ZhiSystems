@@ -593,7 +593,7 @@ COMPARISON
 - Do NOT evaluate theories or infer consequences
 - ONLY compare primitive/derived classifications`,
 
-  "Ontological Dependence": `YOUR TASK: Identify which symbols ontologically depend on others based on EXPLICIT DEFINITIONS only.
+  "Ontological Dependence": `YOUR TASK: Identify which symbols are primitive and which ontologically depend on others.
 
 === INPUT CONCEPTUAL SCHEME ===
 <<<INPUT>>>
@@ -601,35 +601,52 @@ COMPARISON
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-=== DEFINITION OF ONTOLOGICAL DEPENDENCE ===
-A symbol S ontologically depends on symbols T₁, …, Tₙ if and only if there is an explicit definition:
-    S(x,…) ↔ φ(x,…)
+=== RULE FOR DEPENDENCE ===
+A symbol S ontologically depends on symbols T₁, …, Tₙ if and only if there is an EXPLICIT definition:
+    S(...) ↔ φ(...)
 and φ contains T₁, …, Tₙ.
-
-No definition ⇒ S is PRIMITIVE and has NO dependencies.
+If no definition is given, S is primitive.
 
 === OUTPUT FORMAT (use exactly this structure) ===
 
 RESULT
+
 Primitive symbols:
-(list)
+(list primitive predicates/functions from PRIMITIVES block)
 
 Derived symbols and their dependencies:
 S depends on {T1, T2, …}
-S₂ depends on {…}
-…
+S2 depends on {…}
+(If none exist, output "None.")
 
 Dependency Graph:
-(list edges: T → S for each dependency)
-(If no derived symbols exist, output "None.")
+T1 → S
+T2 → S
+(If none exist, output "None.")
+
+=== EXAMPLES ===
+
+EXAMPLE 1:
+INPUT: LANGUAGE: {Parent, Male, Female, Father}, PRIMITIVES: Parent, Male, Female, DEFINITIONS: Father(x,y) ↔ Parent(x,y) ∧ Male(x)
+OUTPUT:
+Primitive symbols: Parent, Male, Female
+Derived symbols: Father depends on {Parent, Male}
+Dependency Graph: Parent → Father, Male → Father
+
+EXAMPLE 2:
+INPUT: LANGUAGE: {R, S, T}, PRIMITIVES: R, S, DEFINITIONS: T(x,y) ↔ R(x) ∧ S(x,y)
+OUTPUT:
+Primitive symbols: R, S
+Derived symbols: T depends on {R, S}
+Dependency Graph: R → T, S → T
 
 === HARD REQUIREMENTS ===
-- Dependencies come ONLY from explicit definitions
-- Do NOT infer dependencies from axioms
-- Do NOT guess definability
-- Do NOT perform model-theoretic analysis
-- Do NOT produce philosophical commentary
-- Do NOT invent new predicates`,
+- Do NOT infer definability from axioms
+- Do NOT guess dependencies
+- Do NOT reason about models
+- Do NOT add symbols
+- Do NOT philosophize or narrate
+- Do NOT produce explanations longer than one sentence`,
 
   "Generate Alternative Conceptualizations": `YOUR TASK: Produce 1–3 alternative axiom sets T' for the input theory T.
 
