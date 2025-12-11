@@ -1,0 +1,105 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: COMPUTATIONAL".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (COMPUTATIONAL)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct a COMPUTATIONAL MODEL
+for T using standard computational entities in the following priority order:
+
+1. Data structures (arrays, lists, trees, graphs, hash tables)
+2. Algorithms / procedures
+3. Type systems
+4. State machines / automata
+5. Program semantics (functions, closures, evaluators)
+6. Processes / message passing
+7. Memory models (stacks, heaps, stores)
+8. Only if all above fail: abstract rewriting systems.
+
+MODEL CONSTRUCTION RULES:
+- Select a computational domain D (e.g., nodes of a tree, states of a machine,
+  memory cells, program values).
+- Interpret each predicate/function of T as a computational relation/function
+  on D (e.g., “is parent of,” “next state,” “contains,” “pointer-to”).
+- The interpretation must satisfy all axioms of T.
+
+If no computational interpretation satisfies T:
+"No computational interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <description of computational domain>
+Interpretations:
+P1(x̄) := <computational relation/function>
+P2(x̄) := <computational relation/function>
+...
+Pk(x̄) := <computational relation/function>
+
+If no computational interpretation exists:
+"No computational interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- The computational domain is chosen from the earliest feasible category.
+- Each symbol of T is mapped to a concrete computational behavior.
+- Every axiom is checked under the interpretation to ensure correctness.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {Next(x,y)}
+Axioms:
+1. ∀x∃y Next(x,y)
+2. ∀x∀y∀z ((Next(x,y) ∧ Next(x,z)) → y = z)
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Natural numbers ℕ
+Interpretations:
+Next(x,y) := (y = x + 1)
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Natural numbers ℕ
+Interpretations:
+Next(x,y) := (y = x + 1)
+
+EXPLANATION:
+- The earliest viable computational structure is a simple array index model.
+- For every x, there is exactly one successor x+1, satisfying both axioms:
+  • Axiom 1: every number has a next number.
+  • Axiom 2: the next number is unique.
+- Thus the “Next” predicate is naturally modeled as the successor operation.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

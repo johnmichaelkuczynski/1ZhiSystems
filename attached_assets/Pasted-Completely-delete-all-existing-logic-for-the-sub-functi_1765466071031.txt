@@ -1,0 +1,106 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: MATHEMATICAL".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (MATHEMATICAL)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct a MATHEMATICAL MODEL
+for T using real branches of mathematics in the following priority order:
+
+1. Algebra (groups, rings, fields, lattices, vector spaces)
+2. Geometry / Trigonometry
+3. Topology
+4. Calculus / Analysis
+5. Probability theory
+6. Linear algebra
+7. Combinatorics / Graph theory
+8. Number theory
+9. Real / complex functions
+10. Only if all above fail: set-theoretic or logical structures.
+
+MODEL CONSTRUCTION RULES:
+- Select a natural mathematical domain D from the earliest workable category.
+- Interpret each predicate/function symbol of T as a standard mathematical
+  relation/function on D.
+- The chosen interpretations must satisfy all axioms of T.
+
+If no branch of mathematics yields a valid model, report:
+"No mathematical interpretation available."
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <description of mathematical set>
+Interpretations:
+P1(x̄) := <mathematical relation/function>
+P2(x̄) := <mathematical relation/function>
+...
+Pk(x̄) := <mathematical relation/function>
+
+If no mathematical interpretation exists:
+"No mathematical interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Interpretation is chosen from the earliest feasible mathematical branch.
+- Domain D is selected to make the axioms satisfiable.
+- Each predicate/function is assigned a standard mathematical meaning.
+- Verification is done by checking each axiom under the chosen assignments.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {R(x,y)}
+Axioms:
+1. ∀x R(x,x)
+2. ∀x∀y (R(x,y) → R(y,x))
+3. ∀x∀y∀z ((R(x,y) ∧ R(y,z)) → R(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: ℝ (the real numbers)
+Interpretations:
+R(x,y) := (x = y)
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: ℝ (the real numbers)
+Interpretations:
+R(x,y) := (x = y)
+
+EXPLANATION:
+- Algebra is the earliest branch that yields a workable interpretation.
+- Equality on ℝ is reflexive, symmetric, and transitive.
+- Thus all three axioms hold immediately.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

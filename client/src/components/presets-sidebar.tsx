@@ -2294,54 +2294,40 @@ EXPLANATION:
     instructions: `FIND AN INTERPRETATION: MATHEMATICAL (1 ARG)
 
 TASK:
-Given a single theory T, construct an explicit mathematical model using algebra, topology, geometry, calculus, or trigonometry. Only use pure set-theoretic structures if no mathematical structure fits the axioms.
+Given an uninterpreted axiom system T, construct a MATHEMATICAL MODEL for T using real branches of mathematics in the following priority order:
 
-INPUT:
-- LANGUAGE of T (predicate, function, constant symbols)
-- AXIOMS of T (formulas to be satisfied)
+1. Algebra (groups, rings, fields, lattices, vector spaces)
+2. Geometry / Trigonometry
+3. Topology
+4. Calculus / Analysis
+5. Probability theory
+6. Linear algebra
+7. Combinatorics / Graph theory
+8. Number theory
+9. Real / complex functions
+10. Only if all above fail: set-theoretic or logical structures
 
-MODEL-CONSTRUCTION PROCEDURE:
+MODEL CONSTRUCTION RULES:
+- Select a natural mathematical domain D from the earliest workable category
+- Interpret each predicate/function symbol of T as a standard mathematical relation/function on D
+- The chosen interpretations must satisfy all axioms of T
 
-STEP 1 — IDENTIFY CANDIDATE MATHEMATICAL STRUCTURES:
-- Algebraic (groups, orders, lattices)
-- Geometric (points, lines, distances)
-- Topological (open sets, closure)
-- Calculus-based (real line, derivatives)
-- Trigonometric (angles, periodic functions)
-
-STEP 2 — SELECT THE SIMPLEST STRUCTURE:
-That can satisfy the axioms.
-
-STEP 3 — ASSIGN AN EXPLICIT DOMAIN:
-E.g., ℝ, ℕ, S¹, a metric space.
-
-STEP 4 — INTERPRET EACH PRIMITIVE SYMBOL:
-- Predicates as relations (e.g., <, ≤, adjacency, openness)
-- Functions as operations (e.g., +, ·, derivative operator)
-- Constants as specific elements (0, 1, π, the origin)
-
-STEP 5 — VERIFY EACH AXIOM:
-Ensure every axiom holds under this interpretation.
-
-STEP 6 — FALLBACK:
-If no algebraic/geometric/topological model works, fall back to a minimal set-theoretic model.
-
-SUCCESS CONDITION:
-
-A valid mathematical interpretation must:
-- Provide an explicit domain
-- Assign each primitive a precise mathematical meaning
-- Make every axiom true in that structure
+If no branch of mathematics yields a valid model, report: "No mathematical interpretation available"
 
 OUTPUT (EXPLAIN = OFF):
 
 1. THE RESULT
 
-INTERPRETATION (MATHEMATICAL):
-Domain: …
-Symbol interpretations:
-- …
-- …
+MODEL:
+Domain: <description of mathematical set>
+Interpretations:
+P1(x̄) := <mathematical relation/function>
+P2(x̄) := <mathematical relation/function>
+...
+Pk(x̄) := <mathematical relation/function>
+
+If no mathematical interpretation exists:
+"No mathematical interpretation available"
 
 OUTPUT (EXPLAIN = ON):
 
@@ -2349,8 +2335,10 @@ OUTPUT (EXPLAIN = ON):
 (same as EXPLAIN = OFF)
 
 EXPLANATION:
-- Briefly describe which mathematical structure was chosen and why
-- Note which axioms are satisfied by which properties of that structure`
+- Interpretation is chosen from the earliest feasible mathematical branch
+- Domain D is selected to make the axioms satisfiable
+- Each predicate/function is assigned a standard mathematical meaning
+- Verification is done by checking each axiom under the chosen assignments`
   },
   {
     id: "f10-computational",
