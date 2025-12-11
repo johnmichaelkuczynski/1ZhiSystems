@@ -1,0 +1,101 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: MACRO / INTERMARKET".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (MACRO / INTERMARKET)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct a MACRO/INTERMARKET MODEL
+using the following priority order:
+
+1. Leading/lagging indicators
+2. Interest-rate → currency → commodities sequencing
+3. Business cycle phases
+4. Equity/bond yield relationships
+5. Global contagion chains
+6. Relative-strength orderings
+7. Only if all above fail: abstract economic time-order models.
+
+MODEL CONSTRUCTION RULES:
+- Choose a domain D of macroeconomic indicators or asset classes.
+- Interpret predicates/functions as intermarket relations:
+  “leads,” “lags,” “responds-before,” “has-stronger-cycle-than,” etc.
+- Ensure axioms hold.
+
+If no interpretation exists:
+"No macro-intermarket interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <macro domain>
+Interpretations:
+P1(x̄) := <macro relation>
+P2(x̄) := <macro relation>
+...
+Pk(x̄) := <macro relation>
+
+If no interpretation exists:
+"No macro-intermarket interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Interpretation chosen from earliest viable intermarket ordering.
+- Predicates represent cycle-lead or rate-driven cause/effect precedence.
+- Axioms are verified against these relations.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {Leads(x,y)}
+Axioms:
+1. ∀x ¬Leads(x,x)
+2. ∀x∀y∀z ((Leads(x,y) ∧ Leads(y,z)) → Leads(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Macro indicators (Yields, USD, Commodities)
+Interpretations:
+Leads(x,y) := "turning point of x historically precedes turning point of y"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Macro indicators (Yields, USD, Commodities)
+Interpretations:
+Leads(x,y) := "turning point of x historically precedes turning point of y"
+
+EXPLANATION:
+- Intermarket sequences exhibit strict leadership hierarchies.
+- Turning-point precedence is irreflexive and transitive.
+- Therefore the axioms hold.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

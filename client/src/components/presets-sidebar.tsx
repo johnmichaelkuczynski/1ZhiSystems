@@ -3167,42 +3167,359 @@ EXPLANATION:
     name: "Portfolio & Risk",
     functionId: 10,
     input: ``,
-    instructions: `Find a PORTFOLIO & RISK interpretation. Use asset classes, risk levels, allocations, or return profiles.`
+    instructions: `FIND AN INTERPRETATION: PORTFOLIO & RISK (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct a PORTFOLIO/RISK MODEL using the following priority order:
+
+1. Assets and their risk levels
+2. Expected returns and volatilities
+3. Correlation structure
+4. Risk dominance relations (more risky than)
+5. Allocation and weighting functions
+6. Diversification effects
+7. Only if all above fail: abstract ordered risk sets
+
+MODEL CONSTRUCTION RULES:
+- Choose a domain D of assets or asset classes
+- Interpret predicates/functions as risk relations: "more-volatile-than", "higher-beta-than", "dominates-in-risk", etc.
+- Ensure the axioms are satisfied
+
+If no interpretation exists:
+"No portfolio-risk interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <portfolio domain>
+Interpretations:
+P1(x̄) := <risk relation>
+P2(x̄) := <risk relation>
+...
+Pk(x̄) := <risk relation>
+
+If no interpretation exists:
+"No portfolio-risk interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Predicates map to standard financial risk measures
+- The earliest viable risk metric is used (volatility → beta → VaR)
+- Axioms are verified`
   },
   {
     id: "f10-credit-fixed-income",
     name: "Credit & Fixed-Income",
     functionId: 10,
     input: ``,
-    instructions: `Find a CREDIT & FIXED-INCOME interpretation. Use tranches, seniority, bonds, or CDO structures.`
+    instructions: `FIND AN INTERPRETATION: CREDIT & FIXED-INCOME (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct a CREDIT/FI MODEL with the following priority:
+
+1. Bond seniority structure
+2. Tranches (senior, mezzanine, equity)
+3. Default priority
+4. Yield/discount relationships
+5. Duration/convexity comparisons
+6. Cashflow waterfall ordering
+7. Only if all above fail: abstract priority claims
+
+MODEL CONSTRUCTION RULES:
+- Choose a domain D of bonds, tranches, or credit claims
+- Map predicates to credit relations: "senior-to", "paid-before", "lower-duration-than", etc.
+- Ensure all axioms are satisfied
+
+If no interpretation exists:
+"No credit-fixed-income interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <credit domain>
+Interpretations:
+P1(x̄) := <credit relation>
+P2(x̄) := <credit relation>
+...
+Pk(x̄) := <credit relation>
+
+If no interpretation exists:
+"No credit-fixed-income interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Predicates map to seniority or duration/convexity relations
+- The earliest viable structural relation is used
+- Axioms are verified`
   },
   {
     id: "f10-ma-corporate",
     name: "M&A / Corporate Structure",
     functionId: 10,
     input: ``,
-    instructions: `Find an M&A / CORPORATE STRUCTURE interpretation. Use corporate entities, ownership, voting control, or subsidiaries.`
+    instructions: `FIND AN INTERPRETATION: M&A / CORPORATE STRUCTURE (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct a CORPORATE-STRUCTURE MODEL in the following priority order:
+
+1. Parent–subsidiary relationships
+2. Voting control (majority ownership)
+3. Ownership chains
+4. Board authority and oversight
+5. Affiliate structures
+6. Merger integration hierarchies
+7. Only if all above fail: abstract ownership graphs
+
+MODEL CONSTRUCTION RULES:
+- Choose a domain D of corporate entities
+- Interpret predicates/functions as ownership/control relations: "owns-majority-of", "controls", "is-parent-of", etc.
+- Ensure axioms are satisfied
+
+If no interpretation exists:
+"No corporate-structure interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <corporate domain>
+Interpretations:
+P1(x̄) := <corporate relation>
+P2(x̄) := <corporate relation>
+...
+Pk(x̄) := <corporate relation>
+
+If no interpretation exists:
+"No corporate-structure interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Predicates map to ownership, voting, or control hierarchies
+- Interpretation chosen from earliest workable structural level
+- Axioms verified`
   },
   {
     id: "f10-derivatives",
     name: "Derivatives",
     functionId: 10,
     input: ``,
-    instructions: `Find a DERIVATIVES interpretation. Use options, strike prices, payoffs, or contract structures.`
+    instructions: `FIND AN INTERPRETATION: DERIVATIVES (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct a DERIVATIVES MODEL using the following priority order:
+
+1. Option payoff relations (higher payoff than)
+2. Strike-price ordering
+3. Moneyness relations (more in-the-money than)
+4. Greeks (sensitivity comparisons: delta, gamma, vega)
+5. Volatility-surface dominance
+6. Arbitrage-free price relations
+7. Only if all above fail: abstract payoff lattices
+
+MODEL CONSTRUCTION RULES:
+- Choose a domain D of derivatives contracts
+- Interpret predicates/functions as pricing or payoff relations: "higher-payoff-than", "lower-strike-than", "dominates-in-delta", etc.
+- Ensure axioms hold
+
+If no interpretation exists:
+"No derivatives interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <derivatives domain>
+Interpretations:
+P1(x̄) := <derivatives relation>
+P2(x̄) := <derivatives relation>
+...
+Pk(x̄) := <derivatives relation>
+
+If no interpretation exists:
+"No derivatives interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Predicates correspond to payoff/strike/greek dominance relations
+- Interpretation selected from the earliest viable derivatives structure
+- Axioms verified`
   },
   {
     id: "f10-private-equity",
     name: "Private Equity / LBO",
     functionId: 10,
     input: ``,
-    instructions: `Find a PRIVATE EQUITY / LBO interpretation. Use capital structure layers, exit waterfalls, or payout priorities.`
+    instructions: `FIND AN INTERPRETATION: PRIVATE EQUITY / LBO (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct an LBO MODEL using the following priority order:
+
+1. Capital structure layers (senior debt, mezzanine, equity)
+2. Cashflow waterfall (pays-before)
+3. Leverage relationships (more-levered-than)
+4. Exit preferences (receives-proceeds-before)
+5. IRR / MOIC ordering
+6. Governance control (board rights)
+7. Only if all above fail: abstract payout-order graphs
+
+MODEL CONSTRUCTION RULES:
+- Choose a domain D of capital structure claims
+- Interpret predicates/functions using LBO mechanics: "pays-before", "more-junior-than", "receives-residual", etc.
+- Ensure the axioms hold
+
+If no interpretation exists:
+"No LBO interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <LBO capital structure>
+Interpretations:
+P1(x̄) := <LBO relation>
+P2(x̄) := <LBO relation>
+...
+Pk(x̄) := <LBO relation>
+
+If no interpretation exists:
+"No LBO interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Predicates map to cashflow priority and leverage relations
+- The earliest viable structure (waterfall → leverage → IRR order) is selected
+- Axioms are verified`
   },
   {
     id: "f10-macro-intermarket",
     name: "Macro / Intermarket",
     functionId: 10,
     input: ``,
-    instructions: `Find a MACRO / INTERMARKET interpretation. Use global macro indicators, leads/lags, or economic sequences.`
+    instructions: `FIND AN INTERPRETATION: MACRO / INTERMARKET (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct a MACRO/INTERMARKET MODEL using the following priority order:
+
+1. Leading/lagging indicators
+2. Interest-rate → currency → commodities sequencing
+3. Business cycle phases
+4. Equity/bond yield relationships
+5. Global contagion chains
+6. Relative-strength orderings
+7. Only if all above fail: abstract economic time-order models
+
+MODEL CONSTRUCTION RULES:
+- Choose a domain D of macroeconomic indicators or asset classes
+- Interpret predicates/functions as intermarket relations: "leads", "lags", "responds-before", "has-stronger-cycle-than", etc.
+- Ensure axioms hold
+
+If no interpretation exists:
+"No macro-intermarket interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <macro domain>
+Interpretations:
+P1(x̄) := <macro relation>
+P2(x̄) := <macro relation>
+...
+Pk(x̄) := <macro relation>
+
+If no interpretation exists:
+"No macro-intermarket interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Interpretation chosen from earliest viable intermarket ordering
+- Predicates represent cycle-lead or rate-driven cause/effect precedence
+- Axioms are verified against these relations`
+  },
+  {
+    id: "f10-abstract-fallback",
+    name: "Abstract / Fallback",
+    functionId: 10,
+    input: ``,
+    instructions: `FIND AN INTERPRETATION: ABSTRACT FALLBACK MODEL (1 ARG)
+
+TASK:
+Used ONLY when:
+- No mathematical model succeeds
+- No computational, philosophical, physical, scientific, economic, or domain-specific interpretation succeeds
+
+Construct a PURELY ABSTRACT MODEL using:
+
+1. Sets as domains
+2. Arbitrary relations defined by extension
+3. Arbitrary functions defined by graphs
+4. Minimal structure needed to satisfy axioms
+5. Default: choose a finite domain whenever possible
+
+MODEL CONSTRUCTION RULES:
+- Choose a small domain D = {a, b, c, …} of abstract elements
+- Define each predicate/function symbol extensionally so that T's axioms hold
+- No interpretive meaning is assigned — purely structural satisfaction
+
+If even the fallback fails (rare):
+"No interpretation available in any domain"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: {a, b, c, …}
+Interpretations:
+P1(x̄) := <extensions chosen to satisfy axioms>
+P2(x̄) := <extensions chosen to satisfy axioms>
+...
+Pk(x̄) := <extensions chosen to satisfy axioms>
+
+If no interpretation exists:
+"No interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- All predicates/functions are assigned purely to satisfy axioms
+- No semantic commitments, only structural adequacy
+- This mode activates ONLY after all meaningful interpretations fail`
   }
 ];
 

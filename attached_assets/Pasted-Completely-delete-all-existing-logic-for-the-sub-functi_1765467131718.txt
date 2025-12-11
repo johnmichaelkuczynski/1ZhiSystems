@@ -1,0 +1,100 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: PRIVATE EQUITY / LBO".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (PRIVATE EQUITY / LBO)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct an LBO MODEL
+using the following priority order:
+
+1. Capital structure layers (senior debt, mezzanine, equity)
+2. Cashflow waterfall (pays-before)
+3. Leverage relationships (more-levered-than)
+4. Exit preferences (receives-proceeds-before)
+5. IRR / MOIC ordering
+6. Governance control (board rights)
+7. Only if all above fail: abstract payout-order graphs.
+
+MODEL CONSTRUCTION RULES:
+- Choose a domain D of capital structure claims.
+- Interpret predicates/functions using LBO mechanics:
+  “pays-before,” “more-junior-than,” “receives-residual,” etc.
+- Ensure the axioms hold.
+
+If no interpretation exists:
+"No LBO interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <LBO capital structure>
+Interpretations:
+P1(x̄) := <LBO relation>
+P2(x̄) := <LBO relation>
+...
+Pk(x̄) := <LBO relation>
+
+If no interpretation exists:
+"No LBO interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Predicates map to cashflow priority and leverage relations.
+- The earliest viable structure (waterfall → leverage → IRR order) is selected.
+- Axioms are verified.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {PaysBefore(x,y)}
+Axioms:
+1. ∀x ¬PaysBefore(x,x)
+2. ∀x∀y∀z ((PaysBefore(x,y) ∧ PaysBefore(y,z)) → PaysBefore(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Senior debt, mezzanine, equity
+Interpretations:
+PaysBefore(x,y) := "x receives distribution before y in the LBO waterfall"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Senior debt, mezzanine, equity
+Interpretations:
+PaysBefore(x,y) := "x receives distribution before y in the LBO waterfall"
+
+EXPLANATION:
+- Cashflow waterfalls in LBOs form strict priority hierarchies.
+- Irreflexive and transitive → axioms satisfied.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
