@@ -1,0 +1,169 @@
+Completely delete all existing logic for:
+"Primitive Swap (One Argument)"
+Replace it entirely with the unified rules below.
+
+=========================================================
+UNIFIED LOGIC FOR THIS FUNCTION
+=========================================================
+
+INPUT:
+- BOX A: a single theory T with:
+    - LANGUAGE section
+    - AXIOMS section
+- Two selected primitive symbols S1 and S2 from the LANGUAGE
+    - S1 and S2 must have the SAME ARITY (both unary, both binary, etc.)
+- EXPLAIN toggle (ON or OFF)
+
+TASK:
+Produce a new theory T' that is obtained by a PURE SYMBOL SWAP:
+- Everywhere S1 appears, replace it with S2.
+- Everywhere S2 appears, replace it with S1.
+- Do not change any other part of the formulas.
+- Do not add, delete, or modify axioms, except for this literal renaming.
+- Do not introduce definitions, equivalences, or semantic commentary.
+
+This is a pure permutation of primitive names.
+
+There are TWO output modes depending on the EXPLAIN toggle.
+
+=========================================================
+MODE 1 — EXPLAIN TOGGLE OFF (NON-EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = OFF, output MUST be:
+ONLY the transformed theory, NO extra commentary.
+
+OUTPUT FORMAT (STRICT):
+
+1. THE RESULT
+
+LANGUAGE: {<language with S1 and S2 swapped>}
+
+SWAP MAP:
+S1 ↔ S2
+
+AXIOMS:
+1. <axiom 1 with S1 and S2 swapped>
+2. <axiom 2 with S1 and S2 swapped>
+3. ...
+
+Rules:
+- Apply a literal textual swap of the predicate/function names S1 and S2:
+    * Replace every occurrence of S1(t1,...,tn) with S2(t1,...,tn).
+    * Replace every occurrence of S2(t1,...,tn) with S1(t1,...,tn).
+- Do NOT change variable names, quantifiers, connectives, or other symbols.
+- Do NOT change axiom numbering.
+- Do NOT add any new axioms.
+- Do NOT introduce any "DEFINITIONS" section in this function.
+- Do NOT attempt to define one symbol in terms of the other.
+
+Arity Mismatch Case:
+- If S1 and S2 do NOT have the same arity, DO NOT perform the swap.
+- Instead, return the original theory unchanged, with this format:
+
+1. THE RESULT
+
+LANGUAGE: {<original language>}
+
+SWAP MAP:
+(no valid swap — arity mismatch)
+
+AXIOMS:
+1. <original axiom 1>
+2. <original axiom 2>
+3. ...
+
+Example the app MUST imitate (structure, not content):
+
+Example INPUT:
+LANGUAGE: {R(x,y), P(x)}
+AXIOMS:
+1. ∀x ¬R(x,x)
+2. ∀x∀y (R(x,y) → P(x))
+EXPLAIN = OFF, S1 = R, S2 = P
+
+Example OUTPUT:
+1. THE RESULT
+
+LANGUAGE: {P(x,y), R(x)}
+
+SWAP MAP:
+R ↔ P
+
+AXIOMS:
+1. ∀x ¬P(x,x)
+2. ∀x∀y (P(x,y) → R(x))
+
+=========================================================
+MODE 2 — EXPLAIN TOGGLE ON (EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = ON, output MUST contain TWO sections:
+
+1) The RESULT block (IDENTICAL in structure to EXPLAIN=OFF)  
+2) An "EXPLANATION" block with a brief justification
+
+OUTPUT FORMAT (STRICT):
+
+1. THE RESULT
+
+LANGUAGE: {<language with S1 and S2 swapped>}
+
+SWAP MAP:
+S1 ↔ S2
+
+AXIOMS:
+1. <axiom 1 with S1 and S2 swapped>
+2. <axiom 2 with S1 and S2 swapped>
+3. ...
+
+EXPLANATION:
+- Primitive Swap exchanges only the names S1 and S2 in the language and axioms.
+- Every atomic formula using S1 is rewritten using S2 with the same arguments, and vice versa.
+- No new axioms or definitions are added; the logical form of each axiom is unchanged apart from the symbol names.
+- Any model of the original theory becomes a model of the new theory by swapping the interpretations of S1 and S2, and the reverse swap recovers the original theory.
+- Therefore, the transformation is a pure symbol renaming and preserves the model class up to permutation of primitive names.
+
+Arity Mismatch Case (EXPLAIN = ON):
+- If S1 and S2 have different arities, return the original theory unchanged:
+
+1. THE RESULT
+
+LANGUAGE: {<original language>}
+
+SWAP MAP:
+(no valid swap — arity mismatch)
+
+AXIOMS:
+1. <original axiom 1>
+2. <original axiom 2>
+3. ...
+
+EXPLANATION:
+- Primitive Swap requires S1 and S2 to have the same arity.
+- The selected primitives do not satisfy this requirement, so performing a swap would make formulas ill-formed.
+- For this reason, the function leaves the theory unchanged.
+
+=========================================================
+GLOBAL RULES
+=========================================================
+
+1. Never introduce "DEFINITIONS" in this sub-function.
+   - Do NOT output lines such as "R(x,y) ↔ P(x) ∧ ¬P(y)".
+
+2. Never change the arity of any primitive.
+   - Swapping S1 and S2 means only swapping their NAMES, not their argument structure.
+
+3. Never delete primitives from the LANGUAGE.
+   - Both S1 and S2 must remain in the LANGUAGE after the swap, just with names exchanged.
+
+4. Never add or remove axioms.
+   - The only change to AXIOMS is replacing S1 with S2 and S2 with S1.
+
+5. The ONLY difference between EXPLAIN=OFF and EXPLAIN=ON:
+   - EXPLAIN=OFF: just "1. THE RESULT" block.
+   - EXPLAIN=ON: "1. THE RESULT" block + "EXPLANATION" block.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

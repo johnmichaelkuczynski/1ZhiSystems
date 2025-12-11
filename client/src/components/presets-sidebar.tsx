@@ -18,7 +18,31 @@ const PRESETS: Preset[] = [
     name: "Primitive Swap",
     functionId: 1,
     input: ``,
-    instructions: `Identify the first two primitives in the theory. Make the first primitive defined in terms of the second. Rewrite all axioms accordingly while preserving all models.`
+    instructions: `PRIMITIVE SWAP OPERATION:
+
+1. Identify the first two primitives S1 and S2 in the LANGUAGE (they MUST have the same arity).
+2. Perform a PURE SYMBOL SWAP:
+   - Replace every occurrence of S1 with S2
+   - Replace every occurrence of S2 with S1
+   - Do NOT change anything else (variables, quantifiers, connectives)
+
+OUTPUT FORMAT:
+1. THE RESULT
+
+LANGUAGE: {<language with S1 and S2 swapped>}
+
+SWAP MAP:
+S1 ↔ S2
+
+AXIOMS:
+1. <axiom with S1↔S2 swapped>
+2. ...
+
+RULES:
+- This is a PURE TEXTUAL SWAP of names only
+- Do NOT add definitions or equivalences
+- Do NOT add/remove axioms
+- If arities differ, return original unchanged with note "(no valid swap — arity mismatch)"`
   },
   {
     id: "f1-signature-change",
