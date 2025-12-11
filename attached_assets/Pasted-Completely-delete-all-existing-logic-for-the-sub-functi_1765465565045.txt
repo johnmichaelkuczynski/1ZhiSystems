@@ -1,0 +1,65 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: COMPUTATIONAL".
+
+Do NOT modify any other sub-functions in Function 10.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (COMPUTATIONAL)
+=========================================================
+
+TASK:
+Given a single theory T, construct a computational model using
+data structures, algorithms, types, programs, or processes.
+
+=========================================================
+INPUT
+=========================================================
+
+- LANGUAGE of T.
+- AXIOMS of T.
+
+=========================================================
+MODEL-CONSTRUCTION PROCEDURE
+=========================================================
+
+1. Identify computational analogues:
+   - Nodes, pointers, arrays, trees, DAGs, stacks, queues
+   - Types and subtyping relations
+   - State machines, transitions, processes
+   - Flags, markers, annotations
+
+2. Choose a minimal computational domain (e.g., nodes in a DAG).
+
+3. Interpret primitives as computational constructs:
+   - Binary predicates → pointers, edges, reachability
+   - Unary predicates → flags, states, type-membership
+   - Constants → distinguished nodes (root, null, start state)
+
+4. Ensure all axioms correspond to:
+   - Structural constraints (acyclicity, inheritance)
+   - Algorithmic invariants
+   - Type or state transitions
+
+5. Validate all axioms using the chosen structure.
+
+=========================================================
+SUCCESS CONDITION
+=========================================================
+
+A valid computational interpretation must:
+- Specify a concrete data structure,
+- Give exact computational semantics for each primitive,
+- Make all axioms true in that data structure.
+
+=========================================================
+OUTPUT FORMAT
+=========================================================
+
+1. THE RESULT
+INTERPRETATION (COMPUTATIONAL):
+Domain: …
+Symbol interpretations:
+- …
+- …

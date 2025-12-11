@@ -2291,7 +2291,66 @@ EXPLANATION:
     name: "Mathematical",
     functionId: 10,
     input: ``,
-    instructions: `Find a MATHEMATICAL interpretation. Use algebra, topology, geometry, calculus, or trigonometry. Resort to set theory only if all else fails.`
+    instructions: `FIND AN INTERPRETATION: MATHEMATICAL (1 ARG)
+
+TASK:
+Given a single theory T, construct an explicit mathematical model using algebra, topology, geometry, calculus, or trigonometry. Only use pure set-theoretic structures if no mathematical structure fits the axioms.
+
+INPUT:
+- LANGUAGE of T (predicate, function, constant symbols)
+- AXIOMS of T (formulas to be satisfied)
+
+MODEL-CONSTRUCTION PROCEDURE:
+
+STEP 1 — IDENTIFY CANDIDATE MATHEMATICAL STRUCTURES:
+- Algebraic (groups, orders, lattices)
+- Geometric (points, lines, distances)
+- Topological (open sets, closure)
+- Calculus-based (real line, derivatives)
+- Trigonometric (angles, periodic functions)
+
+STEP 2 — SELECT THE SIMPLEST STRUCTURE:
+That can satisfy the axioms.
+
+STEP 3 — ASSIGN AN EXPLICIT DOMAIN:
+E.g., ℝ, ℕ, S¹, a metric space.
+
+STEP 4 — INTERPRET EACH PRIMITIVE SYMBOL:
+- Predicates as relations (e.g., <, ≤, adjacency, openness)
+- Functions as operations (e.g., +, ·, derivative operator)
+- Constants as specific elements (0, 1, π, the origin)
+
+STEP 5 — VERIFY EACH AXIOM:
+Ensure every axiom holds under this interpretation.
+
+STEP 6 — FALLBACK:
+If no algebraic/geometric/topological model works, fall back to a minimal set-theoretic model.
+
+SUCCESS CONDITION:
+
+A valid mathematical interpretation must:
+- Provide an explicit domain
+- Assign each primitive a precise mathematical meaning
+- Make every axiom true in that structure
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+INTERPRETATION (MATHEMATICAL):
+Domain: …
+Symbol interpretations:
+- …
+- …
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Briefly describe which mathematical structure was chosen and why
+- Note which axioms are satisfied by which properties of that structure`
   },
   {
     id: "f10-computational",
