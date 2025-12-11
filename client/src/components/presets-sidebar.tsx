@@ -1223,7 +1223,95 @@ EXPLANATION:
     name: "Remove One Primitive",
     functionId: 7,
     input: ``,
-    instructions: `Remove the first/main primitive and analyze what collapses. Report which axioms become unstatable and which theorems are lost.`
+    instructions: `ONTOLOGICAL DEPENDENCE: REMOVE ONE PRIMITIVE (1 ARG)
+
+TASK:
+Given a single theory T, remove its **first (main) primitive** from the language and determine what collapses.
+
+You must report:
+1. Which axioms become **unstatable** (contain symbols no longer in the language)
+2. Which definitional chains break
+3. Which theorems (syntactically derivable consequences) become **unprovable** because they depended on the removed primitive
+4. Whether the remaining primitives suffice to reconstruct the old one (definability test). If so, note the definitional recovery
+
+No semantic reasoning. No model construction. Purely syntactic.
+
+INPUT:
+A single theory T with:
+- LANGUAGE: {P₁, P₂, ..., P_k} (P₁ is the primitive to remove)
+- AXIOMS: A
+- EXPLAIN toggle ON/OFF
+
+MECHANICAL REMOVAL PROCEDURE:
+
+STEP 1 — REMOVE P₁ FROM THE LANGUAGE:
+New language L′ = L − {P₁}. Any axiom or derived formula containing P₁ becomes unstatable.
+
+STEP 2 — FILTER AXIOMS:
+Partition the axioms into:
+• **Surviving axioms**: Axioms that contain no occurrence of P₁
+• **Destroyed axioms**: Axioms that contain P₁ and cannot be expressed in the new language
+
+Destroyed axioms are removed from the theory entirely.
+
+STEP 3 — TEST DEFINABILITY OF THE REMOVED PRIMITIVE:
+Attempt to find a syntactic definition φ(x̄) such that: P₁(x̄) ↔ φ(x̄)
+where φ uses only symbols from L′.
+
+Use mechanical definability test:
+- Syntactic pattern matching only
+- No inference, no semantic interpretation
+
+If definable: Mark P₁ as **recoverable**
+If not definable: Mark P₁ as **irrecoverable**
+
+STEP 4 — IDENTIFY LOST THEOREMS:
+Compute which theorems depended on P₁:
+- Any theorem ψ containing P₁ becomes inexpressible → lost
+- Any theorem ψ not containing P₁ but whose derivation used a destroyed axiom becomes **unprovable**
+
+Check derivations by:
+- Replacing each destroyed axiom with a placeholder FAILURE marker
+- Any ψ whose proof references a FAILURE marker is removed from the theorem set
+
+STEP 5 — SUMMARY OF COLLAPSE:
+List:
+1. Unstatable axioms
+2. Lost theorems
+3. Surviving axioms
+4. Whether P₁ is definably recoverable or permanently lost
+
+OUTPUT (EXPLAIN = OFF):
+
+REMOVED PRIMITIVE:
+P₁
+
+UNSTABLE AXIOMS (DESTROYED):
+1. <axiom>
+2. <axiom>
+...
+
+SURVIVING AXIOMS:
+1. <axiom>
+2. <axiom>
+...
+
+LOST THEOREMS:
+1. <theorem>
+2. <theorem>
+...
+
+RECOVERABILITY:
+Recoverable / Not recoverable
+
+OUTPUT (EXPLAIN = ON):
+
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Removing P₁ deletes every axiom in which it appears
+- Any theorem whose proof uses a deleted axiom becomes unprovable
+- If no definition φ in the reduced language exists, P₁ is ontologically load-bearing and cannot be rebuilt`
   },
   {
     id: "f7-minimal-set",
