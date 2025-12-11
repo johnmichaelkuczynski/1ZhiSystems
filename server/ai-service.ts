@@ -62,7 +62,7 @@ Then briefly explain the reasoning.`,
   
   "Model-Preserving Rewrite": `Rewrite the input theory into canonical normalized form with the exact same class of models. Remove unnecessary primitives, use minimal vocabulary, output as LANGUAGE + numbered AXIOMS list.`,
   
-  "Conservative Extension Analysis": `Analyze whether adding the given new axioms or primitives to the base theory constitutes a conservative extension (no new theorems in the original language are provable). Answer YES or NO and prove it: either exhibit a proof of a new old-language theorem or prove independence using a model where the extension fails.`,
+  "Conservative Extension Analysis": `Determine if the extended theory is a conservative extension of the base theory. Check if new symbols are explicitly definable from base vocabulary. Output in canonical format: RESULT, BASE LANGUAGE, BASE THEORY, EXTENDED LANGUAGE, EXTENDED THEORY, KEY FACT.`,
   
   "Compare Conceptual Schemes": `Take the two input conceptual schemes/theories and compare their expressive power, ontological commitments, and primitive concepts. Highlight what one can express that the other cannot, what is gained or lost in each formulation, and which is more natural or parsimonious.`,
   
@@ -483,14 +483,76 @@ AXIOMS:
 - JUST the LANGUAGE and AXIOMS
 - Each axiom on its own numbered line`,
 
-  "Conservative Extension Analysis": `Analyze whether the extension is conservative.
+  "Conservative Extension Analysis": `YOUR TASK: Determine if the extended theory is a CONSERVATIVE EXTENSION of the base theory.
+
+A conservative extension means: new symbols are explicitly definable from the base vocabulary, and no new theorems in the original language become provable.
 
 <<<INPUT>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-Determine if adding the new axioms/primitives changes what can be proved in the original vocabulary. Provide verdict with justification.`,
+=== PROCEDURE ===
+
+1. IDENTIFY the base language and base theory T₁ (axioms in original vocabulary)
+2. IDENTIFY the extended language and extended theory T₂ (T₁ plus axioms with new symbols)
+3. CHECK if each new symbol is explicitly definable from base vocabulary
+4. If definable → Conservative extension: YES
+   If not definable → Conservative extension: NO
+
+=== OUTPUT FORMAT (use exactly this structure) ===
+
+RESULT
+Conservative extension: YES or NO
+
+BASE LANGUAGE
+{Predicate1(args), Predicate2(args), ...}
+
+BASE THEORY T₁
+1. [first base axiom]
+2. [second base axiom]
+...
+
+EXTENDED LANGUAGE
+{BasePreds..., NewPred(args)}
+
+EXTENDED THEORY T₂ = T₁ ∪ {new axioms}
+1. [first new axiom involving new symbol]
+2. [second new axiom]
+...
+
+KEY FACT
+[If YES: State the explicit definability equivalence, e.g., ∀x∀y [Father(x,y) ↔ (Parent(x,y) ∧ Male(x))]]
+[If NO: State the obstruction - why the new symbol cannot be defined]
+
+=== EXAMPLE ===
+
+RESULT
+Conservative extension: YES
+
+BASE LANGUAGE
+{Parent(x,y), Male(x), Female(x)}
+
+BASE THEORY T₁
+1. ∀x∀y (Parent(x,y) → (Male(x) ∨ Female(x)))
+2. ∀x ¬(Male(x) ∧ Female(x))
+
+EXTENDED LANGUAGE
+{Parent(x,y), Male(x), Female(x), Father(x,y)}
+
+EXTENDED THEORY T₂ = T₁ ∪ {1,2,3}
+1. ∀x∀y (Father(x,y) → Parent(x,y))
+2. ∀x∀y (Father(x,y) → Male(x))
+3. ∀x∀y (Parent(x,y) ∧ Male(x) → Father(x,y))
+
+KEY FACT
+∀x∀y [Father(x,y) ↔ (Parent(x,y) ∧ Male(x))]
+
+=== HARD REQUIREMENTS ===
+- NO commentary or pedagogy
+- NO informal explanation
+- Explicit quantifiers only
+- Optimized for AI theorem-normalization pipelines`,
 
   "Compare Conceptual Schemes": `Compare the conceptual structures of the two theories below.
 
