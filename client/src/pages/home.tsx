@@ -26,7 +26,6 @@ export default function Home() {
     { id: 8, title: "Generate Alternative Conceptualizations (One Argument)", description: "Produce alternative axiom-sets whose most natural interpretations are also interpretations of the input theory.", dualInput: false },
     { id: 9, title: "Interpret Canonical Meaning (One Argument)", description: "Identify intended interpretations of primitive symbols and restate the axioms using explicit, natural-language primitives.", dualInput: false },
     { id: 10, title: "Find an Interpretation (One Argument)", description: "Find a true model for the axiom system.", dualInput: false },
-    { id: 11, title: "Determine Equivalence (Two Arguments)", description: "Compare two systems for theorem equivalence.", dualInput: true },
   ];
 
   const handleSelectPreset = (preset: Preset) => {

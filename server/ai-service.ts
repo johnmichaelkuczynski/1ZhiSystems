@@ -131,24 +131,7 @@ CASE D (Would Have Model If Slightly Modified):
 - Explain why current version has no model
 - Identify smallest modification for consistency
 - Model the modified axiom-set
-- Show connection between original and corrected`,
-  
-  "Determine Equivalence": `Compare two axiom systems and determine their logical relationship.
-
-START YOUR RESPONSE WITH A CLEAR VERDICT. Use this exact format:
-
-**VERDICT: [EQUIVALENT / NOT EQUIVALENT]**
-
-If NOT EQUIVALENT, also state the relationship:
-- A ⊂ B (A is strictly weaker - every A-theorem is provable in B, but B proves more)
-- B ⊂ A (B is strictly weaker)
-- OVERLAPPING (each has theorems the other cannot prove)
-- DISJOINT (no shared theorems)
-
-Then provide:
-1. Key theorems each system proves
-2. A separating theorem (if not equivalent) - something provable in one but not the other
-3. Brief explanation of why the relationship holds`
+- Show connection between original and corrected`
 };
 
 const SYSTEM_PROMPT = `You are the world's foremost expert in first-order logic, theory transformation, and formal ontology analysis.
@@ -519,36 +502,7 @@ FAILURE HANDLING (never return empty):
 - Case A (contradictory): Explain why, give adjacent consistent set with model
 - Case B (ill-formed, unclear): Reconstruct charitably, model that
 - Case C (ill-formed, obvious fix): Fix syntax, model corrected version
-- Case D (nearly consistent): Show minimal fix, model the fixed version`,
-
-  "Determine Equivalence": `YOUR TASK: Determine if two axiom systems are logically equivalent.
-
-=== SYSTEM A ===
-<<<SYSTEM_A>>>
-
-=== SYSTEM B ===
-<<<SYSTEM_B>>>
-
-INSTRUCTIONS:
-<<<INSTRUCTIONS>>>
-
-=== USE THIS OUTPUT FORMAT (not the default 5-section format) ===
-
-**VERDICT: [EQUIVALENT / NOT EQUIVALENT]**
-
-**RELATIONSHIP:** [If not equivalent, state: A ⊂ B / B ⊂ A / OVERLAPPING / DISJOINT]
-
-**ANALYSIS:**
-- System A proves: [key theorems]
-- System B proves: [key theorems]
-- Separating theorem: [if not equivalent, a theorem provable in one but not the other]
-
-**EXPLANATION:**
-[Brief explanation of why the relationship holds - 2-3 sentences max]
-
-=== END FORMAT ===
-
-START WITH THE VERDICT. The user needs to know immediately if they are equivalent or not.`
+- Case D (nearly consistent): Show minimal fix, model the fixed version`
 };
 
 function buildPrompt(input: string, instructions: string, functionName: string): string {
@@ -557,15 +511,6 @@ function buildPrompt(input: string, instructions: string, functionName: string):
   
   const template = FUNCTION_PROMPTS[normalizedName] || FUNCTION_PROMPTS["Axiom-Set / Theory Transformation"];
   const effectiveInstructions = instructions?.trim() || DEFAULT_INSTRUCTIONS[normalizedName] || "Perform the standard transformation for this function.";
-  
-  // Handle dual-input functions (like Determine Equivalence)
-  if (normalizedName === "Determine Equivalence" && input.includes("<<<SEPARATOR>>>")) {
-    const [systemA, systemB] = input.split("<<<SEPARATOR>>>");
-    return template
-      .replace("<<<SYSTEM_A>>>", systemA?.trim() || "")
-      .replace("<<<SYSTEM_B>>>", systemB?.trim() || "")
-      .replace("<<<INSTRUCTIONS>>>", effectiveInstructions);
-  }
   
   return template
     .replace("<<<INPUT>>>", input)

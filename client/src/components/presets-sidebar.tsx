@@ -448,35 +448,6 @@ const PRESETS: Preset[] = [
     functionId: 10,
     input: ``,
     instructions: `Find a MACRO / INTERMARKET interpretation. Use global macro indicators, leads/lags, or economic sequences.`
-  },
-  // FUNCTION 11: Determine Equivalence
-  {
-    id: "f11-theorem-comparison",
-    name: "Full Theorem Comparison",
-    functionId: 11,
-    input: ``,
-    instructions: `Compare all theorems provable in each system. Determine if they generate exactly the same theorems. Provide examples of shared and unique theorems.`
-  },
-  {
-    id: "f11-strength-analysis",
-    name: "Relative Strength Analysis",
-    functionId: 11,
-    input: ``,
-    instructions: `Determine which system is stronger (proves more theorems). If one is strictly stronger, show a theorem provable only in the stronger system.`
-  },
-  {
-    id: "f11-translation-check",
-    name: "Mutual Translation Check",
-    functionId: 11,
-    input: ``,
-    instructions: `Check if there exists a translation between the two systems that preserves all theorems. If so, provide the translation. If not, explain the obstruction.`
-  },
-  {
-    id: "f11-conservativity",
-    name: "Conservativity Check",
-    functionId: 11,
-    input: ``,
-    instructions: `Determine if one system is a conservative extension of the other (proves the same theorems in the shared language). Identify any new theorems if not conservative.`
   }
 ];
 
@@ -497,8 +468,7 @@ export function PresetsSidebar({ onSelectPreset }: PresetsSidebarProps) {
     "Ontological Dependence (1 Arg)",
     "Generate Alt. Conceptualizations (1 Arg)",
     "Interpret Canonical Meaning (1 Arg)",
-    "Find an Interpretation (1 Arg)",
-    "Determine Equivalence (2 Args)"
+    "Find an Interpretation (1 Arg)"
   ];
 
   const toggleSection = (id: number) => {
