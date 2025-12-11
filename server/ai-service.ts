@@ -326,69 +326,60 @@ Rewrite these instructions to be PERFECT and PRECISE while staying as close to t
 const FUNCTION_PROMPTS: Record<string, string> = {
   "Axiom-Set / Theory Transformation": `YOUR TASK: Model-to-Model Transformation
 
-You are given a STATEMENT-SET describing an interpretation (a model). Your job is to:
-1. Parse the input and understand the domain, symbol meanings, and statements
-2. Detect which standard axiom-pattern the input model satisfies
-3. Produce a DIFFERENT model that satisfies the same axiom-pattern
-4. The new model must use a different domain and different predicate interpretation
+You are given a STATEMENT-SET describing an interpretation (a model). Transform it into a DIFFERENT but structurally identical model.
 
 <<<INPUT>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-=== PROCEDURE ===
+=== OUTPUT FORMAT (conversational, intuitive) ===
 
-Step 1: DETECT THE AXIOM PATTERN
-Look at the statements provided. What axiom-set do they satisfy?
-Common patterns:
-- Strict total order: irreflexive, transitive, trichotomous
-- Partial order: reflexive, antisymmetric, transitive
-- Equivalence relation: reflexive, symmetric, transitive
-- Successor structure: discrete linear ordering
-- Group-like: identity, inverse, associativity
-- Lattice: joins and meets exist
-- Tree: unique paths between nodes
+**1. You started with:**
 
-Step 2: SELECT A DIFFERENT DOMAIN
-Choose a domain completely different from the input. Examples:
-- If input uses "people in a line" → use natural numbers, geometric points, or time instants
-- If input uses "numbers" → use words, tasks, or physical objects
-- If input uses "sets" → use programs, regions, or organizational units
+Domain: [restate the given domain and objects]
 
-Step 3: DEFINE NEW INTERPRETATIONS
-For each predicate/function symbol, give a new meaning in the new domain that preserves the axiom pattern.
+[Symbol]: "[restate the given meaning]"
 
-Step 4: TRANSLATE ALL STATEMENTS
-Rewrite each input statement as a true statement in the new model.
+Given statements:
+[List each statement with its plain English meaning in parentheses]
 
-=== OUTPUT FORMAT ===
+So: [One plain sentence summarizing the pattern - e.g., "That's just a strict ranking."]
 
-**DETECTED AXIOM PATTERN**
-[Name the pattern and list the axioms satisfied]
+**2. New model: [new domain type] instead of [old domain type]**
 
-**INPUT MODEL (Summary)**
-Domain: [what was given]
-Symbols: [meanings given]
+New domain: [your new domain with specific objects]
 
-**NEW MODEL (Interpretation B)**
-Domain: [your new domain - must be different from input]
-[Symbol 1]: "[new meaning in new domain]"
-[Symbol 2]: "[new meaning in new domain]"
+[Symbol]: "[new meaning in new domain]"
 
-**TRANSLATED STATEMENTS**
-[For each input statement, show the corresponding true statement in the new model]
+We match:
+[Object A] ↔ [New object 1]
+[Object B] ↔ [New object 2]
+[etc.]
 
-**VERIFICATION**
-[Brief confirmation that the new model satisfies the same axiom pattern]
+**3. The translated facts**
+
+Original → New:
+[Statement 1] → [New statement] → "[plain English]" (true)
+[Statement 2] → [New statement] → "[plain English]" (true)
+[etc.]
+
+So every original fact has a direct [new domain] twin that's also true.
+
+**4. Why this counts as "the same structure"**
+
+In the [old domain]: [one sentence describing the pattern]
+
+In the [new domain]: [one sentence showing the same pattern holds]
 
 === RULES ===
-1. The new model MUST be different from the input (different objects, different realization)
-2. The new model MUST satisfy the same axiom-set as the input
-3. The models must be structurally isomorphic (same model-theoretic type)
-4. If input is ambiguous, choose the simplest consistent axiom-pattern
-5. If statements are ill-formed, apply minimal repair and proceed
-6. NEVER return null or fail - always produce a valid transformation`,
+1. Use CONVERSATIONAL language - explain like you're talking to someone
+2. Show the MAPPING between old and new objects explicitly
+3. Translate EVERY statement with its plain English meaning
+4. Keep it SHORT and INTUITIVE - no jargon
+5. The new domain MUST be completely different from the input
+6. If input is ambiguous or ill-formed, fix it and proceed
+7. NEVER fail - always produce a valid transformation`,
 
   "Schema Equivalence": `Determine if the two theories below are schema-equivalent (same up to renaming of symbols).
 
