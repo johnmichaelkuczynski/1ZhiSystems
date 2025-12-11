@@ -384,18 +384,71 @@ The primitive R is replaced by T, representing its reflexive closure. R is defin
 - MODE 2: Formal + syntactic explanation only
 - NEVER fail - always produce a valid transformation`,
 
-  "Schema Equivalence": `Determine if the two theories below are schema-equivalent (same up to renaming of symbols).
+  "Schema Equivalence": `YOUR TASK: Determine whether T₁ and T₂ are *definitionally equivalent theories*.
+That is: Do they have exactly the same models up to definitional extension?
 
-=== SYSTEM A ===
+This is a MODEL-THEORETIC SAMENESS TEST.
+
+=== THEORY T₁ (Box A) ===
 <<<SYSTEM_A>>>
 
-=== SYSTEM B ===
+=== THEORY T₂ (Box B) ===
 <<<SYSTEM_B>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-Build a symbol mapping between vocabularies. Test all arity-preserving mappings. Report whether schema equivalence holds. If yes, give the mapping. If no, give the minimal obstruction.`,
+=== CHECK EXPLAIN MODE ===
+If the instructions contain "EXPLAIN = ON" or the explain toggle is enabled, use MODE 2.
+Otherwise, use MODE 1.
+
+=== MODE 1: EXPLAIN OFF (default) ===
+
+Output ONLY the formal result. NO commentary.
+
+FORMAT:
+
+RESULT
+Equivalence: YES or NO
+
+SYMBOL MAPPING (if YES):
+P₁ ↦ Q₁
+P₂ ↦ Q₂
+...
+
+OBSTRUCTION (if NO):
+<one sentence stating what prevents equivalence>
+
+=== MODE 2: EXPLAIN ON ===
+
+Output the formal result PLUS a short EXPLANATION.
+
+FORMAT:
+
+RESULT
+Equivalence: YES or NO
+
+SYMBOL MAPPING (if YES):
+P₁ ↦ Q₁
+P₂ ↦ Q₂
+...
+
+DEFINITIONS (showing how each theory defines the other's primitives):
+In T₁: Q(x,y) ↔ <formula using T₁ primitives>
+In T₂: P(x,y) ↔ <formula using T₂ primitives>
+
+EXPLANATION:
+<2-3 paragraphs explaining:
+- How each theory can define the other's primitives
+- Why the axioms become identical under translation
+- What the obstruction is (if NO)>
+
+=== HARD REQUIREMENTS ===
+- MODE 1: Purely formal, no prose
+- MODE 2: Formal + brief explanation
+- No long proofs or derivations
+- No model theory jargon
+- If NOT equivalent, state the obstruction clearly`,
 
   "Definitional Equivalence": `YOUR TASK: Determine if the two theories are DEFINITIONALLY EQUIVALENT.
 

@@ -1,0 +1,129 @@
+Completely delete all existing logic for:
+"Schema Equivalence (Two Arguments)"
+Replace it entirely with the unified rules below.
+
+=========================================================
+UNIFIED LOGIC FOR THIS FUNCTION
+=========================================================
+
+INPUT:
+- BOX A: Theory T₁ (with LANGUAGE and AXIOMS)
+- BOX B: Theory T₂ (with LANGUAGE and AXIOMS)
+- EXPLAIN toggle (ON or OFF)
+
+TASK:
+Determine whether T₁ and T₂ are *definitionally equivalent theories*.
+That is: Do they have exactly the same models up to definitional extension?
+
+This is a *model-theoretic sameness test*.
+
+There are TWO output modes depending on EXPLAIN toggle.
+
+=========================================================
+MODE 1 — EXPLAIN TOGGLE OFF (NON-EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = OFF, output must be:
+
+1. THE RESULT
+Equivalence: YES   or   Equivalence: NO
+
+KEY FACT:
+<one-sentence reason identifying the critical definitional issue>
+
+Rules:
+- The answer must be **binary**: YES or NO.
+- The KEY FACT must be **one or two sentences maximum**.
+- The KEY FACT must refer ONLY to:
+    * definability or non-definability of primitives
+    * missing or extra structures in one theory
+    * mismatched constraints on models
+- NO semantic examples.
+- NO domains.
+- NO model constructions.
+- NO long explanation.
+- NO proofs.
+- NO analogy (numbers, letters, networks, etc.)
+
+=========================================================
+MODE 2 — EXPLAIN TOGGLE ON (EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = ON, output must contain:
+
+1. THE RESULT
+   Equivalence: YES or NO
+
+2. EXPLANATION SECTION  
+   (2–5 short paragraphs)
+
+FORMAT:
+
+1. THE RESULT
+Equivalence: YES   (or NO)
+
+EXPLANATION:
+<explanation text>
+
+Rules for EXPLAIN = ON:
+- Explanation MUST discuss:
+    * Why the two theories DO or DO NOT determine the same class of models.
+    * Whether each primitive in T₁ is explicitly definable in T₂ and vice versa.
+    * Any structural property present in one theory but absent in the other.
+- Explanation MUST NOT:
+    * Construct specific domains
+    * Describe example models
+    * Tell stories or analogies
+    * Drift into ontology, metaphysics, or philosophy
+- Explanation MUST stay strictly within:
+    * definability
+    * axiomatized constraints
+    * model-theoretic equivalence
+
+=========================================================
+STYLE TEMPLATE THE AGENT MUST FOLLOW
+=========================================================
+
+Example INPUT:
+
+BOX A (T₁):
+LANGUAGE: {Parent(x,y), Male(x)}
+AXIOMS:
+1. ∀x∀y (Parent(x,y) → Male(x))
+
+BOX B (T₂):
+LANGUAGE: {Father(x,y)}
+AXIOMS:
+1. ∀x∀y (Father(x,y) → Father(x,y))  // trivial axiom
+2. ∀x∀y (Father(x,y) → Father(x,y))
+
+EXPLAIN = OFF
+
+Example OUTPUT:
+
+1. THE RESULT
+Equivalence: NO
+KEY FACT:
+T₁’s predicates Parent(x,y) and Male(x) cannot be definitionally recovered from T₂’s single predicate Father(x,y).
+
+-----------------------------
+
+Example INPUT (with EXPLAIN = ON):
+(same theories)
+
+Example OUTPUT:
+
+1. THE RESULT
+Equivalence: NO
+
+EXPLANATION:
+T₂ has only one primitive predicate Father(x,y), which does not contain
+sufficient structure to recover the distinct predicates Parent and Male
+appearing in T₁. Consequently, the models of T₂ allow many interpretations
+that cannot correspond to any model of T₁. Since at least one primitive in
+each direction is not explicitly definable, the theories are not
+definitionally equivalent.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
