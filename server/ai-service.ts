@@ -422,7 +422,7 @@ Otherwise, use MODE 1.
 
 FORMAT:
 
-RESULT
+1. THE RESULT
 Equivalence: YES or NO
 
 KEY FACT:
@@ -438,16 +438,16 @@ RULES FOR MODE 1:
 
 FORMAT:
 
-RESULT
+1. THE RESULT
 Equivalence: YES or NO
 
 EXPLANATION:
 <2-5 short paragraphs>
 
 RULES FOR MODE 2:
-- MUST discuss: why theories DO or DO NOT determine same class of models, whether each primitive is explicitly definable in the other theory, any structural property present in one but absent in the other
-- MUST NOT: construct specific domains, describe example models, tell stories or analogies, drift into ontology/metaphysics/philosophy
-- MUST stay strictly within: definability, axiomatized constraints, model-theoretic equivalence
+- Explanation MUST discuss: why theories DO or DO NOT determine same class of models, whether each primitive is explicitly definable in the other theory, any structural property present in one but absent in the other
+- Explanation MUST NOT: construct specific domains, describe example models, tell stories or analogies, drift into ontology/metaphysics/philosophy
+- Explanation MUST stay strictly within: definability, axiomatized constraints, model-theoretic equivalence
 
 === EXAMPLES ===
 
@@ -455,8 +455,10 @@ EXAMPLE (EXPLAIN OFF):
 INPUT: T₁: LANGUAGE: {Parent(x,y), Male(x)}, AXIOMS: ∀x∀y (Parent(x,y) → Male(x)) | T₂: LANGUAGE: {Father(x,y)}, AXIOMS: ∀x∀y (Father(x,y) → Father(x,y))
 
 OUTPUT:
-RESULT
+
+1. THE RESULT
 Equivalence: NO
+
 KEY FACT:
 T₁'s predicates Parent(x,y) and Male(x) cannot be definitionally recovered from T₂'s single predicate Father(x,y).
 
@@ -464,7 +466,8 @@ EXAMPLE (EXPLAIN ON):
 Same input with EXPLAIN = ON
 
 OUTPUT:
-RESULT
+
+1. THE RESULT
 Equivalence: NO
 
 EXPLANATION:

@@ -1,0 +1,154 @@
+Completely delete all existing logic for:
+"Definitional Equivalence (Two Arguments)"
+Replace it entirely with the unified rules below.
+
+=========================================================
+UNIFIED LOGIC FOR THIS FUNCTION
+=========================================================
+
+INPUT:
+- BOX A: Theory T₁ (LANGUAGE + AXIOMS)
+- BOX B: Theory T₂ (LANGUAGE + AXIOMS)
+- EXPLAIN toggle (ON or OFF)
+
+TASK:
+Determine whether T₁ and T₂ are *definitionally equivalent*, meaning:
+1. Every primitive symbol in T₁ is explicitly definable in T₂.
+2. Every primitive symbol in T₂ is explicitly definable in T₁.
+3. After adding these definitions as conservative extensions, the theories
+   determine exactly the same class of models.
+
+This is a *stronger* relation than schema equivalence.
+
+There are TWO OUTPUT MODES depending on EXPLAIN toggle.
+
+=========================================================
+MODE 1 — EXPLAIN TOGGLE OFF (NON-EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = OFF, output MUST be:
+
+1. THE RESULT
+Definitional equivalence: YES   or   Definitional equivalence: NO
+
+FORWARD DEFINABILITY:
+<one-sentence verdict: YES definable or NO not definable>
+
+BACKWARD DEFINABILITY:
+<one-sentence verdict: YES definable or NO not definable>
+
+KEY FACT:
+<one or two sentences identifying the core definability failure or success>
+
+Rules for EXPLAIN = OFF:
+- Answer must be concise, formal, and non-narrative.
+- NO examples.
+- NO models.
+- NO interpretations.
+- NO analogies.
+- NO domain descriptions.
+- NO derivations.
+- EXACTLY the four sections above, nothing more.
+
+=========================================================
+MODE 2 — EXPLAIN TOGGLE ON (EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = ON, output must contain:
+
+1. THE RESULT  
+   Definitional equivalence: YES or NO
+
+2. TRANSLATION SUMMARY  
+   - Forward definability: short description  
+   - Backward definability: short description  
+
+3. EXPLANATION  
+   A short analytic section (3–6 short paragraphs)
+
+FORMAT:
+
+1. THE RESULT
+Definitional equivalence: YES   (or NO)
+
+TRANSLATION SUMMARY:
+Forward: <explanation of whether each T₁ primitive is definable in T₂>
+Backward: <explanation of whether each T₂ primitive is definable in T₁>
+
+EXPLANATION:
+<Explain:
+ - how definitions would be constructed
+ - or why they cannot be constructed
+ - what structural information is missing in one theory or both
+ - why definitional equivalence does or does not hold>
+
+Rules for EXPLAIN = ON:
+- MUST discuss definability of primitives in both directions.
+- MUST stick to syntactic definability and axiomatic constraints.
+- MUST NOT:
+    * describe or build example models
+    * mention domains like ℕ, ℤ, servers, letters, etc.
+    * use analogies or storytelling
+    * drift into semantics unless necessary to state definability failure
+- KEEP THE EXPLANATION TIGHT AND TECHNICAL.
+
+=========================================================
+STYLE TEMPLATE THE AGENT MUST FOLLOW
+=========================================================
+
+Example INPUT:
+
+BOX A (T₁):
+LANGUAGE: {Parent(x,y), Male(x)}
+AXIOMS:
+1. ∀x∀y (Parent(x,y) → Male(x))
+
+BOX B (T₂):
+LANGUAGE: {Father(x,y)}
+AXIOMS:
+1. ∀x∀y (Father(x,y) → Father(x,y))
+
+EXPLAIN = OFF
+
+Example OUTPUT:
+
+1. THE RESULT
+Definitional equivalence: NO
+
+FORWARD DEFINABILITY:
+Parent and Male are not definable in terms of Father alone.
+
+BACKWARD DEFINABILITY:
+Father is not definable in terms of Parent and Male without additional axioms.
+
+KEY FACT:
+The expressive resources of the two languages are mismatched; neither direction
+admits explicit definitions.
+
+-----------------------------
+
+Example INPUT (EXPLAIN = ON):
+(same theories)
+
+Example OUTPUT:
+
+1. THE RESULT
+Definitional equivalence: NO
+
+TRANSLATION SUMMARY:
+Forward: The single predicate Father(x,y) does not contain enough structure to
+recover the distinct predicates Parent(x,y) and Male(x).
+Backward: Father(x,y) cannot be defined from Parent(x,y) and Male(x) because T₁
+does not assert any connection between these predicates.
+
+EXPLANATION:
+To have definitional equivalence, each primitive in T₁ must be explicitly
+recoverable via a formula of T₂, and vice versa. In this case, T₂ has only one
+predicate and imposes no constraints that separate parenthood from gender, so
+there is no way to define Parent(x,y) or Male(x) within T₂. Conversely, T₁ does
+not define fatherhood; it merely states that all parents are male. Because both
+directions fail definability, the theories are not definitionally equivalent.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
