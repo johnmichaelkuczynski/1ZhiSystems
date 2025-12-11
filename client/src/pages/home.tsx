@@ -46,11 +46,18 @@ export default function Home() {
     }, 100);
   };
 
+  const handleScrollToFunction = (functionId: number) => {
+    const ref = functionRefs.current[functionId];
+    if (ref) {
+      ref.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/10 flex">
       {/* Left Sidebar - Presets */}
       <aside className="w-72 shrink-0 hidden lg:block h-screen sticky top-0 overflow-hidden">
-        <PresetsSidebar onSelectPreset={handleSelectPreset} />
+        <PresetsSidebar onSelectPreset={handleSelectPreset} onScrollToFunction={handleScrollToFunction} />
       </aside>
 
       {/* Main Content */}
