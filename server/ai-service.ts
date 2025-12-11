@@ -480,64 +480,113 @@ T₂ has only one primitive predicate Father(x,y), which does not contain suffic
 - No model theory jargon
 - No semantic examples or domain constructions`,
 
-  "Definitional Equivalence": `YOUR TASK: Determine if the two theories are DEFINITIONALLY EQUIVALENT.
+  "Definitional Equivalence": `YOUR TASK: Determine whether T₁ and T₂ are *definitionally equivalent*.
 
 Definitional equivalence means:
-- Each theory can explicitly define the other's primitives
-- The axioms become IDENTICAL under those definitions
-- This is NOT schema-equivalence, NOT syntactic rewriting, NOT entailment checking
+1. Every primitive symbol in T₁ is explicitly definable in T₂.
+2. Every primitive symbol in T₂ is explicitly definable in T₁.
+3. After adding these definitions as conservative extensions, the theories determine exactly the same class of models.
 
-=== THEORY A ===
+This is a STRONGER relation than schema equivalence.
+
+=== THEORY T₁ (Box A) ===
 <<<SYSTEM_A>>>
 
-=== THEORY B ===
+=== THEORY T₂ (Box B) ===
 <<<SYSTEM_B>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-=== OUTPUT FORMAT (use exactly this four-part template, always concise) ===
+=== CHECK EXPLAIN MODE ===
+If the instructions contain "EXPLAIN = ON" or the explain toggle is enabled, use MODE 2.
+Otherwise, use MODE 1.
 
-**1. RESULT**
+=== MODE 1: EXPLAIN OFF (default) ===
 
-State clearly:
-"The theories ARE definitionally equivalent."
-OR
-"The theories are NOT definitionally equivalent."
+FORMAT:
 
-If equivalent, list the symbol mapping:
-R ↦ S
-f ↦ g
-c ↦ d
+1. THE RESULT
+Definitional equivalence: YES or NO
 
-**2. WHY**
+FORWARD DEFINABILITY:
+<one-sentence verdict: YES definable or NO not definable>
 
-3-4 sentences maximum stating:
-- Each primitive of A can be explicitly defined using B
-- Each primitive of B can be explicitly defined using A
-- Translating A's axioms using the mapping yields B's axioms
-- Translating B's axioms using the mapping yields A's axioms
+BACKWARD DEFINABILITY:
+<one-sentence verdict: YES definable or NO not definable>
 
-NO long proofs. NO derivations. NO FOL jargon.
+KEY FACT:
+<one or two sentences identifying the core definability failure or success>
 
-**3. INTUITIVE EXPLANATION**
+RULES FOR MODE 1:
+- Answer must be concise, formal, and non-narrative
+- NO examples, NO models, NO interpretations, NO analogies, NO domain descriptions, NO derivations
+- EXACTLY the four sections above, nothing more
 
-1-2 sentences in normal language:
-"These theories say the same thing with different predicate names."
-"They describe the same structures but with different vocabulary."
+=== MODE 2: EXPLAIN ON ===
 
-**4. TRANSLATED AXIOMS**
+FORMAT:
 
-Show the translated axioms matching exactly after renaming:
-A1 under R ↦ <: ∀x∀y (x < y ↔ ...) — matches B1
-A2 under R ↦ <: ∀x ¬(x < x) — matches B2
+1. THE RESULT
+Definitional equivalence: YES or NO
+
+TRANSLATION SUMMARY:
+Forward: <explanation of whether each T₁ primitive is definable in T₂>
+Backward: <explanation of whether each T₂ primitive is definable in T₁>
+
+EXPLANATION:
+<3-6 short paragraphs explaining:
+ - how definitions would be constructed
+ - or why they cannot be constructed
+ - what structural information is missing in one theory or both
+ - why definitional equivalence does or does not hold>
+
+RULES FOR MODE 2:
+- MUST discuss definability of primitives in both directions
+- MUST stick to syntactic definability and axiomatic constraints
+- MUST NOT: describe or build example models, mention domains like ℕ, ℤ, servers, letters, use analogies or storytelling, drift into semantics unless necessary to state definability failure
+- KEEP THE EXPLANATION TIGHT AND TECHNICAL
+
+=== EXAMPLES ===
+
+EXAMPLE (EXPLAIN OFF):
+INPUT: T₁: LANGUAGE: {Parent(x,y), Male(x)}, AXIOMS: ∀x∀y (Parent(x,y) → Male(x)) | T₂: LANGUAGE: {Father(x,y)}, AXIOMS: ∀x∀y (Father(x,y) → Father(x,y))
+
+OUTPUT:
+
+1. THE RESULT
+Definitional equivalence: NO
+
+FORWARD DEFINABILITY:
+Parent and Male are not definable in terms of Father alone.
+
+BACKWARD DEFINABILITY:
+Father is not definable in terms of Parent and Male without additional axioms.
+
+KEY FACT:
+The expressive resources of the two languages are mismatched; neither direction admits explicit definitions.
+
+EXAMPLE (EXPLAIN ON):
+Same input with EXPLAIN = ON
+
+OUTPUT:
+
+1. THE RESULT
+Definitional equivalence: NO
+
+TRANSLATION SUMMARY:
+Forward: The single predicate Father(x,y) does not contain enough structure to recover the distinct predicates Parent(x,y) and Male(x).
+Backward: Father(x,y) cannot be defined from Parent(x,y) and Male(x) because T₁ does not assert any connection between these predicates.
+
+EXPLANATION:
+To have definitional equivalence, each primitive in T₁ must be explicitly recoverable via a formula of T₂, and vice versa. In this case, T₂ has only one predicate and imposes no constraints that separate parenthood from gender, so there is no way to define Parent(x,y) or Male(x) within T₂. Conversely, T₁ does not define fatherhood; it merely states that all parents are male. Because both directions fail definability, the theories are not definitionally equivalent.
 
 === HARD REQUIREMENTS ===
-- No long proofs
-- No multi-paragraph explanations
-- No variable renaming debates
-- Never cite model theory jargon ("Henkin expansion", "Beth definability", etc.)
-- If NOT equivalent, explain which direction of definability fails`,
+- MODE 1: Purely formal, exactly the four sections
+- MODE 2: Formal + tight technical explanation about definability
+- No long proofs or derivations
+- No model theory jargon
+- No semantic examples or domain constructions`,
 
   "Model-Preserving Rewrite": `YOUR TASK: Rewrite the input theory into CANONICAL NORMALIZED FORM.
 
