@@ -366,7 +366,11 @@ In the [new domain]: [one sentence showing the same pattern holds]
 
   "Schema Equivalence": `Determine if the two theories below are schema-equivalent (same up to renaming of symbols).
 
-<<<INPUT>>>
+=== SYSTEM A ===
+<<<SYSTEM_A>>>
+
+=== SYSTEM B ===
+<<<SYSTEM_B>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
@@ -375,7 +379,11 @@ Build a symbol mapping between vocabularies. Test all arity-preserving mappings.
 
   "Definitional Equivalence": `Test whether the two theories below are definitionally equivalent.
 
-<<<INPUT>>>
+=== SYSTEM A ===
+<<<SYSTEM_A>>>
+
+=== SYSTEM B ===
+<<<SYSTEM_B>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
@@ -402,14 +410,18 @@ INSTRUCTIONS:
 
 Determine if adding the new axioms/primitives changes what can be proved in the original vocabulary. Provide verdict with justification.`,
 
-  "Compare Conceptual Schemes": `Analyze the conceptual structure of this theory.
+  "Compare Conceptual Schemes": `Compare the conceptual structures of the two theories below.
 
-<<<INPUT>>>
+=== SYSTEM A ===
+<<<SYSTEM_A>>>
+
+=== SYSTEM B ===
+<<<SYSTEM_B>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-Build a dependency graph. Classify concepts as primitive vs derived. Compute definitional depth. Identify bottlenecks and central concepts.`,
+For each theory, identify primitive vs derived concepts. Compare expressive power. Highlight what one can express that the other cannot. Determine which is more natural or parsimonious.`,
 
   "Ontological Dependence": `Analyze the ontological dependencies in this theory.
 
@@ -511,6 +523,16 @@ function buildPrompt(input: string, instructions: string, functionName: string):
   
   const template = FUNCTION_PROMPTS[normalizedName] || FUNCTION_PROMPTS["Axiom-Set / Theory Transformation"];
   const effectiveInstructions = instructions?.trim() || DEFAULT_INSTRUCTIONS[normalizedName] || "Perform the standard transformation for this function.";
+  
+  // Handle dual-input functions (Schema Equivalence, Definitional Equivalence, Compare Conceptual Schemes)
+  const dualInputFunctions = ["Schema Equivalence", "Definitional Equivalence", "Compare Conceptual Schemes"];
+  if (dualInputFunctions.includes(normalizedName) && input.includes("<<<SEPARATOR>>>")) {
+    const [systemA, systemB] = input.split("<<<SEPARATOR>>>");
+    return template
+      .replace("<<<SYSTEM_A>>>", systemA?.trim() || "")
+      .replace("<<<SYSTEM_B>>>", systemB?.trim() || "")
+      .replace("<<<INSTRUCTIONS>>>", effectiveInstructions);
+  }
   
   return template
     .replace("<<<INPUT>>>", input)
