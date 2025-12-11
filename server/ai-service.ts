@@ -631,14 +631,52 @@ Dependency Graph:
 - Do NOT produce philosophical commentary
 - Do NOT invent new predicates`,
 
-  "Generate Alternative Conceptualizations": `Generate an alternative conceptualization of this theory.
+  "Generate Alternative Conceptualizations": `YOUR TASK: Produce 1–3 alternative axiom sets T' for the input theory T.
 
+=== INPUT THEORY T ===
 <<<INPUT>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-Invert the conceptual hierarchy. Make derived notions primitive. Redefine original primitives. Produce an equivalent theory with different conceptual structure.`,
+=== REQUIREMENTS FOR ALTERNATIVE THEORIES ===
+Each alternative T' must:
+- Use a different but closely related conceptualization
+- Have model classes naturally included in the model class of T
+- Preserve the "intended interpretation" of the input theory
+
+=== ALLOWED OPERATIONS ===
+- Rename the primitive predicate
+- Replace the primitive with a natural conceptual surrogate
+- Use equivalent axiom patterns (e.g., "strict order" ↔ "acyclic + irreflexive", "irreflexive + transitive" ↔ "asymmetric + transitive")
+- Express the same idea through different semantic framing (ranks, layers, precedence, exclusion, partial orders, etc.)
+
+=== FORBIDDEN ===
+- Do NOT produce definitional rewrites (same axioms, just renamed)
+- Do NOT add new primitives (no expansions)
+- Do NOT invent new structures beyond the input's scope
+- Do NOT produce model-theoretically unrelated theories
+
+=== OUTPUT FORMAT ===
+
+ALTERNATIVE 1
+LANGUAGE: {NewPred(args), ...}
+AXIOMS:
+1. [axiom]
+2. [axiom]
+...
+WHY RELATED: (one sentence explaining how this captures the same idea)
+
+ALTERNATIVE 2 (if applicable)
+...
+
+ALTERNATIVE 3 (if applicable)
+...
+
+=== HARD REQUIREMENTS ===
+- 1–3 alternatives only
+- Each must be a genuine reconceptualization, not just a synonym swap
+- Concise output, no philosophy or commentary`,
 
   "Interpret Canonical Meaning": `Interpret the canonical meaning of this theory.
 
