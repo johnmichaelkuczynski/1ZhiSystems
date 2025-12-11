@@ -1908,24 +1908,91 @@ EXPLANATION:
     instructions: `INTERPRET CANONICAL MEANING: IDENTIFY PRIMITIVE MEANINGS (1 ARG)
 
 TASK:
-Given a theory T with primitives {P1, …, Pk}, identify the *most natural* intended meaning of each predicate, function, and constant symbol.
+Given a single first-order theory T (one argument), identify for each primitive symbol its **most natural intended meaning** in ordinary language.
 
-RULES:
-1. Use ONLY the syntactic form:
-   - Unary predicate → property of objects
-   - Binary predicate → relation between objects
-   - Function symbol → operation producing an output
-   - Constant → designated object
-2. Do NOT infer semantics beyond what the symbol names and arities suggest
-3. Output one short clause per primitive describing its canonical meaning
+This is a **semantic labeling** step:
+- Take each primitive predicate, function, and constant symbol
+- Infer what kind of property / relation / operation / object it is most naturally meant to represent
+- Assign to each a short canonical natural-language description
 
-OUTPUT FORMAT:
+INPUT:
+One theory T with:
+1. LANGUAGE: primitive symbols (predicates P(x̄), functions f(x̄), constants c)
+2. AXIOMS: formulas ϕ₁, ϕ₂, ..., ϕₙ in that language
+3. OPTIONAL HINTS: human-readable names or domain hints if available
+
+MECHANICAL INTERPRETATION PROCEDURE:
+
+For each primitive symbol S in the language of T:
+
+STEP 1 — CLASSIFY SYMBOL TYPE:
+- If S is k-ary predicate: classify as **k-place relation**
+- If S is k-ary function: classify as **k-argument operation**
+- If S is a constant: classify as **distinguished element**
+
+STEP 2 — ANALYZE STRUCTURAL BEHAVIOR:
+Scan all axioms where S occurs. Detect basic structural patterns:
+- Reflexivity: ∀x S(x,x)
+- Irreflexivity: ∀x ¬S(x,x)
+- Symmetry: ∀x∀y (S(x,y) → S(y,x))
+- Antisymmetry: ∀x∀y ((S(x,y) ∧ S(y,x)) → x = y)
+- Transitivity: ∀x∀y∀z ((S(x,y) ∧ S(y,z)) → S(x,z))
+- Functional behavior (unique outputs), totality, etc.
+Record which patterns S satisfies.
+
+STEP 3 — MATCH TO GENERIC CONCEPT TEMPLATES:
+Based on arity and detected patterns, map S onto generic conceptual templates:
+- Binary, reflexive, antisymmetric, transitive → "partial order"
+- Binary, symmetric, reflexive, transitive → "equivalence relation"
+- Unary predicate heavily used in restrictions → "distinguished subclass"
+- Binary function with +/·-like axioms → "operation like addition/multiplication"
+If no strong pattern: treat S as generic relation/property/operation.
+
+STEP 4 — INCORPORATE NAMING HINTS (IF AVAILABLE):
+If earlier stages or raw syntax suggest an English-like name (e.g., "Parent", "LessEq", "Edge", "Member"):
+- Use that as the **base** of the canonical description
+Otherwise, generate a neutral but informative name (e.g., "a binary relation on the domain").
+
+STEP 5 — CONSTRUCT CANONICAL DESCRIPTIONS:
+For each symbol S, build a one-line canonical meaning:
+- Predicates: "S(x̄): x̄ stand in relation S (a [detected pattern]) on the domain"
+- Functions: "f(x̄): the [operation type] applied to x̄"
+- Constants: "c: a distinguished element of the domain with the special role described in the axioms"
+
+STEP 6 — PREFER SPECIFICITY OVER VAGUENESS:
+If axioms clearly indicate a specific known structure (order, equivalence, group operation, etc.), mention it explicitly.
+If not, fall back on the most specific neutral description entailed by the axioms.
+
+SUCCESS CONDITION:
+
+Each primitive symbol S receives:
+- A recognized type (predicate / function / constant)
+- A structural classification (if detectable)
+- A canonical one-line natural-language description
+
+If axioms give no usable structural information about S: still succeed, but label minimally (e.g., "arbitrary unary property").
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
 
 PRIMITIVE MEANINGS:
-- P1(x): "..."
-- P2(x,y): "..."
-- f(x): "..."
-- c: "..."`
+- P(x̄): [canonical natural-language description]
+- Q(x̄): [canonical natural-language description]
+- f(x̄): [canonical natural-language description]
+- c: [canonical natural-language description]
+...
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- For each primitive symbol, briefly:
+  - State its arity and formal type
+  - List the key structural patterns detected from the axioms
+  - Justify the chosen canonical description in light of those patterns`
   },
   {
     id: "f9-natural-language",

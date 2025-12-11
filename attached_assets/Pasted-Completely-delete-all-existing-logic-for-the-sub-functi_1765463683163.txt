@@ -1,0 +1,139 @@
+Completely delete all existing logic for the sub-function:
+"INTERPRET CANONICAL MEANING: IDENTIFY PRIMITIVE MEANINGS".
+
+Do NOT modify other sub-functions in the Interpret Canonical Meaning block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+INTERPRET CANONICAL MEANING (IDENTIFY PRIMITIVE MEANINGS)
+=========================================================
+
+TASK:
+Given a single first-order theory T (one argument), identify for each
+primitive symbol its **most natural intended meaning** in ordinary
+language.
+
+This is a **semantic labeling** step:
+- Take each primitive predicate, function, and constant symbol.
+- Infer what kind of property / relation / operation / object
+  it is most naturally meant to represent.
+- Assign to each a short canonical natural-language description.
+
+=========================================================
+INPUT
+=========================================================
+
+One theory T with:
+
+1. LANGUAGE:
+   - A list of primitive symbols:
+     - Predicate symbols: P(x̄), Q(x̄), ...
+     - Function symbols: f(x̄), g(x̄), ...
+     - Constant symbols: c, d, ...
+
+2. AXIOMS:
+   - A list of formulas ϕ₁, ϕ₂, ..., ϕₙ in that language.
+
+3. OPTIONAL HINTS (if available from earlier stages):
+   - Human-readable names or labels for some primitives.
+   - Domain hints (e.g., "agents", "numbers", "times").
+
+=========================================================
+MECHANICAL INTERPRETATION PROCEDURE
+=========================================================
+
+For each primitive symbol S in the language of T:
+
+1. CLASSIFY SYMBOL TYPE
+   - If S is k-ary predicate: classify as **k-place relation**.
+   - If S is k-ary function: classify as **k-argument operation**.
+   - If S is a constant: classify as **distinguished element**.
+
+2. ANALYZE STRUCTURAL BEHAVIOR
+   - Scan all axioms where S occurs.
+   - Detect basic structural patterns, such as:
+     - Reflexivity: ∀x S(x,x)
+     - Irreflexivity: ∀x ¬S(x,x)
+     - Symmetry: ∀x∀y (S(x,y) → S(y,x))
+     - Antisymmetry: ∀x∀y ((S(x,y) ∧ S(y,x)) → x = y)
+     - Transitivity: ∀x∀y∀z ((S(x,y) ∧ S(y,z)) → S(x,z))
+     - Functional behavior (unique outputs), totality, etc.
+   - Record which of these patterns S satisfies.
+
+3. MATCH TO GENERIC CONCEPT TEMPLATES
+   - Based on arity and detected patterns, map S onto **generic
+     conceptual templates**, e.g.:
+     - Binary, reflexive, antisymmetric, transitive → "partial order"
+     - Binary, symmetric, reflexive, transitive → "equivalence relation"
+     - Unary predicate heavily used in restriction clauses →
+       "distinguished subclass" of the domain
+     - Binary function symbol used with +, ·-like axioms →
+       "operation like addition / multiplication on the domain"
+   - If no strong pattern is detected:
+     - Treat S as a generic relation/property/operation
+       with minimal commitment (e.g. "a binary relation on the domain").
+
+4. INCORPORATE NAMING HINTS (IF AVAILABLE)
+   - If earlier stages or the raw syntax suggest an English-like
+     name (e.g., "Parent", "LessEq", "Edge", "Member"):
+     - Use that as the **base** of the canonical description.
+   - Otherwise, generate a neutral but informative name, e.g.:
+     - "R(x,y): a binary relation on the domain"
+     - "F(x): a unary property of domain elements"
+
+5. CONSTRUCT CANONICAL DESCRIPTIONS
+   - For each symbol S, build a one-line canonical meaning:
+     - Predicates: "S(x̄): x̄ stand in relation S (a [detected pattern])
+       on the domain."
+     - Functions: "f(x̄): the [operation type] applied to x̄."
+     - Constants: "c: a distinguished element of the domain with the
+       special role described in the axioms."
+
+6. PREFER SPECIFICITY OVER VAGUENESS
+   - If the axioms clearly indicate a specific known structure
+     (order, equivalence, group operation, etc.), mention it explicitly.
+   - If not, fall back on the most specific neutral description that
+     is entailed by the axioms.
+
+=========================================================
+SUCCESS CONDITION
+=========================================================
+
+The procedure **succeeds** if each primitive symbol S receives:
+
+- A recognized type (predicate / function / constant),
+- A structural classification (if detectable),
+- A canonical one-line natural-language description.
+
+If the axioms give **no usable structural information** about S:
+- Still succeed, but label S minimally (e.g. "arbitrary unary property").
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+PRIMITIVE MEANINGS:
+- P(x̄): [canonical natural-language description]
+- Q(x̄): [canonical natural-language description]
+- f(x̄): [canonical natural-language description]
+- c: [canonical natural-language description]
+...
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- For each primitive symbol, briefly:
+  - State its arity and formal type.
+  - List the key structural patterns detected from the axioms.
+  - Justify the chosen canonical description in light of those patterns.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
