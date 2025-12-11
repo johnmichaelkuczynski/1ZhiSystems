@@ -1,0 +1,107 @@
+The current logic for the function "Conservative Extension Analysis (Two Arguments)" is incorrect and must be COMPLETELY REPLACED, not patched or modified. Discard all previous assumptions about how the function works.
+
+REPLACE the logic with the following rules:
+
+1. BOX A ALWAYS CONTAINS THE BASE THEORY T₁.
+   - This must be the weaker theory.
+   - It is written in some base language L₁.
+   - The app must never infer or guess the base theory; it is exactly whatever the user enters into Box A.
+
+2. BOX B ALWAYS CONTAINS THE EXTENDED THEORY T₂.
+   - This is the theory we are checking to see whether it is a conservative extension of T₁.
+   - It must include all axioms of T₁ either explicitly or implicitly, plus new axioms written in a strictly larger or equal language L₂ ⊇ L₁.
+   - The app must never treat Box B as a “rewrite” or “alternate version.” It is ALWAYS the extension.
+
+3. The function’s task:
+   Determine whether T₂ is a conservative extension of T₁ relative to the base language L₁.
+
+   Formally: T₂ is a conservative extension of T₁ iff for every sentence φ in the language L₁:
+       If T₂ ⊢ φ, then T₁ ⊢ φ.
+
+   In other words, adding new symbols and axioms in Box B must NOT allow the user to prove any NEW theorems about the old symbols in Box A.
+
+4. The app must output:
+   - “Conservative extension: YES” or “Conservative extension: NO”
+   - The base language and base theory (copied from Box A).
+   - The extended language and extended theory (copied from Box B).
+   - A short KEY FACT explaining WHY.
+
+5. IMPORTANT: The app must NEVER incorrectly claim conservativity merely because a new symbol "seems definable." Explicit definability is sufficient for conservativity but NOT necessary. Conversely, definability cannot be guessed. Conservativity is determined ONLY by whether Box B forces new theorems in the old language.
+
+6. Use the following examples to calibrate behavior:
+
+EXAMPLE 1 (SHOULD OUTPUT YES — conservative)
+BOX A:
+LANGUAGE: {R(x,y)}
+AXIOMS:
+1. ∀x ∃y R(x,y)
+
+BOX B:
+LANGUAGE: {R(x,y), f(x)}
+AXIOMS:
+1. ∀x ∃y R(x,y)
+2. ∀x R(x,f(x))
+
+KEY FACT:
+Base theory already guarantees a witness. Adding f(x) just chooses one. No new theorems in {R} become provable.
+
+EXAMPLE 2 (SHOULD OUTPUT NO — NOT conservative)
+BOX A:
+LANGUAGE: {Less(x,y)}
+AXIOMS:
+1. ∀x ¬Less(x,x)
+2. ∀x∀y∀z ((Less(x,y) ∧ Less(y,z)) → Less(x,z))
+
+BOX B:
+LANGUAGE: {Less(x,y), Zero}
+AXIOMS:
+1. ∀x ¬Less(x,x)
+2. ∀x∀y∀z ((Less(x,y) ∧ Less(y,z)) → Less(x,z))
+3. ∀x ¬Less(x,Zero)
+4. ∀x (x ≠ Zero → Less(Zero,x))
+
+KEY FACT:
+Box B proves ∃m ∀x (x ≠ m → Less(m,x)), forcing a least element.
+Box A allows models with no least element (e.g., integers).
+Therefore T₂ proves new theorems in the old language; NOT conservative.
+
+EXAMPLE 3 (SHOULD OUTPUT YES — conservative even though new predicates are added)
+BOX A:
+LANGUAGE: {E(x,y)}
+AXIOMS:
+1. ∀x∀y (E(x,y) → E(y,x))
+
+BOX B:
+LANGUAGE: {E(x,y), Sym(x), Anti(x)}
+AXIOMS:
+1. ∀x∀y (E(x,y) → E(y,x))
+2. ∀x∀y (E(x,y) → (Sym(x) ∧ Sym(y)))
+3. ∀x (Sym(x) → ¬Anti(x))
+4. ∀x∀y ((Anti(x) ∧ Anti(y)) → ¬E(x,y))
+5. ∀x (Anti(x) → ∃y E(x,y))
+
+KEY FACT:
+Any symmetric relation E can be expanded to satisfy the new axioms by interpreting Sym = domain and Anti = empty set.
+No new theorems in {E} follow. Conservative.
+
+7. The app must strictly follow this structure when generating output:
+
+RESULT
+Conservative extension: YES/NO
+
+BASE LANGUAGE
+{...}
+
+BASE THEORY T₁
+(list axioms exactly as written in Box A)
+
+EXTENDED LANGUAGE
+{...}
+
+EXTENDED THEORY T₂
+(list axioms exactly as written in Box B)
+
+KEY FACT
+(One-sentence explanation of the reason for YES or NO.)
+
+This replaces ALL previous logic for this function.

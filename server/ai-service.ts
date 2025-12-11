@@ -483,18 +483,46 @@ AXIOMS:
 - JUST the LANGUAGE and AXIOMS
 - Each axiom on its own numbered line`,
 
-  "Conservative Extension Analysis": `YOUR TASK: Determine if the PROPOSED EXTENSION is a CONSERVATIVE EXTENSION of the BASE THEORY.
+  "Conservative Extension Analysis": `YOUR TASK: Determine whether T₂ (Box B) is a CONSERVATIVE EXTENSION of T₁ (Box A) relative to the base language L₁.
 
-A conservative extension means: new symbols are explicitly definable from the base vocabulary, and no new theorems in the original language become provable.
-
-=== BASE THEORY (Original Axiom Set) ===
+=== BASE THEORY T₁ (Box A) ===
 <<<SYSTEM_A>>>
 
-=== PROPOSED EXTENSION (New Axioms) ===
+=== EXTENDED THEORY T₂ (Box B) ===
 <<<SYSTEM_B>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
+
+=== DEFINITION ===
+T₂ is a conservative extension of T₁ iff for every sentence φ in the language L₁:
+    If T₂ ⊢ φ, then T₁ ⊢ φ.
+
+In other words: adding new symbols and axioms in T₂ must NOT allow proving any NEW theorems about the old symbols from T₁.
+
+=== CRITICAL RULES ===
+1. Box A is ALWAYS the base theory T₁ in language L₁. Never infer or guess it.
+2. Box B is ALWAYS the extended theory T₂ in language L₂ ⊇ L₁. It includes T₁'s axioms plus new ones.
+3. Explicit definability is SUFFICIENT for conservativity but NOT NECESSARY.
+4. Conservativity is determined ONLY by whether T₂ forces new theorems in the old language L₁.
+5. NEVER claim conservativity merely because a new symbol "seems definable."
+
+=== CALIBRATION EXAMPLES ===
+
+EXAMPLE 1 (YES — conservative)
+BOX A: LANGUAGE: {R(x,y)}, AXIOMS: ∀x ∃y R(x,y)
+BOX B: LANGUAGE: {R(x,y), f(x)}, AXIOMS: ∀x ∃y R(x,y), ∀x R(x,f(x))
+→ YES: Base theory already guarantees a witness. Adding f(x) just chooses one. No new theorems in {R} become provable.
+
+EXAMPLE 2 (NO — NOT conservative)
+BOX A: LANGUAGE: {Less(x,y)}, AXIOMS: ∀x ¬Less(x,x), ∀x∀y∀z ((Less(x,y) ∧ Less(y,z)) → Less(x,z))
+BOX B: LANGUAGE: {Less(x,y), Zero}, AXIOMS: same + ∀x ¬Less(x,Zero), ∀x (x ≠ Zero → Less(Zero,x))
+→ NO: Box B proves ∃m ∀x (x ≠ m → Less(m,x)), forcing a least element. Box A allows models with no least element (e.g., integers). T₂ proves new theorems in the old language.
+
+EXAMPLE 3 (YES — conservative even with new predicates)
+BOX A: LANGUAGE: {E(x,y)}, AXIOMS: ∀x∀y (E(x,y) → E(y,x))
+BOX B: LANGUAGE: {E(x,y), Sym(x), Anti(x)}, AXIOMS: same + new axioms about Sym/Anti
+→ YES: Any symmetric relation E can be expanded by interpreting Sym = domain, Anti = empty set. No new theorems in {E} follow.
 
 === OUTPUT FORMAT (use exactly this structure) ===
 
@@ -502,30 +530,25 @@ RESULT
 Conservative extension: YES or NO
 
 BASE LANGUAGE
-{Predicate1(args), Predicate2(args), ...}
+{...}
 
 BASE THEORY T₁
-1. [first base axiom]
-2. [second base axiom]
-...
+(list axioms exactly as written in Box A)
 
 EXTENDED LANGUAGE
-{BasePreds..., NewPred(args)}
+{...}
 
-EXTENDED THEORY T₂ = T₁ ∪ {new axioms}
-1. [first new axiom involving new symbol]
-2. [second new axiom]
-...
+EXTENDED THEORY T₂
+(list axioms exactly as written in Box B)
 
 KEY FACT
-[If YES: State the explicit definability equivalence, e.g., ∀x∀y [Father(x,y) ↔ (Parent(x,y) ∧ Male(x))]]
-[If NO: State the obstruction - why the new symbol cannot be defined]
+(One-sentence explanation of the reason for YES or NO)
 
 === HARD REQUIREMENTS ===
 - NO commentary or pedagogy
-- NO informal explanation
+- Copy axioms exactly as provided
 - Explicit quantifiers only
-- Optimized for AI theorem-normalization pipelines`,
+- One-sentence KEY FACT explaining WHY`,
 
   "Compare Conceptual Schemes": `Compare the conceptual structures of the two theories below.
 
