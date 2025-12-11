@@ -72,7 +72,7 @@ Then briefly explain the reasoning.`,
   
   "Identify Representational Biases": `Analyze the input theory and identify hidden representational biases, implicit ontological assumptions, and historical or notational prejudices baked into the choice of primitives and axioms. Suggest how these biases affect what the theory makes easy or difficult to express, and propose a bias-minimized alternative formulation.`,
   
-  "Find an Interpretation": `Find a concrete, true (or defensible) model/interpretation of the input axiom system. Map each primitive symbol to a specific domain of objects and relations from mathematics, physics, economics, philosophy, or any appropriate field. Show explicitly how each axiom becomes a true statement under this interpretation. If multiple interpretations exist, provide the most natural or illuminating one.`
+  "Find an Interpretation": `Find a practical application of the input axiom system in mathematics, science (including computer science), or engineering. Map each primitive symbol to concrete objects and relations from a real scientific or engineering domain. Show how each axiom becomes a true, useful statement in that application. Provide a model that a working mathematician, scientist, or engineer would recognize as genuinely applicable to their field.`
 };
 
 const SYSTEM_PROMPT = `You are the world's foremost expert in first-order logic, theory transformation, and formal ontology analysis.
