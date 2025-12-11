@@ -827,7 +827,71 @@ EXPLANATION:
     name: "New Axioms Test",
     functionId: 5,
     input: `<<<SEPARATOR>>>`,
-    instructions: `Determine whether adding the new axioms proves any new facts expressible in the original vocabulary. Provide proof or countermodel.`
+    instructions: `CONSERVATIVE EXTENSION ANALYSIS (NEW AXIOMS TEST)
+
+TASK:
+Given a base theory T₁ and an extended theory T₂ obtained by adding **new axioms** (not new symbols), determine whether the extension is **conservative**:
+
+T₂ must NOT prove any new theorems expressible in the vocabulary of T₁ that were not already provable in T₁.
+
+This test evaluates only the effect of **additional axioms**.
+
+INPUT:
+T₁ (base theory):
+- LANGUAGE: L
+- AXIOMS: A₁
+
+T₂ (extension):
+- LANGUAGE: L (same vocabulary)
+- AXIOMS: A₂ = A₁ ∪ {new axioms}
+
+EXPLAIN toggle (ON or OFF)
+
+MECHANICAL CONSERVATIVITY TEST:
+
+STEP 1 — IDENTIFY NEW AXIOMS:
+Let Δ = A₂ − A₁. These are the axioms whose effect we are analyzing.
+
+STEP 2 — CHECK FOR NEW THEOREMS:
+We examine whether any formula ψ in the **original language** L is derivable from A₂ but NOT derivable from A₁
+
+Mechanical procedure:
+1. For each new axiom δ in Δ:
+   - Attempt to syntactically produce consequences of δ using: substitution, instantiation, rewriting under equivalences in A₁
+2. Any consequence ψ that lies **entirely in L** (no new symbols) is a candidate new theorem
+3. If ψ is reducible to an axiom or theorem already in A₁: NOT A NEW THEOREM
+4. If ψ cannot be reduced syntactically to anything provable from A₁: T₂ proves a new fact → NON-CONSERVATIVE
+
+No semantic reasoning, no model-search, and no meta-theoretical proof attempts are permitted.
+
+STEP 3 — CHECK FOR COUNTERMODEL:
+If a candidate ψ appears to be new:
+Search for a syntactic countermodel pattern:
+- Attempt to unify ¬ψ with a model-pattern that satisfies A₁ but not δ
+- If such a syntactic model-pattern exists, ψ was NOT previously provable in T₁, hence T₂ is non-conservative
+
+SUCCESS CONDITION:
+
+T₂ is CONSERVATIVE over T₁ iff:
+- No sentence ψ in language L becomes newly provable from the added axioms Δ
+
+If ANY such ψ exists, conservativity FAILS.
+
+OUTPUT (EXPLAIN = OFF):
+Conservative: YES/NO
+If NO:
+NEW THEOREM:
+ψ
+If YES:
+(No new theorems)
+
+OUTPUT (EXPLAIN = ON):
+Conservative: YES/NO
+[NEW THEOREM: ψ if NO]
+EXPLANATION:
+- New axioms are conservative only if they do not generate new consequences in the original vocabulary
+- The test isolates the effects of the new axioms syntactically
+- If any new ψ arises, the extension is non-conservative`
   },
   {
     id: "f5-weak-extension",
