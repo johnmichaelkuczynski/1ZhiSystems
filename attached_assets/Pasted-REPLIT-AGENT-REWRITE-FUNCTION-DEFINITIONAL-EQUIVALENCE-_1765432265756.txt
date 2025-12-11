@@ -1,0 +1,130 @@
+REPLIT AGENT — REWRITE FUNCTION “DEFINITIONAL EQUIVALENCE (2 ARGS)”
+1. Remove all existing code for this function.
+
+Do not patch or modify.
+Delete and replace completely with the specification below.
+
+🟩 2. NEW FUNCTION SPECIFICATION
+Function Name (unchanged):
+
+Definitional Equivalence (Two Arguments)
+
+Purpose:
+
+Given two axiom-sets, determine whether they are definitionally equivalent, meaning:
+
+Each theory can explicitly define the other’s primitives, and the axioms become identical under those definitions.
+
+This is not schema-equivalence, not syntactic rewriting, not entailment checking.
+
+🟧 3. INPUT FORMAT (MANDATORY)
+
+The function receives two axiom-sets, called:
+
+THEORY A:
+<list of axioms>
+
+THEORY B:
+<list of axioms>
+
+
+Primitives may include:
+
+predicate symbols
+
+function symbols
+
+constant symbols
+
+The function extracts the non-logical vocabulary of each theory automatically.
+
+🟨 4. OUTPUT FORMAT (MANDATORY)
+
+Your output must follow this exact four-part template, always concise, never verbose:
+
+1. RESULT
+
+State clearly:
+
+“The theories ARE definitionally equivalent”
+OR
+
+“The theories are NOT definitionally equivalent.”
+
+If equivalent, list the symbol mapping, e.g.:
+
+R ↦ S
+f ↦ g
+c ↦ d
+
+2. WHY
+
+Give a 3–4 sentence maximal explanation stating:
+
+Each primitive of A can be explicitly defined using B
+
+Each primitive of B can be explicitly defined using A
+
+Translating A’s axioms using the mapping yields B’s axioms
+
+Translating B’s axioms using the mapping yields A’s axioms
+
+Do not provide long proofs, do not give derivations, do not explain FOL techniques.
+
+3. INTUITIVE EXPLANATION
+
+1–2 sentences explaining the idea in normal language:
+
+“These theories say the same thing with different predicate names.”
+
+“They describe the same structures but with different vocabulary.”
+
+4. CORRECT FORM OF OUTPUT
+
+Show the translated axioms if and only if they match exactly after renaming.
+
+Example:
+
+Translated Axiom A1 → S-form:
+∀x∀y (S(x,y) ↔ ∀z (S(z,x) → S(z,y)))
+Matches B1 exactly.
+
+🟥 5. Example Input (for testing)
+THEORY A:
+1. ∀x∀y (R(x, y) ↔ ∀z (R(z, x) → R(z, y)))
+2. ∀x ¬R(x, x)
+
+THEORY B:
+1. ∀x∀y (x < y ↔ ∀z (z < x → z < y))
+2. ∀x ¬(x < x)
+
+🟦 6. Example of the REQUIRED OUTPUT (gold standard)
+1. RESULT
+The two theories ARE definitionally equivalent.
+Mapping: R ↦ <
+
+2. WHY
+Substituting R(x,y) with x < y in all axioms of Theory A yields Theory B exactly.
+Substituting x < y with R(x,y) in Theory B yields Theory A exactly.
+Each primitive is explicitly definable in the other theory’s vocabulary.
+
+3. INTUITIVE EXPLANATION
+The theories say the same thing with different names for the relation.
+
+4. TRANSLATED AXIOMS
+A1 under R ↦ <: ∀x∀y (x < y ↔ ∀z (z < x → z < y)) — matches B1
+A2 under R ↦ <: ∀x ¬(x < x) — matches B2
+
+🟦 7. Hard Requirements
+
+No long proofs
+
+No multi-paragraph explanations
+
+No variable renaming debates
+
+Never cite model theory jargon (“Henkin expansion”, “Beth definability”, etc.)
+
+Must always adhere to the four-part output format
+
+If not equivalent, explain which direction of definability fails

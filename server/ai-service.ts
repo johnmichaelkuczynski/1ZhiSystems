@@ -58,7 +58,7 @@ const DEFAULT_INSTRUCTIONS: Record<string, string> = {
 — UNKNOWN (with justification).
 Then briefly explain the reasoning.`,
   
-  "Definitional Equivalence": `Determine whether one theory is a definitional extension of the other: i.e., one can be obtained from the other by adding explicit definitions (conservative extension with new symbols explicitly defined). State which direction holds (A defines B, B defines A, mutual, or neither) and show the explicit definitions if they exist.`,
+  "Definitional Equivalence": `Determine whether the two theories are definitionally equivalent: each theory can explicitly define the other's primitives, and the axioms become identical under those definitions. Show the symbol mapping and translated axioms.`,
   
   "Model-Preserving Rewrite": `Rewrite the input theory using a completely different vocabulary and axiom set, but such that every model of the original is isomorphic to a model of the new theory and vice versa. The two theories must be categorically equivalent. Do not use conservative extensions — the output must not be a definitional extension.`,
   
@@ -377,20 +377,64 @@ INSTRUCTIONS:
 
 Build a symbol mapping between vocabularies. Test all arity-preserving mappings. Report whether schema equivalence holds. If yes, give the mapping. If no, give the minimal obstruction.`,
 
-  "Definitional Equivalence": `Test whether the two theories below are definitionally equivalent.
+  "Definitional Equivalence": `YOUR TASK: Determine if the two theories are DEFINITIONALLY EQUIVALENT.
 
-=== SYSTEM A ===
+Definitional equivalence means:
+- Each theory can explicitly define the other's primitives
+- The axioms become IDENTICAL under those definitions
+- This is NOT schema-equivalence, NOT syntactic rewriting, NOT entailment checking
+
+=== THEORY A ===
 <<<SYSTEM_A>>>
 
-=== SYSTEM B ===
+=== THEORY B ===
 <<<SYSTEM_B>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-For each primitive of Theory A, provide an explicit definition using Theory B's vocabulary.
-For each primitive of Theory B, provide an explicit definition using Theory A's vocabulary.
-Show the bi-directional translation that establishes equivalence.`,
+=== OUTPUT FORMAT (use exactly this four-part template, always concise) ===
+
+**1. RESULT**
+
+State clearly:
+"The theories ARE definitionally equivalent."
+OR
+"The theories are NOT definitionally equivalent."
+
+If equivalent, list the symbol mapping:
+R ↦ S
+f ↦ g
+c ↦ d
+
+**2. WHY**
+
+3-4 sentences maximum stating:
+- Each primitive of A can be explicitly defined using B
+- Each primitive of B can be explicitly defined using A
+- Translating A's axioms using the mapping yields B's axioms
+- Translating B's axioms using the mapping yields A's axioms
+
+NO long proofs. NO derivations. NO FOL jargon.
+
+**3. INTUITIVE EXPLANATION**
+
+1-2 sentences in normal language:
+"These theories say the same thing with different predicate names."
+"They describe the same structures but with different vocabulary."
+
+**4. TRANSLATED AXIOMS**
+
+Show the translated axioms matching exactly after renaming:
+A1 under R ↦ <: ∀x∀y (x < y ↔ ...) — matches B1
+A2 under R ↦ <: ∀x ¬(x < x) — matches B2
+
+=== HARD REQUIREMENTS ===
+- No long proofs
+- No multi-paragraph explanations
+- No variable renaming debates
+- Never cite model theory jargon ("Henkin expansion", "Beth definability", etc.)
+- If NOT equivalent, explain which direction of definability fails`,
 
   "Model-Preserving Rewrite": `Rewrite the theory below while preserving exactly the same class of models.
 
