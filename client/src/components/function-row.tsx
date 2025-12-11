@@ -60,12 +60,12 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
 
   useEffect(() => {
     if (triggerRun && triggerRun > 0) {
-      setPendingRun(true);
+      setTimeout(() => setPendingRun(true), 50);
     }
   }, [triggerRun]);
 
   useEffect(() => {
-    if (pendingRun && input && instructions && !isProcessing) {
+    if (pendingRun && input && !isProcessing) {
       setPendingRun(false);
       runTransformation(input, instructions);
     } else if (pendingRun && !input) {
