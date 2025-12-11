@@ -463,7 +463,7 @@ export function PresetsSidebar({ onSelectPreset }: PresetsSidebarProps) {
     "Schema Equivalence (2 Args)",
     "Definitional Equivalence (2 Args)",
     "Model-Preserving Rewrite (1 Arg)",
-    "Conservative Extension Analysis (1 Arg)",
+    "Conservative Extension Analysis (2 Args)",
     "Compare Conceptual Schemes (2 Args)",
     "Ontological Dependence (1 Arg)",
     "Generate Alt. Conceptualizations (1 Arg)",

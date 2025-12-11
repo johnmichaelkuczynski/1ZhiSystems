@@ -483,22 +483,18 @@ AXIOMS:
 - JUST the LANGUAGE and AXIOMS
 - Each axiom on its own numbered line`,
 
-  "Conservative Extension Analysis": `YOUR TASK: Determine if the extended theory is a CONSERVATIVE EXTENSION of the base theory.
+  "Conservative Extension Analysis": `YOUR TASK: Determine if the PROPOSED EXTENSION is a CONSERVATIVE EXTENSION of the BASE THEORY.
 
 A conservative extension means: new symbols are explicitly definable from the base vocabulary, and no new theorems in the original language become provable.
 
-<<<INPUT>>>
+=== BASE THEORY (Original Axiom Set) ===
+<<<SYSTEM_A>>>
+
+=== PROPOSED EXTENSION (New Axioms) ===
+<<<SYSTEM_B>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
-
-=== PROCEDURE ===
-
-1. IDENTIFY the base language and base theory T₁ (axioms in original vocabulary)
-2. IDENTIFY the extended language and extended theory T₂ (T₁ plus axioms with new symbols)
-3. CHECK if each new symbol is explicitly definable from base vocabulary
-4. If definable → Conservative extension: YES
-   If not definable → Conservative extension: NO
 
 === OUTPUT FORMAT (use exactly this structure) ===
 
@@ -524,29 +520,6 @@ EXTENDED THEORY T₂ = T₁ ∪ {new axioms}
 KEY FACT
 [If YES: State the explicit definability equivalence, e.g., ∀x∀y [Father(x,y) ↔ (Parent(x,y) ∧ Male(x))]]
 [If NO: State the obstruction - why the new symbol cannot be defined]
-
-=== EXAMPLE ===
-
-RESULT
-Conservative extension: YES
-
-BASE LANGUAGE
-{Parent(x,y), Male(x), Female(x)}
-
-BASE THEORY T₁
-1. ∀x∀y (Parent(x,y) → (Male(x) ∨ Female(x)))
-2. ∀x ¬(Male(x) ∧ Female(x))
-
-EXTENDED LANGUAGE
-{Parent(x,y), Male(x), Female(x), Father(x,y)}
-
-EXTENDED THEORY T₂ = T₁ ∪ {1,2,3}
-1. ∀x∀y (Father(x,y) → Parent(x,y))
-2. ∀x∀y (Father(x,y) → Male(x))
-3. ∀x∀y (Parent(x,y) ∧ Male(x) → Father(x,y))
-
-KEY FACT
-∀x∀y [Father(x,y) ↔ (Parent(x,y) ∧ Male(x))]
 
 === HARD REQUIREMENTS ===
 - NO commentary or pedagogy
@@ -668,8 +641,8 @@ function buildPrompt(input: string, instructions: string, functionName: string):
   const template = FUNCTION_PROMPTS[normalizedName] || FUNCTION_PROMPTS["Axiom-Set / Theory Transformation"];
   const effectiveInstructions = instructions?.trim() || DEFAULT_INSTRUCTIONS[normalizedName] || "Perform the standard transformation for this function.";
   
-  // Handle dual-input functions (Schema Equivalence, Definitional Equivalence, Compare Conceptual Schemes)
-  const dualInputFunctions = ["Schema Equivalence", "Definitional Equivalence", "Compare Conceptual Schemes"];
+  // Handle dual-input functions
+  const dualInputFunctions = ["Schema Equivalence", "Definitional Equivalence", "Conservative Extension Analysis", "Compare Conceptual Schemes"];
   if (dualInputFunctions.includes(normalizedName) && input.includes("<<<SEPARATOR>>>")) {
     const [systemA, systemB] = input.split("<<<SEPARATOR>>>");
     return template
