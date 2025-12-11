@@ -20,7 +20,7 @@ export default function Home() {
     { id: 2, title: "Schema Equivalence (Two Arguments)", description: "Model-theoretic sameness check.", dualInput: false },
     { id: 3, title: "Definitional Equivalence (Two Arguments)", description: "Bi-directional definitional translation.", dualInput: false },
     { id: 4, title: "Model-Preserving Rewrite (One Argument)", description: "Rewrite theory preserving all models.", dualInput: false },
-    { id: 5, title: "Conservative Extension Analysis (Two Arguments)", description: "Analyze extensions for conservativity.", dualInput: false },
+    { id: 5, title: "Conservative Extension Analysis (One Argument)", description: "Analyze extensions for conservativity.", dualInput: false },
     { id: 6, title: "Compare Conceptual Schemes (Two Arguments)", description: "Compare primitive/derived classifications.", dualInput: false },
     { id: 7, title: "Ontological Dependence (One Argument)", description: "Analyze primitive dependencies.", dualInput: false },
     { id: 8, title: "Generate Alternative Conceptualizations (One Argument)", description: "Produce alternative axiom-sets whose most natural interpretations are also interpretations of the input theory.", dualInput: false },
