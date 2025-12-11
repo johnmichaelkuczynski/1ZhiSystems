@@ -72,7 +72,19 @@ Then briefly explain the reasoning.`,
   
   "Identify Representational Biases": `Analyze the input theory and identify hidden representational biases, implicit ontological assumptions, and historical or notational prejudices baked into the choice of primitives and axioms. Suggest how these biases affect what the theory makes easy or difficult to express, and propose a bias-minimized alternative formulation.`,
   
-  "Find an Interpretation": `Find a practical application of the input axiom system in mathematics, science (including computer science), or engineering. Map each primitive symbol to concrete objects and relations from a real scientific or engineering domain. Show how each axiom becomes a true, useful statement in that application. Provide a model that a working mathematician, scientist, or engineer would recognize as genuinely applicable to their field.`
+  "Find an Interpretation": `Find a practical application of the input axiom system in mathematics, science (including computer science), or engineering. Map each primitive symbol to concrete objects and relations from a real scientific or engineering domain. Show how each axiom becomes a true, useful statement in that application. Provide a model that a working mathematician, scientist, or engineer would recognize as genuinely applicable to their field.`,
+  
+  "Determine Equivalence": `Determine whether the two axiom systems generate exactly the same theorems. Provide a verdict (EQUIVALENT or NOT EQUIVALENT) with detailed analysis:
+
+If EQUIVALENT: Explain why they generate the same theorems. Show the logical relationship between them.
+
+If NOT EQUIVALENT: Classify the relationship:
+- DISJOINT: The theorem sets have no overlap (neither proves anything the other proves)
+- OVERLAPPING: Some theorems are shared, but each has unique theorems
+- A ⊂ B: System A's theorems are a proper subset of System B's theorems
+- B ⊂ A: System B's theorems are a proper subset of System A's theorems
+
+Provide specific examples of theorems that demonstrate the relationship.`
 };
 
 const SYSTEM_PROMPT = `You are the world's foremost expert in first-order logic, theory transformation, and formal ontology analysis.
@@ -361,12 +373,46 @@ TASK:
    - Symbol-to-meaning mapping
    - Verification that each axiom holds
 
-If the user specifies a field (e.g., "from micro-economics"), find an interpretation from that field. If no field is specified, choose the most illuminating interpretation from mathematics, physics, economics, philosophy, computer science, or any appropriate domain.`
+If the user specifies a field (e.g., "from micro-economics"), find an interpretation from that field. If no field is specified, choose the most illuminating interpretation from mathematics, physics, economics, philosophy, computer science, or any appropriate domain.`,
+
+  "Determine Equivalence": `Compare the two axiom systems below and determine their logical relationship.
+
+=== SYSTEM A ===
+<<<SYSTEM_A>>>
+
+=== SYSTEM B ===
+<<<SYSTEM_B>>>
+
+INSTRUCTIONS:
+<<<INSTRUCTIONS>>>
+
+TASK:
+1. Identify the primitives and axioms of each system.
+2. Determine what theorems each system can prove.
+3. Compare the theorem sets and classify the relationship:
+   - EQUIVALENT: Both systems prove exactly the same theorems
+   - A ⊂ B (A STRICTLY WEAKER): Every theorem of A is provable in B, but B proves more
+   - B ⊂ A (B STRICTLY WEAKER): Every theorem of B is provable in A, but A proves more
+   - OVERLAPPING: Some shared theorems, but each has unique theorems the other cannot prove
+   - DISJOINT: No shared theorems (extremely rare)
+
+4. Provide specific example theorems demonstrating the relationship.
+5. If equivalent, show why (translation, bi-interpretation, etc.).
+6. If not equivalent, show a separating theorem (provable in one but not the other).`
 };
 
 function buildPrompt(input: string, instructions: string, functionName: string): string {
   const template = FUNCTION_PROMPTS[functionName] || FUNCTION_PROMPTS["Axiom-Set / Theory Transformation"];
   const effectiveInstructions = instructions?.trim() || DEFAULT_INSTRUCTIONS[functionName] || "Perform the standard transformation for this function.";
+  
+  // Handle dual-input functions (like Determine Equivalence)
+  if (functionName === "Determine Equivalence" && input.includes("<<<SEPARATOR>>>")) {
+    const [systemA, systemB] = input.split("<<<SEPARATOR>>>");
+    return template
+      .replace("<<<SYSTEM_A>>>", systemA?.trim() || "")
+      .replace("<<<SYSTEM_B>>>", systemB?.trim() || "")
+      .replace("<<<INSTRUCTIONS>>>", effectiveInstructions);
+  }
   
   return template
     .replace("<<<INPUT>>>", input)

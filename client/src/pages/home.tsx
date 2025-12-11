@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { ChatInterface } from "@/components/chat-interface";
 import { type LLM } from "@/lib/api";
 import { FunctionRow } from "@/components/function-row";
+import { DualInputRow } from "@/components/dual-input-row";
 import { PresetsSidebar, type Preset } from "@/components/presets-sidebar";
 import generatedLogo from "@assets/generated_images/minimalist_geometric_logo_representing_logic_transformation.png";
 
@@ -15,16 +16,17 @@ export default function Home() {
   const functionRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
 
   const functions = [
-    { id: 1, title: "Axiom-Set / Theory Transformation", description: "Rewrite primitives and axioms." },
-    { id: 2, title: "Schema Equivalence", description: "Model-theoretic sameness check." },
-    { id: 3, title: "Definitional Equivalence", description: "Bi-directional definitional translation." },
-    { id: 4, title: "Model-Preserving Rewrite", description: "Rewrite theory preserving all models." },
-    { id: 5, title: "Conservative Extension Analysis", description: "Analyze extensions for conservativity." },
-    { id: 6, title: "Compare Conceptual Schemes", description: "Compare primitive/derived classifications." },
-    { id: 7, title: "Ontological Dependence", description: "Analyze primitive dependencies." },
-    { id: 8, title: "Generate Alternative Conceptualizations", description: "Generate equivalent conceptualizations." },
-    { id: 9, title: "Identify Representational Biases", description: "Detect biases in primitive choices." },
-    { id: 10, title: "Find an Interpretation", description: "Find a true model for the axiom system." },
+    { id: 1, title: "Axiom-Set / Theory Transformation", description: "Rewrite primitives and axioms.", dualInput: false },
+    { id: 2, title: "Schema Equivalence", description: "Model-theoretic sameness check.", dualInput: false },
+    { id: 3, title: "Definitional Equivalence", description: "Bi-directional definitional translation.", dualInput: false },
+    { id: 4, title: "Model-Preserving Rewrite", description: "Rewrite theory preserving all models.", dualInput: false },
+    { id: 5, title: "Conservative Extension Analysis", description: "Analyze extensions for conservativity.", dualInput: false },
+    { id: 6, title: "Compare Conceptual Schemes", description: "Compare primitive/derived classifications.", dualInput: false },
+    { id: 7, title: "Ontological Dependence", description: "Analyze primitive dependencies.", dualInput: false },
+    { id: 8, title: "Generate Alternative Conceptualizations", description: "Generate equivalent conceptualizations.", dualInput: false },
+    { id: 9, title: "Identify Representational Biases", description: "Detect biases in primitive choices.", dualInput: false },
+    { id: 10, title: "Find an Interpretation", description: "Find a true model for the axiom system.", dualInput: false },
+    { id: 11, title: "Determine Equivalence", description: "Compare two systems for theorem equivalence.", dualInput: true },
   ];
 
   const handleSelectPreset = (preset: Preset) => {
@@ -93,15 +95,24 @@ export default function Home() {
                     className="bg-card"
                     ref={(el) => { functionRefs.current[f.id] = el; }}
                   >
-                    <FunctionRow
-                      id={f.id}
-                      title={f.title}
-                      description={f.description}
-                      selectedModel={selectedModel}
-                      presetInput={functionInputs[f.id]?.input}
-                      presetInstructions={functionInputs[f.id]?.instructions}
-                      triggerRun={functionInputs[f.id]?.trigger}
-                    />
+                    {f.dualInput ? (
+                      <DualInputRow
+                        id={f.id}
+                        title={f.title}
+                        description={f.description}
+                        selectedModel={selectedModel}
+                      />
+                    ) : (
+                      <FunctionRow
+                        id={f.id}
+                        title={f.title}
+                        description={f.description}
+                        selectedModel={selectedModel}
+                        presetInput={functionInputs[f.id]?.input}
+                        presetInstructions={functionInputs[f.id]?.instructions}
+                        triggerRun={functionInputs[f.id]?.trigger}
+                      />
+                    )}
                   </div>
                 ))}
               </div>
