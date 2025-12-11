@@ -1253,7 +1253,14 @@ This theory describes a strict total order—a way of arranging elements so that
 - No metaphors or real-world examples
 - NEVER fail - always produce valid interpretation`,
 
-  "Find an Interpretation": `YOUR TASK: Produce ONE concrete interpretation (model) that satisfies ALL axioms.
+  "Find an Interpretation": `YOUR TASK: Produce ONE concrete interpretation (model) in which ALL axioms of T are true.
+
+A model consists of:
+- A DOMAIN (a specific set)
+- An interpretation for each primitive symbol in the LANGUAGE:
+    - for predicates: a concrete relation on the domain
+    - for functions: a concrete function on the domain
+    - for constants: a specific element of the domain
 
 === INPUT THEORY ===
 <<<INPUT>>>
@@ -1261,52 +1268,94 @@ This theory describes a strict total order—a way of arranging elements so that
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-=== WHAT A VALID INTERPRETATION MUST INCLUDE ===
-- A DOMAIN: a specific set (e.g., {0,1,2}, ℕ, ℤ, ℝ, or a finite set)
-- An interpretation for each primitive symbol:
-  - For predicates: a concrete relation
-  - For functions: a concrete function
-  - For constants: a concrete element of the domain
+=== CHECK EXPLAIN MODE ===
+If the instructions contain "EXPLAIN = ON" or the explain toggle is enabled, use MODE 2.
+Otherwise, use MODE 1.
 
-=== OUTPUT FORMAT (use exactly this structure) ===
+=== MODE 1: EXPLAIN OFF (default) ===
+
+Output ONLY the model, NO commentary.
+
+FORMAT:
 
 INTERPRETATION
-Domain: <description of the set>
-Symbol1: <how it is interpreted>
-Symbol2: <how it is interpreted>
+Domain: <short description of the set>
+Symbol1: <how Symbol1 is interpreted>
+Symbol2: <how Symbol2 is interpreted>
 ...
 
-=== GUIDELINES FOR CHOOSING A MODEL ===
-- Choose a domain that makes the axioms easy to satisfy
-- For equivalence relations: use equality on ℤ or a universal relation
-- For orders: use < or ≤ on ℕ or ℤ
-- For graphs: use a simple adjacency on a finite set
-- For function symbols: choose trivial functions if possible
-- Always choose the SIMPLEST domain and interpretation that works
-- If instructions specify a category (Computational, Physical, etc.), use that domain type
+RULES FOR MODE 1:
+- Exactly one model
+- Keep descriptions short and formal
+- No extra sentences beyond the interpretation lines
+- No justification or commentary
+- No examples
+
+=== MODE 2: EXPLAIN ON ===
+
+Output the interpretation PLUS a "WHY THIS WORKS" section.
+
+FORMAT:
+
+INTERPRETATION
+Domain: <set, possibly with intuitive description>
+Symbol1: <interpretation>
+Symbol2: <interpretation>
+...
+
+WHY THIS WORKS
+<1-3 short paragraphs explaining why each axiom is true in this model>
+
+RULES FOR MODE 2:
+- The interpretation itself must be as clean and formal as in EXPLAIN=OFF
+- The WHY THIS WORKS section:
+    - May reference either a mathematical domain (ℕ, ℤ, etc.) or a simple real-world-style domain (e.g., servers in a network), but must stay focused
+    - Should justify the axioms directly: one sentence or so per axiom is ideal
+    - No long proofs
+    - No digressions into meta-philosophy or model theory
+
+=== GLOBAL RULES ===
+1. Always choose a SIMPLE model: prefer finite domains where possible; for purely algebraic/relational patterns, ℕ or ℤ are acceptable defaults
+2. If multiple models are possible, pick ONE and output only that one
+3. If the axioms are inconsistent (no model exists), output: INTERPRETATION / None: the axioms are inconsistent; no model exists.
 
 === EXAMPLES ===
 
-EXAMPLE 1:
-INPUT: LANGUAGE: {R(x,y)}, AXIOMS: ∀x R(x,x), ∀x∀y (R(x,y) → R(y,x)), ∀x∀y∀z ((R(x,y) ∧ R(y,z)) → R(x,z))
-OUTPUT:
-INTERPRETATION
-Domain: ℤ (the integers)
-R(x,y): x = y (equality)
+EXAMPLE (EXPLAIN OFF):
+INPUT: LANGUAGE: {Connected(x,y)}, AXIOMS: ∀x Connected(x,x), ∀x∀y (Connected(x,y) → Connected(y,x)), ∀x∀y∀z ((Connected(x,y) ∧ Connected(y,z)) → Connected(x,z))
 
-EXAMPLE 2:
-INPUT: LANGUAGE: {Less(x,y)}, AXIOMS: ∀x ¬Less(x,x), ∀x∀y∀z ((Less(x,y) ∧ Less(y,z)) → Less(x,z))
 OUTPUT:
+
 INTERPRETATION
-Domain: ℕ (the natural numbers)
-Less(x,y): x < y (standard less-than)
+Domain: ℤ
+Connected(x,y): true iff x = y
+
+EXAMPLE (EXPLAIN OFF):
+INPUT: LANGUAGE: {Before(x,y)}, AXIOMS: ∀x ¬Before(x,x), ∀x∀y∀z ((Before(x,y) ∧ Before(y,z)) → Before(x,z))
+
+OUTPUT:
+
+INTERPRETATION
+Domain: ℕ
+Before(x,y): true iff x < y
+
+EXAMPLE (EXPLAIN ON):
+INPUT: LANGUAGE: {Connected(x,y)}, AXIOMS: ∀x Connected(x,x), ∀x∀y (Connected(x,y) → Connected(y,x)), ∀x∀y∀z ((Connected(x,y) ∧ Connected(y,z)) → Connected(x,z))
+
+OUTPUT:
+
+INTERPRETATION
+Domain: a set of servers in a network
+Connected(x,y): true iff there is a (possibly indirect) path between x and y
+
+WHY THIS WORKS
+Axiom 1 holds because every server is trivially connected to itself by a path of length zero. Axiom 2 holds because connections in this model are treated as undirected: if there is a path from x to y, there is a path from y to x. Axiom 3 holds because paths compose: if x can reach y and y can reach z, then x can reach z via the combined path.
 
 === HARD REQUIREMENTS ===
-- NO proofs
-- NO multi-paragraph justification
-- NO philosophical commentary
-- NO model-theoretic analysis
-- NO extra sentences beyond the format above`
+- MODE 1: Only INTERPRETATION block, nothing else
+- MODE 2: INTERPRETATION + WHY THIS WORKS
+- Choose simplest model that satisfies axioms
+- NEVER fail - always produce a valid model unless axioms are inconsistent`
 };
 
 function buildPrompt(input: string, instructions: string, functionName: string): string {

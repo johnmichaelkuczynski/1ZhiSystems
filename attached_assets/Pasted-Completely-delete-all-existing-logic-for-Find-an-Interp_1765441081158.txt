@@ -1,0 +1,149 @@
+Completely delete all existing logic for:
+"Find an Interpretation (One Argument)"
+Replace it entirely with the unified rules below.
+
+=========================================================
+UNIFIED LOGIC FOR THIS FUNCTION
+=========================================================
+
+INPUT:
+- BOX A: a single theory T with:
+    - LANGUAGE section
+    - AXIOMS section
+- EXPLAIN toggle (ON or OFF)
+
+TASK:
+Produce ONE concrete interpretation (model) in which ALL axioms of T are true.
+
+A model consists of:
+- A DOMAIN (a specific set)
+- An interpretation for each primitive symbol in the LANGUAGE:
+    - for predicates: a concrete relation on the domain
+    - for functions: a concrete function on the domain
+    - for constants: a specific element of the domain
+
+There are TWO output modes depending on the EXPLAIN toggle.
+
+=========================================================
+MODE 1 — EXPLAIN TOGGLE OFF (NON-EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = OFF, output MUST be:
+PURELY the model, NO commentary.
+
+OUTPUT FORMAT (STRICT):
+
+INTERPRETATION
+Domain: <short description of the set>
+Symbol1: <how Symbol1 is interpreted>
+Symbol2: <how Symbol2 is interpreted>
+...
+
+Rules:
+- Exactly one model.
+- Keep descriptions short and formal.
+- No extra sentences beyond the interpretation lines.
+- No justification or commentary.
+- No examples.
+
+Examples the app MUST imitate:
+
+Example 1
+INPUT:
+LANGUAGE: {Connected(x,y)}
+AXIOMS:
+1. ∀x Connected(x,x)
+2. ∀x∀y (Connected(x,y) → Connected(y,x))
+3. ∀x∀y∀z ((Connected(x,y) ∧ Connected(y,z)) → Connected(x,z))
+EXPLAIN = OFF
+
+OUTPUT:
+INTERPRETATION
+Domain: ℤ
+Connected(x,y): true iff x = y
+
+Example 2
+INPUT:
+LANGUAGE: {Before(x,y)}
+AXIOMS:
+1. ∀x ¬Before(x,x)
+2. ∀x∀y∀z ((Before(x,y) ∧ Before(y,z)) → Before(x,z))
+EXPLAIN = OFF
+
+OUTPUT:
+INTERPRETATION
+Domain: ℕ
+Before(x,y): true iff x < y
+
+=========================================================
+MODE 2 — EXPLAIN TOGGLE ON (EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = ON, output MUST contain TWO sections:
+
+1) The INTERPRETATION block (same format as EXPLAIN=OFF)  
+2) A “WHY THIS WORKS” block with a brief justification
+
+OUTPUT FORMAT (STRICT):
+
+INTERPRETATION
+Domain: <set, possibly with intuitive description>
+Symbol1: <interpretation>
+Symbol2: <interpretation>
+...
+
+WHY THIS WORKS
+<1–3 short paragraphs explaining why each axiom is true in this model>
+
+Rules:
+- The interpretation itself must be as clean and formal as in EXPLAIN=OFF.
+- The WHY THIS WORKS section:
+    - May reference either a mathematical domain (ℕ, ℤ, etc.)
+      or a simple real-world-style domain (e.g., servers in a network),
+      but must stay focused and not ramble.
+    - Should justify the axioms directly:
+        * one sentence or so per axiom is ideal.
+    - No long proofs.
+    - No digressions into meta-philosophy or model theory.
+
+Example the app MUST imitate:
+
+Example INPUT:
+LANGUAGE: {Connected(x,y)}
+AXIOMS:
+1. ∀x Connected(x,x)
+2. ∀x∀y (Connected(x,y) → Connected(y,x))
+3. ∀x∀y∀z ((Connected(x,y) ∧ Connected(y,z)) → Connected(x,z))
+EXPLAIN = ON
+
+Example OUTPUT:
+INTERPRETATION
+Domain: a set of servers in a network
+Connected(x,y): true iff there is a (possibly indirect) path between x and y
+
+WHY THIS WORKS
+Axiom 1 holds because every server is trivially connected to itself by a path
+of length zero. Axiom 2 holds because connections in this model are treated as
+undirected: if there is a path from x to y, there is a path from y to x.
+Axiom 3 holds because paths compose: if x can reach y and y can reach z, then
+x can reach z via the combined path.
+
+=========================================================
+GLOBAL RULES
+=========================================================
+
+1. Always choose a SIMPLE model:
+   - Prefer finite domains where possible.
+   - For purely algebraic/relational patterns, ℕ or ℤ are acceptable defaults.
+
+2. If multiple models are possible, pick ONE and output only that one.
+
+3. If the axioms are inconsistent (no model exists), the function may output:
+   INTERPRETATION
+   None: the axioms are inconsistent; no model exists.
+
+   But only if the inconsistency is straightforwardly detectable from the axioms.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
