@@ -1,7 +1,7 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { FileText, Dot } from "lucide-react";
+import { FileText } from "lucide-react";
 
 export interface Preset {
   id: string;
@@ -584,43 +584,31 @@ export function PresetsSidebar({ onSelectPreset, onScrollToFunction }: PresetsSi
         <div className="p-2 space-y-1">
           {groupedPresets.map((group) => (
             <div key={group.id}>
-              <div className="flex items-center gap-2 min-w-0 w-full p-2 rounded-sm hover:bg-muted/50 transition-colors text-left group/header">
-                <button
-                  className="shrink-0 hover:text-foreground transition-colors text-muted-foreground opacity-0 group-hover/header:opacity-100"
-                  onClick={() => onScrollToFunction?.(group.id)}
-                  title="Scroll to this function"
-                >
-                  <Dot className="h-4 w-4" />
-                </button>
+              <button
+                className="flex items-center gap-2 min-w-0 w-full p-2 rounded-sm hover:bg-muted/50 transition-colors text-left"
+                onClick={() => onScrollToFunction?.(group.id)}
+              >
                 <Badge variant="outline" className="font-mono text-[10px] shrink-0 rounded-sm">
                   {group.id}
                 </Badge>
                 <span className="text-xs font-medium truncate">{group.name}</span>
-              </div>
+              </button>
               <div className="pl-4 pr-2 pb-2 space-y-1">
                 {group.presets.length > 0 ? (
                   group.presets.map((preset) => (
-                    <div key={preset.id} className="flex items-center gap-1 group/preset">
-                      <button
-                        className="shrink-0 hover:text-foreground transition-colors text-muted-foreground opacity-0 group-hover/preset:opacity-100"
-                        onClick={() => onScrollToFunction?.(group.id)}
-                        title="Scroll to this function"
-                      >
-                        <Dot className="h-3 w-3" />
-                      </button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="flex-1 justify-start text-xs h-8 font-normal text-muted-foreground hover:text-foreground"
-                        onClick={() => {
-                          onSelectPreset(preset);
-                          onScrollToFunction?.(group.id);
-                        }}
-                        data-testid={`preset-${preset.id}`}
-                      >
-                        {preset.name}
-                      </Button>
-                    </div>
+                    <Button
+                      key={preset.id}
+                      variant="ghost"
+                      size="sm"
+                      className="w-full justify-start text-xs h-8 font-normal text-muted-foreground hover:text-foreground"
+                      onClick={() => {
+                        onSelectPreset(preset);
+                        onScrollToFunction?.(group.id);
+                      }}
+                      data-testid={`preset-${preset.id}`}
+                    >
+                      {preset.name}
+                    </Button>
                   ))
                 ) : (
                   <p className="text-[10px] text-muted-foreground/50 py-1 pl-2">No presets</p>
