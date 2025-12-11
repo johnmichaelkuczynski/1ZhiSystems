@@ -1035,7 +1035,7 @@ DEPENDENCY STRUCTURE:
 Father → {Parent, Male}
 
 EXPLANATION:
-The theory treats Parent, Male, and Female as irreducible, giving them foundational status. Father is explicitly defined in terms of Parent and Male, creating a direct conceptual dependence. The dependency graph shows Father as a derived concept built from two independent primitives. This structure reveals the theory's conceptual architecture: gender and parenthood are fundamental, while fatherhood is composite.
+The theory treats Parent, Male, and Female as irreducible, giving them foundational status. Father is not primitive, because its behavior is fully determined by the interaction of Parent and Male. Ontologically, the theory requires Parent and Male before Father can be introduced. The dependency structure therefore reveals a two-tier conceptual organization: foundational gender and parenthood predicates, with Father constructed from them.
 
 === HARD REQUIREMENTS ===
 - MODE 1: Compact formal output only

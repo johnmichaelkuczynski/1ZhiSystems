@@ -1,0 +1,133 @@
+Completely delete all existing logic for:
+"Ontological Dependence (One Argument)"
+Replace everything with the rules below.
+
+=========================================================
+UNIFIED LOGIC FOR THIS FUNCTION
+=========================================================
+
+INPUT:
+- BOX A = Theory T (LANGUAGE + AXIOMS)
+- EXPLAIN toggle (ON or OFF)
+
+GOAL:
+Identify **ontological dependence relations** among the theory’s predicates:
+- Which predicates are *primitive*
+- Which predicates are *definable* from the primitives
+- For each definable predicate, identify which primitives it depends on
+- Summarize the dependency graph
+
+This function is NOT:
+- a conservativity test  
+- a model-theoretic test  
+- a definitional-equivalence test  
+- a rewriting function  
+
+It is strictly an **intra-theory dependency analysis**.
+
+There are two output modes.
+
+=========================================================
+MODE 1 — EXPLAIN TOGGLE OFF (NON-EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = OFF, output MUST be:
+
+1. THE RESULT
+
+PRIMITIVE PREDICATES:
+<list>
+
+DEFINABLE PREDICATES:
+<list each predicate with explicit definition>
+
+DEPENDENCY STRUCTURE:
+<bullet list showing which predicates depend on which>
+
+Rules:
+- Keep output extremely compact.
+- DEFINITIONS must be explicit first-order formulas when possible.
+- The DEPENDENCY STRUCTURE must be strictly factual:
+    Example: “Father depends on Parent + Male”
+- No prose explanation.
+- No metaphors, analogies, or interpretations.
+
+=========================================================
+MODE 2 — EXPLAIN TOGGLE ON (EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = ON, output MUST contain:
+
+1. THE RESULT  
+   (Same categories as EXPLAIN=OFF, exact structure retained)
+
+2. EXPLANATION  
+   (2–4 concise paragraphs)
+
+EXPLANATION must:
+- Clarify *why* certain predicates are primitive.
+- Explain how definability shows conceptual dependence.
+- Describe the dependency graph in intuitive but rigorous terms.
+- Explain how the structure reveals the theory’s conceptual architecture.
+
+EXPLANATION must NOT:
+- Discuss specific models (numbers, people, networks, etc.).
+- Use analogies or storytelling.
+- Talk about metaphysics or real-world ontology.
+- Drift into anything except formal conceptual structure.
+
+=========================================================
+STYLE TEMPLATE (MUST FOLLOW)
+=========================================================
+
+Example INPUT:
+
+LANGUAGE: {Parent(x,y), Male(x), Female(x), Father(x,y)}
+AXIOMS:
+1. ∀x∀y (Father(x,y) → Parent(x,y) ∧ Male(x))
+2. ∀x ¬(Male(x) ∧ Female(x))
+
+EXPLAIN = OFF
+
+Example OUTPUT:
+
+1. THE RESULT
+
+PRIMITIVE PREDICATES:
+Parent, Male, Female
+
+DEFINABLE PREDICATES:
+Father(x,y) ↔ Parent(x,y) ∧ Male(x)
+
+DEPENDENCY STRUCTURE:
+Father → {Parent, Male}
+
+-----------------------------
+
+Example INPUT with EXPLAIN = ON:
+(same theory)
+
+Example OUTPUT:
+
+1. THE RESULT
+
+PRIMITIVE PREDICATES:
+Parent, Male, Female
+
+DEFINABLE PREDICATES:
+Father ↔ Parent ∧ Male
+
+DEPENDENCY STRUCTURE:
+Father → {Parent, Male}
+
+EXPLANATION:
+The theory treats Parent, Male, and Female as irreducible, giving them
+foundational status. Father is not primitive, because its behavior is fully
+determined by the interaction of Parent and Male. Ontologically, the theory
+requires Parent and Male before Father can be introduced. The dependency
+structure therefore reveals a two-tier conceptual organization: foundational
+gender and parenthood predicates, with Father constructed from them.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
