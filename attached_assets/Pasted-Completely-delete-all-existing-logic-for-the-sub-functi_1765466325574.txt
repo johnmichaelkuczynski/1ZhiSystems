@@ -1,0 +1,101 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: CHEMICAL".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (CHEMICAL)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct a CHEMICAL MODEL
+using real chemical entities in the following priority order:
+
+1. Chemical species (atoms, ions, molecules)
+2. Chemical bonds (single, double, ionic, covalent)
+3. Reaction pathways (reactant → product)
+4. Energy levels, activation barriers
+5. Stoichiometric relations
+6. Equilibrium / kinetics (rates, catalysts)
+7. Only if all above fail: abstract chemical graphs.
+
+MODEL CONSTRUCTION RULES:
+- Choose a chemical domain D (atoms, molecules, reactions).
+- Map each predicate/function to a real chemical relation:
+  “bonds-with”, “reacts-to-form”, “has oxidation state”, etc.
+- Ensure the axioms hold.
+
+If no chemical interpretation satisfies T:
+"No chemical interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <chemical domain>
+Interpretations:
+P1(x̄) := <chemical relation>
+P2(x̄) := <chemical relation>
+...
+Pk(x̄) := <chemical relation>
+
+If no interpretation exists:
+"No chemical interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Interpretation is taken from the earliest feasible chemical category.
+- Predicates/functions correspond to bonding, reactivity, or molecular structure.
+- All axioms are checked under this interpretation.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {Bonds(x,y)}
+Axioms:
+1. ∀x ¬Bonds(x,x)
+2. ∀x∀y (Bonds(x,y) → Bonds(y,x))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Atoms in a molecule
+Interpretations:
+Bonds(x,y) := "atom x and atom y share a covalent bond"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Atoms in a molecule
+Interpretations:
+Bonds(x,y) := "atom x and atom y share a covalent bond"
+
+EXPLANATION:
+- Atoms do not bond with themselves (axiom 1).
+- Covalent bonds are symmetric (axiom 2).
+- Thus the axioms are satisfied.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

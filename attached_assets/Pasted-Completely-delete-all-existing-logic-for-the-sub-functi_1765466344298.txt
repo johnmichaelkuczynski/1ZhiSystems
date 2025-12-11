@@ -1,0 +1,100 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: ECONOMIC".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (ECONOMIC)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct an ECONOMIC MODEL
+according to the following priority order:
+
+1. Goods, prices, and markets
+2. Agents and preferences
+3. Trade relations (buys-from, sells-to)
+4. Utility, demand, and substitution
+5. Production functions (inputs → outputs)
+6. Market equilibria
+7. Only if all above fail: abstract exchange networks.
+
+MODEL CONSTRUCTION RULES:
+- Choose an economic domain D (goods, agents, prices).
+- Interpret predicates/functions as real economic relations:
+  “prefers”, “trades-with”, “more-expensive-than”, “produces”.
+- Ensure all axioms hold.
+
+If no interpretation exists:
+"No economic interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <economic domain>
+Interpretations:
+P1(x̄) := <economic relation>
+P2(x̄) := <economic relation>
+...
+Pk(x̄) := <economic relation>
+
+If no interpretation exists:
+"No economic interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- The model is chosen from the earliest viable branch of economics.
+- Predicates correspond to market relations, preferences, or trade flows.
+- Axioms are checked under the chosen mapping.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {MoreExpensive(x,y)}
+Axioms:
+1. ∀x ¬MoreExpensive(x,x)
+2. ∀x∀y∀z ((MoreExpensive(x,y) ∧ MoreExpensive(y,z)) → MoreExpensive(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Market goods
+Interpretations:
+MoreExpensive(x,y) := "price(x) > price(y)"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Market goods
+Interpretations:
+MoreExpensive(x,y) := "price(x) > price(y)"
+
+EXPLANATION:
+- Price comparison is irreflexive and transitive.
+- Therefore the axioms are satisfied.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

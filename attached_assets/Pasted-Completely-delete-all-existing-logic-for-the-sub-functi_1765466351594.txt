@@ -1,0 +1,100 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: SOCIAL / SOCIOLOGICAL".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (SOCIAL / SOCIOLOGICAL)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct a SOCIAL MODEL
+using the following priority order:
+
+1. Individuals in a group
+2. Social roles (leader, subordinate, peer)
+3. Social relations (trusts, respects, defers-to)
+4. Hierarchies (rankings, influence)
+5. Group dynamics (coalitions, alliances)
+6. Norms and rule-following behavior
+7. Only if all above fail: abstract social graphs.
+
+MODEL CONSTRUCTION RULES:
+- Select a domain D of persons or social units.
+- Map each predicate/function to a sociological relation:
+  “has-higher-status-than”, “defers-to”, “belongs-to-group-of”.
+- Ensure all axioms hold.
+
+If no interpretation exists:
+"No social interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <social domain>
+Interpretations:
+P1(x̄) := <social relation>
+P2(x̄) := <social relation>
+...
+Pk(x̄) := <social relation>
+
+If no interpretation exists:
+"No social interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Interpretation chosen from earliest feasible social structure.
+- Predicates are mapped to stable social relations (rank, influence).
+- The axioms are verified under these assignments.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {HigherStatus(x,y)}
+Axioms:
+1. ∀x ¬HigherStatus(x,x)
+2. ∀x∀y∀z ((HigherStatus(x,y) ∧ HigherStatus(y,z)) → HigherStatus(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Members of a formal hierarchy
+Interpretations:
+HigherStatus(x,y) := "x holds a higher rank than y in the organization"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Members of a formal hierarchy
+Interpretations:
+HigherStatus(x,y) := "x holds a higher rank than y in the organization"
+
+EXPLANATION:
+- Hierarchical rank is irreflexive and transitive.
+- Therefore the axioms are satisfied.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

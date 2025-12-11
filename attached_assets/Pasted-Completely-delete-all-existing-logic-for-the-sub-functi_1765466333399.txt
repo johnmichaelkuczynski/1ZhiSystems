@@ -1,0 +1,101 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: BIOLOGICAL".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (BIOLOGICAL)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct a BIOLOGICAL MODEL
+using actual biological entities in the following priority order:
+
+1. Organisms (species members, populations)
+2. Cells and cell types
+3. Biological functions (feeds-on, predates, symbiosis)
+4. Genetic relations (parent, offspring, expresses-gene)
+5. Ecosystem interactions (producer, consumer)
+6. Evolutionary relations (ancestor, diverged-from)
+7. Only if all above fail: abstract phylogenetic graphs.
+
+MODEL CONSTRUCTION RULES:
+- Select a biological domain D.
+- Map predicates/functions to biological relations:
+  “preys-on”, “is-parent-of”, “is-in-same-clade-as”, etc.
+- Ensure the axioms hold.
+
+If no interpretation exists:
+"No biological interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <biological domain>
+Interpretations:
+P1(x̄) := <biological relation>
+P2(x̄) := <biological relation>
+...
+Pk(x̄) := <biological relation>
+
+If no interpretation exists:
+"No biological interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- The domain is chosen from the simplest viable level of biological structure.
+- Predicates map onto ecological, genetic, or anatomical relations.
+- All axioms must hold under the interpretation.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {Eats(x,y)}
+Axioms:
+1. ∀x ¬Eats(x,x)
+2. ∀x∀y∀z ((Eats(x,y) ∧ Eats(y,z)) → Eats(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Species in a food chain
+Interpretations:
+Eats(x,y) := "species x is a trophic level above species y"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Species in a food chain
+Interpretations:
+Eats(x,y) := "species x is a trophic level above species y"
+
+EXPLANATION:
+- No species occupies a trophic level above itself.
+- Food-chain dominance is transitive.
+- Thus all axioms are satisfied.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
