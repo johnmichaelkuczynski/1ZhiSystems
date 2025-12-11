@@ -281,6 +281,42 @@ const PRESETS: Preset[] = [
     functionId: 9,
     input: ``,
     instructions: `List all representational biases from strongest to weakest. For each bias, explain what it privileges, what it suppresses, and how severe the distortion is.`
+  },
+  // FUNCTION 10: Find an Interpretation
+  {
+    id: "f10-mathematics",
+    name: "Mathematical Interpretation",
+    functionId: 10,
+    input: ``,
+    instructions: `Find an interpretation from pure mathematics. Map primitives to set-theoretic, algebraic, or geometric structures. Verify each axiom holds in the model.`
+  },
+  {
+    id: "f10-physics",
+    name: "Physical Interpretation",
+    functionId: 10,
+    input: ``,
+    instructions: `Find an interpretation from physics. Map primitives to physical entities (spacetime, particles, fields, forces). Show how each axiom becomes a true physical statement.`
+  },
+  {
+    id: "f10-economics",
+    name: "Economic Interpretation",
+    functionId: 10,
+    input: ``,
+    instructions: `Find an interpretation from economics. Map primitives to economic entities (agents, goods, preferences, markets). Verify each axiom as an economic principle.`
+  },
+  {
+    id: "f10-computer-science",
+    name: "Computational Interpretation",
+    functionId: 10,
+    input: ``,
+    instructions: `Find an interpretation from computer science. Map primitives to computational structures (types, programs, data structures, processes). Verify each axiom computationally.`
+  },
+  {
+    id: "f10-philosophy",
+    name: "Philosophical Interpretation",
+    functionId: 10,
+    input: ``,
+    instructions: `Find an interpretation from philosophy or metaphysics. Map primitives to philosophical concepts (substances, properties, events, minds). Explain the philosophical significance.`
   }
 ];
 
@@ -300,7 +336,8 @@ export function PresetsSidebar({ onSelectPreset }: PresetsSidebarProps) {
     "Compare Conceptual Schemes",
     "Ontological Dependence",
     "Generate Alternative Conceptualizations",
-    "Identify Representational Biases"
+    "Identify Representational Biases",
+    "Find an Interpretation"
   ];
 
   const toggleSection = (id: number) => {

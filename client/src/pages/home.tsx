@@ -24,6 +24,7 @@ export default function Home() {
     { id: 7, title: "Ontological Dependence", description: "Analyze primitive dependencies." },
     { id: 8, title: "Generate Alternative Conceptualizations", description: "Generate equivalent conceptualizations." },
     { id: 9, title: "Identify Representational Biases", description: "Detect biases in primitive choices." },
+    { id: 10, title: "Find an Interpretation", description: "Find a true model for the axiom system." },
   ];
 
   const handleSelectPreset = (preset: Preset) => {

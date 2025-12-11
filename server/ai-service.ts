@@ -70,7 +70,9 @@ Then briefly explain the reasoning.`,
   
   "Generate Alternative Conceptualizations": `Generate three distinct, non-trivial, logically equivalent reformulations of the input theory using completely different primitive concepts (e.g., algebraic, topological, order-theoretic, mereological, etc.). Each reformulation must be categorical or at least bi-interpretable with the original.`,
   
-  "Identify Representational Biases": `Analyze the input theory and identify hidden representational biases, implicit ontological assumptions, and historical or notational prejudices baked into the choice of primitives and axioms. Suggest how these biases affect what the theory makes easy or difficult to express, and propose a bias-minimized alternative formulation.`
+  "Identify Representational Biases": `Analyze the input theory and identify hidden representational biases, implicit ontological assumptions, and historical or notational prejudices baked into the choice of primitives and axioms. Suggest how these biases affect what the theory makes easy or difficult to express, and propose a bias-minimized alternative formulation.`,
+  
+  "Find an Interpretation": `Find a concrete, true (or defensible) model/interpretation of the input axiom system. Map each primitive symbol to a specific domain of objects and relations from mathematics, physics, economics, philosophy, or any appropriate field. Show explicitly how each axiom becomes a true statement under this interpretation. If multiple interpretations exist, provide the most natural or illuminating one.`
 };
 
 const SYSTEM_PROMPT = `You are the world's foremost expert in first-order logic, theory transformation, and formal ontology analysis.
@@ -318,7 +320,26 @@ Invert the conceptual hierarchy. Make derived notions primitive. Redefine origin
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-Analyze what the primitive choices privilege vs suppress. Extract the implicit worldview. Rank biases by severity. Suggest debiasing alternatives.`
+Analyze what the primitive choices privilege vs suppress. Extract the implicit worldview. Rank biases by severity. Suggest debiasing alternatives.`,
+
+  "Find an Interpretation": `Find a concrete model/interpretation for the axiom system below.
+
+<<<INPUT>>>
+
+INSTRUCTIONS:
+<<<INSTRUCTIONS>>>
+
+TASK:
+1. Identify the primitives (predicates, functions, constants) in the input - extract them from formal notation or natural language.
+2. Choose a concrete domain of objects from the requested field (or the most natural field if none specified).
+3. Map each primitive symbol to a specific relation/function/object in that domain.
+4. Verify that each axiom becomes a TRUE statement under this interpretation.
+5. Present the interpretation clearly with:
+   - Domain specification
+   - Symbol-to-meaning mapping
+   - Verification that each axiom holds
+
+If the user specifies a field (e.g., "from micro-economics"), find an interpretation from that field. If no field is specified, choose the most illuminating interpretation from mathematics, physics, economics, philosophy, computer science, or any appropriate domain.`
 };
 
 function buildPrompt(input: string, instructions: string, functionName: string): string {
