@@ -1,0 +1,108 @@
+Replace ONLY the sub-function "Vocabulary Compression".
+Do NOT modify the main Theory Transformation function.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION: Vocabulary Compression
+=========================================================
+
+TASK:
+Given any theory, compress the vocabulary by:
+1. Identifying unary predicates that can be defined using surviving non-unary predicates.
+2. Eliminating those unary predicates from the LANGUAGE.
+3. Introducing DEFINITIONS for each eliminated predicate.
+4. Removing only axioms that become tautological after substitution.
+5. Leaving all other axioms exactly intact.
+
+RULES:
+- If U(x) appears only in axioms of the form (U(x) → ∃y F(x,y)) or (F(x,y) → U(x)),
+  define it as:
+        U(x) ↔ ∃y F(x,y)
+- If V(x) is always the negation of U(x), define it as:
+        V(x) ↔ ¬∃y F(x,y)
+- Keep all surviving predicates unchanged.
+- Do NOT add new primitives.
+- Do NOT reject or complain about any input.
+- Always return a nontrivial compressed theory.
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+LANGUAGE: { <surviving predicates> }
+
+DEFINITIONS:
+<one line per eliminated predicate>
+
+AXIOMS:
+<remaining axioms after eliminating tautologies>
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+<same block as EXPLAIN = OFF>
+
+EXPLANATION:
+- State which predicates were eliminated.
+- State the definitions used.
+- State which axioms vanished and why.
+- State that the resulting theory is definitionally equivalent.
+
+=========================================================
+EXAMPLE — EXPLAIN = OFF
+=========================================================
+
+INPUT:
+Language: {F(x,y), G(x,y), U(x), V(x)}
+Axioms:
+1. ∀x ¬F(x,x)
+2. ∀x∀y (F(x,y) → U(x))
+3. ∀x (U(x) → ∃y F(x,y))
+4. ∀x∀y (G(x,y) → ¬G(y,x))
+5. ∀x∀y∀z ((G(x,y) ∧ G(y,z)) → G(x,z))
+6. ∀x (V(x) → ¬U(x))
+7. ∀x (U(x) ∨ V(x))
+
+OUTPUT:
+1. THE RESULT
+
+LANGUAGE: {F(x,y), G(x,y)}
+
+DEFINITIONS:
+U(x) ↔ ∃y F(x,y)
+V(x) ↔ ¬∃y F(x,y)
+
+AXIOMS:
+1. ∀x ¬F(x,x)
+2. ∀x∀y (G(x,y) → ¬G(y,x))
+3. ∀x∀y∀z ((G(x,y) ∧ G(y,z)) → G(x,z))
+
+=========================================================
+EXAMPLE — EXPLAIN = ON
+=========================================================
+
+1. THE RESULT
+
+LANGUAGE: {F(x,y), G(x,y)}
+
+DEFINITIONS:
+U(x) ↔ ∃y F(x,y)
+V(x) ↔ ¬∃y F(x,y)
+
+AXIOMS:
+1. ∀x ¬F(x,x)
+2. ∀x∀y (G(x,y) → ¬G(y,x))
+3. ∀x∀y∀z ((G(x,y) ∧ G(y,z)) → G(x,z))
+
+EXPLANATION:
+U and V were eliminated because both are definable from F.  
+U(x) is equivalent to “x has an F-successor,” and V(x) is its negation.  
+After substituting these definitions, the axioms involving U and V collapsed into tautologies and were removed.  
+The remaining axioms preserve the same models, making the compressed theory definitionally equivalent to the original.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

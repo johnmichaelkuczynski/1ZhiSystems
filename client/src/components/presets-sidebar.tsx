@@ -53,7 +53,32 @@ RULES:
     name: "Vocabulary Compression",
     functionId: 1,
     input: ``,
-    instructions: `Find and eliminate all redundant primitives. Keep only the minimal set needed to express all axioms. Define eliminated primitives in terms of the survivors.`
+    instructions: `VOCABULARY COMPRESSION OPERATION:
+
+Compress the vocabulary by:
+1. Identifying unary predicates that can be defined using surviving non-unary predicates.
+2. Eliminating those unary predicates from the LANGUAGE.
+3. Introducing DEFINITIONS for each eliminated predicate.
+4. Removing only axioms that become tautological after substitution.
+5. Leaving all other axioms exactly intact.
+
+RULES:
+- If U(x) appears only in axioms of the form (U(x) → ∃y F(x,y)) or (F(x,y) → U(x)), define: U(x) ↔ ∃y F(x,y)
+- If V(x) is always the negation of U(x), define: V(x) ↔ ¬∃y F(x,y)
+- Keep all surviving predicates unchanged
+- Do NOT add new primitives
+- Always return a nontrivial compressed theory
+
+OUTPUT FORMAT:
+1. THE RESULT
+
+LANGUAGE: { <surviving predicates> }
+
+DEFINITIONS:
+<one line per eliminated predicate>
+
+AXIOMS:
+<remaining axioms after eliminating tautologies>`
   },
   {
     id: "f1-vocab-expansion",
