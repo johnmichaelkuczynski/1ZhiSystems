@@ -601,7 +601,10 @@ export function PresetsSidebar({ onSelectPreset, onScrollToFunction }: PresetsSi
                       variant="ghost"
                       size="sm"
                       className="w-full justify-start text-xs h-8 font-normal text-muted-foreground hover:text-foreground"
-                      onClick={() => onSelectPreset(preset)}
+                      onClick={() => {
+                        onSelectPreset(preset);
+                        onScrollToFunction?.(group.id);
+                      }}
                       data-testid={`preset-${preset.id}`}
                     >
                       {preset.name}
