@@ -550,18 +550,48 @@ KEY FACT
 - Explicit quantifiers only
 - One-sentence KEY FACT explaining WHY`,
 
-  "Compare Conceptual Schemes": `Compare the conceptual structures of the two theories below.
+  "Compare Conceptual Schemes": `YOUR TASK: Compare the primitive/derived classifications in Scheme A vs. Scheme B.
+NOTHING ELSE. Do NOT discuss expressivity, ontology, naturalness, or philosophy.
 
-=== SYSTEM A ===
+=== CONCEPTUAL SCHEME A ===
 <<<SYSTEM_A>>>
 
-=== SYSTEM B ===
+=== CONCEPTUAL SCHEME B ===
 <<<SYSTEM_B>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-For each theory, identify primitive vs derived concepts. Compare expressive power. Highlight what one can express that the other cannot. Determine which is more natural or parsimonious.`,
+=== DEFINITION OF "DERIVED" ===
+A symbol is DERIVED if and only if it has an explicit definition (P(x,y) ↔ φ(x,y)) given in the input.
+If no definition is provided, the symbol is PRIMITIVE.
+
+=== OUTPUT FORMAT (use exactly this structure) ===
+
+RESULT
+Primitive symbols in A:
+(list)
+Derived symbols in A:
+(list)
+
+Primitive symbols in B:
+(list)
+Derived symbols in B:
+(list)
+
+COMPARISON
+- Which primitives in A become derived in B?
+- Which primitives in B become derived in A?
+- Which primitives exist only in A?
+- Which primitives exist only in B?
+
+=== HARD REQUIREMENTS ===
+- Do NOT add meanings that aren't in the input
+- Do NOT invent new predicates
+- Do NOT assume definability not explicitly stated
+- Do NOT produce bloated explanations
+- Do NOT evaluate theories or infer consequences
+- ONLY compare primitive/derived classifications`,
 
   "Ontological Dependence": `Analyze the ontological dependencies in this theory.
 
