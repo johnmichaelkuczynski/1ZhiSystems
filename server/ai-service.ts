@@ -1154,60 +1154,104 @@ The original theory uses an irreflexive relation R to characterize a transitive 
 
   "Interpret Canonical Meaning": `YOUR TASK: Identify the canonical meaning of each primitive and restate all axioms in natural language.
 
+Given theory T in BOX A:
+1. Identify the most natural, standard, domain-neutral interpretation of each primitive predicate, relation, or function.
+2. Restate each axiom using those explicit natural-language interpretations.
+3. When EXPLAIN is ON: provide formal and informal explanation.
+4. When EXPLAIN is OFF: output ONLY the canonical interpretation + restated axioms (no commentary).
+
+This is NOT: a rewriting of the theory, a search for models, a conceptual alternative, a test for equivalence.
+It is purely an INTERPRETATION + NATURAL-LANGUAGE RESTATEMENT function.
+
 === INPUT THEORY ===
 <<<INPUT>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-=== RULES FOR INTERPRETING PRIMITIVES ===
-- Interpret only from the NAME and the STRUCTURE of the axioms
-- Provide ONE short, explicit meaning per primitive symbol
-- Interpret at the level of ordinary natural language (e.g., "x is earlier than y", "x touches y")
-- Do NOT introduce technical ontology, metaphysics, or formalisms
+=== CHECK EXPLAIN MODE ===
+If the instructions contain "EXPLAIN = ON" or the explain toggle is enabled, use MODE 2.
+Otherwise, use MODE 1.
 
-=== RULES FOR RESTATING AXIOMS ===
-- Replace formal notation with clear English sentences
-- Each axiom MUST be restated in ONE sentence
-- The restated sentences must preserve the logical content
-- Do NOT comment, analyze, justify, or expand beyond restatement
+=== MODE 1: EXPLAIN OFF (default) ===
 
-=== OUTPUT FORMAT (use exactly this structure) ===
+OUTPUT MUST HAVE ONLY THESE TWO SECTIONS:
 
-RESULT
+INTERPRETATION
+<List each primitive and give a short, domain-neutral intended meaning.>
+<Meanings must be standard logical interpretations (order, equivalence, membership, function behavior, etc.), not metaphoric or real-world analogies.>
 
-Intended Meaning of Primitives:
-P1: <short meaning>
-P2: <short meaning>
-...
+RESTATED AXIOMS
+<Each axiom rewritten in clear natural language that:>
+<- preserves exact logical structure>
+<- avoids ANY metaphor, scenario, or domain-specific imagery>
+<- is short, literal, and formal>
 
-Restated Axioms:
-1. <axiom 1 restated briefly>
-2. <axiom 2 restated briefly>
-...
+RULES FOR MODE 1:
+- NO extra commentary
+- NO explanations
+- NO examples from the real world
 
-=== EXAMPLE ===
+=== MODE 2: EXPLAIN ON ===
 
+OUTPUT MUST HAVE FOUR SECTIONS:
+
+INTERPRETATION
+(same as above)
+
+RESTATED AXIOMS
+(same as above)
+
+FORMAL EXPLANATION
+<2-4 short paragraphs explaining:>
+<- What standard mathematical structure the axioms characterize>
+<- Why the chosen primitive interpretations are natural>
+<- How the logical structure determines the canonical meaning>
+<Must remain domain-neutral and formal. No metaphors.>
+
+INFORMAL EXPLANATION
+<Short—1 or 2 paragraphs.>
+<Looser but still abstract; may describe the structural idea (e.g., "a strict order," "a partition," "a closure") but still NO metaphors, objects, or domain examples.>
+
+=== EXAMPLES ===
+
+EXAMPLE (EXPLAIN OFF):
 INPUT: LANGUAGE: {Before(x,y)}, AXIOMS: ∀x ¬Before(x,x), ∀x∀y∀z ((Before(x,y) ∧ Before(y,z)) → Before(x,z)), ∀x∀y (x ≠ y → (Before(x,y) ∨ Before(y,x)))
 
 OUTPUT:
-RESULT
-Intended Meaning of Primitives:
-Before(x,y): x comes earlier than y.
 
-Restated Axioms:
-1. Nothing comes earlier than itself.
-2. If x comes earlier than y and y comes earlier than z, then x comes earlier than z.
-3. Any two distinct things are ordered so that one comes earlier than the other.
+INTERPRETATION
+Before(x,y): "x precedes y in a strict total order."
+
+RESTATED AXIOMS
+1. No element precedes itself.
+2. If x precedes y and y precedes z, then x precedes z.
+3. Every pair of distinct elements is comparable.
+
+EXAMPLE (EXPLAIN ON):
+Same input with EXPLAIN = ON
+
+OUTPUT:
+
+INTERPRETATION
+Before(x,y): "x precedes y in a strict total order."
+
+RESTATED AXIOMS
+1. No element precedes itself.
+2. If x precedes y and y precedes z, then x precedes z.
+3. Every pair of distinct elements is comparable.
+
+FORMAL EXPLANATION
+The three axioms jointly characterize a strict total order. The first axiom (irreflexivity) ensures no element relates to itself. The second axiom (transitivity) ensures the ordering is consistent across chains. The third axiom (trichotomy) ensures every pair of distinct elements is comparable. Together, these properties define the canonical structure of a linear ordering without endpoints or gaps imposed.
+
+INFORMAL EXPLANATION
+This theory describes a strict total order—a way of arranging elements so that any two can be compared, with no element preceding itself. The structure is the abstract backbone of orderings like "earlier than" or "less than" without committing to any particular domain.
 
 === HARD REQUIREMENTS ===
-- NO formal explanations
-- NO informal commentary
-- NO methodology sections
-- NO significance statements
-- NO classification (e.g., "this is a strict order")
-- NO domain theory, ontology, or philosophy
-- NO multi-paragraph descriptions`,
+- MODE 1: Only INTERPRETATION + RESTATED AXIOMS, nothing else
+- MODE 2: All four sections, formal and domain-neutral
+- No metaphors or real-world examples
+- NEVER fail - always produce valid interpretation`,
 
   "Find an Interpretation": `YOUR TASK: Produce ONE concrete interpretation (model) that satisfies ALL axioms.
 
