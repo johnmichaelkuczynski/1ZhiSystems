@@ -16,9 +16,13 @@ interface DualInputRowProps {
   presetInputA?: string;
   presetInputB?: string;
   presetInstructions?: string;
+  labelA?: string;
+  labelB?: string;
+  placeholderA?: string;
+  placeholderB?: string;
 }
 
-export function DualInputRow({ id, title, description, selectedModel, presetInputA, presetInputB, presetInstructions }: DualInputRowProps) {
+export function DualInputRow({ id, title, description, selectedModel, presetInputA, presetInputB, presetInstructions, labelA = "System A", labelB = "System B", placeholderA = "// Enter first axiom system here...", placeholderB = "// Enter second axiom system here..." }: DualInputRowProps) {
   const [inputA, setInputA] = useState("");
   const [inputB, setInputB] = useState("");
   const [instructions, setInstructions] = useState("");
@@ -143,9 +147,9 @@ export function DualInputRow({ id, title, description, selectedModel, presetInpu
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div className="space-y-3">
-          <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider">System A</label>
+          <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider">{labelA}</label>
           <Textarea 
-            placeholder="// Enter first axiom system here..."
+            placeholder={placeholderA}
             className="min-h-[300px] font-mono text-sm bg-secondary/30 resize-none border-border rounded-sm focus-visible:ring-1 focus-visible:ring-ring"
             value={inputA}
             onChange={(e) => setInputA(e.target.value)}
@@ -155,9 +159,9 @@ export function DualInputRow({ id, title, description, selectedModel, presetInpu
         </div>
 
         <div className="space-y-3">
-          <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider">System B</label>
+          <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider">{labelB}</label>
           <Textarea 
-            placeholder="// Enter second axiom system here..."
+            placeholder={placeholderB}
             className="min-h-[300px] font-mono text-sm bg-secondary/30 resize-none border-border rounded-sm focus-visible:ring-1 focus-visible:ring-ring"
             value={inputB}
             onChange={(e) => setInputB(e.target.value)}

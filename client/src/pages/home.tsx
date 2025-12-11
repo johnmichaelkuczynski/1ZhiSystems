@@ -100,6 +100,12 @@ export default function Home() {
                         title={f.title}
                         description={f.description}
                         selectedModel={selectedModel}
+                        {...(f.id === 5 ? {
+                          labelA: "Base Theory",
+                          labelB: "Extended Theory",
+                          placeholderA: "// Enter base theory here...",
+                          placeholderB: "// Enter extended theory here..."
+                        } : {})}
                       />
                     ) : (
                       <FunctionRow
