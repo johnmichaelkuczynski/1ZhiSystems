@@ -588,52 +588,116 @@ To have definitional equivalence, each primitive in T₁ must be explicitly reco
 - No model theory jargon
 - No semantic examples or domain constructions`,
 
-  "Model-Preserving Rewrite": `YOUR TASK: Rewrite the input theory into CANONICAL NORMALIZED FORM.
+  "Model-Preserving Rewrite": `YOUR TASK: Rewrite the given theory into a *model-equivalent* theory.
 
-The output must have the EXACT SAME CLASS OF MODELS as the input.
+The rewrite must NOT change the class of models of the original theory.
+You may:
+  - introduce new primitives
+  - eliminate primitives
+  - replace constants by existential axioms
+  - replace relations by definable relations
+  - reorganize the axioms into a simpler equivalent form
 
+All rewrites must preserve EXACTLY the same models (up to definitional extension).
+
+=== INPUT THEORY ===
 <<<INPUT>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-=== NORMALIZATION RULES ===
+=== CHECK EXPLAIN MODE ===
+If the instructions contain "EXPLAIN = ON" or the explain toggle is enabled, use MODE 2.
+Otherwise, use MODE 1.
 
-1. REMOVE all unnecessary primitives (e.g., constants like Zero) — replace with existential axioms
-2. PRESERVE only essential vocabulary required to characterize the model class
-3. REWRITE axioms in clean, minimal form: NO prose, NO commentary, NO explanations
-4. OUTPUT as LANGUAGE declaration + numbered AXIOMS list
-5. ALL quantifiers must appear explicitly using standard first-order syntax
-6. OPTIMIZE for AI theorem-normalization: minimal vocabulary, no redundancy, fully canonical
+=== MODE 1: EXPLAIN OFF (default) ===
 
-=== OUTPUT FORMAT (use exactly this structure) ===
+Output ONLY the rewritten theory. NO interpretations, NO domain examples, NO analogies, NO explanation.
 
-LANGUAGE: {Predicate1(args), Predicate2(args), ...}
+FORMAT:
+
+1. THE RESULT
+
+LANGUAGE: { <new primitives> }
+
+DEFINITIONS (optional):
+<old_symbol>(...) ↔ <formula using new primitives>
 
 AXIOMS:
-1. [first axiom]
-2. [second axiom]
-3. [third axiom]
+1. <rewritten axiom>
+2. <rewritten axiom>
 ...
 
-=== EXAMPLE ===
+RULES FOR MODE 1:
+- Output must be purely formal
+- NO interpretations, NO domain examples, NO analogies, NO explanation, NO semantic justification
+- KEEP IT SHORT
 
-Input: Theory with Zero constant and Less relation
-Output:
+=== MODE 2: EXPLAIN ON ===
+
+Output the formal rewrite PLUS a short EXPLANATION section.
+
+FORMAT:
+
+1. THE RESULT
+
+LANGUAGE: { <new primitives> }
+
+DEFINITIONS (optional):
+<old_symbol>(...) ↔ <definition>
+
+AXIOMS:
+1. <rewritten axiom>
+2. <rewritten axiom>
+...
+
+EXPLANATION:
+<2–4 short paragraphs explaining the equivalence>
+
+RULES FOR MODE 2:
+- MUST explain the definitional bridge between old and new primitives
+- MUST explain why the rewritten axioms ensure the same model class
+- MUST NOT: construct explicit models, give domain examples (numbers, letters, servers, etc.), use analogies, drift into semantic or philosophical narrative
+- Explanation MUST stay strictly about: definitional equivalence, elimination or introduction of primitives, axiomatic equivalence
+
+=== EXAMPLES ===
+
+EXAMPLE (EXPLAIN OFF):
+INPUT: LANGUAGE: {Less(x,y), Zero}, AXIOMS: ∀x ¬Less(x,x), ∀x∀y∀z ((Less(x,y) ∧ Less(y,z)) → Less(x,z)), ∀x ¬Less(x,Zero), ∀x (x ≠ Zero → Less(Zero,x))
+
+OUTPUT:
+
+1. THE RESULT
 
 LANGUAGE: {Less(x,y)}
 
 AXIOMS:
 1. ∀x ¬Less(x,x)
 2. ∀x∀y∀z ((Less(x,y) ∧ Less(y,z)) → Less(x,z))
-3. ∀x∀y (x ≠ y → (Less(x,y) ∨ Less(y,x)))
-4. ∃m ∀x ¬Less(x,m)
+3. ∃m ∀x ¬Less(x,m)
+
+EXAMPLE (EXPLAIN ON):
+Same input with EXPLAIN = ON
+
+OUTPUT:
+
+1. THE RESULT
+
+LANGUAGE: {Less(x,y)}
+
+AXIOMS:
+1. ∀x ¬Less(x,x)
+2. ∀x∀y∀z ((Less(x,y) ∧ Less(y,z)) → Less(x,z))
+3. ∃m ∀x ¬Less(x,m)
+
+EXPLANATION:
+The constant Zero is eliminated by replacing it with an existential claim asserting the existence of a unique minimal element. Any model of the original theory can be converted into a model of the rewritten theory by choosing Zero as the witness for the existential quantifier. Conversely, any model satisfying the rewritten theory can be expanded by interpreting Zero as that minimal element. Thus the two theories have exactly the same models up to definitional extension.
 
 === HARD REQUIREMENTS ===
-- NO prose or explanations in the output
-- NO commentary about what you did
-- JUST the LANGUAGE and AXIOMS
-- Each axiom on its own numbered line`,
+- MODE 1: Purely formal, no prose
+- MODE 2: Formal + explanation about definitional/axiomatic equivalence only
+- No model constructions or domain examples
+- NEVER fail - always produce a valid rewrite`,
 
   "Conservative Extension Analysis": `YOUR TASK: Determine whether T₂ (Box B) is a CONSERVATIVE EXTENSION of T₁ (Box A) relative to the base language L₁.
 

@@ -1,0 +1,149 @@
+Completely delete all existing logic for:
+"Model-Preserving Rewrite (One Argument)"
+Replace it entirely with the unified rules below.
+
+=========================================================
+UNIFIED LOGIC FOR THIS FUNCTION
+=========================================================
+
+INPUT:
+- LANGUAGE section
+- AXIOMS section
+- EXPLAIN toggle (ON or OFF)
+
+TASK:
+Rewrite the given theory into a *model-equivalent* theory.
+The rewrite must NOT change the class of models of the original theory.
+You may:
+  - introduce new primitives,
+  - eliminate primitives,
+  - replace constants by existential axioms,
+  - replace relations by definable relations,
+  - or reorganize the axioms into a simpler equivalent form.
+
+All rewrites must preserve EXACTLY the same models (up to definitional extension).
+
+There are TWO output modes:
+
+=========================================================
+MODE 1 — EXPLAIN TOGGLE OFF (NON-EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = OFF, output must contain ONLY the rewritten theory.
+
+FORMAT:
+
+1. THE RESULT
+
+LANGUAGE: { <new primitives> }
+
+DEFINITIONS (optional):
+<old_symbol>(...) ↔ <formula using new primitives>
+
+AXIOMS:
+1. <rewritten axiom>
+2. <rewritten axiom>
+...
+
+Rules:
+- Output must be purely formal.
+- NO interpretations.
+- NO domain examples.
+- NO analogies.
+- NO explanation.
+- NO semantic justification.
+- KEEP IT SHORT.
+
+=========================================================
+MODE 2 — EXPLAIN TOGGLE ON (EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = ON, output must contain:
+
+(1) The exact same formal rewrite required in EXPLAIN=OFF  
+(2) A short EXPLANATION section  
+    describing *why the rewrite preserves all models*
+
+FORMAT:
+
+1. THE RESULT
+
+LANGUAGE: { <new primitives> }
+
+DEFINITIONS:
+<old_symbol>(...) ↔ <definition>
+
+AXIOMS:
+1. <rewritten axiom>
+2. <rewritten axiom>
+...
+
+EXPLANATION:
+<2–4 short paragraphs explaining the equivalence>
+
+Rules for EXPLAIN = ON:
+- MUST explain the definitional bridge between old and new primitives.
+- MUST explain why the rewritten axioms ensure the same model class.
+- MUST NOT:
+    * construct explicit models
+    * give domain examples (numbers, letters, servers, etc.)
+    * use analogies
+    * drift into semantic or philosophical narrative
+- Explanation MUST stay strictly about:
+    * definitional equivalence
+    * elimination or introduction of primitives
+    * axiomatic equivalence
+
+=========================================================
+STYLE TEMPLATE (THE AGENT MUST FOLLOW)
+=========================================================
+
+Example INPUT:
+
+LANGUAGE: {Less(x,y), Zero}
+AXIOMS:
+1. ∀x ¬Less(x,x)
+2. ∀x∀y∀z ((Less(x,y) ∧ Less(y,z)) → Less(x,z))
+3. ∀x ¬Less(x,Zero)
+4. ∀x (x ≠ Zero → Less(Zero,x))
+EXPLAIN = OFF
+
+Example OUTPUT:
+
+1. THE RESULT
+
+LANGUAGE: {Less(x,y)}
+
+AXIOMS:
+1. ∀x ¬Less(x,x)
+2. ∀x∀y∀z ((Less(x,y) ∧ Less(y,z)) → Less(x,z))
+3. ∃m ∀x ¬Less(x,m)
+
+-----------------------------
+
+Example INPUT with EXPLAIN = ON:
+(same theory)
+
+Example OUTPUT:
+
+1. THE RESULT
+
+LANGUAGE: {Less(x,y)}
+
+AXIOMS:
+1. ∀x ¬Less(x,x)
+2. ∀x∀y∀z ((Less(x,y) ∧ Less(y,z)) → Less(x,z))
+3. ∃m ∀x ¬Less(x,m)
+
+EXPLANATION:
+The constant Zero is eliminated by replacing it with an existential claim
+asserting the existence of a unique minimal element. Any model of the
+original theory can be converted into a model of the rewritten theory by
+choosing Zero as the witness for the existential quantifier. Conversely,
+any model satisfying the rewritten theory can be expanded by interpreting
+Zero as that minimal element. Thus the two theories have exactly the same
+models up to definitional extension.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
