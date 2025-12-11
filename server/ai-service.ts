@@ -695,14 +695,62 @@ ALTERNATIVE 3 (if applicable)
 - Each must be a genuine reconceptualization, not just a synonym swap
 - Concise output, no philosophy or commentary`,
 
-  "Interpret Canonical Meaning": `Interpret the canonical meaning of this theory.
+  "Interpret Canonical Meaning": `YOUR TASK: Identify the canonical meaning of each primitive and restate all axioms in natural language.
 
+=== INPUT THEORY ===
 <<<INPUT>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-For each primitive symbol, identify what it is intended to represent in the most natural interpretation. Then restate all axioms in explicit natural language that reveals what the theory is really about.`,
+=== RULES FOR INTERPRETING PRIMITIVES ===
+- Interpret only from the NAME and the STRUCTURE of the axioms
+- Provide ONE short, explicit meaning per primitive symbol
+- Interpret at the level of ordinary natural language (e.g., "x is earlier than y", "x touches y")
+- Do NOT introduce technical ontology, metaphysics, or formalisms
+
+=== RULES FOR RESTATING AXIOMS ===
+- Replace formal notation with clear English sentences
+- Each axiom MUST be restated in ONE sentence
+- The restated sentences must preserve the logical content
+- Do NOT comment, analyze, justify, or expand beyond restatement
+
+=== OUTPUT FORMAT (use exactly this structure) ===
+
+RESULT
+
+Intended Meaning of Primitives:
+P1: <short meaning>
+P2: <short meaning>
+...
+
+Restated Axioms:
+1. <axiom 1 restated briefly>
+2. <axiom 2 restated briefly>
+...
+
+=== EXAMPLE ===
+
+INPUT: LANGUAGE: {Before(x,y)}, AXIOMS: ∀x ¬Before(x,x), ∀x∀y∀z ((Before(x,y) ∧ Before(y,z)) → Before(x,z)), ∀x∀y (x ≠ y → (Before(x,y) ∨ Before(y,x)))
+
+OUTPUT:
+RESULT
+Intended Meaning of Primitives:
+Before(x,y): x comes earlier than y.
+
+Restated Axioms:
+1. Nothing comes earlier than itself.
+2. If x comes earlier than y and y comes earlier than z, then x comes earlier than z.
+3. Any two distinct things are ordered so that one comes earlier than the other.
+
+=== HARD REQUIREMENTS ===
+- NO formal explanations
+- NO informal commentary
+- NO methodology sections
+- NO significance statements
+- NO classification (e.g., "this is a strict order")
+- NO domain theory, ontology, or philosophy
+- NO multi-paragraph descriptions`,
 
   "Find an Interpretation": `YOUR TASK: Find a TRUE MODEL (interpretation) for the axiom system below.
 

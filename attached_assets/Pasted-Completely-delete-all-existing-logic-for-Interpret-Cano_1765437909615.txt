@@ -1,0 +1,79 @@
+Completely delete all existing logic for 
+"Interpret Canonical Meaning (One Argument)".
+Do NOT modify it. REPLACE it fully with the rules below.
+
+========================================
+NEW LOGIC FOR THIS FUNCTION
+========================================
+
+1. The user provides ONE theory T containing:
+   - LANGUAGE
+   - AXIOMS
+   (Definitions may or may not be included.)
+
+2. The task of the function is EXTREMELY LIMITED:
+   (a) Identify the most natural, canonical real-world interpretation 
+       of each primitive symbol in the LANGUAGE.
+   (b) Restate each axiom in simple, explicit natural language 
+       using the identified meanings.
+
+3. Rules for interpreting primitives:
+   - Interpret only from the NAME and the STRUCTURE of the axioms.
+   - Provide ONE short, explicit meaning per primitive symbol.
+   - Do NOT introduce technical ontology, metaphysics, or formalisms.
+   - Interpret at the level of ordinary natural language 
+     (e.g., “x is earlier than y”, “x touches y”, “x is an element of y”).
+
+4. Rules for restating axioms:
+   - Replace formal notation with clear English sentences.
+   - Each axiom MUST be restated in ONE sentence.
+   - The restated sentences must preserve the logical content.
+   - DO NOT comment, analyze, justify, or expand beyond restatement.
+
+5. Prohibited behavior:
+   - NO formal explanations.
+   - NO informal commentary.
+   - NO methodology sections.
+   - NO significance statements.
+   - NO classification (e.g., “this is a strict order”).
+   - NO domain theory, no ontology, no philosophy.
+   - NO multi-paragraph descriptions.
+   - NO invented meanings beyond the obvious intended primitive.
+
+6. Required output format MUST be exactly:
+
+RESULT
+
+Intended Meaning of Primitives:
+P1: <short meaning>
+P2: <short meaning>
+...
+
+Restated Axioms:
+1. <axiom 1 restated briefly>
+2. <axiom 2 restated briefly>
+...
+
+7. Examples the app MUST imitate:
+
+EXAMPLE INPUT:
+LANGUAGE: {Before(x,y)}
+AXIOMS:
+1. ∀x ¬Before(x,x)
+2. ∀x∀y∀z ((Before(x,y) ∧ Before(y,z)) → Before(x,z))
+3. ∀x∀y (x ≠ y → (Before(x,y) ∨ Before(y,x)))
+
+EXAMPLE OUTPUT:
+RESULT
+
+Intended Meaning of Primitives:
+Before(x,y): x comes earlier than y.
+
+Restated Axioms:
+1. Nothing comes earlier than itself.
+2. If x comes earlier than y and y comes earlier than z, then x comes earlier than z.
+3. Any two distinct things are ordered so that one comes earlier than the other.
+
+========================================
+
+This instruction REPLACES ALL OLD LOGIC for this function.
