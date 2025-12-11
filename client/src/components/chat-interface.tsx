@@ -147,10 +147,10 @@ export function ChatInterface({ selectedModel, onModelChange }: ChatInterfacePro
             <SelectValue placeholder="Select Model" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="Zhi 1">Zhi 1 (Grok) - Default</SelectItem>
-            <SelectItem value="Zhi 2">Zhi 2 (Anthropic)</SelectItem>
-            <SelectItem value="Zhi 3">Zhi 3 (OpenAI)</SelectItem>
-            <SelectItem value="Zhi 4">Zhi 4 (DeepSeek)</SelectItem>
+            <SelectItem value="Zhi 1">Zhi 1 - Default</SelectItem>
+            <SelectItem value="Zhi 2">Zhi 2</SelectItem>
+            <SelectItem value="Zhi 3">Zhi 3</SelectItem>
+            <SelectItem value="Zhi 4">Zhi 4</SelectItem>
           </SelectContent>
         </Select>
 
