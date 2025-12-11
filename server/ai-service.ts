@@ -164,25 +164,26 @@ ABSOLUTE RULES - NO EXCEPTIONS:
 
 6. USER INSTRUCTIONS ALWAYS OVERRIDE FUNCTION DEFAULT BEHAVIOR.
 
-=== MANDATORY OUTPUT FORMAT ===
+=== DEFAULT OUTPUT FORMAT (use unless function specifies otherwise) ===
 
-EVERY response MUST follow this EXACT structure:
+For MOST functions, use this structure:
 
-**1. THE RESULT** (Start here immediately - no preamble, no introduction)
+**1. THE RESULT** (Start immediately - no preamble)
 Present the transformed theory, model, interpretation, or analysis RIGHT AT THE TOP.
-Just output it. No "Here is..." or "I will now..." - just the actual result.
 
 **2. FORMAL EXPLANATION**
-Provide a rigorous, technical explanation of the result using proper logical notation and terminology.
+Rigorous technical explanation.
 
 **3. INFORMAL EXPLANATION**
-Explain the result in plain language that a non-specialist could understand.
+Plain language explanation.
 
 **4. SIGNIFICANCE**
-Brief discussion of why this result matters, what it reveals, or how it could be used.
+Why this result matters.
 
 **5. METHODOLOGY**
-Explain the approach/algorithm used to arrive at this result.
+Approach used.
+
+EXCEPTION: If the function prompt specifies a DIFFERENT output format (like INTERPRETATION + WHY THIS WORKS), use THAT format instead. The function-specific format OVERRIDES this default.
 
 === END FORMAT ===
 
@@ -426,25 +427,30 @@ INSTRUCTIONS:
 
 For each primitive symbol, identify what it is intended to represent in the most natural interpretation. Then restate all axioms in explicit natural language that reveals what the theory is really about.`,
 
-  "Find an Interpretation": `Find a TRUE MODEL for the axiom system below.
+  "Find an Interpretation": `YOUR TASK: Find a TRUE MODEL (interpretation) for the axiom system below.
+
+DO NOT transform the theory. DO NOT rewrite the axioms. DO NOT change primitives.
+Instead: INTERPRET the existing axioms in a concrete domain where they are all true.
 
 <<<INPUT>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-=== MANDATORY OUTPUT FORMAT ===
+=== USE THIS OUTPUT FORMAT (not the default 5-section format) ===
 
 **INTERPRETATION**
 
-Domain: [exactly what objects the variables range over]
-[Symbol 1]: [plain English meaning]
-[Symbol 2]: [plain English meaning]
+Domain: [exactly what objects the variables range over - be specific]
+[Symbol 1]: "[plain English meaning]"
+[Symbol 2]: "[plain English meaning]"
 [etc.]
 
 **WHY THIS WORKS**
 
-[For each axiom, explain in 1-2 sentences why it is TRUE in this model. Be concrete and intuitive.]
+Axiom 1: [State it] — [1-2 sentences why it's TRUE in this domain]
+Axiom 2: [State it] — [1-2 sentences why it's TRUE in this domain]
+[etc.]
 
 === END FORMAT ===
 
