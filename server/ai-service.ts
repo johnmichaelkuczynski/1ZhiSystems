@@ -1043,7 +1043,15 @@ The theory treats Parent, Male, and Female as irreducible, giving them foundatio
 - No model constructions or real-world examples
 - No analogies or philosophical drift`,
 
-  "Generate Alternative Conceptualizations": `YOUR TASK: Produce 1–3 alternative axiom sets T' for the input theory T.
+  "Generate Alternative Conceptualizations": `YOUR TASK: Produce one or more alternative theories T′ for the input theory T.
+
+Given theory T, produce alternative theories T′ such that:
+1. T and T′ have the SAME CLASS OF NATURAL MODELS (they capture the same phenomenon)
+2. T′ uses DIFFERENT PRIMITIVES, or recasts the primitives into a different conceptual basis
+3. T′ is not a mere renaming; it must reorganize the conceptual structure in a formally meaningful way
+
+This is NOT: a reduplication of the input, a definitional equivalence test, a rewriting function.
+It is strictly a CONCEPTUAL REFRAMING of the theory.
 
 === INPUT THEORY T ===
 <<<INPUT>>>
@@ -1051,44 +1059,98 @@ The theory treats Parent, Male, and Female as irreducible, giving them foundatio
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-=== REQUIREMENTS FOR ALTERNATIVE THEORIES ===
-Each alternative T' must:
-- Use a different but closely related conceptualization
-- Have model classes naturally included in the model class of T
-- Preserve the "intended interpretation" of the input theory
+=== CHECK EXPLAIN MODE ===
+If the instructions contain "EXPLAIN = ON" or the explain toggle is enabled, use MODE 2.
+Otherwise, use MODE 1.
 
-=== ALLOWED OPERATIONS ===
-- Rename the primitive predicate
-- Replace the primitive with a natural conceptual surrogate
-- Use equivalent axiom patterns (e.g., "strict order" ↔ "acyclic + irreflexive", "irreflexive + transitive" ↔ "asymmetric + transitive")
-- Express the same idea through different semantic framing (ranks, layers, precedence, exclusion, partial orders, etc.)
+=== MODE 1: EXPLAIN OFF (default) ===
 
-=== FORBIDDEN ===
-- Do NOT produce definitional rewrites (same axioms, just renamed)
-- Do NOT add new primitives (no expansions)
-- Do NOT invent new structures beyond the input's scope
-- Do NOT produce model-theoretically unrelated theories
+FORMAT:
 
-=== OUTPUT FORMAT ===
+1. ALTERNATIVE CONCEPTUALIZATION
 
-ALTERNATIVE 1
-LANGUAGE: {NewPred(args), ...}
-AXIOMS:
-1. [axiom]
-2. [axiom]
-...
-WHY RELATED: (one sentence explaining how this captures the same idea)
+New Language: { ... }
 
-ALTERNATIVE 2 (if applicable)
-...
+New Axioms:
+1. ...
+2. ...
 
-ALTERNATIVE 3 (if applicable)
-...
+Bridge Definitions:
+OldPredicate(x) ↔ <formula in the new language>
+
+RULES FOR MODE 1:
+- Output MUST be minimal and clean
+- New primitives MUST represent a genuinely different conceptual framing (e.g., replace "R is a strict order" with "T is a reflexive-transitive closure")
+- Output two to four bridge definitions max
+- NO prose explanation, NO analogies, NO commentary
+
+=== MODE 2: EXPLAIN ON ===
+
+FORMAT:
+
+1. ALTERNATIVE CONCEPTUALIZATION
+
+New Language: { ... }
+
+New Axioms:
+1. ...
+2. ...
+
+Bridge Definitions:
+OldPredicate(x) ↔ <formula in the new language>
+
+EXPLANATION:
+<2-4 short paragraphs explaining:
+ - why the new primitives constitute a conceptual reorganization
+ - how the new axioms capture the same natural models as the original
+ - what structural or ontological viewpoint the new version emphasizes>
+
+RULES FOR MODE 2:
+- Explanation must focus on conceptual reorganization
+- MUST NOT: introduce real-world metaphors, examples, or stories; talk about models like numbers, graphs, networks; include philosophical digressions
+
+=== EXAMPLES ===
+
+EXAMPLE (EXPLAIN OFF):
+INPUT: LANGUAGE: {R(x,y)}, AXIOMS: ∀x ¬R(x,x), ∀x∀y∀z ((R(x,y) ∧ R(y,z)) → R(x,z))
+
+OUTPUT:
+
+1. ALTERNATIVE CONCEPTUALIZATION
+
+New Language: {T(x,y)}
+
+New Axioms:
+1. ∀x T(x,x)
+2. ∀x∀y∀z ((T(x,y) ∧ T(y,z)) → T(x,z))
+
+Bridge Definitions:
+R(x,y) ↔ (T(x,y) ∧ x ≠ y)
+
+EXAMPLE (EXPLAIN ON):
+Same input with EXPLAIN = ON
+
+OUTPUT:
+
+1. ALTERNATIVE CONCEPTUALIZATION
+
+New Language: {T(x,y)}
+
+New Axioms:
+1. ∀x T(x,x)
+2. ∀x∀y∀z ((T(x,y) ∧ T(y,z)) → T(x,z))
+
+Bridge Definitions:
+R(x,y) ↔ (T(x,y) ∧ x ≠ y)
+
+EXPLANATION:
+The original theory uses an irreflexive relation R to characterize a transitive ordering structure. The alternative formulation replaces R with a reflexive relation T representing its closure under identity. This shifts the conceptual basis: instead of starting from exclusion of self-relations, the new theory treats reflexivity and transitivity as fundamental. Irreflexivity becomes a derived feature of R through the bridge definition. The models of both theories coincide, but the organizing principles differ, demonstrating an alternative conceptualization of the same structure.
 
 === HARD REQUIREMENTS ===
-- 1–3 alternatives only
-- Each must be a genuine reconceptualization, not just a synonym swap
-- Concise output, no philosophy or commentary`,
+- MODE 1: Minimal clean output with bridge definitions
+- MODE 2: Same + explanation about conceptual reorganization
+- No real-world examples or metaphors
+- NEVER fail - always produce a valid alternative`,
 
   "Interpret Canonical Meaning": `YOUR TASK: Identify the canonical meaning of each primitive and restate all axioms in natural language.
 

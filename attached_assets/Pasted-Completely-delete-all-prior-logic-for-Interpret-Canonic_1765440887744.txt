@@ -1,0 +1,125 @@
+Completely delete all prior logic for:
+"Interpret Canonical Meaning (One Argument)"
+Replace EVERYTHING with the rules below.
+
+=========================================================
+UNIFIED LOGIC FOR THIS FUNCTION
+=========================================================
+
+INPUT:
+- BOX A = Axiom-set T (one argument)
+- EXPLAIN toggle (ON or OFF)
+
+GOAL:
+Given theory T in BOX A, the function must:
+
+1. Identify the most natural, standard, domain-neutral interpretation of each primitive predicate, relation, or function.
+2. Restate each axiom using those explicit natural-language interpretations.
+3. When EXPLAIN is ON: provide formal and informal explanation.
+4. When EXPLAIN is OFF: output ONLY the canonical interpretation + restated axioms (no commentary).
+
+This is NOT:
+- A rewriting of the theory
+- A search for models
+- A conceptual alternative
+- A test for equivalence
+
+It is purely an **interpretation + natural-language restatement** function.
+
+=========================================================
+MODE 1 — EXPLAIN TOGGLE OFF (NON-EXPLAIN VERSION)
+=========================================================
+
+OUTPUT MUST HAVE ONLY THESE TWO SECTIONS:
+
+1. **INTERPRETATION**  
+List each primitive and give a short, domain-neutral intended meaning.  
+Meanings must be standard logical interpretations (order, equivalence, membership, function behavior, etc.), not metaphoric or real-world analogies.
+
+Example format:
+- Before(x,y): “x precedes y in a strict order.”
+- P(x): “x has property P.”
+
+2. **RESTATED AXIOMS**  
+Each axiom must be rewritten in clear natural language that:
+- preserves exact logical structure  
+- avoids ANY metaphor, scenario, or domain-specific imagery  
+- is short, literal, and formal  
+
+Example format:
+1. “No element precedes itself.”
+2. “If x precedes y and y precedes z, then x precedes z.”
+
+NO extra commentary.  
+NO explanations.  
+NO examples from the real world.  
+
+=========================================================
+MODE 2 — EXPLAIN TOGGLE ON (EXPLAIN VERSION)
+=========================================================
+
+OUTPUT MUST HAVE FOUR SECTIONS:
+
+1. **INTERPRETATION**  
+(same as above)
+
+2. **RESTATED AXIOMS**  
+(same as above)
+
+3. **FORMAL EXPLANATION**  
+2–4 short paragraphs explaining:
+- What standard mathematical structure the axioms characterize  
+- Why the chosen primitive interpretations are natural  
+- How the logical structure determines the canonical meaning  
+Must remain domain-neutral and formal. No metaphors.
+
+4. **INFORMAL EXPLANATION**  
+Short—1 or 2 paragraphs.  
+Looser but still abstract; may describe the structural idea (e.g., “a strict order,” “a partition,” “a closure”) but still NO metaphors, objects, or domain examples.
+
+=========================================================
+OUTPUT TEMPLATE (STRICT)
+=========================================================
+
+Given input:
+
+LANGUAGE: {Before(x,y)}
+AXIOMS:
+1. ∀x ¬Before(x,x)
+2. ∀x∀y∀z ((Before(x,y) ∧ Before(y,z)) → Before(x,z))
+3. ∀x∀y (x ≠ y → (Before(x,y) ∨ Before(y,x)))
+
+EXPLAIN = OFF
+
+Correct Output:
+
+INTERPRETATION
+Before(x,y): “x precedes y in a strict total order.”
+
+RESTATED AXIOMS
+1. No element precedes itself.
+2. If x precedes y and y precedes z, then x precedes z.
+3. Every pair of distinct elements is comparable.
+
+-------------------------
+
+If EXPLAIN = ON:
+
+INTERPRETATION  
+Before(x,y): “x precedes y in a strict total order.”
+
+RESTATED AXIOMS  
+1. No element precedes itself.  
+2. If x precedes y and y precedes z, then x precedes z.  
+3. Every pair of distinct elements is comparable.
+
+FORMAL EXPLANATION  
+(3–4 paragraphs explaining the order-theoretic structure)
+
+INFORMAL EXPLANATION  
+(1–2 paragraphs summarizing the idea)
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
+
