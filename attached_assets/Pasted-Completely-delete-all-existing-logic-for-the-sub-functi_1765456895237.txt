@@ -1,0 +1,86 @@
+Completely delete all existing logic for the sub-function:
+"SCHEMA EQUIVALENCE: ARITY-PRESERVING MAPPING".
+
+Do NOT modify the main function "Theory Transformation".
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+SCHEMA EQUIVALENCE: ARITY-PRESERVING MAPPING (T₁, T₂)
+=========================================================
+
+TASK:
+Given two input theories T₁ and T₂, decide whether they are
+definitionally equivalent **via a direct arity-preserving
+renaming of predicates**.
+
+This sub-function checks ONLY vocabulary structure:
+- SAME number of predicates,
+- SAME arities in the SAME order,
+- AND a 1–1 renaming exists that makes all axioms match.
+
+This is a PURE schema-level test. No extra constructions.
+
+=========================================================
+CORE CONDITIONS
+=========================================================
+
+INPUT:
+- THEORY A (T₁): language {P1,...,Pk} with arities n1,...,nk
+- THEORY B (T₂): language {Q1,...,Qk} with arities m1,...,mk
+- AXIOMS A: list of formulas using Pi
+- AXIOMS B: list of formulas using Qi
+- EXPLAIN toggle (ON or OFF)
+
+ARITY CONDITIONS:
+1. T₁ and T₂ MUST have the same number k of predicate symbols.
+2. For each i = 1,...,k:
+       arity(Pi) = arity(Qi)
+   If any mismatch occurs → NOT equivalent.
+
+TRANSLATION:
+If arities match, define a direct renaming:
+       Pi(x1,...,x_ni) ↔ Qi(x1,...,x_ni)
+
+AXIOM MATCHING:
+1. Rewrite every axiom of T₁ by replacing Pi with Qi.
+2. Compare the rewritten axioms to the axioms of T₂.
+3. If the rewritten set exactly matches T₂'s axioms
+   (up to permutation and α-conversion), declare:
+       EQUIVALENT: YES
+   Otherwise:
+       EQUIVALENT: NO
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+Equivalence: YES/NO
+
+IF YES:
+TRANSLATION (OLD → NEW):
+P1(x1,...,x_n1) ↔ Q1(x1,...,x_n1)
+P2(x1,...,x_n2) ↔ Q2(x1,...,x_n2)
+...
+
+IF NO:
+State only: Equivalence: NO
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Arity-preserving schema equivalence requires a 1–1 predicate
+  renaming with identical arities.
+- If arities match and axioms align under renaming, the theories
+  are definitionally equivalent.
+- Otherwise, no arity-preserving schema map exists.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

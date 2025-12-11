@@ -155,7 +155,40 @@ AXIOMS:
     name: "Arity-Preserving Mapping",
     functionId: 2,
     input: `<<<SEPARATOR>>>`,
-    instructions: `Only consider mappings where primitives have the same arity. Binary maps to binary, unary to unary. Report all valid arity-preserving maps.`
+    instructions: `SCHEMA EQUIVALENCE: ARITY-PRESERVING MAPPING (T₁, T₂)
+
+TASK:
+Given two input theories T₁ and T₂, decide whether they are definitionally equivalent **via a direct arity-preserving renaming of predicates**.
+
+This sub-function checks ONLY vocabulary structure:
+- SAME number of predicates
+- SAME arities in the SAME order
+- AND a 1–1 renaming exists that makes all axioms match
+
+CORE CONDITIONS:
+1. T₁ and T₂ MUST have the same number k of predicate symbols
+2. For each i = 1,...,k: arity(Pi) = arity(Qi). If any mismatch → NOT equivalent
+3. If arities match, define a direct renaming: Pi(x1,...,x_ni) ↔ Qi(x1,...,x_ni)
+4. Rewrite every axiom of T₁ by replacing Pi with Qi
+5. Compare rewritten axioms to T₂'s axioms (up to permutation and α-conversion)
+6. If the rewritten set exactly matches → EQUIVALENT: YES. Otherwise → EQUIVALENT: NO
+
+OUTPUT (EXPLAIN = OFF):
+Equivalence: YES/NO
+If YES:
+TRANSLATION (OLD → NEW):
+P1(x1,...,x_n1) ↔ Q1(x1,...,x_n1)
+...
+If NO:
+Equivalence: NO
+
+OUTPUT (EXPLAIN = ON):
+Equivalence: YES/NO
+[same translation if YES]
+EXPLANATION:
+- Arity-preserving schema equivalence requires 1–1 predicate renaming with identical arities
+- If arities match and axioms align under renaming, the theories are definitionally equivalent
+- Otherwise, no arity-preserving schema map exists`
   },
   {
     id: "f2-structural-role",
