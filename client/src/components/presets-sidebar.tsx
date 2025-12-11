@@ -447,7 +447,76 @@ EXPLANATION:
     name: "Conservative Definability",
     functionId: 3,
     input: `<<<SEPARATOR>>>`,
-    instructions: `Provide only conservative definitions that do not introduce any new theorems. Verify that each definition is eliminable without changing provability.`
+    instructions: `DEFINITIONAL EQUIVALENCE (CONSERVATIVE DEFINABILITY)
+
+TASK:
+Given two theories T₁ and T₂, determine whether the explicit definitions of T₁-primitives in T₂ (or vice versa) are **conservative definitions**.
+
+A definition is conservative iff:
+- Adding it to T₂ does NOT allow proving any new theorems in the old language of T₂ alone
+- The definition is **eliminable**: any derivation using it can be rewritten into a derivation not using it
+
+This sub-function checks conservativity **purely syntactically**.
+
+INPUT:
+For each predicate Pi of T₁:
+- A candidate explicit definition: Pi(x̄) ↔ φi(x̄)
+  where φi is a formula in the language of T₂
+
+Goal: Determine whether each definition is conservative over T₂.
+
+MECHANICAL CONSERVATIVITY TEST:
+
+For each definition Pi(x̄) ↔ φi(x̄):
+
+1. **Check eliminability condition syntactically:**
+   A definition is eliminable iff:
+   - Pi appears ONLY as a defined symbol, never as a primitive
+   - Replacing every occurrence of Pi in any T₂-derivation with φi preserves the shape of the derivation
+   - No new atomic forms are introduced into T₂'s language outside φi itself
+   
+   This is a structural check:
+   - Confirm Pi does not occur in T₂'s axioms
+   - Confirm φi uses only vocabulary already present in T₂
+   - Confirm φi does not increase arity of any symbol
+
+2. **Check conservativity syntactically:**
+   T₂ ∪ {Pi(x̄) ↔ φi(x̄)} must not yield any new theorems in the vocabulary of T₂
+   
+   Mechanically:
+   - Attempt to derive any T₂-language atomic formula from the definition alone
+   - If substitution of φi never produces a T₂-atomic formula not already present, conservativity holds
+   - If any such production occurs, conservativity fails
+
+No semantic or proof-theoretic reasoning is permitted. This is a purely structural, schema-level elimination check.
+
+SUCCESS CONDITION:
+
+Conservative definability succeeds IFF:
+- For every primitive Pi of T₁: Pi(x̄) ↔ φi(x̄) is **eliminable** in T₂
+- Adding the definition produces **no new theorems** in the vocabulary of T₂
+
+If all definitions pass, report success and output the conservative definitions.
+If any definition fails, the entire test fails.
+
+OUTPUT (EXPLAIN = OFF):
+Conservative: YES/NO
+If YES:
+CONSERVATIVE DEFINITIONS:
+P1(x̄) ↔ φ1(x̄)
+P2(x̄) ↔ φ2(x̄)
+...
+Pk(x̄) ↔ φk(x̄)
+If NO:
+Conservative: NO
+
+OUTPUT (EXPLAIN = ON):
+Conservative: YES/NO
+[same definitions if YES]
+EXPLANATION:
+- A conservative definition must be eliminable without affecting provability in the base theory
+- The test checks only syntactic eliminability and prohibition of new theorems in T₂'s vocabulary
+- If every definition satisfies eliminability, conservativity holds`
   },
   // FUNCTION 4: Model-Preserving Rewrite
   {
