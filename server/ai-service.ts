@@ -382,25 +382,31 @@ For each primitive symbol, identify what it is intended to represent in the most
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-CRITICAL REQUIREMENT: The interpretation must be STRICTLY CORRECT. Every axiom must be LITERALLY TRUE in the model - not "approximately true," "true in spirit," or "captures the essence." If you cannot find a strictly correct interpretation, you must say so.
+=== OUTPUT FORMAT FOR THIS FUNCTION ===
 
-TASK:
-1. IDENTIFY PRIMITIVES: Extract all predicates, functions, and constants from the input.
-2. DEFINE THE DOMAIN: Specify the EXACT set of objects that variables range over.
-3. MAP EACH PRIMITIVE: For every symbol, state PRECISELY what it denotes in the model.
-4. PROVE EACH AXIOM TRUE: For EVERY axiom, provide an explicit verification that it is TRUE in this model:
-   - State the axiom
-   - Substitute the interpretations
-   - Show why it holds in the domain
-   - Do NOT say "this corresponds to" or "this captures" - PROVE it is true
-5. STRICT CORRECTNESS CHECK: Confirm that ALL axioms are literally satisfied, not just "mostly" or "approximately."
+**1. THE INTERPRETATION** (Simple, clear, human-readable - START HERE)
+State the interpretation in plain language FIRST. Example format:
+- Domain: [what the variables range over, e.g., "the natural numbers" or "people in a company"]
+- [symbol 1] means: [plain English meaning]
+- [symbol 2] means: [plain English meaning]
+- etc.
 
-IF NO STRICTLY CORRECT INTERPRETATION EXISTS:
-- State clearly: "No strictly correct interpretation exists in [domain] because..."
-- Identify which axiom(s) cannot be satisfied and why
-- Do NOT fabricate a semi-correct interpretation
+This section should be SHORT and IMMEDIATELY UNDERSTANDABLE. No jargon. A reader should instantly grasp what the model is.
 
-If the user specifies a field, find an interpretation from that field. If none specified, choose the most natural domain from mathematics, physics, economics, or computer science.`,
+**2. AXIOM VERIFICATION** (Prove each axiom is true)
+For each axiom:
+- State the axiom
+- Substitute the interpretation
+- Show it is TRUE in the domain (not just "corresponds to" - actually prove it)
+
+**3. SIGNIFICANCE**
+Why this interpretation matters or where it applies.
+
+=== END FORMAT ===
+
+CRITICAL: The interpretation must be STRICTLY CORRECT. Every axiom must be LITERALLY TRUE - not approximately true. If no strictly correct interpretation exists, say so and explain which axiom fails.
+
+If the user specifies a field, find an interpretation from that field. Otherwise, choose from mathematics, physics, economics, or computer science.`,
 
   "Determine Equivalence": `Compare the two axiom systems below and determine their logical relationship.
 
