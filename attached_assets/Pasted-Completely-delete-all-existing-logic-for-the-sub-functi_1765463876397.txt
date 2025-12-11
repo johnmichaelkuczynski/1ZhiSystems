@@ -1,0 +1,139 @@
+Completely delete all existing logic for the sub-function:
+"INTERPRET CANONICAL MEANING: IDENTIFY INTENDED DOMAIN".
+
+Do NOT modify other sub-functions in the Interpret Canonical Meaning block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+INTERPRET CANONICAL MEANING (IDENTIFY INTENDED DOMAIN)
+=========================================================
+
+TASK:
+Given a single theory T and its interpreted primitives and content
+(from earlier sub-functions), determine:
+
+- What **kind** of objects the variables are most naturally taken
+  to range over (the intended domain).
+- What the overall **subject matter** of the theory appears to be
+  (e.g. people, time points, numbers, graph nodes, sets, etc.).
+
+This is an **interpretive classification** step:
+- Infer the "real-world" or "conceptual" domain the theory is about.
+- Express this explicitly in natural language.
+
+=========================================================
+INPUT
+=========================================================
+
+1. THEORY T:
+   - LANGUAGE and AXIOMS as before.
+
+2. PRIMITIVE MEANINGS:
+   - Canonical descriptions of all primitive symbols.
+
+3. THEORY CONTENT SUMMARY:
+   - Plain-language explanation of what the theory is about
+     (output of "Reveal Theory Content"), if available.
+
+4. OPTIONAL EXTERNAL HINTS:
+   - Any human-provided labels or comments (e.g. "parent", "ancestor",
+     "less than") that strongly suggest a domain.
+
+=========================================================
+DOMAIN-IDENTIFICATION PROCEDURE
+=========================================================
+
+1. EXTRACT LINGUISTIC CUES
+   - Inspect the canonical meanings of primitives for **noun phrases**
+     and role terms, e.g.:
+     - "x is a parent of y" → suggests x and y are **persons** or
+       **organisms**.
+     - "x is less than y" → suggests x and y are **numbers**,
+       **measurements**, or **time points**.
+     - "x is adjacent to y" → suggests x and y are **nodes** in a
+       network or graph, or **spatial points**.
+   - Record all such candidate domain-types.
+
+2. EXAMINE STRUCTURAL PATTERNS
+   - Use the structural behavior of key relations and functions:
+     - Linear orders with endpoints → often **time**, **positions
+       on a line**, or **numbers**.
+     - Tree-like ancestry structures → often **genealogies of agents**,
+       **hierarchies**, or **organizational charts**.
+     - Algebraic operations (+, ·, inverse, identity) → often **numbers**
+       or **algebraic elements**.
+   - Match detected patterns to standard model kinds when possible.
+
+3. CROSS-CHECK WITH THEORY CONTENT SUMMARY
+   - Compare candidate domain-types from steps 1–2 with the plain-language
+     summary of theory content.
+   - Prefer domain descriptions that:
+     - Are consistent with all primitive meanings.
+     - Fit naturally with the global story (e.g. "family relations",
+       "ordering of times", "graph-like connectivity").
+
+4. SELECT THE MOST NATURAL DOMAIN DESCRIPTION
+   - Choose a single domain description of the form:
+     - "The domain consists of [kind of objects]."
+   - If several equally plausible domain-types remain:
+     - State the **most specific safe** description and list alternatives.
+     - Example: "The domain consists of ordered elements, most naturally
+       interpreted as times or positions on a line."
+
+5. IDENTIFY SUBJECT MATTER
+   - On top of the bare domain-type, state the **subject matter**:
+     - "This theory is about family relationships between persons."
+     - "This theory is about the ordering of events in time."
+     - "This theory is about the structure of a directed graph."
+   - Use the roles of predicates and functions to refine this description.
+
+6. HANDLE UNDERDETERMINED CASES
+   - If the axioms + primitive meanings do not support any specific
+     domain-type beyond "arbitrary objects":
+     - Say explicitly:
+       - "The intended domain is not uniquely determined; the theory
+         can be interpreted over any collection of objects."
+     - Still provide the most informative generic label available
+       (e.g. "abstract elements", "nodes", "items").
+
+=========================================================
+SUCCESS CONDITION
+=========================================================
+
+The procedure **succeeds** if it outputs:
+
+- A clear statement of what kind of objects the variables range over
+  (or a small set of plausible options), and
+- A short description of the subject matter in ordinary language.
+
+If the domain is genuinely unconstrained:
+- The result must explicitly note this and avoid pretending to
+  a specificity that the axioms do not support.
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+INTENDED DOMAIN:
+- Domain: [short description of what the objects are]
+- Subject matter: [one-sentence description of what the theory
+  is about]
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Briefly list:
+  - The key linguistic cues from primitive meanings.
+  - The main structural patterns that guided domain selection.
+  - Any alternative plausible domain-types, if applicable.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

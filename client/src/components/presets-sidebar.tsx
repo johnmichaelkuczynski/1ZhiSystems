@@ -2108,18 +2108,92 @@ EXPLANATION:
     instructions: `INTERPRET CANONICAL MEANING: REVEAL THEORY CONTENT (1 ARG)
 
 TASK:
-Explain in plain English what the theory *says about the world* once symbols are replaced with their meanings.
+Given a single theory T, together with canonical primitive meanings and natural-language restatements of all axioms, produce a **plain-English explanation of what the theory is really about**.
 
-RULES:
-1. Describe only what follows directly from the axioms
-2. Do NOT infer unstated metaphysics or hidden structure
-3. Summarize the claims as they stand, not their consequences
+This is a **global summarization** step:
+- Move from axiom-by-axiom descriptions to a high-level account of the structure the theory describes
+- Identify the main constraints and patterns imposed on the domain
+- Express them as ordinary claims about reality, not as formulas
 
-OUTPUT FORMAT:
+INPUT:
+1. THEORY T: LANGUAGE and AXIOMS as before
+2. PRIMITIVE MEANINGS: Canonical meaning for each primitive symbol S
+3. NATURAL-LANGUAGE AXIOMS: For each axiom ϕᵢ, a clear English restatement from previous sub-function
 
-THEORY CONTENT:
-- <one-sentence description of the core claim>
-- <additional points capturing what the axioms jointly assert>`
+CONTENT-REVEALING PROCEDURE:
+
+STEP 1 — COLLECT AND GROUP AXIOMS:
+Take all English restatements. Group them into clusters by **theme**, e.g.:
+- Axioms characterizing one key relation (e.g. ordering, equivalence)
+- Axioms describing a special subclass (e.g. "parents", "maximal elements")
+- Existence axioms (guaranteeing certain objects)
+- Non-existence / restriction axioms (ruling out certain configurations)
+
+STEP 2 — IDENTIFY STRUCTURAL PATTERNS:
+Within each cluster, detect which standard kinds of structures are being enforced:
+- Partial order, total order, equivalence relation
+- Algebraic structure (group, ring-like, lattice-like)
+- Graph-like structure (edges, paths, neighbors)
+- Hierarchical or genealogical structure (ancestor, descendant)
+Record any **named** structural properties:
+- Irreflexive, transitive relation → "strict order-like relation"
+- Symmetric, transitive, reflexive → "equivalence-like relation"
+
+STEP 3 — DERIVE KEY GLOBAL CLAIMS:
+From the clusters and patterns, extract **core content claims**:
+- What relationships must always hold between any two or three elements?
+- What kinds of objects are guaranteed to exist?
+- What configurations are explicitly forbidden?
+Express these as **general English statements**, e.g.:
+- "Every object stands in the relation R to itself"
+- "No two distinct objects can both be parents of each other"
+- "There is at least one object that has no predecessors"
+
+STEP 4 — SYNTHESIZE A HIGH-LEVEL SUMMARY:
+Combine key claims into a short, cohesive narrative answering:
+- "What kind of structure does this theory describe?"
+- "What constraints does it impose on that structure?"
+The summary should:
+- Mention the main relations / operations / distinguished sets
+- Explain how they interact
+- Indicate whether the structure resembles a known mathematical or conceptual pattern (e.g. "a tree-like genealogy", "a linearly ordered sequence of times", "an equivalence partition")
+
+STEP 5 — AVOID FORMALISM IN THE FINAL SUMMARY:
+The final exposition must:
+- Use no symbols like ∀, ∃, ¬, ∧, etc.
+- Avoid variable names as much as possible (x, y, z)
+Instead, speak directly about "objects", "elements", "points", "agents", etc., using natural terms from primitive meanings.
+
+STEP 6 — INCLUDE INTUITIVE CONSEQUENCES (OPTIONAL, IF ENTAILED):
+Where straightforward, derive **simple consequences** that show how the structure behaves:
+- "Because the relation is transitive and antisymmetric, there cannot be cycles"
+- "Because every object has at most one parent, the structure resembles a collection of rooted trees"
+Only include consequences clearly supported by the axioms.
+
+SUCCESS CONDITION:
+
+Produce a concise, coherent, and non-technical explanation that:
+- States what kind of structure the theory describes
+- Highlights the main constraints and patterns
+- Avoids formal notation while remaining faithful to the axioms
+
+If the theory is too weak or generic: state that explicitly, describing it as imposing minimal constraints.
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+THEORY CONTENT (PLAIN LANGUAGE SUMMARY):
+[One or two paragraphs explaining, in ordinary English, what the theory says about its domain and structure.]
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Briefly list the main axiom clusters and indicate which parts of the English summary they support
+- Note any standard structural patterns detected (order, equivalence, algebraic structure, etc.) and where they came from`
   },
   {
     id: "f9-intended-domain",
@@ -2129,18 +2203,86 @@ THEORY CONTENT:
     instructions: `INTERPRET CANONICAL MEANING: IDENTIFY INTENDED DOMAIN (1 ARG)
 
 TASK:
-Determine the most natural domain of discourse based on the primitive meanings and the structure of the axioms.
+Given a single theory T and its interpreted primitives and content (from earlier sub-functions), determine:
+- What **kind** of objects the variables are most naturally taken to range over (the intended domain)
+- What the overall **subject matter** of the theory appears to be (e.g. people, time points, numbers, graph nodes, sets, etc.)
 
-RULES:
-1. If the predicates resemble social, physical, or mathematical notions, pick the simplest domain matching that
-2. Use only minimal interpretive assumptions
-3. If ambiguous, state the smallest class of objects that makes sense given the primitive meanings
+This is an **interpretive classification** step:
+- Infer the "real-world" or "conceptual" domain the theory is about
+- Express this explicitly in natural language
 
-OUTPUT FORMAT:
+INPUT:
+1. THEORY T: LANGUAGE and AXIOMS as before
+2. PRIMITIVE MEANINGS: Canonical descriptions of all primitive symbols
+3. THEORY CONTENT SUMMARY: Plain-language explanation of what the theory is about (output of "Reveal Theory Content"), if available
+4. OPTIONAL EXTERNAL HINTS: Any human-provided labels or comments (e.g. "parent", "ancestor", "less than") suggesting domain
+
+DOMAIN-IDENTIFICATION PROCEDURE:
+
+STEP 1 — EXTRACT LINGUISTIC CUES:
+Inspect canonical meanings of primitives for **noun phrases** and role terms:
+- "x is a parent of y" → suggests x and y are **persons** or **organisms**
+- "x is less than y" → suggests x and y are **numbers**, **measurements**, or **time points**
+- "x is adjacent to y" → suggests x and y are **nodes** in a network/graph, or **spatial points**
+Record all candidate domain-types.
+
+STEP 2 — EXAMINE STRUCTURAL PATTERNS:
+Use structural behavior of key relations and functions:
+- Linear orders with endpoints → often **time**, **positions on a line**, or **numbers**
+- Tree-like ancestry structures → often **genealogies of agents**, **hierarchies**, or **organizational charts**
+- Algebraic operations (+, ·, inverse, identity) → often **numbers** or **algebraic elements**
+Match detected patterns to standard model kinds when possible.
+
+STEP 3 — CROSS-CHECK WITH THEORY CONTENT SUMMARY:
+Compare candidate domain-types from steps 1-2 with the plain-language summary of theory content.
+Prefer domain descriptions that:
+- Are consistent with all primitive meanings
+- Fit naturally with the global story (e.g. "family relations", "ordering of times", "graph-like connectivity")
+
+STEP 4 — SELECT THE MOST NATURAL DOMAIN DESCRIPTION:
+Choose a single domain description of the form: "The domain consists of [kind of objects]"
+If multiple equally plausible domain-types remain:
+- State the **most specific safe** description and list alternatives
+- Example: "The domain consists of ordered elements, most naturally interpreted as times or positions on a line"
+
+STEP 5 — IDENTIFY SUBJECT MATTER:
+On top of the bare domain-type, state the **subject matter**:
+- "This theory is about family relationships between persons"
+- "This theory is about the ordering of events in time"
+- "This theory is about the structure of a directed graph"
+Use the roles of predicates and functions to refine this description.
+
+STEP 6 — HANDLE UNDERDETERMINED CASES:
+If axioms + primitive meanings do not support any specific domain-type beyond "arbitrary objects":
+- State explicitly: "The intended domain is not uniquely determined; the theory can be interpreted over any collection of objects"
+Still provide the most informative generic label available (e.g. "abstract elements", "nodes", "items").
+
+SUCCESS CONDITION:
+
+Output:
+- A clear statement of what kind of objects the variables range over (or small set of plausible options)
+- A short description of the subject matter in ordinary language
+
+If domain is genuinely unconstrained: explicitly note this and avoid pretending to specificity the axioms don't support.
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
 
 INTENDED DOMAIN:
-- "The domain is most naturally interpreted as …"
-- "Objects in the domain represent …"`
+- Domain: [short description of what the objects are]
+- Subject matter: [one-sentence description of what the theory is about]
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Briefly list:
+  - The key linguistic cues from primitive meanings
+  - The main structural patterns that guided domain selection
+  - Any alternative plausible domain-types, if applicable`
   },
   // FUNCTION 10: Find an Interpretation
   // A. Abstract / Formal Domains
