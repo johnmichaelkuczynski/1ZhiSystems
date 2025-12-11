@@ -593,14 +593,43 @@ COMPARISON
 - Do NOT evaluate theories or infer consequences
 - ONLY compare primitive/derived classifications`,
 
-  "Ontological Dependence": `Analyze the ontological dependencies in this theory.
+  "Ontological Dependence": `YOUR TASK: Identify which symbols ontologically depend on others based on EXPLICIT DEFINITIONS only.
 
+=== INPUT CONCEPTUAL SCHEME ===
 <<<INPUT>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-For each primitive, determine its ontological load. Rank primitives by importance. Find the minimal sustaining set. Report which primitives are eliminable.`,
+=== DEFINITION OF ONTOLOGICAL DEPENDENCE ===
+A symbol S ontologically depends on symbols T₁, …, Tₙ if and only if there is an explicit definition:
+    S(x,…) ↔ φ(x,…)
+and φ contains T₁, …, Tₙ.
+
+No definition ⇒ S is PRIMITIVE and has NO dependencies.
+
+=== OUTPUT FORMAT (use exactly this structure) ===
+
+RESULT
+Primitive symbols:
+(list)
+
+Derived symbols and their dependencies:
+S depends on {T1, T2, …}
+S₂ depends on {…}
+…
+
+Dependency Graph:
+(list edges: T → S for each dependency)
+(If no derived symbols exist, output "None.")
+
+=== HARD REQUIREMENTS ===
+- Dependencies come ONLY from explicit definitions
+- Do NOT infer dependencies from axioms
+- Do NOT guess definability
+- Do NOT perform model-theoretic analysis
+- Do NOT produce philosophical commentary
+- Do NOT invent new predicates`,
 
   "Generate Alternative Conceptualizations": `Generate an alternative conceptualization of this theory.
 
