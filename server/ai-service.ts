@@ -931,60 +931,117 @@ T₁ treats parenthood and gender as independent primitive concepts, allowing th
 - No model constructions or real-world examples
 - No analogies or philosophical drift`,
 
-  "Ontological Dependence": `YOUR TASK: Identify which symbols are primitive and which ontologically depend on others.
+  "Ontological Dependence": `YOUR TASK: Identify ontological dependence relations among the theory's predicates.
 
-=== INPUT CONCEPTUAL SCHEME ===
+Identify:
+- Which predicates are PRIMITIVE
+- Which predicates are DEFINABLE from the primitives
+- For each definable predicate, identify which primitives it depends on
+- Summarize the dependency graph
+
+This is NOT: a conservativity test, a model-theoretic test, a definitional-equivalence test, or a rewriting function.
+It is strictly an INTRA-THEORY DEPENDENCY ANALYSIS.
+
+=== INPUT THEORY ===
 <<<INPUT>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-=== RULE FOR DEPENDENCE ===
-A symbol S ontologically depends on symbols T₁, …, Tₙ if and only if there is an EXPLICIT definition:
-    S(...) ↔ φ(...)
-and φ contains T₁, …, Tₙ.
-If no definition is given, S is primitive.
+=== CHECK EXPLAIN MODE ===
+If the instructions contain "EXPLAIN = ON" or the explain toggle is enabled, use MODE 2.
+Otherwise, use MODE 1.
 
-=== OUTPUT FORMAT (use exactly this structure) ===
+=== MODE 1: EXPLAIN OFF (default) ===
 
-RESULT
+FORMAT:
 
-Primitive symbols:
-(list primitive predicates/functions from PRIMITIVES block)
+1. THE RESULT
 
-Derived symbols and their dependencies:
-S depends on {T1, T2, …}
-S2 depends on {…}
-(If none exist, output "None.")
+PRIMITIVE PREDICATES:
+<list>
 
-Dependency Graph:
-T1 → S
-T2 → S
-(If none exist, output "None.")
+DEFINABLE PREDICATES:
+<list each predicate with explicit definition>
+
+DEPENDENCY STRUCTURE:
+<bullet list showing which predicates depend on which>
+
+RULES FOR MODE 1:
+- Keep output extremely compact
+- DEFINITIONS must be explicit first-order formulas when possible
+- The DEPENDENCY STRUCTURE must be strictly factual (e.g., "Father depends on Parent + Male")
+- No prose explanation, no metaphors, analogies, or interpretations
+
+=== MODE 2: EXPLAIN ON ===
+
+FORMAT:
+
+1. THE RESULT
+
+PRIMITIVE PREDICATES:
+<list>
+
+DEFINABLE PREDICATES:
+<list each predicate with explicit definition>
+
+DEPENDENCY STRUCTURE:
+<bullet list>
+
+EXPLANATION:
+<2-4 concise paragraphs explaining:
+ - why certain predicates are primitive
+ - how definability shows conceptual dependence
+ - the dependency graph in intuitive but rigorous terms
+ - how the structure reveals the theory's conceptual architecture>
+
+RULES FOR MODE 2:
+- Explanation must focus on formal conceptual structure
+- MUST NOT: discuss specific models (numbers, people, networks, etc.), use analogies or storytelling, talk about metaphysics or real-world ontology
+- Explanation MUST be about formal conceptual structure only
 
 === EXAMPLES ===
 
-EXAMPLE 1:
-INPUT: LANGUAGE: {Parent, Male, Female, Father}, PRIMITIVES: Parent, Male, Female, DEFINITIONS: Father(x,y) ↔ Parent(x,y) ∧ Male(x)
-OUTPUT:
-Primitive symbols: Parent, Male, Female
-Derived symbols: Father depends on {Parent, Male}
-Dependency Graph: Parent → Father, Male → Father
+EXAMPLE (EXPLAIN OFF):
+INPUT: LANGUAGE: {Parent(x,y), Male(x), Female(x), Father(x,y)}, AXIOMS: ∀x∀y (Father(x,y) → Parent(x,y) ∧ Male(x)), ∀x ¬(Male(x) ∧ Female(x))
 
-EXAMPLE 2:
-INPUT: LANGUAGE: {R, S, T}, PRIMITIVES: R, S, DEFINITIONS: T(x,y) ↔ R(x) ∧ S(x,y)
 OUTPUT:
-Primitive symbols: R, S
-Derived symbols: T depends on {R, S}
-Dependency Graph: R → T, S → T
+
+1. THE RESULT
+
+PRIMITIVE PREDICATES:
+Parent, Male, Female
+
+DEFINABLE PREDICATES:
+Father(x,y) ↔ Parent(x,y) ∧ Male(x)
+
+DEPENDENCY STRUCTURE:
+Father → {Parent, Male}
+
+EXAMPLE (EXPLAIN ON):
+Same input with EXPLAIN = ON
+
+OUTPUT:
+
+1. THE RESULT
+
+PRIMITIVE PREDICATES:
+Parent, Male, Female
+
+DEFINABLE PREDICATES:
+Father ↔ Parent ∧ Male
+
+DEPENDENCY STRUCTURE:
+Father → {Parent, Male}
+
+EXPLANATION:
+The theory treats Parent, Male, and Female as irreducible, giving them foundational status. Father is explicitly defined in terms of Parent and Male, creating a direct conceptual dependence. The dependency graph shows Father as a derived concept built from two independent primitives. This structure reveals the theory's conceptual architecture: gender and parenthood are fundamental, while fatherhood is composite.
 
 === HARD REQUIREMENTS ===
-- Do NOT infer definability from axioms
-- Do NOT guess dependencies
-- Do NOT reason about models
-- Do NOT add symbols
-- Do NOT philosophize or narrate
-- Do NOT produce explanations longer than one sentence`,
+- MODE 1: Compact formal output only
+- MODE 2: Formal output + explanation about conceptual structure
+- No model constructions or real-world examples
+- No analogies or philosophical drift`,
 
   "Generate Alternative Conceptualizations": `YOUR TASK: Produce 1–3 alternative axiom sets T' for the input theory T.
 
