@@ -1905,28 +1905,92 @@ EXPLANATION:
     name: "Identify Primitive Meanings",
     functionId: 9,
     input: ``,
-    instructions: `For each primitive symbol in the theory, identify what it is most naturally intended to represent. Explain the canonical meaning of each predicate, function, and constant.`
+    instructions: `INTERPRET CANONICAL MEANING: IDENTIFY PRIMITIVE MEANINGS (1 ARG)
+
+TASK:
+Given a theory T with primitives {P1, …, Pk}, identify the *most natural* intended meaning of each predicate, function, and constant symbol.
+
+RULES:
+1. Use ONLY the syntactic form:
+   - Unary predicate → property of objects
+   - Binary predicate → relation between objects
+   - Function symbol → operation producing an output
+   - Constant → designated object
+2. Do NOT infer semantics beyond what the symbol names and arities suggest
+3. Output one short clause per primitive describing its canonical meaning
+
+OUTPUT FORMAT:
+
+PRIMITIVE MEANINGS:
+- P1(x): "..."
+- P2(x,y): "..."
+- f(x): "..."
+- c: "..."`
   },
   {
     id: "f9-natural-language",
     name: "Natural Language Restatement",
     functionId: 9,
     input: ``,
-    instructions: `Restate all axioms using explicit natural-language terms instead of abstract symbols. Replace each primitive with a phrase that captures its intended meaning.`
+    instructions: `INTERPRET CANONICAL MEANING: NATURAL LANGUAGE RESTATEMENT (1 ARG)
+
+TASK:
+Rewrite every axiom in plain English by replacing each primitive symbol with the natural-language phrase identified in the primitive meanings step.
+
+RULES:
+1. Logical connectives are rendered in English ("for all", "there exists", "implies", "and")
+2. Preserve quantifier scope exactly
+3. DO NOT paraphrase or summarize. Restate literally
+4. Every predicate/function/constant must be replaced with its phrase
+
+OUTPUT FORMAT:
+
+NATURAL LANGUAGE AXIOMS:
+1. <axiom 1 in English>
+2. <axiom 2 in English>
+...`
   },
   {
     id: "f9-reveal-content",
     name: "Reveal Theory Content",
     functionId: 9,
     input: ``,
-    instructions: `Explain what this theory is really about. Strip away the formal notation and describe in plain English what claims the theory makes about reality.`
+    instructions: `INTERPRET CANONICAL MEANING: REVEAL THEORY CONTENT (1 ARG)
+
+TASK:
+Explain in plain English what the theory *says about the world* once symbols are replaced with their meanings.
+
+RULES:
+1. Describe only what follows directly from the axioms
+2. Do NOT infer unstated metaphysics or hidden structure
+3. Summarize the claims as they stand, not their consequences
+
+OUTPUT FORMAT:
+
+THEORY CONTENT:
+- <one-sentence description of the core claim>
+- <additional points capturing what the axioms jointly assert>`
   },
   {
     id: "f9-intended-domain",
     name: "Identify Intended Domain",
     functionId: 9,
     input: ``,
-    instructions: `Determine what domain of objects this theory is intended to describe. What are the primitives supposed to range over? What is the intended subject matter?`
+    instructions: `INTERPRET CANONICAL MEANING: IDENTIFY INTENDED DOMAIN (1 ARG)
+
+TASK:
+Determine the most natural domain of discourse based on the primitive meanings and the structure of the axioms.
+
+RULES:
+1. If the predicates resemble social, physical, or mathematical notions, pick the simplest domain matching that
+2. Use only minimal interpretive assumptions
+3. If ambiguous, state the smallest class of objects that makes sense given the primitive meanings
+
+OUTPUT FORMAT:
+
+INTENDED DOMAIN:
+- "The domain is most naturally interpreted as …"
+- "Objects in the domain represent …"`
   },
   // FUNCTION 10: Find an Interpretation
   // A. Abstract / Formal Domains

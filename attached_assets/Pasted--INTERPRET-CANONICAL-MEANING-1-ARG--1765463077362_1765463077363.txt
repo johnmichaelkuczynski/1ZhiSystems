@@ -1,0 +1,85 @@
+=========================================================
+INTERPRET CANONICAL MEANING (1 ARG)
+=========================================================
+
+Sub-function 1:
+IDENTIFY PRIMITIVE MEANINGS
+
+TASK:
+Given a theory T with primitives {P1, …, Pk}, identify the *most natural* intended meaning of each predicate, function, and constant symbol.
+
+RULES:
+1. Use ONLY the syntactic form:
+   - Unary predicate → property of objects
+   - Binary predicate → relation between objects
+   - Function symbol → operation producing an output
+   - Constant → designated object
+2. Do NOT infer semantics beyond what the symbol names and arities suggest.
+3. Output one short clause per primitive describing its canonical meaning.
+
+OUTPUT FORMAT:
+PRIMITIVE MEANINGS:
+- P1(x): “...” 
+- P2(x,y): “...”
+- f(x): “...”
+- c: “...”
+
+---------------------------------------------------------
+
+Sub-function 2:
+NATURAL LANGUAGE RESTATEMENT
+
+TASK:
+Rewrite every axiom in plain English by replacing each primitive symbol with the natural-language phrase identified in Sub-function 1.
+
+RULES:
+1. Logical connectives are rendered in English (“for all”, “there exists”, “implies”, “and”).
+2. Preserve quantifier scope exactly.
+3. DO NOT paraphrase or summarize. Restate literally.
+4. Every predicate/function/constant must be replaced with its phrase.
+
+OUTPUT FORMAT:
+NATURAL LANGUAGE AXIOMS:
+1. <axiom 1 in English>
+2. <axiom 2 in English>
+...
+
+---------------------------------------------------------
+
+Sub-function 3:
+REVEAL THEORY CONTENT
+
+TASK:
+Explain in plain English what the theory *says about the world* once symbols are replaced with their meanings.
+
+RULES:
+1. Describe only what follows directly from the axioms.
+2. Do NOT infer unstated metaphysics or hidden structure.
+3. Summarize the claims as they stand, not their consequences.
+
+OUTPUT FORMAT:
+THEORY CONTENT:
+- <one-sentence description of the core claim>
+- <additional points capturing what the axioms jointly assert>
+
+---------------------------------------------------------
+
+Sub-function 4:
+IDENTIFY INTENDED DOMAIN
+
+TASK:
+Determine the most natural domain of discourse based on the primitive meanings and the structure of the axioms.
+
+RULES:
+1. If the predicates resemble social, physical, or mathematical notions, pick the simplest domain matching that.
+2. Use only minimal interpretive assumptions.
+3. If ambiguous, state the smallest class of objects that makes sense given the primitive meanings.
+
+OUTPUT FORMAT:
+INTENDED DOMAIN:
+- “The domain is most naturally interpreted as …”
+- “Objects in the domain represent …”
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
