@@ -244,7 +244,36 @@ EXPLANATION:
     name: "Minimal Obstruction Report",
     functionId: 2,
     input: `<<<SEPARATOR>>>`,
-    instructions: `If the theories are not schema-equivalent, identify the smallest structural difference that prevents equivalence. Report the specific axiom or property that blocks the mapping.`
+    instructions: `SCHEMA EQUIVALENCE: MINIMAL OBSTRUCTION REPORT (T₁, T₂)
+
+TASK:
+Given two theories T₁ and T₂, output a **single, minimal, formal obstruction** explaining why they FAIL schema-equivalence under any mapping type (Direct Vocabulary, Arity-Preserving, Structural Role).
+
+This sub-function NEVER declares equivalence. Its sole purpose is to identify the FIRST point of failure.
+
+ORDER OF TESTING (test in this EXACT sequence):
+1. Cardinality Mismatch: |Lang(T₁)| ≠ |Lang(T₂)|
+2. Arity Mismatch: ∃i such that arity(Pi) ≠ any arity in T₂
+3. No Possible Arity-Preserving Bijection: Multisets of arities differ
+4. Role-Profile Mismatch: Even with matching arities, no bijection aligns role profiles
+5. Axiom Mismatch: Even with a candidate bijection, rewritten axioms of T₁ fail to match T₂
+
+Upon encountering the FIRST failing condition, STOP and report ONLY that obstruction.
+
+MINIMAL OBSTRUCTION MESSAGES (pick exactly ONE):
+1. "Obstruction: Different number of predicate symbols."
+2. "Obstruction: Predicate arities do not match across theories."
+3. "Obstruction: No arity-preserving bijection exists."
+4. "Obstruction: No predicate-role mapping preserves structural profiles."
+5. "Obstruction: Axioms do not match under any arity-preserving renaming."
+
+OUTPUT (EXPLAIN = OFF):
+<one minimal obstruction message>
+
+OUTPUT (EXPLAIN = ON):
+<one minimal obstruction message>
+EXPLANATION:
+A short explanation (2–3 lines maximum) stating why that specific obstruction prevents any schema-equivalence between the theories.`
   },
   // FUNCTION 3: Definitional Equivalence
   {

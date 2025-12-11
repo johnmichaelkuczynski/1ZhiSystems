@@ -1,0 +1,92 @@
+Completely delete all existing logic for the sub-function:
+"SCHEMA EQUIVALENCE: MINIMAL OBSTRUCTION REPORT".
+
+Do NOT modify the main function "Theory Transformation".
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+SCHEMA EQUIVALENCE: MINIMAL OBSTRUCTION REPORT (T₁, T₂)
+=========================================================
+
+TASK:
+Given two theories T₁ and T₂, output a **single, minimal, formal
+obstruction** explaining why they FAIL schema-equivalence under
+any of the following mapping types:
+
+1. Direct Vocabulary Mapping  
+2. Arity-Preserving Mapping  
+3. Structural Role Mapping  
+
+This sub-function NEVER declares equivalence.
+Its sole purpose is to identify the FIRST point of failure.
+
+=========================================================
+ORDER OF TESTING
+=========================================================
+
+The sub-function must test obstacles in this EXACT sequence:
+
+1. **Cardinality Mismatch**  
+   |Lang(T₁)| ≠ |Lang(T₂)|
+
+2. **Arity Mismatch**  
+   ∃i such that arity(Pi) ≠ any arity in T₂
+
+3. **No Possible Arity-Preserving Bijection**  
+   Multisets of arities differ.
+
+4. **Role-Profile Mismatch**  
+   Even with matching arities, no bijection aligns role profiles.
+
+5. **Axiom Mismatch Under Best Candidate Mapping**  
+   Even with a candidate bijection, rewritten axioms of T₁ fail to match T₂.
+
+Upon encountering the FIRST failing condition, STOP and report ONLY that obstruction.
+
+=========================================================
+MINIMAL OBSTRUCTION FORMAT
+=========================================================
+
+Each possible failure has a fixed, canonical message:
+
+1. CARDINALITY:
+   "Obstruction: Different number of predicate symbols."
+
+2. ARITY MISMATCH:
+   "Obstruction: Predicate arities do not match across theories."
+
+3. ARITY MULTISET FAILURE:
+   "Obstruction: No arity-preserving bijection exists."
+
+4. ROLE PROFILE FAILURE:
+   "Obstruction: No predicate-role mapping preserves structural profiles."
+
+5. AXIOM FAILURE:
+   "Obstruction: Axioms do not match under any arity-preserving renaming."
+
+Exactly ONE of the above must be output.
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+<one minimal obstruction message>
+
+No translation, no extra commentary.
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+<one minimal obstruction message>
+
+EXPLANATION:
+A short explanation (2–3 lines maximum) stating why that specific
+obstruction prevents any schema-equivalence between the theories.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
