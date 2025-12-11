@@ -50,7 +50,7 @@ export interface AIResponse {
 }
 
 const DEFAULT_INSTRUCTIONS: Record<string, string> = {
-  "Axiom-Set / Theory Transformation": `Transform the input statement-set (describing a model/interpretation) into a different but isomorphic model. The system will detect what axiom-set the input satisfies, then produce a completely different interpretation that satisfies the same axioms. The new model must use a different domain and different predicate meanings while preserving the same structural pattern.`,
+  "Axiom-Set / Theory Transformation": `Produce a model-preserving syntactic transformation of the input theory by introducing new primitives or eliminating old ones. The transformation must preserve models up to definitional equivalence.`,
   
   "Schema Equivalence": `Determine whether the two input theories (or schemas) are logically equivalent: i.e., they prove exactly the same theorems in all models. Answer with one of:
 — YES, they are equivalent (bi-interpretable or mutually embeddable)
@@ -307,62 +307,82 @@ Rewrite these instructions to be PERFECT and PRECISE while staying as close to t
 }
 
 const FUNCTION_PROMPTS: Record<string, string> = {
-  "Axiom-Set / Theory Transformation": `YOUR TASK: Model-to-Model Transformation
+  "Axiom-Set / Theory Transformation": `YOUR TASK: Model-Preserving Syntactic Transformation
 
-You are given a STATEMENT-SET describing an interpretation (a model). Transform it into a DIFFERENT but structurally identical model.
+Produce a syntactic transformation of the given theory by introducing new primitives or eliminating old ones. The transformation must preserve models up to definitional equivalence.
 
+=== INPUT THEORY ===
 <<<INPUT>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-=== OUTPUT FORMAT (conversational, intuitive) ===
+=== CHECK EXPLAIN MODE ===
+If the instructions contain "EXPLAIN = ON" or the explain toggle is enabled, use MODE 2.
+Otherwise, use MODE 1.
 
-**1. You started with:**
+=== MODE 1: EXPLAIN OFF (default) ===
 
-Domain: [restate the given domain and objects]
+Output ONLY the formal transformed theory. NO interpretations, NO domains, NO analogies, NO commentary.
 
-[Symbol]: "[restate the given meaning]"
+FORMAT:
 
-Given statements:
-[List each statement with its plain English meaning in parentheses]
+LANGUAGE: { <new primitives> }
 
-So: [One plain sentence summarizing the pattern - e.g., "That's just a strict ranking."]
+DEFINITIONS:
+<old_symbol>(...) ↔ <formula using new primitives>
 
-**2. New model: [new domain type] instead of [old domain type]**
+AXIOMS:
+1. <rewritten axiom>
+2. <rewritten axiom>
+...
 
-New domain: [your new domain with specific objects]
+=== MODE 2: EXPLAIN ON ===
 
-[Symbol]: "[new meaning in new domain]"
+Output the formal transformation PLUS a short EXPLANATION section.
 
-We match:
-[Object A] ↔ [New object 1]
-[Object B] ↔ [New object 2]
-[etc.]
+FORMAT:
 
-**3. The translated facts**
+LANGUAGE: { <new primitives> }
 
-Original → New:
-[Statement 1] → [New statement] → "[plain English]" (true)
-[Statement 2] → [New statement] → "[plain English]" (true)
-[etc.]
+DEFINITIONS:
+<old_symbol>(...) ↔ <formula using new primitives>
 
-So every original fact has a direct [new domain] twin that's also true.
+AXIOMS:
+1. <rewritten axiom>
+2. <rewritten axiom>
+...
 
-**4. Why this counts as "the same structure"**
+EXPLANATION:
+<2–4 short paragraphs explaining the syntactic transformation>
 
-In the [old domain]: [one sentence describing the pattern]
+EXPLANATION RULES:
+- MUST discuss: what primitives were introduced/eliminated, how definitional equivalence works, why the rewritten axioms preserve the same models
+- MUST NOT: describe domains, provide semantic examples, drift into ontology/philosophy, give storytelling analogies
+- Stay strictly about the SYNTACTIC REWRITE
 
-In the [new domain]: [one sentence showing the same pattern holds]
+=== EXAMPLE ===
 
-=== RULES ===
-1. Use CONVERSATIONAL language - explain like you're talking to someone
-2. Show the MAPPING between old and new objects explicitly
-3. Translate EVERY statement with its plain English meaning
-4. Keep it SHORT and INTUITIVE - no jargon
-5. The new domain MUST be completely different from the input
-6. If input is ambiguous or ill-formed, fix it and proceed
-7. NEVER fail - always produce a valid transformation`,
+INPUT: LANGUAGE: {R(x,y)}, AXIOMS: ∀x ¬R(x,x), ∀x∀y∀z ((R(x,y) ∧ R(y,z)) → R(x,z)), EXPLAIN = ON
+
+OUTPUT:
+LANGUAGE: {T(x,y)}
+
+DEFINITIONS:
+R(x,y) ↔ (T(x,y) ∧ x ≠ y)
+
+AXIOMS:
+1. ∀x T(x,x)
+2. ∀x∀y∀z ((T(x,y) ∧ T(y,z)) → T(x,z))
+
+EXPLANATION:
+The primitive R is replaced by T, representing its reflexive closure. R is defined as T restricted to non-reflexive cases. This ensures that the new theory induces exactly the same models as the original. The new axioms enforce reflexivity and transitivity for T, supplying the structure needed for reconstructing R through the definition.
+
+=== HARD REQUIREMENTS ===
+- Transformation MUST preserve models up to definitional equivalence
+- MODE 1: Purely formal, no prose
+- MODE 2: Formal + syntactic explanation only
+- NEVER fail - always produce a valid transformation`,
 
   "Schema Equivalence": `Determine if the two theories below are schema-equivalent (same up to renaming of symbols).
 
