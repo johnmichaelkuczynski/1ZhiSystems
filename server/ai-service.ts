@@ -522,11 +522,14 @@ START WITH THE VERDICT. The user needs to know immediately if they are equivalen
 };
 
 function buildPrompt(input: string, instructions: string, functionName: string): string {
-  const template = FUNCTION_PROMPTS[functionName] || FUNCTION_PROMPTS["Axiom-Set / Theory Transformation"];
-  const effectiveInstructions = instructions?.trim() || DEFAULT_INSTRUCTIONS[functionName] || "Perform the standard transformation for this function.";
+  // Normalize function name by removing argument count suffix like "(One Argument)" or "(Two Arguments)"
+  const normalizedName = functionName.replace(/\s*\(.*Argument.*\)\s*$/i, "").trim();
+  
+  const template = FUNCTION_PROMPTS[normalizedName] || FUNCTION_PROMPTS["Axiom-Set / Theory Transformation"];
+  const effectiveInstructions = instructions?.trim() || DEFAULT_INSTRUCTIONS[normalizedName] || "Perform the standard transformation for this function.";
   
   // Handle dual-input functions (like Determine Equivalence)
-  if (functionName === "Determine Equivalence" && input.includes("<<<SEPARATOR>>>")) {
+  if (normalizedName === "Determine Equivalence" && input.includes("<<<SEPARATOR>>>")) {
     const [systemA, systemB] = input.split("<<<SEPARATOR>>>");
     return template
       .replace("<<<SYSTEM_A>>>", systemA?.trim() || "")
