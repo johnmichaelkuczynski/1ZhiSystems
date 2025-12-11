@@ -2757,28 +2757,204 @@ EXPLANATION:
     name: "Psychological",
     functionId: 10,
     input: ``,
-    instructions: `Find a PSYCHOLOGICAL interpretation. Use desires, motivations, mental states, or priority of needs.`
+    instructions: `FIND AN INTERPRETATION: PSYCHOLOGICAL (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct a PSYCHOLOGICAL MODEL using mental constructs in the following priority order:
+
+1. Desires, motivations, goals
+2. Beliefs and informational states
+3. Preferences and aversions
+4. Emotions and affective valence
+5. Cognitive processes (memory, inference, attention)
+6. Decision-making structures
+7. Only if all above fail: abstract mental-state graphs
+
+MODEL CONSTRUCTION RULES:
+- Choose a domain D consisting of mental states or agents
+- Interpret predicates/functions as psychological relations: "desires-more-than", "believes-that", "is-afraid-of", "is-motivated-by", etc.
+- Ensure all axioms are satisfied
+
+If no interpretation exists:
+"No psychological interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <psychological domain>
+Interpretations:
+P1(x̄) := <psychological relation>
+P2(x̄) := <psychological relation>
+...
+Pk(x̄) := <psychological relation>
+
+If no interpretation exists:
+"No psychological interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Predicates map to motivational/cognitive relations
+- The interpretation is taken from the earliest viable psychological structure
+- Axioms are verified under the mapping`
   },
   {
     id: "f10-linguistic",
     name: "Linguistic",
     functionId: 10,
     input: ``,
-    instructions: `Find a LINGUISTIC interpretation. Use words, alphabetical order, grammar, or syntactic structures.`
+    instructions: `FIND AN INTERPRETATION: LINGUISTIC (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct a LINGUISTIC MODEL using the following priority order:
+
+1. Words in a language
+2. Alphabetical order / lexicographic order
+3. Grammar rules (subject–verb, modifier relations)
+4. Syntactic dependencies (head, complement, specifier)
+5. Semantic relations (synonymy, entailment, reference)
+6. Pragmatic relations (topic, emphasis)
+7. Only if all above fail: abstract strings and relations
+
+MODEL CONSTRUCTION RULES:
+- Choose a linguistic domain D (words, sentences, syntactic nodes)
+- Interpret predicates/functions as linguistic relations: "precedes", "modifies", "dominates", "is-synonym-of", etc.
+- Ensure axioms are satisfied
+
+If no interpretation exists:
+"No linguistic interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <linguistic domain>
+Interpretations:
+P1(x̄) := <linguistic relation>
+P2(x̄) := <linguistic relation>
+...
+Pk(x̄) := <linguistic relation>
+
+If no interpretation exists:
+"No linguistic interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Interpretation chosen from earliest workable linguistic level
+- Predicates map to grammatical or semantic relations
+- Axioms are checked for satisfaction`
   },
   {
     id: "f10-organizational",
     name: "Organizational",
     functionId: 10,
     input: ``,
-    instructions: `Find an ORGANIZATIONAL interpretation. Use tasks, workflows, dependencies, or project structures.`
+    instructions: `FIND AN INTERPRETATION: ORGANIZATIONAL (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct an ORGANIZATIONAL MODEL using real organizational structures in the following priority order:
+
+1. Tasks / workflow items
+2. Dependencies (task A must precede task B)
+3. Responsibility assignments (role → task)
+4. Reporting structure (manager → subordinate)
+5. Project phases / pipelines
+6. Inter-team coordination (handoffs, blocking dependencies)
+7. Only if all above fail: abstract DAG of tasks
+
+MODEL CONSTRUCTION RULES:
+- Choose a domain D of tasks, roles, or organizational units
+- Interpret predicates/functions as workflow relations: "precedes", "depends-on", "reports-to", "is-blocked-by"
+- Ensure axioms hold
+
+If no interpretation exists:
+"No organizational interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <organizational domain>
+Interpretations:
+P1(x̄) := <organizational relation>
+P2(x̄) := <organizational relation>
+...
+Pk(x̄) := <organizational relation>
+
+If no interpretation exists:
+"No organizational interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Interpretation taken from earliest viable workflow structure
+- Predicates correspond to precedence/dependency or reporting structures
+- Axioms are checked for satisfaction`
   },
   {
     id: "f10-geographical",
     name: "Geographical / Spatial",
     functionId: 10,
     input: ``,
-    instructions: `Find a GEOGRAPHICAL interpretation. Use locations, elevations, distances, or spatial relationships.`
+    instructions: `FIND AN INTERPRETATION: GEOGRAPHICAL / SPATIAL (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct a GEOGRAPHICAL/SPATIAL MODEL using spatial entities in the following priority order:
+
+1. Locations on a map
+2. Elevation / altitude relations
+3. Distances between points
+4. Adjacency and containment
+5. Movement paths / routes
+6. Regions and boundaries
+7. Only if all above fail: abstract metric spaces
+
+MODEL CONSTRUCTION RULES:
+- Choose a spatial domain D (cities, landmarks, coordinates)
+- Interpret predicates/functions as spatial relations: "north-of", "higher-than", "closer-than", "adjacent-to"
+- Ensure axioms hold
+
+If no interpretation exists:
+"No geographical interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <spatial domain>
+Interpretations:
+P1(x̄) := <spatial relation>
+P2(x̄) := <spatial relation>
+...
+Pk(x̄) := <spatial relation>
+
+If no interpretation exists:
+"No geographical interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Interpretation chosen from earliest viable spatial structure
+- Predicates are mapped to genuine geographic or geometric relations
+- All axioms are checked for satisfaction`
   },
   {
     id: "f10-home-economics",

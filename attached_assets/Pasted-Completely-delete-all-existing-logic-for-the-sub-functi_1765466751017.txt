@@ -1,0 +1,101 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: NETWORK".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (NETWORK)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct a NETWORK MODEL
+using the following priority order:
+
+1. Nodes and direct connections
+2. Routing paths (hops)
+3. Packet flow relations (sends-to, forwards-to)
+4. Load or capacity constraints
+5. Latency / priority ordering
+6. Directed/undirected graph structure
+7. Only if all above fail: abstract graph-theoretic models.
+
+MODEL CONSTRUCTION RULES:
+- Choose a network domain D (servers, routers, nodes).
+- Interpret predicates/functions as network relations:
+  “direct-link,” “forwards-to,” “lower-latency-than,” etc.
+- Ensure axioms are satisfied.
+
+If no interpretation exists:
+"No network interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <network domain>
+Interpretations:
+P1(x̄) := <network relation>
+P2(x̄) := <network relation>
+...
+Pk(x̄) := <network relation>
+
+If no interpretation exists:
+"No network interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Predicates map to standard network routing or connectivity relations.
+- Interpretation is chosen from the earliest workable category.
+- All axioms are verified.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {RoutesTo(x,y)}
+Axioms:
+1. ∀x ¬RoutesTo(x,x)
+2. ∀x∀y∀z ((RoutesTo(x,y) ∧ RoutesTo(y,z)) → RoutesTo(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Routers in a network
+Interpretations:
+RoutesTo(x,y) := "there exists a routing table entry sending traffic from x to y"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Routers in a network
+Interpretations:
+RoutesTo(x,y) := "there exists a routing table entry sending traffic from x to y"
+
+EXPLANATION:
+- Routing is irreflexive (no router directs traffic to itself as destination).
+- Routing-path composition is transitive.
+- Therefore the axioms are satisfied.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

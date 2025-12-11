@@ -1,0 +1,99 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: HOME ECONOMICS".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (HOME ECONOMICS)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct a HOME ECONOMICS MODEL
+using the following priority order:
+
+1. Cooking processes (heats, mixes, chops)
+2. Temperature relations (hotter-than, cooler-than)
+3. Storage and containment (inside, sealed-in, refrigerated)
+4. Appliance operations (oven → heats, blender → mixes)
+5. Resource usage (consumes-power, uses-water)
+6. Household workflows (prepare → cook → serve)
+7. Only if all above fail: abstract household state models.
+
+MODEL CONSTRUCTION RULES:
+- Choose a household domain D (foods, containers, appliances).
+- Interpret predicates/functions as kitchen/household relations.
+- Ensure axioms are satisfied.
+
+If no interpretation exists:
+"No home-economics interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <home-economics domain>
+Interpretations:
+P1(x̄) := <household relation>
+P2(x̄) := <household relation>
+...
+Pk(x̄) := <household relation>
+
+If no interpretation exists:
+"No home-economics interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- The interpretation is chosen from the earliest viable household process.
+- Predicates correspond to heating, mixing, storage, or appliance actions.
+- Axioms are checked for satisfaction.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {Hotter(x,y)}
+Axioms:
+1. ∀x ¬Hotter(x,x)
+2. ∀x∀y∀z ((Hotter(x,y) ∧ Hotter(y,z)) → Hotter(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Pots and pans on a stove
+Interpretations:
+Hotter(x,y) := "temperature(x) > temperature(y)"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Pots and pans on a stove
+Interpretations:
+Hotter(x,y) := "temperature(x) > temperature(y)"
+
+EXPLANATION:
+- Temperature ordering is irreflexive and transitive.
+- Thus the axioms are satisfied.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

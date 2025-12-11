@@ -1,0 +1,101 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: MARKET MICROSTRUCTURE".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (MARKET MICROSTRUCTURE)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct a MICROSTRUCTURE MODEL
+using the following priority order:
+
+1. Limit order book structure (bids, asks)
+2. Price priority (better prices execute first)
+3. Time priority (earlier orders execute first)
+4. Execution rules (market order → consumes liquidity)
+5. Matching engine behavior
+6. Queue position relations
+7. Only if all above fail: abstract priority queues.
+
+MODEL CONSTRUCTION RULES:
+- Choose a domain D of orders/ticks/price levels.
+- Interpret predicates/functions using order book mechanics:
+  “better-price-than,” “ahead-in-queue,” “matchable-with,” etc.
+- Verify that axioms hold.
+
+If no interpretation exists:
+"No market-microstructure interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <microstructure domain>
+Interpretations:
+P1(x̄) := <microstructure relation>
+P2(x̄) := <microstructure relation>
+...
+Pk(x̄) := <microstructure relation>
+
+If no interpretation exists:
+"No market-microstructure interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Predicates correspond to microstructure mechanics (priority, queue position).
+- The earliest viable feature of the order book is used.
+- All axioms are checked for satisfaction.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {Better(x,y)}
+Axioms:
+1. ∀x ¬Better(x,x)
+2. ∀x∀y∀z ((Better(x,y) ∧ Better(y,z)) → Better(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Limit orders at different price levels
+Interpretations:
+Better(x,y) := "price(x) > price(y) for buy-side orders"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Limit orders at different price levels
+Interpretations:
+Better(x,y) := "price(x) > price(y) for buy-side orders"
+
+EXPLANATION:
+- Price priority on the buy side is strictly ordered: higher price is always better.
+- Irreflexivity and transitivity hold.
+- Therefore the axioms are satisfied.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
