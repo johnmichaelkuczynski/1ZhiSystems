@@ -82,7 +82,7 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
     try {
       const response = await processTheory(inputText, instructionsText, title, selectedModel, explain);
       setOutput(response.result);
-      setUsedModel(`${response.provider} - ${response.model}`);
+      setUsedModel(selectedModel);
     } catch (err: any) {
       setError(err.message || "Processing failed");
       setOutput("");

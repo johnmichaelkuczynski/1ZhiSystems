@@ -79,7 +79,7 @@ export function DualInputRow({ id, title, description, selectedModel, presetInpu
     try {
       const response = await processTheory(combinedInput, instructions, title, selectedModel, explain);
       setOutput(response.result);
-      setUsedModel(`${response.provider} - ${response.model}`);
+      setUsedModel(selectedModel);
     } catch (err: any) {
       setError(err.message || "Processing failed");
       setOutput("");
