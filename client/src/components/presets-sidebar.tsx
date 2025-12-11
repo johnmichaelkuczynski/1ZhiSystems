@@ -524,7 +524,63 @@ EXPLANATION:
     name: "Reduced Primitive Set",
     functionId: 4,
     input: ``,
-    instructions: `Eliminate as many primitives as possible while keeping exactly the same models. Report the minimal primitive set and how eliminated primitives are defined.`
+    instructions: `MODEL-PRESERVING REWRITE (REDUCED PRIMITIVE SET)
+
+TASK:
+Given a theory T, eliminate as many primitive predicates as possible while preserving EXACTLY the same class of models (up to isomorphism). All eliminated primitives must be explicitly definable from the remaining ones.
+
+The sub-function must output:
+1. The minimal surviving primitive set
+2. Definitions expressing each eliminated primitive in terms of the survivors
+
+INPUT:
+A single theory T with:
+- LANGUAGE: predicates P1,...,Pk with arities ≥ 1
+- AXIOMS: first-order sentences over that language
+- EXPLAIN toggle (ON or OFF)
+
+MECHANICAL REDUCTION PROCEDURE:
+
+For each predicate Pi:
+1. Attempt to syntactically express Pi(x̄) as a formula φi(x̄) using ONLY the other predicates {Pj : j ≠ i} by:
+   - Searching every axiom for positions where Pi appears
+   - Replacing other predicates Pj by schematic placeholders
+   - Attempting to unify Pi(x̄) with a subformula in which Pi appears *only on one side* of an equivalence, implication, or definitional pattern
+2. If such a φi is found and contains no occurrence of Pi: Mark Pi as DEFINABLE
+3. If no such φi exists: Mark Pi as NON-DEFINABLE
+
+After scanning all predicates:
+4. Remove all DEFINABLE primitives from the language
+5. For each removed Pi, record its explicit definition: Pi(x̄) ↔ φi(x̄)
+6. The remaining primitives form the MINIMAL PRIMITIVE SET
+
+No inference, no model-building, and no semantic reasoning are permitted. THIS IS A PURELY SYNTACTIC DEFINABILITY TEST.
+
+SUCCESS CONDITION:
+
+Reduction ALWAYS succeeds.
+- If zero primitives are eliminable: Output the original primitive set unchanged + "No eliminable primitives"
+- If at least one primitive is eliminable: Output the reduced primitive set + explicit definitions for each eliminated predicate
+
+OUTPUT (EXPLAIN = OFF):
+
+MINIMAL LANGUAGE:
+{ list surviving primitives with arities }
+
+ELIMINATED PRIMITIVES AND DEFINITIONS:
+P_i(x̄) ↔ φ_i(x̄)
+...
+
+AXIOMS:
+(same axioms of T, unchanged except that eliminated predicates, if they appear, are replaced by their definitions)
+
+OUTPUT (EXPLAIN = ON):
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- A primitive was removed only if it had an explicit syntactic definition using the remaining primitives
+- This guarantees that all models of the original theory extend uniquely to models of the rewritten theory
+- Therefore the rewritten theory is model-preserving`
   },
   {
     id: "f4-expanded-primitive",
