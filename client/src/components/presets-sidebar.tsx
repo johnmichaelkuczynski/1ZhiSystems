@@ -281,7 +281,54 @@ A short explanation (2–3 lines maximum) stating why that specific obstruction 
     name: "Mutual Explicit Definitions",
     functionId: 3,
     input: `<<<SEPARATOR>>>`,
-    instructions: `For each primitive in Theory A, write an explicit definition using Theory B's vocabulary. Then do the reverse. Show the complete bi-directional translation.`
+    instructions: `DEFINITIONAL EQUIVALENCE (MUTUAL EXPLICIT DEFINITIONS) (T₁, T₂)
+
+TASK:
+Given two theories T₁ and T₂, determine whether every primitive predicate of T₁ is explicitly definable in T₂ AND every primitive predicate of T₂ is explicitly definable in T₁.
+
+This sub-function tests **mutual explicit definability only**. No semantic reasoning, no models, no conservativity checks.
+
+LANGUAGES:
+- T₁ uses predicates P1,...,Pk with arities n1,...,nk
+- T₂ uses predicates Q1,...,Qm with arities m1,...,mm
+
+MECHANICAL TEST FOR EXPLICIT DEFINABILITY:
+
+For each predicate Pi in T₁:
+1. Construct a fresh atomic pattern: Pi(x1,...,x_ni)
+2. Search T₂'s axioms for a formula φi(x1,...,x_ni) such that T₂ proves: Pi(x̄) ↔ φi(x̄)
+   UNDER PURE SYNTAX MATCHING:
+   - Replace every occurrence of Qi(...) in T₂ with schematic placeholders
+   - Attempt to unify Pi(x̄) with a subformula that occupies the same structural position
+   - No inference, no proof search
+3. If no φi matches → definability fails
+
+Repeat symmetrically for each predicate Qj of T₂ using formulas ψj in the language of T₁.
+
+SUCCESS CONDITION:
+
+Mutual explicit definability succeeds IFF:
+- For every Pi in T₁, a formula φi exists in T₂
+- For every Qj in T₂, a formula ψj exists in T₁
+
+If so, the theories are definitionally equivalent **under mutual explicit definition**.
+
+OUTPUT (EXPLAIN = OFF):
+Equivalence: YES/NO
+If YES:
+TRANSLATIONS:
+Pi(x̄) ↔ φi(x̄)
+Qj(x̄) ↔ ψj(x̄)
+If NO:
+Equivalence: NO
+
+OUTPUT (EXPLAIN = ON):
+Equivalence: YES/NO
+[same translations if YES]
+EXPLANATION:
+- Mutual explicit definability requires each primitive in T₁ to be explicitly definable in T₂ and vice versa
+- The test uses only syntactic pattern-matching
+- If all primitives admit explicit definitions, T₁ and T₂ are definitionally equivalent`
   },
   {
     id: "f3-one-direction",
