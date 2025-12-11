@@ -752,71 +752,60 @@ Restated Axioms:
 - NO domain theory, ontology, or philosophy
 - NO multi-paragraph descriptions`,
 
-  "Find an Interpretation": `YOUR TASK: Find a TRUE MODEL (interpretation) for the axiom system below.
+  "Find an Interpretation": `YOUR TASK: Produce ONE concrete interpretation (model) that satisfies ALL axioms.
 
-DO NOT transform the theory. DO NOT rewrite the axioms. DO NOT change primitives.
-Instead: INTERPRET the existing axioms in a concrete domain where they are all true.
-
+=== INPUT THEORY ===
 <<<INPUT>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-=== CRITICAL: CATEGORY IS MANDATORY ===
+=== WHAT A VALID INTERPRETATION MUST INCLUDE ===
+- A DOMAIN: a specific set (e.g., {0,1,2}, ℕ, ℤ, ℝ, or a finite set)
+- An interpretation for each primitive symbol:
+  - For predicates: a concrete relation
+  - For functions: a concrete function
+  - For constants: a concrete element of the domain
 
-READ THE INSTRUCTIONS ABOVE. If they specify a category (Mathematical, Computational, Physical, etc.), you MUST find an interpretation FROM THAT CATEGORY. Do NOT give a generic or different interpretation.
+=== OUTPUT FORMAT (use exactly this structure) ===
 
-Examples of CORRECT behavior:
-- Instructions say "COMPUTATIONAL" → Domain must be programs, data structures, types, algorithms, processes
-- Instructions say "PHYSICAL" → Domain must be everyday objects, containers, weight, heat
-- Instructions say "ECONOMIC" → Domain must be goods, prices, markets, preferences
-- Instructions say "BIOLOGICAL" → Domain must be organisms, cells, food chains
+INTERPRETATION
+Domain: <description of the set>
+Symbol1: <how it is interpreted>
+Symbol2: <how it is interpreted>
+...
 
-Examples of WRONG behavior:
-- Instructions say "COMPUTATIONAL" but you give integers with < (WRONG - that's mathematical)
-- Instructions say "PHYSICAL" but you give real numbers (WRONG - that's mathematical)
-- Instructions say "ECONOMIC" but you give a strict order on sets (WRONG - that's mathematical)
+=== GUIDELINES FOR CHOOSING A MODEL ===
+- Choose a domain that makes the axioms easy to satisfy
+- For equivalence relations: use equality on ℤ or a universal relation
+- For orders: use < or ≤ on ℕ or ℤ
+- For graphs: use a simple adjacency on a finite set
+- For function symbols: choose trivial functions if possible
+- Always choose the SIMPLEST domain and interpretation that works
+- If instructions specify a category (Computational, Physical, etc.), use that domain type
 
-=== USE THIS OUTPUT FORMAT ===
+=== EXAMPLES ===
 
-**INTERPRETATION**
+EXAMPLE 1:
+INPUT: LANGUAGE: {R(x,y)}, AXIOMS: ∀x R(x,x), ∀x∀y (R(x,y) → R(y,x)), ∀x∀y∀z ((R(x,y) ∧ R(y,z)) → R(x,z))
+OUTPUT:
+INTERPRETATION
+Domain: ℤ (the integers)
+R(x,y): x = y (equality)
 
-Domain: [specific objects from the REQUIRED CATEGORY]
-[Symbol 1]: "[meaning specific to that category]"
-[Symbol 2]: "[meaning specific to that category]"
+EXAMPLE 2:
+INPUT: LANGUAGE: {Less(x,y)}, AXIOMS: ∀x ¬Less(x,x), ∀x∀y∀z ((Less(x,y) ∧ Less(y,z)) → Less(x,z))
+OUTPUT:
+INTERPRETATION
+Domain: ℕ (the natural numbers)
+Less(x,y): x < y (standard less-than)
 
-**WHY THIS WORKS**
-
-Axiom 1: [State it] — [1-2 sentences why TRUE in this domain]
-Axiom 2: [State it] — [1-2 sentences why TRUE in this domain]
-[etc.]
-
-=== END FORMAT ===
-
-CATEGORY DEFINITIONS (use the one specified in instructions):
-- Mathematical: algebra, topology, geometry, calculus, groups, rings, fields (NOT just integers/reals)
-- Computational: programs, data structures, types, algorithms, processes, state machines, memory
-- Philosophical: substances, properties, events, minds, modalities, possible worlds
-- Physical: everyday objects - containers, weight, heat, motion, tools, furniture
-- Physics: scientific physics - spacetime, fields, forces, particles, thermodynamics
-- Chemical: molecules, reactions, species, bonds, catalysts
-- Biological: organisms, cells, food chains, ecosystems, genes
-- Economic: goods, prices, preferences, markets, utility
-- Social: people, hierarchies, status, relationships
-- Psychological: desires, motivations, beliefs, mental states
-- Linguistic: words, sentences, alphabetical order, grammar
-- Organizational: tasks, workflows, projects, dependencies
-- Geographical: locations, elevations, distances, regions
-- Home Economics: cooking temperatures, food prep, appliances, recipes
-- Engineering: components, systems, dependencies, modules
-- Network: servers, nodes, routing, connections, data flow
-- Finance: orders, assets, risk, tranches, options, capital structure
-
-FAILURE HANDLING (never return empty):
-- Case A (contradictory): Explain why, give adjacent consistent set with model
-- Case B (ill-formed, unclear): Reconstruct charitably, model that
-- Case C (ill-formed, obvious fix): Fix syntax, model corrected version
-- Case D (nearly consistent): Show minimal fix, model the fixed version`
+=== HARD REQUIREMENTS ===
+- NO proofs
+- NO multi-paragraph justification
+- NO philosophical commentary
+- NO model-theoretic analysis
+- NO extra sentences beyond the format above`
 };
 
 function buildPrompt(input: string, instructions: string, functionName: string): string {
