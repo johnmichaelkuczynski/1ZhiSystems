@@ -1600,7 +1600,103 @@ EXPLANATION:
     name: "Behavioral Reconstruction",
     functionId: 8,
     input: ``,
-    instructions: `Rewrite the theory using only observable/behavioral predicates. Eliminate any primitives that refer to intrinsic properties. Keep only what can be tested.`
+    instructions: `GENERATE ALTERNATIVE CONCEPTUALIZATIONS: BEHAVIORAL RECONSTRUCTION (1 ARG)
+
+TASK:
+Rewrite a theory T using **only observable / behavioral predicates**.
+
+The goal:
+1. Eliminate primitives referring to intrinsic, internal, or hidden properties
+2. Replace them with predicates describing observable interactions, outputs, or measurable behavior
+3. Rewrite all axioms using only behavioral primitives
+4. Remove any axiom that cannot be expressed behaviorally
+
+All transformations must be syntactic. No semantic or empirical interpretation is allowed.
+
+INPUT:
+A single theory T with:
+- LANGUAGE: L = {P₁, …, P_k}
+- AXIOMS: A
+- Classification of predicates:
+    • Behavioral: B₁, …  
+    • Intrinsic / hidden: H₁, …
+- EXPLAIN toggle ON/OFF
+
+MECHANICAL RECONSTRUCTION PROCEDURE:
+
+STEP 1 — IDENTIFY BEHAVIORAL CORE:
+Behavioral primitives = all predicates explicitly classified as: observable, testable, interaction-based
+Intrinsic primitives = all others
+New language: L* = { all behavioral predicates B_i }
+
+STEP 2 — ATTEMPT DEFINABILITY OF INTRINSIC PRIMITIVES:
+For each intrinsic primitive H:
+
+Try to syntactically define it using only behavioral primitives: H(x̄) ↔ φ_H(x̄)
+where φ_H contains only predicates in L*
+
+Use the standard definability test:
+- Syntactic substitution and matching only
+- No inference
+- No semantic assumptions
+
+If definable: Store definition H → φ_H
+If not definable: Mark H as **eliminated**
+
+STEP 3 — REWRITE AXIOMS:
+For each axiom α in A:
+
+1. Replace each intrinsic predicate H with φ_H if definable
+2. If α contains any intrinsic predicate that is **not** definable, the entire axiom becomes **unstatable** and must be removed
+3. Keep all remaining axioms intact
+
+The resulting axiom set A* contains only behavioral vocabulary.
+
+STEP 4 — CONSTRUCT THE BEHAVIORAL THEORY T*:
+T* consists of:
+- LANGUAGE: L*
+- DEFINITIONS: all H(x̄) ↔ φ_H(x̄) found in Step 2
+- AXIOMS: A*
+
+SUCCESS CONDITION:
+
+Behavioral reconstruction succeeds even if many axioms are removed.
+
+The goal is NOT to preserve equivalence, but:
+- To remove intrinsic predicates
+- To express everything possible in behavioral terms
+- To mark all else as eliminated
+
+OUTPUT (EXPLAIN = OFF):
+
+BEHAVIORAL LANGUAGE:
+{ B₁, B₂, ... }
+
+DEFINABLE INTRINSICS:
+H₁(x̄) ↔ φ₁(x̄)
+H₂(x̄) ↔ φ₂(x̄)
+...
+
+ELIMINATED INTRINSICS:
+{ H_i not definable }
+
+REWRITTEN AXIOMS:
+1. <behavioral axiom>
+2. ...
+
+REMOVED AXIOMS:
+1. <unstatable axiom>
+2. ...
+
+OUTPUT (EXPLAIN = ON):
+
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Behavioral reconstruction removes all intrinsic predicates
+- Only observable interaction-patterns remain
+- Any intrinsic concept that cannot be behaviorally defined is eliminated
+- Axioms depending on intrinsic notions are deleted`
   },
   {
     id: "f8-structural",
