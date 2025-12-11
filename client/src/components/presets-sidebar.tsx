@@ -1318,7 +1318,79 @@ EXPLANATION:
     name: "Minimal Primitive Set",
     functionId: 7,
     input: ``,
-    instructions: `Find the smallest subset of primitives that keeps the theory functional. All other primitives must be definable from this set.`
+    instructions: `ONTOLOGICAL DEPENDENCE: MINIMAL PRIMITIVE SET (1 ARG)
+
+TASK:
+Given a single theory T, find the **smallest subset of primitives** that still makes the theory functional.
+
+A primitive set S ⊆ L is **minimal** iff:
+1. Every other primitive predicate P ∉ S is explicitly definable from S (syntactic definability only)
+2. No proper subset of S has property (1)
+
+You must output the minimal primitive base S and all definitional schemata expressing the other primitives in terms of S.
+
+INPUT:
+A theory T with:
+- LANGUAGE: L = {P₁, P₂, ..., P_k}
+- AXIOMS: A
+- EXPLAIN toggle ON/OFF
+
+MECHANICAL MINIMALITY PROCEDURE:
+
+STEP 1 — INITIALIZE CANDIDATE SET:
+Start with the full primitive set: S = L
+
+STEP 2 — VARIATIONAL REMOVAL OF PRIMITIVES:
+For each primitive P in S:
+1. Temporarily remove P: S_temp = S − {P}
+2. Test whether P is definable from S_temp:
+   Attempt to find φ_P(x̄) in the language S_temp such that: P(x̄) ↔ φ_P(x̄)
+   Using the mechanical definability test:
+   - Syntactic matching only
+   - No inference
+   - No semantic reasoning
+3. If definable: Permanently remove P from S
+4. If not definable: Keep P in S
+
+Repeat until no primitive can be removed.
+
+STEP 3 — VERIFY MINIMALITY:
+After all removals:
+For each P ∈ S:
+- Attempt to define P using S − {P}
+- If definable → S is NOT minimal → continue removing
+- If not definable → S is minimally necessary
+
+Stop once every predicate in S fails the definability test relative to the others.
+
+STEP 4 — COMPUTE DEFINITIONS FOR NON-PRIMITIVES:
+For each primitive Q ∉ S (removed earlier):
+- Output its explicit definition: Q(x̄) ↔ φ_Q(x̄)
+
+SUCCESS CONDITION:
+
+A minimal primitive set S must satisfy:
+1. Every predicate outside S is definable from S
+2. No predicate inside S is definable from the remaining ones
+
+OUTPUT (EXPLAIN = OFF):
+
+MINIMAL PRIMITIVE SET:
+{ P_i, P_j, ... }
+
+DEFINITIONS OF REMOVED PRIMITIVES:
+Q₁(x̄) ↔ φ₁(x̄)
+Q₂(x̄) ↔ φ₂(x̄)
+...
+
+OUTPUT (EXPLAIN = ON):
+
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- A minimal primitive base is one from which all other predicates can be defined, but which itself cannot be reduced further
+- Each removed primitive is explicitly definable from the final base
+- No further removal is possible without losing definability`
   },
   {
     id: "f7-replacement",
