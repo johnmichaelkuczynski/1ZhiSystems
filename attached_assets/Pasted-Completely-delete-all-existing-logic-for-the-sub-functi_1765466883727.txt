@@ -1,0 +1,100 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: M&A / CORPORATE STRUCTURE".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (M&A / CORPORATE STRUCTURE)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct a CORPORATE-STRUCTURE MODEL
+in the following priority order:
+
+1. Parent–subsidiary relationships
+2. Voting control (majority ownership)
+3. Ownership chains
+4. Board authority and oversight
+5. Affiliate structures
+6. Merger integration hierarchies
+7. Only if all above fail: abstract ownership graphs.
+
+MODEL CONSTRUCTION RULES:
+- Choose a domain D of corporate entities.
+- Interpret predicates/functions as ownership/control relations:
+  “owns-majority-of,” “controls,” “is-parent-of,” etc.
+- Ensure axioms are satisfied.
+
+If no interpretation exists:
+"No corporate-structure interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <corporate domain>
+Interpretations:
+P1(x̄) := <corporate relation>
+P2(x̄) := <corporate relation>
+...
+Pk(x̄) := <corporate relation>
+
+If no interpretation exists:
+"No corporate-structure interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Predicates map to ownership, voting, or control hierarchies.
+- Interpretation chosen from earliest workable structural level.
+- Axioms verified.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {Controls(x,y)}
+Axioms:
+1. ∀x ¬Controls(x,x)
+2. ∀x∀y∀z ((Controls(x,y) ∧ Controls(y,z)) → Controls(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Corporations in a holding company structure
+Interpretations:
+Controls(x,y) := "x owns a majority (>50%) of y's voting shares"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Corporations in a holding company structure
+Interpretations:
+Controls(x,y) := "x owns a majority (>50%) of y's voting shares"
+
+EXPLANATION:
+- Majority ownership control is irreflexive and transitive.
+- Thus the axioms are satisfied.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

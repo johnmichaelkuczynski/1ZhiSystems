@@ -1,0 +1,100 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: PORTFOLIO & RISK".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (PORTFOLIO & RISK)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct a PORTFOLIO/RISK MODEL
+using the following priority order:
+
+1. Assets and their risk levels
+2. Expected returns and volatilities
+3. Correlation structure
+4. Risk dominance relations (more risky than)
+5. Allocation and weighting functions
+6. Diversification effects
+7. Only if all above fail: abstract ordered risk sets.
+
+MODEL CONSTRUCTION RULES:
+- Choose a domain D of assets or asset classes.
+- Interpret predicates/functions as risk relations:
+  “more-volatile-than,” “higher-beta-than,” “dominates-in-risk,” etc.
+- Ensure the axioms are satisfied.
+
+If no interpretation exists:
+"No portfolio-risk interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <portfolio domain>
+Interpretations:
+P1(x̄) := <risk relation>
+P2(x̄) := <risk relation>
+...
+Pk(x̄) := <risk relation>
+
+If no interpretation exists:
+"No portfolio-risk interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Predicates map to standard financial risk measures.
+- The earliest viable risk metric is used (volatility → beta → VaR).
+- Axioms are verified.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {MoreRisky(x,y)}
+Axioms:
+1. ∀x ¬MoreRisky(x,x)
+2. ∀x∀y∀z ((MoreRisky(x,y) ∧ MoreRisky(y,z)) → MoreRisky(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Asset classes (equities, bonds, commodities)
+Interpretations:
+MoreRisky(x,y) := "volatility(x) > volatility(y)"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Asset classes (equities, bonds, commodities)
+Interpretations:
+MoreRisky(x,y) := "volatility(x) > volatility(y)"
+
+EXPLANATION:
+- Volatility ranking is irreflexive and transitive over broad asset classes.
+- Thus all axioms hold.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

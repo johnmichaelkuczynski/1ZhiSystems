@@ -1,0 +1,100 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: CREDIT & FIXED-INCOME".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (CREDIT & FIXED-INCOME)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct a CREDIT/FI MODEL
+with the following priority:
+
+1. Bond seniority structure
+2. Tranches (senior, mezzanine, equity)
+3. Default priority
+4. Yield/discount relationships
+5. Duration/convexity comparisons
+6. Cashflow waterfall ordering
+7. Only if all above fail: abstract priority claims.
+
+MODEL CONSTRUCTION RULES:
+- Choose a domain D of bonds, tranches, or credit claims.
+- Map predicates to credit relations:
+  “senior-to,” “paid-before,” “lower-duration-than,” etc.
+- Ensure all axioms are satisfied.
+
+If no interpretation exists:
+"No credit-fixed-income interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <credit domain>
+Interpretations:
+P1(x̄) := <credit relation>
+P2(x̄) := <credit relation>
+...
+Pk(x̄) := <credit relation>
+
+If no interpretation exists:
+"No credit-fixed-income interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Predicates map to seniority or duration/convexity relations.
+- The earliest viable structural relation is used.
+- Axioms are verified.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {SeniorTo(x,y)}
+Axioms:
+1. ∀x ¬SeniorTo(x,x)
+2. ∀x∀y∀z ((SeniorTo(x,y) ∧ SeniorTo(y,z)) → SeniorTo(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Credit tranches in a CDO
+Interpretations:
+SeniorTo(x,y) := "x receives cashflow before y in the waterfall"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Credit tranches in a CDO
+Interpretations:
+SeniorTo(x,y) := "x receives cashflow before y in the waterfall"
+
+EXPLANATION:
+- Cashflow waterfall priority is irreflexive and transitive.
+- Thus the axioms hold.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

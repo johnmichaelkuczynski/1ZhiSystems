@@ -2961,7 +2961,51 @@ EXPLANATION:
     name: "Home Economics",
     functionId: 10,
     input: ``,
-    instructions: `Find a HOME ECONOMICS interpretation. Use cooking, food prep, appliances, temperature, household tasks, or storage rules.`
+    instructions: `FIND AN INTERPRETATION: HOME ECONOMICS (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct a HOME ECONOMICS MODEL using the following priority order:
+
+1. Cooking processes (heats, mixes, chops)
+2. Temperature relations (hotter-than, cooler-than)
+3. Storage and containment (inside, sealed-in, refrigerated)
+4. Appliance operations (oven → heats, blender → mixes)
+5. Resource usage (consumes-power, uses-water)
+6. Household workflows (prepare → cook → serve)
+7. Only if all above fail: abstract household state models
+
+MODEL CONSTRUCTION RULES:
+- Choose a household domain D (foods, containers, appliances)
+- Interpret predicates/functions as kitchen/household relations
+- Ensure axioms are satisfied
+
+If no interpretation exists:
+"No home-economics interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <home-economics domain>
+Interpretations:
+P1(x̄) := <household relation>
+P2(x̄) := <household relation>
+...
+Pk(x̄) := <household relation>
+
+If no interpretation exists:
+"No home-economics interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- The interpretation is chosen from the earliest viable household process
+- Predicates correspond to heating, mixing, storage, or appliance actions
+- Axioms are checked for satisfaction`
   },
   // D. Engineering & Systems
   {
@@ -2969,14 +3013,102 @@ EXPLANATION:
     name: "Engineering / Systems",
     functionId: 10,
     input: ``,
-    instructions: `Find an ENGINEERING interpretation. Use machine components, system dependencies, or functional relationships.`
+    instructions: `FIND AN INTERPRETATION: ENGINEERING / SYSTEMS (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct an ENGINEERING/SYSTEMS MODEL using the following priority order:
+
+1. Machine components (gears, pistons, valves)
+2. Functional dependencies (input → output)
+3. System flows (pressure lines, current paths)
+4. Control logic (enables, disables, triggers)
+5. System states (active, idle, fault)
+6. Safety interlocks and constraints
+7. Only if all above fail: abstract system diagrams
+
+MODEL CONSTRUCTION RULES:
+- Choose a domain D of system components or states
+- Interpret predicates/functions as mechanical or control relations
+- Ensure axioms are satisfied
+
+If no interpretation exists:
+"No engineering interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <engineering domain>
+Interpretations:
+P1(x̄) := <system relation>
+P2(x̄) := <system relation>
+...
+Pk(x̄) := <system relation>
+
+If no interpretation exists:
+"No engineering interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- The model is taken from the earliest suitable engineering structure
+- Predicates map to mechanical interactions or signal relations
+- Axioms are checked for compliance`
   },
   {
     id: "f10-network",
     name: "Network",
     functionId: 10,
     input: ``,
-    instructions: `Find a NETWORK interpretation. Use servers, routing, data flow, graphs, or connectivity.`
+    instructions: `FIND AN INTERPRETATION: NETWORK (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct a NETWORK MODEL using the following priority order:
+
+1. Nodes and direct connections
+2. Routing paths (hops)
+3. Packet flow relations (sends-to, forwards-to)
+4. Load or capacity constraints
+5. Latency / priority ordering
+6. Directed/undirected graph structure
+7. Only if all above fail: abstract graph-theoretic models
+
+MODEL CONSTRUCTION RULES:
+- Choose a network domain D (servers, routers, nodes)
+- Interpret predicates/functions as network relations: "direct-link", "forwards-to", "lower-latency-than", etc.
+- Ensure axioms are satisfied
+
+If no interpretation exists:
+"No network interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <network domain>
+Interpretations:
+P1(x̄) := <network relation>
+P2(x̄) := <network relation>
+...
+Pk(x̄) := <network relation>
+
+If no interpretation exists:
+"No network interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Predicates map to standard network routing or connectivity relations
+- Interpretation is chosen from the earliest workable category
+- All axioms are verified`
   },
   // E. Finance, Markets, Investment
   {
@@ -2984,7 +3116,51 @@ EXPLANATION:
     name: "Market Microstructure",
     functionId: 10,
     input: ``,
-    instructions: `Find a MARKET MICROSTRUCTURE interpretation. Use limit orders, price priority, execution rules, or order books.`
+    instructions: `FIND AN INTERPRETATION: MARKET MICROSTRUCTURE (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct a MICROSTRUCTURE MODEL using the following priority order:
+
+1. Limit order book structure (bids, asks)
+2. Price priority (better prices execute first)
+3. Time priority (earlier orders execute first)
+4. Execution rules (market order → consumes liquidity)
+5. Matching engine behavior
+6. Queue position relations
+7. Only if all above fail: abstract priority queues
+
+MODEL CONSTRUCTION RULES:
+- Choose a domain D of orders/ticks/price levels
+- Interpret predicates/functions using order book mechanics: "better-price-than", "ahead-in-queue", "matchable-with", etc.
+- Verify that axioms hold
+
+If no interpretation exists:
+"No market-microstructure interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <microstructure domain>
+Interpretations:
+P1(x̄) := <microstructure relation>
+P2(x̄) := <microstructure relation>
+...
+Pk(x̄) := <microstructure relation>
+
+If no interpretation exists:
+"No market-microstructure interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Predicates correspond to microstructure mechanics (priority, queue position)
+- The earliest viable feature of the order book is used
+- All axioms are checked for satisfaction`
   },
   {
     id: "f10-portfolio-risk",

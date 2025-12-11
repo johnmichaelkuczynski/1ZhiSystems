@@ -1,0 +1,101 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: DERIVATIVES".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (DERIVATIVES)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct a DERIVATIVES MODEL
+using the following priority order:
+
+1. Option payoff relations (higher payoff than)
+2. Strike-price ordering
+3. Moneyness relations (more in-the-money than)
+4. Greeks (sensitivity comparisons: delta, gamma, vega)
+5. Volatility-surface dominance
+6. Arbitrage-free price relations
+7. Only if all above fail: abstract payoff lattices.
+
+MODEL CONSTRUCTION RULES:
+- Choose a domain D of derivatives contracts.
+- Interpret predicates/functions as pricing or payoff relations:
+  “higher-payoff-than,” “lower-strike-than,” “dominates-in-delta,” etc.
+- Ensure axioms hold.
+
+If no interpretation exists:
+"No derivatives interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <derivatives domain>
+Interpretations:
+P1(x̄) := <derivatives relation>
+P2(x̄) := <derivatives relation>
+...
+Pk(x̄) := <derivatives relation>
+
+If no interpretation exists:
+"No derivatives interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Predicates correspond to payoff/strike/greek dominance relations.
+- Interpretation selected from the earliest viable derivatives structure.
+- Axioms verified.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {HigherPayoff(x,y)}
+Axioms:
+1. ∀x ¬HigherPayoff(x,x)
+2. ∀x∀y∀z ((HigherPayoff(x,y) ∧ HigherPayoff(y,z)) → HigherPayoff(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: European call options with different strikes
+Interpretations:
+HigherPayoff(x,y) := "for all possible underlying prices S: payoff_x(S) > payoff_y(S)"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: European call options with different strikes
+Interpretations:
+HigherPayoff(x,y) := "for all possible underlying prices S: payoff_x(S) > payoff_y(S)"
+
+EXPLANATION:
+- A lower-strike call always dominates a higher-strike call pointwise.
+- Pointwise payoff dominance is irreflexive and transitive.
+- Thus the axioms are satisfied.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
