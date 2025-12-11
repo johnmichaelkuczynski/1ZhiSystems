@@ -2,35 +2,55 @@
 
 ## Overview
 
-This is an AI-powered formal analysis tool for transforming, comparing, and analyzing axiomatic systems. The application provides 11 specialized functions for working with first-order logic theories, including theory transformation, schema equivalence checking, definitional equivalence analysis, model finding, and theorem equivalence comparison.
+This is an AI-powered formal analysis tool for transforming, comparing, and analyzing axiomatic systems. The application provides **10 specialized functions** for working with first-order logic theories.
 
-The app connects to multiple LLM providers (branded as "Zhi 1-4" internally mapping to Grok/xAI, Claude/Anthropic, OpenAI, and DeepSeek) to perform complex logical transformations on user-provided axiomatic theories.
+The app connects to multiple LLM providers (branded as "Zhi 1-4" with no visible provider names) to perform complex logical transformations on user-provided axiomatic theories.
+
+## Current Functions (10 total)
+
+1. **Axiom-Set / Theory Transformation** - Model-to-Model transformation (detects axiom pattern, produces isomorphic model in different domain)
+2. **Schema Equivalence** (2 Args) - Model-theoretic sameness check
+3. **Definitional Equivalence** (2 Args) - Bi-directional definitional translation with 4-part output
+4. **Model-Preserving Rewrite** - Canonical normalization (LANGUAGE + AXIOMS format)
+5. **Conservative Extension Analysis** - Analyze extensions for conservativity
+6. **Compare Conceptual Schemes** (2 Args) - Compare primitive/derived classifications
+7. **Ontological Dependence** - Analyze primitive dependencies
+8. **Generate Alternative Conceptualizations** - Produce alternative axiom-sets
+9. **Interpret Canonical Meaning** - Identify intended interpretations of primitive symbols
+10. **Find an Interpretation** - Find true models across 23 categories in 5 domains
 
 ## Recent Changes (Dec 2024)
 
-### Function 9: Renamed to "Interpret Canonical Meaning"
-- Identifies intended interpretations of primitive symbols
-- Restates axioms using explicit natural-language primitives
+### Function 1: Complete Rebuild - Model-to-Model Transformation
+- Input: Statement-set describing a model (domain + symbol meanings + statements)
+- Detects axiom pattern (strict order, equivalence, group, etc.)
+- Outputs different but isomorphic model with new domain
+- Conversational output format with explicit object mapping
 
-### Function 10: "Find an Interpretation" - Complete Rebuild
-- 23 interpretation categories across 5 groups:
-  - A. Abstract/Formal: Mathematical, Computational, Philosophical
-  - B. Natural Sciences: Physical (everyday), Physics (science), Chemical, Biological
-  - C. Human/Social/Cultural: Economic, Social, Psychological, Linguistic, Organizational, Geographical, Home Economics
-  - D. Engineering & Systems: Engineering, Network
-  - E. Finance/Markets: Market Microstructure, Portfolio & Risk, Credit & Fixed-Income, M&A/Corporate, Derivatives, Private Equity/LBO, Macro/Intermarket
-- Custom output format: INTERPRETATION + WHY THIS WORKS (not the default 5-section format)
-- Failure case handling (A-D): Never returns empty, always provides constructive result
+### Function 3: Definitional Equivalence - Rewritten
+- 4-part concise output: RESULT, WHY, INTUITIVE EXPLANATION, TRANSLATED AXIOMS
+- Shows symbol mapping (R ↦ <)
+- No long proofs or jargon
 
-### Function 11: "Determine Equivalence" - Fixed
-- Now gives clear VERDICT at top: EQUIVALENT or NOT EQUIVALENT
-- Shows relationship classification: A ⊂ B, B ⊂ A, OVERLAPPING, or DISJOINT
-- Custom output format with VERDICT, RELATIONSHIP, ANALYSIS, EXPLANATION
+### Function 4: Model-Preserving Rewrite - Canonical Format
+- Output: LANGUAGE: {predicates} + numbered AXIOMS list
+- Removes unnecessary primitives (constants → existential axioms)
+- Minimal vocabulary, no prose, optimized for AI pipelines
+
+### Function 10: Find an Interpretation
+- 23 interpretation categories across 5 groups (A-E)
+- MANDATORY category enforcement - AI must use specified domain
+- Custom output: INTERPRETATION + WHY THIS WORKS
+
+### UI Changes
+- Functions 2, 3, 6 now have DUAL INPUT boxes (System A | System B)
+- Model selector shows only "Zhi 1-4" (no provider names visible)
+- Function 11 removed (duplicate of Function 2)
 
 ### Technical Fixes
-- Function name normalization in buildPrompt() to strip "(One Argument)" / "(Two Arguments)" suffixes
-- Paste normalization for input textareas (handles malformed clipboard content from PDFs/Word)
-- System prompt updated to allow function-specific output formats to override default 5-section format
+- Function name normalization strips "(One Argument)" / "(Two Arguments)" suffixes
+- Paste normalization for malformed clipboard content
+- Dual-input handling with <<<SEPARATOR>>> parsing
 
 ## User Preferences
 
