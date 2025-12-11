@@ -1372,12 +1372,45 @@ function buildPrompt(input: string, instructions: string, functionName: string, 
   // Normalize function name by removing argument count suffix like "(One Argument)" or "(Two Arguments)"
   const normalizedName = functionName.replace(/\s*\(.*Argument.*\)\s*$/i, "").trim();
   
-  const template = FUNCTION_PROMPTS[normalizedName] || FUNCTION_PROMPTS["Axiom-Set / Theory Transformation"];
-  const baseInstructions = instructions?.trim() || DEFAULT_INSTRUCTIONS[normalizedName] || "Perform the standard transformation for this function.";
+  // Check if instructions are detailed procedural specifications (sub-function specs)
+  const isDetailedSpec = instructions && (
+    instructions.includes("MECHANICAL") || 
+    instructions.includes("STEP 1 —") || 
+    instructions.includes("STEP 1 --") ||
+    instructions.includes("SUCCESS CONDITION") ||
+    instructions.includes("OUTPUT FORMAT")
+  );
   
   // Append EXPLAIN mode to instructions so the AI knows which output format to use
   const explainDirective = explain ? "\n\nEXPLAIN = ON" : "\n\nEXPLAIN = OFF";
-  const effectiveInstructions = baseInstructions + explainDirective;
+  const effectiveInstructions = (instructions?.trim() || DEFAULT_INSTRUCTIONS[normalizedName] || "Perform the standard transformation for this function.") + explainDirective;
+  
+  // For detailed procedural specifications, use a minimal template that doesn't interfere
+  if (isDetailedSpec) {
+    // Handle dual-input functions
+    const dualInputFunctions = ["Schema Equivalence", "Definitional Equivalence", "Conservative Extension Analysis", "Compare Conceptual Schemes"];
+    if (dualInputFunctions.includes(normalizedName) && input.includes("<<<SEPARATOR>>>")) {
+      const [systemA, systemB] = input.split("<<<SEPARATOR>>>");
+      return `=== INPUT: SYSTEM A ===
+${systemA?.trim() || ""}
+
+=== INPUT: SYSTEM B ===
+${systemB?.trim() || ""}
+
+=== INSTRUCTIONS ===
+${effectiveInstructions}`;
+    }
+    
+    // Single input
+    return `=== INPUT ===
+${input}
+
+=== INSTRUCTIONS ===
+${effectiveInstructions}`;
+  }
+  
+  // Use function-specific template for standard operations
+  const template = FUNCTION_PROMPTS[normalizedName] || FUNCTION_PROMPTS["Axiom-Set / Theory Transformation"];
   
   // Handle dual-input functions
   const dualInputFunctions = ["Schema Equivalence", "Definitional Equivalence", "Conservative Extension Analysis", "Compare Conceptual Schemes"];
