@@ -1397,7 +1397,103 @@ EXPLANATION:
     name: "Replacement Test",
     functionId: 7,
     input: ``,
-    instructions: `For the main/first primitive, attempt to replace it with a definable surrogate constructed from other primitives. Show the replacement or prove it impossible.`
+    instructions: `ONTOLOGICAL DEPENDENCE: REPLACEMENT TEST (1 ARG)
+
+TASK:
+Given a theory T, attempt to **replace the main/first primitive P₁** with a definable surrogate constructed from the other primitives.
+
+You must determine:
+1. Whether such a surrogate exists (syntactic definability test)
+2. Provide the explicit replacement if it exists
+3. If impossible, report the exact reason: no definitional match, circular dependencies, missing structural roles
+
+No semantic reasoning or model analysis. Pure syntax only.
+
+INPUT:
+A theory T with:
+- LANGUAGE: L = {P₁, P₂, ..., P_k} (P₁ is the target primitive for replacement)
+- AXIOMS: A
+- EXPLAIN toggle ON/OFF
+
+MECHANICAL REPLACEMENT PROCEDURE:
+
+STEP 1 — REMOVE P₁ FROM DEFINIENDUM:
+Candidate surrogate must use only predicates in: L′ = L − {P₁}
+
+STEP 2 — ATTEMPT DEFINABILITY MATCH:
+Search for a formula φ(x̄) built only from symbols in L′ such that: P₁(x̄) ↔ φ(x̄)
+
+Procedure:
+- Scan all axioms of T
+- Replace occurrences of predicates other than P₁ with placeholders
+- Attempt to unify P₁(x̄) with a subformula φ(x̄) in identical argument positions
+- No inference rules. No proof search. Strict syntactic match only
+
+If a valid φ(x̄) is found, proceed to STEP 3.
+If no match is found: Replacement = Impossible. Reason = Non-definability
+
+STEP 3 — CHECK FOR CIRCULARITY:
+Inspect φ(x̄):
+
+If φ(x̄) depends on any predicate R such that:
+- R is definable only using P₁ (directly or indirectly), and
+- removing P₁ breaks R
+
+Then definability is circular → Replacement impossible.
+
+STEP 4 — CONSTRUCT SURROGATE P₁*:
+If definability succeeds and is non-circular:
+
+Define new surrogate primitive: P₁*(x̄) ≡ φ(x̄)
+
+Replace ALL occurrences of P₁ in the axioms of T with P₁*(x̄).
+
+Form new theory T*:
+- LANGUAGE: L′ ∪ {P₁*}
+- AXIOMS: A with all instances of P₁ replaced by φ
+
+STEP 5 — VERIFY STRUCTURAL ROLE PRESERVATION:
+Check syntactically whether every axiom containing P₁ remains well-formed after substitution.
+
+If any axiom is destroyed (e.g., φ requires more/fewer arguments):
+Replacement fails. Reason = Structural mismatch
+
+SUCCESS CONDITION:
+
+Replacement succeeds IFF:
+1. A syntactic definition φ(x̄) of P₁ exists using L′
+2. φ does not involve circular definitional dependencies
+3. Substitution preserves the form of all axioms in T
+
+OUTPUT (EXPLAIN = OFF):
+
+REPLACEMENT:
+Possible / Impossible
+
+If POSSIBLE:
+P₁(x̄) ↔ φ(x̄)
+
+SURROGATE:
+P₁*(x̄) ≡ φ(x̄)
+
+REWRITTEN AXIOMS:
+1. <axiom with φ-substitution>
+2. ...
+
+If IMPOSSIBLE:
+Reason:
+- Non-definability
+- Circular dependency
+- Structural mismatch
+
+OUTPUT (EXPLAIN = ON):
+
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Replacement requires explicit definability and non-circularity
+- If φ exists, P₁ can be eliminated without loss of structure
+- If not, P₁ is load-bearing and cannot be substituted`
   },
   {
     id: "f7-load-bearing",
