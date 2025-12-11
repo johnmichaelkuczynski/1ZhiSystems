@@ -142,38 +142,6 @@ AXIOMS:
 1. <axiom with all Pi-atoms rewritten as Hi(c,...)>
 2. ...`
   },
-  {
-    id: "f1-direct-vocab",
-    name: "Direct Vocabulary Mapping",
-    functionId: 1,
-    input: ``,
-    instructions: `DIRECT VOCABULARY MAPPING - NON-ISOMORPHIC TRANSFORMATION:
-
-Build a NEW theory T* in a COMPLETELY DIFFERENT SIGNATURE (same number of predicates, all with HIGHER ARITY and DIFFERENT NAMES) such that T and T* are definitionally equivalent. Output explicit TRANSLATION.
-
-CONSTRUCTION:
-1. For each original predicate Pi of arity ni, introduce new predicate Hi of arity ni + 1.
-2. Introduce ONE new constant c.
-3. NEW LANGUAGE: All Hi (of arity ni + 1) and constant c. NO original Pi.
-4. TRANSLATION at atomic level: Replace every Pi(t1,...,t_ni) with Hi(c,t1,...,t_ni).
-5. AXIOMS of T*: Original axioms with all Pi-atoms rewritten as Hi(c,...).
-6. Do NOT add extra axioms.
-7. Do NOT keep Pi in LANGUAGE of T*.
-
-OUTPUT FORMAT:
-1. THE RESULT
-
-LANGUAGE: { H1(c,x1,...,x_n1), H2(c,x1,...,x_n2), ..., c }
-
-TRANSLATION (OLD → NEW):
-P1(x1,...,x_n1) ↔ H1(c,x1,...,x_n1)
-P2(x1,...,x_n2) ↔ H2(c,x1,...,x_n2)
-...
-
-AXIOMS:
-1. <original axiom 1 rewritten>
-2. ...`
-  },
   // FUNCTION 2: Schema Equivalence
   {
     id: "f2-direct-vocab",
