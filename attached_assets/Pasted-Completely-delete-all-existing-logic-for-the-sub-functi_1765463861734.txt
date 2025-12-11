@@ -1,0 +1,140 @@
+Completely delete all existing logic for the sub-function:
+"INTERPRET CANONICAL MEANING: REVEAL THEORY CONTENT".
+
+Do NOT modify other sub-functions in the Interpret Canonical Meaning block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+INTERPRET CANONICAL MEANING (REVEAL THEORY CONTENT)
+=========================================================
+
+TASK:
+Given a single theory T, together with:
+- Canonical primitive meanings, and
+- Natural-language restatements of all axioms,
+
+produce a **plain-English explanation of what the theory is really about**.
+
+This is a **global summarization** step:
+- Move from axiom-by-axiom descriptions
+  to a high-level account of the structure the theory describes.
+- Identify the main constraints and patterns imposed on the domain.
+- Express them as ordinary claims about reality, not as formulas.
+
+=========================================================
+INPUT
+=========================================================
+
+1. THEORY T:
+   - LANGUAGE and AXIOMS as before.
+
+2. PRIMITIVE MEANINGS:
+   - Canonical meaning for each primitive symbol S.
+
+3. NATURAL-LANGUAGE AXIOMS:
+   - For each axiom ϕᵢ:
+     - A clear English restatement from the previous sub-function.
+
+=========================================================
+CONTENT-REVEALING PROCEDURE
+=========================================================
+
+1. COLLECT AND GROUP AXIOMS
+   - Take all English restatements.
+   - Group them into clusters by **theme**, e.g.:
+     - Axioms characterizing one key relation (e.g. ordering, equivalence).
+     - Axioms describing a special subclass (e.g. "parents", "maximal elements").
+     - Existence axioms (guaranteeing certain objects).
+     - Non-existence / restriction axioms (ruling out certain configurations).
+
+2. IDENTIFY STRUCTURAL PATTERNS
+   - Within each cluster, detect which standard kinds of structures
+     are being enforced, e.g.:
+     - Partial order, total order, equivalence relation.
+     - Algebraic structure (group, ring-like, lattice-like).
+     - Graph-like structure (edges, paths, neighbors).
+     - Hierarchical or genealogical structure (ancestor, descendant).
+   - Record any *named* structural properties:
+     - Irreflexive, transitive relation → "strict order-like relation"
+     - Symmetric, transitive, reflexive → "equivalence-like relation"
+
+3. DERIVE KEY GLOBAL CLAIMS
+   - From the clusters and patterns, extract **core content claims**:
+     - What relationships must always hold between any two or three
+       elements of the domain?
+     - What kinds of objects are guaranteed to exist?
+     - What configurations are explicitly forbidden?
+   - Express these as **general English statements**, e.g.:
+     - "Every object stands in the relation R to itself."
+     - "No two distinct objects can both be parents of each other."
+     - "There is at least one object that has no predecessors."
+
+4. SYNTHESIZE A HIGH-LEVEL SUMMARY
+   - Combine the key claims into a short, cohesive narrative that answers:
+     - "What kind of structure does this theory describe?"
+     - "What constraints does it impose on that structure?"
+   - The summary should:
+     - Mention the main relations / operations / distinguished sets.
+     - Explain how they interact.
+     - Indicate whether the structure resembles a known mathematical
+       or conceptual pattern (e.g. “a tree-like genealogy”, “a linearly
+       ordered sequence of times”, “an equivalence partition of the domain”).
+
+5. AVOID FORMALISM IN THE FINAL SUMMARY
+   - The final exposition must:
+     - Use no symbols like ∀, ∃, ¬, ∧, etc.
+     - Avoid variable names as much as possible (x, y, z).
+   - Instead, speak directly about "objects", "elements", "points",
+     "agents", etc., using the natural terms from primitive meanings.
+
+6. INCLUDE INTUITIVE CONSEQUENCES (OPTIONAL, IF ENTAILED)
+   - Where straightforward, derive **simple consequences** that show
+     how the structure behaves, e.g.:
+     - "Because the relation is transitive and antisymmetric, there
+       cannot be cycles."
+     - "Because every object has at most one parent, the structure
+       resembles a collection of rooted trees."
+   - Only include consequences that are clearly supported by the axioms.
+
+=========================================================
+SUCCESS CONDITION
+=========================================================
+
+The procedure **succeeds** if it produces a concise, coherent,
+and non-technical explanation that:
+
+- States what kind of structure the theory describes.
+- Highlights the main constraints and patterns.
+- Avoids formal notation while remaining faithful to the axioms.
+
+If the theory is too weak or too generic to support a sharp description:
+- State that explicitly, and describe it as imposing only very minimal
+  constraints on an otherwise arbitrary domain.
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+THEORY CONTENT (PLAIN LANGUAGE SUMMARY):
+
+[One or two paragraphs explaining, in ordinary English,
+ what the theory says about its domain and structure.]
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Briefly list the main axiom clusters and indicate which parts of
+  the English summary they support.
+- Note any standard structural patterns detected (order, equivalence,
+  algebraic structure, etc.) and where they came from.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

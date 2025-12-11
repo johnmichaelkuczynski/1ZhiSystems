@@ -2002,20 +2002,103 @@ EXPLANATION:
     instructions: `INTERPRET CANONICAL MEANING: NATURAL LANGUAGE RESTATEMENT (1 ARG)
 
 TASK:
-Rewrite every axiom in plain English by replacing each primitive symbol with the natural-language phrase identified in the primitive meanings step.
+Given a single theory T and canonical meanings for its primitives (from the previous sub-function), restate **each axiom** of T in explicit natural language.
 
-RULES:
-1. Logical connectives are rendered in English ("for all", "there exists", "implies", "and")
-2. Preserve quantifier scope exactly
-3. DO NOT paraphrase or summarize. Restate literally
-4. Every predicate/function/constant must be replaced with its phrase
+This is a **formula-by-formula translation** step:
+- Replace each primitive symbol with its canonical phrase
+- Expand logical structure ("for all", "there exists", "if..., then...") into explicit English
+- Produce clear, grammatically correct sentences for every axiom
 
-OUTPUT FORMAT:
+INPUT:
+1. THEORY T:
+   - LANGUAGE: list of primitive symbols
+   - AXIOMS: ϕ₁, ϕ₂, ..., ϕₙ
 
-NATURAL LANGUAGE AXIOMS:
-1. <axiom 1 in English>
-2. <axiom 2 in English>
-...`
+2. PRIMITIVE MEANINGS:
+   - For each primitive S in the language of T: S(x̄): [canonical natural-language description]
+   - These are outputs of "Identify Primitive Meanings"
+
+RESTATEMENT PROCEDURE:
+
+For each axiom ϕᵢ in T:
+
+STEP 1 — PARSE LOGICAL STRUCTURE:
+Decompose ϕᵢ into:
+- Quantifiers (∀, ∃)
+- Connectives (¬, ∧, ∨, →, ↔)
+- Equality (=)
+- Primitive applications (P(x̄), f(x̄), etc.)
+Build an abstract syntax representation so that:
+- Top-level structure (implication, equivalence, conjunction) is explicitly known
+- Bound variables and their scopes are clearly tracked
+
+STEP 2 — TRANSLATE QUANTIFIERS:
+- ∀x ϕ(x) → "For every x ..." / "For all objects x in the domain ..."
+- ∃x ϕ(x) → "There exists at least one x such that ..."
+- For multiple quantifiers, nest explicitly:
+  - ∀x∀y ϕ(x,y) → "For all x and for all y, ..."
+  - ∀x∃y ϕ(x,y) → "For every x, there exists some y such that ..."
+
+STEP 3 — TRANSLATE CONNECTIVES:
+- (ϕ ∧ ψ) → "... and ..."
+- (ϕ ∨ ψ) → "... or ..."
+- (ϕ → ψ) → "if ... then ..." / "whenever ... then ..."
+- (ϕ ↔ ψ) → "if and only if ..."
+- ¬ϕ → "it is not the case that ..." / "no ..." / "not ...", choosing the most natural negative English form
+
+STEP 4 — SUBSTITUTE PRIMITIVE PHRASES:
+For each occurrence of a primitive S(t̄):
+- Replace it with the appropriate **instantiated** version of its canonical meaning
+- Example: Canonical "Parent(x,y): x is a parent of y" → Occurrence Parent(a,b) becomes "a is a parent of b"
+- Ensure variable names are consistently verbalized: x, y, z → "x", "y", "z" (or domain-specific names if available)
+
+STEP 5 — HANDLE EQUALITY AND DISTINCTNESS:
+- x = y → "x is the same as y"
+- x ≠ y → "x is different from y" / "x is not the same as y"
+
+STEP 6 — ASSEMBLE A NATURAL-LANGUAGE SENTENCE:
+Combine quantifier phrases, connective phrases, and primitive descriptions into a **single, grammatically coherent sentence**.
+Prefer:
+- Plain subject–predicate structure
+- Minimal nesting
+- Explicit clause order reflecting the logical structure
+
+STEP 7 — SIMPLIFY FOR READABILITY (WITHOUT CHANGING CONTENT):
+You may:
+- Reorder clauses for natural flow (keeping logical equivalence)
+- Replace repeated phrases with pronouns where unambiguous
+- Use standard English connectives
+You may NOT:
+- Drop logical conditions
+- Weaken or strengthen the claim
+
+SUCCESS CONDITION:
+
+Every axiom ϕᵢ is associated with a **single clear English sentence** that is logically equivalent in content to the original formal formula.
+
+If an axiom is too complex to translate as one sentence:
+- Use a short, numbered sequence of sentences for that axiom, clearly marked as belonging to axiom ϕᵢ
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+NATURAL-LANGUAGE RESTATEMENT OF AXIOMS:
+1. [English restatement of axiom ϕ₁]
+2. [English restatement of axiom ϕ₂]
+...
+n. [English restatement of axiom ϕₙ]
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- For each axiom:
+  - Show its original symbolic form
+  - Show the intermediate parsed structure (quantifier/connective skeleton)
+  - Justify any non-obvious choices in phrasing or clause ordering`
   },
   {
     id: "f9-reveal-content",
