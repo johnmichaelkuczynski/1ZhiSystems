@@ -327,9 +327,11 @@ Output ONLY the formal transformed theory. NO interpretations, NO domains, NO an
 
 FORMAT:
 
+1. THE RESULT
+
 LANGUAGE: { <new primitives> }
 
-DEFINITIONS:
+DEFINITIONS (optional):
 <old_symbol>(...) ↔ <formula using new primitives>
 
 AXIOMS:
@@ -337,11 +339,22 @@ AXIOMS:
 2. <rewritten axiom>
 ...
 
+RULES FOR MODE 1:
+- Output MUST BE PURELY FORMAL
+- NO interpretations
+- NO domains
+- NO analogies
+- NO commentary
+- KEEP IT SHORT: just LANGUAGE, DEFINITIONS (if any), AXIOMS
+- Transformation must preserve models up to definitional equivalence
+
 === MODE 2: EXPLAIN ON ===
 
 Output the formal transformation PLUS a short EXPLANATION section.
 
 FORMAT:
+
+1. THE RESULT
 
 LANGUAGE: { <new primitives> }
 
@@ -356,9 +369,9 @@ AXIOMS:
 EXPLANATION:
 <2–4 short paragraphs explaining the syntactic transformation>
 
-EXPLANATION RULES:
-- MUST discuss: what primitives were introduced/eliminated, how definitional equivalence works, why the rewritten axioms preserve the same models
-- MUST NOT: describe domains, provide semantic examples, drift into ontology/philosophy, give storytelling analogies
+RULES FOR MODE 2:
+- EXPLANATION MUST discuss: what primitives were introduced/eliminated, how definitional equivalence works, why the rewritten axioms preserve the same models
+- EXPLANATION MUST NOT: describe domains, provide semantic examples, drift into ontology/philosophy, give storytelling analogies
 - Stay strictly about the SYNTACTIC REWRITE
 
 === EXAMPLE ===
@@ -366,6 +379,9 @@ EXPLANATION RULES:
 INPUT: LANGUAGE: {R(x,y)}, AXIOMS: ∀x ¬R(x,x), ∀x∀y∀z ((R(x,y) ∧ R(y,z)) → R(x,z)), EXPLAIN = ON
 
 OUTPUT:
+
+1. THE RESULT
+
 LANGUAGE: {T(x,y)}
 
 DEFINITIONS:

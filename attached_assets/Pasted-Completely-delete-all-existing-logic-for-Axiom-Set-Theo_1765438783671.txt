@@ -1,0 +1,120 @@
+Completely delete all existing logic for:
+"Axiom-Set / Theory Transformation (One Argument)"
+Replace it entirely with the rules below.
+
+=========================================================
+UNIFIED LOGIC FOR THIS FUNCTION
+=========================================================
+
+The input contains:
+  - A LANGUAGE section
+  - An AXIOMS section
+  - An EXPLAIN toggle (ON or OFF)
+
+This function produces a *model-preserving syntactic transformation* 
+of the given theory by introducing new primitives or eliminating old ones.
+
+There are TWO OUTPUT MODES depending on the EXPLAIN toggle.
+
+=========================================================
+MODE 1 — EXPLAIN TOGGLE OFF (NON-EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = OFF, the output must contain **ONLY** the formal transformed theory.
+
+OUTPUT FORMAT:
+
+1. THE RESULT
+
+LANGUAGE: { <new primitives> }
+
+DEFINITIONS (optional):
+<old_symbol>(...) ↔ <formula using new primitives>
+
+AXIOMS:
+1. <rewritten axiom>
+2. <rewritten axiom>
+...
+
+Rules for EXPLAIN = OFF:
+- Output MUST BE PURELY FORMAL.
+- NO interpretations.
+- NO domains.
+- NO analogies.
+- NO commentary.
+- NO explanation paragraphs.
+- KEEP IT SHORT: just LANGUAGE, DEFINITIONS (if any), AXIOMS.
+- Transformation must preserve models up to definitional equivalence.
+
+=========================================================
+MODE 2 — EXPLAIN TOGGLE ON (EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = ON, the output must contain:
+
+(1) The same formal transformation used in EXPLAIN=OFF mode  
+(2) A short EXPLANATION section
+
+FORMAT:
+
+1. THE RESULT
+
+LANGUAGE: { <new primitives> }
+
+DEFINITIONS:
+<old_symbol>(...) ↔ <formula using new primitives>
+
+AXIOMS:
+1. <rewritten axiom>
+2. <rewritten axiom>
+...
+
+EXPLANATION:
+<2–4 short paragraphs explaining the syntactic transformation>
+
+Rules for EXPLAIN = ON:
+- EXPLANATION MUST discuss:
+    * What primitive(s) were introduced or eliminated
+    * How definitional equivalence works
+    * Why the rewritten axioms preserve the same models
+- The explanation MUST NOT:
+    * Describe or construct domains
+    * Provide semantic examples (numbers, letters, servers, etc.)
+    * Drift into ontology, philosophy, or model theory
+    * Give storytelling analogies
+- The explanation MUST stay strictly about the syntactic rewrite.
+
+=========================================================
+STYLE TEMPLATE THE AGENT MUST FOLLOW
+=========================================================
+
+Example INPUT:
+LANGUAGE: {R(x,y)}
+AXIOMS:
+1. ∀x ¬R(x,x)
+2. ∀x∀y∀z ((R(x,y) ∧ R(y,z)) → R(x,z))
+EXPLAIN = ON
+
+Example OUTPUT:
+
+1. THE RESULT
+
+LANGUAGE: {T(x,y)}
+
+DEFINITIONS:
+R(x,y) ↔ (T(x,y) ∧ x ≠ y)
+
+AXIOMS:
+1. ∀x T(x,x)
+2. ∀x∀y∀z ((T(x,y) ∧ T(y,z)) → T(x,z))
+
+EXPLANATION:
+The primitive R is replaced by T, representing its reflexive closure.
+R is defined as T restricted to non-reflexive cases. This ensures that
+the new theory induces exactly the same models as the original. The new
+axioms enforce reflexivity and transitivity for T, supplying the structure
+needed for reconstructing R through the definition.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
