@@ -898,7 +898,85 @@ EXPLANATION:
     name: "Weak Extension Test",
     functionId: 5,
     input: `<<<SEPARATOR>>>`,
-    instructions: `Check if the extension is conservative when allowing only definitional abbreviations. Stricter than full conservativity.`
+    instructions: `CONSERVATIVE EXTENSION ANALYSIS (WEAK EXTENSION TEST)
+
+TASK:
+Given two theories T₁ and T₂ where T₂ extends T₁, determine whether T₂ is a **weak conservative extension** of T₁.
+
+A WEAK extension allows:
+- Adding **only definitional abbreviations**, not arbitrary axioms
+- Each added sentence must be eliminable by substituting its definitional expansion
+- No new theorems in T₁'s vocabulary may be introduced
+
+This is STRICTER than full conservativity.
+
+INPUT:
+T₁ (base theory):
+- LANGUAGE: L
+- AXIOMS: A₁
+
+T₂ (candidate weak extension):
+- LANGUAGE: L ∪ {new symbols}
+- AXIOMS: A₁ ∪ {δ₁,...,δₙ}
+
+Each δᵢ must be tested to see if it is a **pure definitional abbreviation**.
+
+EXPLAIN toggle: ON or OFF
+
+MECHANICAL WEAK-EXTENSION TEST:
+
+STEP 1 — IDENTIFY NEW SYMBOLS:
+Let S = (L₂ − L₁). Each δᵢ must define exactly ONE symbol in S.
+
+If δᵢ contains more than one symbol in S → FAIL.
+If δᵢ is not of the form: NewSymbol(x̄) ↔ φ(x̄) with φ in L₁ → FAIL.
+
+STEP 2 — ELIMINABILITY CHECK:
+For each definitional clause: NewSymbol(x̄) ↔ φ(x̄)
+
+Verify mechanically that:
+- Substituting φ(x̄) everywhere for NewSymbol(x̄) in T₂ yields exactly T₁ plus trivial logical consequences
+- No substitution produces an axiom not derivable from A₁
+- No substitution introduces a non-eliminable occurrence of NewSymbol
+
+If any fail → FAIL.
+
+STEP 3 — CONSERVATIVITY CHECK (STRONGER THAN NORMAL):
+This check is stricter than ordinary conservativity:
+
+Even if T₂ is conservative in the usual sense, WEAK conservativity fails unless:
+- Every added δᵢ is ELIMINABLE
+- Every δᵢ introduces NO new theorems in L₁
+- T₂ reduces to T₁ *purely by definitional inlining*
+
+If ANY δᵢ fails, the weak extension test fails.
+
+SUCCESS CONDITION:
+
+T₂ is a **weak conservative extension** of T₁ IFF:
+1. Every added axiom δᵢ is a definitional equivalence NewSymbol ↔ φ in the old language
+2. Every definition is fully eliminable
+3. T₂ introduces NO new theorems in the original vocabulary
+4. T₁ is recovered *exactly* by eliminating abbreviations
+
+Otherwise: Weak Extension: NO.
+
+OUTPUT (EXPLAIN = OFF):
+Weak Extension: YES/NO
+If YES:
+DEFINITIONS:
+NewSymbol₁(x̄) ↔ φ₁(x̄)
+...
+If NO:
+Weak Extension: NO
+
+OUTPUT (EXPLAIN = ON):
+Weak Extension: YES/NO
+[same definitions if YES]
+EXPLANATION:
+- Weak extensions allow only definitional abbreviations
+- Each must be eliminable and yield no new theorems
+- If any abbreviation is non-eliminable, the extension fails even if T₂ is conservative in the ordinary sense`
   },
   {
     id: "f5-independence",
