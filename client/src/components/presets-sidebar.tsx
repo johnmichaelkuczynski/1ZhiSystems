@@ -1146,7 +1146,69 @@ EXPLANATION:
     name: "Bottleneck Detection",
     functionId: 6,
     input: `<<<SEPARATOR>>>`,
-    instructions: `Identify which primitives all other concepts ultimately depend on. Find conceptual bottlenecks that everything flows through.`
+    instructions: `COMPARE CONCEPTUAL SCHEMES: BOTTLENECK DETECTION (T₁, T₂)
+
+TASK:
+Given two conceptual schemes (T₁ and T₂), identify **conceptual bottlenecks**—primitive predicates on which **all other concepts ultimately depend** through their definitional chains.
+
+A bottleneck is a primitive that appears (directly or indirectly) in every definitional lineage of every derived concept.
+
+INPUT:
+Input consists of:
+- The full set of predicates from T₁ and T₂
+- The definitional dependency graph (edges S → R)
+- The primitive/derived classification
+- The conceptual depths (finite or ∞)
+- EXPLAIN toggle ON/OFF
+
+MECHANICAL BOTTLENECK COMPUTATION:
+
+STEP 1 — COMPUTE ANCESTRAL SETS:
+For each concept R:
+1. Trace all definitional dependencies recursively: Ancestors(R) = { all predicates S such that S →* R }
+   where →* is transitive closure
+2. If R is primitive, Ancestors(R) = {R}
+
+STEP 2 — IDENTIFY GLOBAL BOTTLENECKS:
+A primitive predicate P is a conceptual bottleneck iff:
+
+For **every** concept R in the scheme: P ∈ Ancestors(R)
+
+This includes:
+- all derived predicates
+- all other primitives (trivial for itself)
+
+If multiple primitives satisfy this property, each is a bottleneck.
+If NO primitive satisfies this for all R: There is **no** bottleneck.
+
+STEP 3 — OPTIONAL PARTIAL BOTTLENECKS:
+If no global bottleneck exists:
+Compute **partial bottlenecks**: Primitives that appear in Ancestors(R) for a **majority** of concepts.
+These are not required for the RESULT block, but may appear when EXPLAIN = ON.
+
+SUCCESS CONDITION:
+
+The sub-function must output:
+- The list of global bottlenecks (possibly empty)
+- No additional constructs
+
+OUTPUT (EXPLAIN = OFF):
+
+CONCEPTUAL BOTTLENECKS:
+{ list of primitives P such that P ∈ Ancestors(R) for all R }
+
+If none exist:
+CONCEPTUAL BOTTLENECKS:
+{ }
+
+OUTPUT (EXPLAIN = ON):
+
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- A bottleneck is a primitive all definitional paths eventually rely on
+- These predicates serve as structural "chokepoints" in the conceptual scheme
+- If no primitive appears in all ancestral sets, there is no bottleneck`
   },
   {
     id: "f6-rebalancing",
