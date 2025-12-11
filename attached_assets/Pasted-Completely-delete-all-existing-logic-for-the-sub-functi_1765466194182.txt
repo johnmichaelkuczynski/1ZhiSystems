@@ -1,0 +1,100 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: PHYSICAL (EVERYDAY)".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (PHYSICAL — EVERYDAY)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct an EVERYDAY PHYSICAL MODEL
+using intuitive physical domains in the following priority order:
+
+1. Objects (containers, tools, furniture, vehicles)
+2. Spatial relations (inside, touching, above, next to)
+3. Motion (push, pull, move-to, follows)
+4. Forces (weight, pressure, tension)
+5. Temperature / heat flow
+6. Household processes (heating, mixing, storing)
+7. Only if all above fail: generic physical constraints.
+
+MODEL CONSTRUCTION RULES:
+- Select a domain D consisting of everyday physical objects/scenarios.
+- Map each predicate/function to a natural physical relation or process.
+- Ensure the axioms hold under the assignments.
+
+If no such interpretation exists:
+"No physical interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <everyday physical domain>
+Interpretations:
+P1(x̄) := <physical relation/process>
+P2(x̄) := <physical relation/process>
+...
+Pk(x̄) := <physical relation/process>
+
+If no interpretation exists:
+"No physical interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Interpretation selected from earliest viable everyday physical category.
+- Predicates/functions correspond to intuitive relations or motions.
+- The axioms are verified using these assignments.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {Above(x,y)}
+Axioms:
+1. ∀x ¬Above(x,x)
+2. ∀x∀y∀z ((Above(x,y) ∧ Above(y,z)) → Above(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Stacked boxes
+Interpretations:
+Above(x,y) := "box x is physically stacked on top of box y"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Stacked boxes
+Interpretations:
+Above(x,y) := "box x is physically stacked on top of box y"
+
+EXPLANATION:
+- Boxes form a natural physical ordering in vertical space.
+- No box is above itself (axiom 1).
+- Stacking is transitive (axiom 2).
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

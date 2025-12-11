@@ -1,0 +1,103 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: PHILOSOPHICAL".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (PHILOSOPHICAL)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct a PHILOSOPHICAL MODEL
+using the following priority order of ontological categories:
+
+1. Substances (objects, enduring particulars)
+2. Properties (qualities instantiated by substances)
+3. Events (changes, occurrences)
+4. Relations (causal, spatial, qualitative)
+5. Abstracta (numbers, propositions, sets)
+6. Mental states (beliefs, desires, intentions)
+7. Linguistic entities (meanings, truthmakers)
+8. Only if all above fail: purely formal metaphysical structures.
+
+MODEL CONSTRUCTION RULES:
+- Select a domain D consisting of philosophical entities.
+- Interpret each predicate/function of T as a metaphysical relation,
+  dependence, property-instantiation, causal connection, or event-structure.
+- Ensure the axioms hold under the interpretation.
+
+If no philosophical interpretation satisfies T:
+"No philosophical interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <description of philosophical domain>
+Interpretations:
+P1(x̄) := <philosophical relation/property>
+P2(x̄) := <philosophical relation/property>
+...
+Pk(x̄) := <philosophical relation/property>
+
+If no philosophical interpretation exists:
+"No philosophical interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- The interpretation is chosen from the earliest viable ontological level.
+- Each symbol of T receives a clear metaphysical interpretation.
+- All axioms are verified under this mapping.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {Cause(x,y)}
+Axioms:
+1. ∀x ¬Cause(x,x)
+2. ∀x∀y∀z ((Cause(x,y) ∧ Cause(y,z)) → Cause(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Events
+Interpretations:
+Cause(x,y) := "event x is an immediate causal precursor of event y"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Events
+Interpretations:
+Cause(x,y) := "event x is an immediate causal precursor of event y"
+
+EXPLANATION:
+- Events are the earliest ontological category supporting asymmetric
+  and transitive relations.
+- No event causes itself, satisfying axiom 1.
+- Causal chains are transitive, satisfying axiom 2.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

@@ -2345,14 +2345,104 @@ EXPLANATION:
     name: "Computational",
     functionId: 10,
     input: ``,
-    instructions: `Find a COMPUTATIONAL interpretation. Use data structures, algorithms, types, programs, or processes.`
+    instructions: `FIND AN INTERPRETATION: COMPUTATIONAL (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct a COMPUTATIONAL MODEL using standard computational entities in the following priority order:
+
+1. Data structures (arrays, lists, trees, graphs, hash tables)
+2. Algorithms / procedures
+3. Type systems
+4. State machines / automata
+5. Program semantics (functions, closures, evaluators)
+6. Processes / message passing
+7. Memory models (stacks, heaps, stores)
+8. Only if all above fail: abstract rewriting systems
+
+MODEL CONSTRUCTION RULES:
+- Select a computational domain D (e.g., nodes of a tree, states of a machine, memory cells, program values)
+- Interpret each predicate/function of T as a computational relation/function on D (e.g., "is parent of", "next state", "contains", "pointer-to")
+- The interpretation must satisfy all axioms of T
+
+If no computational interpretation satisfies T:
+"No computational interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <description of computational domain>
+Interpretations:
+P1(x̄) := <computational relation/function>
+P2(x̄) := <computational relation/function>
+...
+Pk(x̄) := <computational relation/function>
+
+If no computational interpretation exists:
+"No computational interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- The computational domain is chosen from the earliest feasible category
+- Each symbol of T is mapped to a concrete computational behavior
+- Every axiom is checked under the interpretation to ensure correctness`
   },
   {
     id: "f10-philosophical",
     name: "Philosophical",
     functionId: 10,
     input: ``,
-    instructions: `Find a PHILOSOPHICAL interpretation. Use concepts like substances, properties, events, minds, or abstract objects.`
+    instructions: `FIND AN INTERPRETATION: PHILOSOPHICAL (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct a PHILOSOPHICAL MODEL using the following priority order of ontological categories:
+
+1. Substances (objects, enduring particulars)
+2. Properties (qualities instantiated by substances)
+3. Events (changes, occurrences)
+4. Relations (causal, spatial, qualitative)
+5. Abstracta (numbers, propositions, sets)
+6. Mental states (beliefs, desires, intentions)
+7. Linguistic entities (meanings, truthmakers)
+8. Only if all above fail: purely formal metaphysical structures
+
+MODEL CONSTRUCTION RULES:
+- Select a domain D consisting of philosophical entities
+- Interpret each predicate/function of T as a metaphysical relation, dependence, property-instantiation, causal connection, or event-structure
+- Ensure the axioms hold under the interpretation
+
+If no philosophical interpretation satisfies T:
+"No philosophical interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <description of philosophical domain>
+Interpretations:
+P1(x̄) := <philosophical relation/property>
+P2(x̄) := <philosophical relation/property>
+...
+Pk(x̄) := <philosophical relation/property>
+
+If no philosophical interpretation exists:
+"No philosophical interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- The interpretation is chosen from the earliest viable ontological level
+- Each symbol of T receives a clear metaphysical interpretation
+- All axioms are verified under this mapping`
   },
   // B. Natural Sciences
   {
@@ -2360,14 +2450,102 @@ EXPLANATION:
     name: "Physical (Everyday)",
     functionId: 10,
     input: ``,
-    instructions: `Find a PHYSICAL interpretation from everyday life. Use tangible objects, containers, weight, heat, space, motion in the intuitive sense.`
+    instructions: `FIND AN INTERPRETATION: PHYSICAL (EVERYDAY) (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct an EVERYDAY PHYSICAL MODEL using intuitive physical domains in the following priority order:
+
+1. Objects (containers, tools, furniture, vehicles)
+2. Spatial relations (inside, touching, above, next to)
+3. Motion (push, pull, move-to, follows)
+4. Forces (weight, pressure, tension)
+5. Temperature / heat flow
+6. Household processes (heating, mixing, storing)
+7. Only if all above fail: generic physical constraints
+
+MODEL CONSTRUCTION RULES:
+- Select a domain D consisting of everyday physical objects/scenarios
+- Map each predicate/function to a natural physical relation or process
+- Ensure the axioms hold under the assignments
+
+If no such interpretation exists:
+"No physical interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <everyday physical domain>
+Interpretations:
+P1(x̄) := <physical relation/process>
+P2(x̄) := <physical relation/process>
+...
+Pk(x̄) := <physical relation/process>
+
+If no interpretation exists:
+"No physical interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Interpretation selected from earliest viable everyday physical category
+- Predicates/functions correspond to intuitive relations or motions
+- The axioms are verified using these assignments`
   },
   {
     id: "f10-physics",
     name: "Physics (Science)",
     functionId: 10,
     input: ``,
-    instructions: `Find a PHYSICS interpretation from the science. Use spacetime, fields, forces, thermodynamics, electromagnetism, or relativity.`
+    instructions: `FIND AN INTERPRETATION: PHYSICS (SCIENTIFIC) (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct a PHYSICAL MODEL drawn from:
+
+1. Classical mechanics (point masses, forces, trajectories)
+2. Electromagnetism (fields, charges, potentials)
+3. Thermodynamics (temperature, entropy, energy flow)
+4. Relativity (worldlines, light cones, spacetime intervals)
+5. Fluid dynamics (flow, pressure, vorticity)
+6. Quantum mechanics (states, observables)
+7. Only if all above fail: purely formal physical spaces
+
+MODEL CONSTRUCTION RULES:
+- Choose a physical domain D
+- Interpret each predicate/function of T as a genuine scientific relation: e.g., "exerts force on", "field intensity at point", "higher energy than", "earlier on worldline", etc.
+- Ensure all axioms are satisfied
+
+If no physical interpretation works:
+"No physics interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <scientific physical domain>
+Interpretations:
+P1(x̄) := <scientific relation>
+P2(x̄) := <scientific relation>
+...
+Pk(x̄) := <scientific relation>
+
+If no interpretation exists:
+"No physics interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- The model is chosen from the earliest viable branch of physics
+- Each predicate/function maps to a physical field, force, ordering, or dynamical relation
+- The axioms are checked for satisfaction`
   },
   {
     id: "f10-chemical",

@@ -1,0 +1,104 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: PHYSICS (SCIENCE)".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (PHYSICS — SCIENTIFIC)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct a PHYSICAL MODEL drawn from:
+
+1. Classical mechanics (point masses, forces, trajectories)
+2. Electromagnetism (fields, charges, potentials)
+3. Thermodynamics (temperature, entropy, energy flow)
+4. Relativity (worldlines, light cones, spacetime intervals)
+5. Fluid dynamics (flow, pressure, vorticity)
+6. Quantum mechanics (states, observables)
+7. Only if all above fail: purely formal physical spaces.
+
+MODEL CONSTRUCTION RULES:
+- Choose a physical domain D.
+- Interpret each predicate/function of T as a genuine scientific relation:
+  e.g., "exerts force on", "field intensity at point", "higher energy than",
+  "earlier on worldline", etc.
+- Ensure all axioms are satisfied.
+
+If no physical interpretation works:
+"No physics interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <scientific physical domain>
+Interpretations:
+P1(x̄) := <scientific relation>
+P2(x̄) := <scientific relation>
+...
+Pk(x̄) := <scientific relation>
+
+If no interpretation exists:
+"No physics interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- The model is chosen from the earliest viable branch of physics.
+- Each predicate/function maps to a physical field, force, ordering,
+  or dynamical relation.
+- The axioms are checked for satisfaction.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {Earlier(x,y)}
+Axioms:
+1. ∀x ¬Earlier(x,x)
+2. ∀x∀y ((Earlier(x,y) ∧ Earlier(y,x)) → ⊥)
+3. ∀x∀y∀z ((Earlier(x,y) ∧ Earlier(y,z)) → Earlier(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Worldline events in Minkowski spacetime
+Interpretations:
+Earlier(x,y) := "event x lies in the past light-cone of event y"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Worldline events in Minkowski spacetime
+Interpretations:
+Earlier(x,y) := "event x lies in the past light-cone of event y"
+
+EXPLANATION:
+- Relativity provides the earliest branch satisfying asymmetry + transitivity.
+- No event is earlier than itself.
+- Past-light-cone ordering is transitive and antisymmetric.
+- Thus all axioms are satisfied.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
