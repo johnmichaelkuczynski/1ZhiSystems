@@ -442,48 +442,55 @@ Instead: INTERPRET the existing axioms in a concrete domain where they are all t
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-=== USE THIS OUTPUT FORMAT (not the default 5-section format) ===
+=== CRITICAL: CATEGORY IS MANDATORY ===
+
+READ THE INSTRUCTIONS ABOVE. If they specify a category (Mathematical, Computational, Physical, etc.), you MUST find an interpretation FROM THAT CATEGORY. Do NOT give a generic or different interpretation.
+
+Examples of CORRECT behavior:
+- Instructions say "COMPUTATIONAL" → Domain must be programs, data structures, types, algorithms, processes
+- Instructions say "PHYSICAL" → Domain must be everyday objects, containers, weight, heat
+- Instructions say "ECONOMIC" → Domain must be goods, prices, markets, preferences
+- Instructions say "BIOLOGICAL" → Domain must be organisms, cells, food chains
+
+Examples of WRONG behavior:
+- Instructions say "COMPUTATIONAL" but you give integers with < (WRONG - that's mathematical)
+- Instructions say "PHYSICAL" but you give real numbers (WRONG - that's mathematical)
+- Instructions say "ECONOMIC" but you give a strict order on sets (WRONG - that's mathematical)
+
+=== USE THIS OUTPUT FORMAT ===
 
 **INTERPRETATION**
 
-Domain: [exactly what objects the variables range over - be specific]
-[Symbol 1]: "[plain English meaning]"
-[Symbol 2]: "[plain English meaning]"
-[etc.]
+Domain: [specific objects from the REQUIRED CATEGORY]
+[Symbol 1]: "[meaning specific to that category]"
+[Symbol 2]: "[meaning specific to that category]"
 
 **WHY THIS WORKS**
 
-Axiom 1: [State it] — [1-2 sentences why it's TRUE in this domain]
-Axiom 2: [State it] — [1-2 sentences why it's TRUE in this domain]
+Axiom 1: [State it] — [1-2 sentences why TRUE in this domain]
+Axiom 2: [State it] — [1-2 sentences why TRUE in this domain]
 [etc.]
 
 === END FORMAT ===
 
-RULES:
-1. The interpretation section must be SHORT and IMMEDIATELY UNDERSTANDABLE
-2. No jargon - a reader should instantly grasp the model
-3. The model must make ALL axioms literally true (not approximately true)
-4. Use the category specified in instructions to guide domain choice
-5. If no category specified, choose the most natural/intuitive domain
-
-CATEGORY GUIDANCE:
-- Mathematical: algebra, topology, geometry, calculus (set theory only as last resort)
-- Computational: data structures, algorithms, types, programs, processes
-- Philosophical: substances, properties, events, minds, abstract objects
-- Physical: everyday tangible reality - objects, containers, weight, heat
-- Physics: scientific physics - spacetime, fields, forces, thermodynamics
-- Chemical: reactions, species, molecular structures
-- Biological: organisms, food chains, ecosystems
-- Economic: goods, prices, preferences
-- Social: people, hierarchies, relationships
-- Psychological: desires, motivations
-- Linguistic: words, alphabetical order
-- Organizational: tasks, workflows
-- Geographical: locations, elevations
-- Home Economics: cooking, food prep, appliances
-- Engineering: components, dependencies
-- Network: servers, routing, graphs
-- Finance categories: orders, assets, tranches, options, capital structure, indicators
+CATEGORY DEFINITIONS (use the one specified in instructions):
+- Mathematical: algebra, topology, geometry, calculus, groups, rings, fields (NOT just integers/reals)
+- Computational: programs, data structures, types, algorithms, processes, state machines, memory
+- Philosophical: substances, properties, events, minds, modalities, possible worlds
+- Physical: everyday objects - containers, weight, heat, motion, tools, furniture
+- Physics: scientific physics - spacetime, fields, forces, particles, thermodynamics
+- Chemical: molecules, reactions, species, bonds, catalysts
+- Biological: organisms, cells, food chains, ecosystems, genes
+- Economic: goods, prices, preferences, markets, utility
+- Social: people, hierarchies, status, relationships
+- Psychological: desires, motivations, beliefs, mental states
+- Linguistic: words, sentences, alphabetical order, grammar
+- Organizational: tasks, workflows, projects, dependencies
+- Geographical: locations, elevations, distances, regions
+- Home Economics: cooking temperatures, food prep, appliances, recipes
+- Engineering: components, systems, dependencies, modules
+- Network: servers, nodes, routing, connections, data flow
+- Finance: orders, assets, risk, tranches, options, capital structure
 
 FAILURE HANDLING (never return empty):
 - Case A (contradictory): Explain why, give adjacent consistent set with model
