@@ -335,7 +335,54 @@ EXPLANATION:
     name: "One-Direction Definability",
     functionId: 3,
     input: `<<<SEPARATOR>>>`,
-    instructions: `Define all primitives of Theory A using only Theory B's vocabulary. Show each definition and verify it preserves the intended meaning.`
+    instructions: `DEFINITIONAL EQUIVALENCE (ONE-DIRECTION DEFINABILITY) FROM T₁ INTO T₂
+
+TASK:
+Given two theories T₁ and T₂, determine whether **every primitive predicate of Theory A (T₁)** is explicitly definable **using only the vocabulary of Theory B (T₂)**.
+
+This is a ONE-DIRECTION definability test: T₁ → T₂ only. No reverse definability is checked here.
+
+LANGUAGES:
+T₁ uses predicates: P1,...,Pk with arities n1,...,nk
+T₂ uses predicates: Q1,...,Qm with arities m1,...,mm
+
+The goal: For each Pi, produce a formula φi in the language of T₂ with the SAME arity.
+
+MECHANICAL PROCEDURE FOR DEFINABILITY:
+
+For each primitive predicate Pi of T₁:
+1. Construct a schematic atomic pattern: Pi(x1,...,x_ni)
+2. Search T₂'s axioms for a candidate formula φi(x1,...,x_ni) using PURE syntax matching:
+   - Replace every Qi(...) in T₂ with schematic placeholders
+   - Attempt to unify Pi(x̄) with a subformula of T₂'s axioms occupying the same syntactic role
+   - No inference, no proof search, no semantic reasoning
+3. If a matching φi is found: Record the explicit definition: Pi(x̄) ↔ φi(x̄)
+4. If no φi matches: One-direction definability FAILS
+
+SUCCESS CONDITION:
+
+One-direction definability from T₁ into T₂ succeeds IFF:
+- For every primitive Pi of T₁, a defining formula φi in T₂ exists
+- Output the complete list of explicit definitions
+
+OUTPUT (EXPLAIN = OFF):
+Definable: YES/NO
+If YES:
+DEFINITIONS:
+P1(x̄) ↔ φ1(x̄)
+P2(x̄) ↔ φ2(x̄)
+...
+Pk(x̄) ↔ φk(x̄)
+If NO:
+Definable: NO
+
+OUTPUT (EXPLAIN = ON):
+Definable: YES/NO
+[same definitions if YES]
+EXPLANATION:
+- One-direction definability requires defining every primitive of T₁ using only T₂ vocabulary
+- The procedure is purely syntactic, based on pattern-matching against T₂'s axioms
+- If all definitions are successfully located, T₁ is definable within T₂`
   },
   {
     id: "f3-minimization",
