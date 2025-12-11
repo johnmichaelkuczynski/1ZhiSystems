@@ -1,7 +1,7 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { FileText } from "lucide-react";
+import { FileText, Dot } from "lucide-react";
 
 export interface Preset {
   id: string;
@@ -154,21 +154,21 @@ AXIOMS:
     id: "f2-arity-preserving",
     name: "Arity-Preserving Mapping",
     functionId: 2,
-    input: ``,
+    input: `<<<SEPARATOR>>>`,
     instructions: `Only consider mappings where primitives have the same arity. Binary maps to binary, unary to unary. Report all valid arity-preserving maps.`
   },
   {
     id: "f2-structural-role",
     name: "Structural Role Mapping",
     functionId: 2,
-    input: ``,
+    input: `<<<SEPARATOR>>>`,
     instructions: `Map primitives based on their structural role in the axioms (e.g., reflexive relations to reflexive relations). Ignore symbol names entirely.`
   },
   {
     id: "f2-obstruction",
     name: "Minimal Obstruction Report",
     functionId: 2,
-    input: ``,
+    input: `<<<SEPARATOR>>>`,
     instructions: `If the theories are not schema-equivalent, identify the smallest structural difference that prevents equivalence. Report the specific axiom or property that blocks the mapping.`
   },
   // FUNCTION 3: Definitional Equivalence
@@ -176,28 +176,28 @@ AXIOMS:
     id: "f3-mutual-explicit",
     name: "Mutual Explicit Definitions",
     functionId: 3,
-    input: ``,
+    input: `<<<SEPARATOR>>>`,
     instructions: `For each primitive in Theory A, write an explicit definition using Theory B's vocabulary. Then do the reverse. Show the complete bi-directional translation.`
   },
   {
     id: "f3-one-direction",
     name: "One-Direction Definability",
     functionId: 3,
-    input: ``,
+    input: `<<<SEPARATOR>>>`,
     instructions: `Define all primitives of Theory A using only Theory B's vocabulary. Show each definition and verify it preserves the intended meaning.`
   },
   {
     id: "f3-minimization",
     name: "Definition Minimization",
     functionId: 3,
-    input: ``,
+    input: `<<<SEPARATOR>>>`,
     instructions: `Find the shortest possible explicit definitions. Minimize the total number of quantifiers and logical connectives in the definitions.`
   },
   {
     id: "f3-conservative",
     name: "Conservative Definability",
     functionId: 3,
-    input: ``,
+    input: `<<<SEPARATOR>>>`,
     instructions: `Provide only conservative definitions that do not introduce any new theorems. Verify that each definition is eliminable without changing provability.`
   },
   // FUNCTION 4: Model-Preserving Rewrite
@@ -234,28 +234,28 @@ AXIOMS:
     id: "f5-new-primitives",
     name: "New Primitives Test",
     functionId: 5,
-    input: ``,
+    input: `<<<SEPARATOR>>>`,
     instructions: `Analyze whether adding the specified new primitives changes any theorems in the original vocabulary. Report conservative or non-conservative with justification.`
   },
   {
     id: "f5-new-axioms",
     name: "New Axioms Test",
     functionId: 5,
-    input: ``,
+    input: `<<<SEPARATOR>>>`,
     instructions: `Determine whether adding the new axioms proves any new facts expressible in the original vocabulary. Provide proof or countermodel.`
   },
   {
     id: "f5-weak-extension",
     name: "Weak Extension Test",
     functionId: 5,
-    input: ``,
+    input: `<<<SEPARATOR>>>`,
     instructions: `Check if the extension is conservative when allowing only definitional abbreviations. Stricter than full conservativity.`
   },
   {
     id: "f5-independence",
     name: "Independence Check",
     functionId: 5,
-    input: ``,
+    input: `<<<SEPARATOR>>>`,
     instructions: `Determine whether the added axiom is independent of the base theory (neither provable nor refutable). Provide model evidence for independence.`
   },
   // FUNCTION 6: Compare Conceptual Schemes
@@ -263,28 +263,28 @@ AXIOMS:
     id: "f6-primitive-derived",
     name: "Primitive vs. Derived Classification",
     functionId: 6,
-    input: ``,
+    input: `<<<SEPARATOR>>>`,
     instructions: `List all concepts. Classify each as primitive or derived. Draw the dependency graph showing which concepts depend on which.`
   },
   {
     id: "f6-depth-map",
     name: "Conceptual Depth Map",
     functionId: 6,
-    input: ``,
+    input: `<<<SEPARATOR>>>`,
     instructions: `For each concept, compute its definitional depth (how many layers of definitions separate it from primitives). Rank concepts by depth.`
   },
   {
     id: "f6-bottleneck",
     name: "Bottleneck Detection",
     functionId: 6,
-    input: ``,
+    input: `<<<SEPARATOR>>>`,
     instructions: `Identify which primitives all other concepts ultimately depend on. Find conceptual bottlenecks that everything flows through.`
   },
   {
     id: "f6-rebalancing",
     name: "Conceptual Rebalancing",
     functionId: 6,
-    input: ``,
+    input: `<<<SEPARATOR>>>`,
     instructions: `Suggest alternative primitive choices that distribute conceptual load more evenly. Reduce bottlenecks by changing what counts as primitive.`
   },
   // FUNCTION 7: Ontological Dependence
@@ -584,31 +584,43 @@ export function PresetsSidebar({ onSelectPreset, onScrollToFunction }: PresetsSi
         <div className="p-2 space-y-1">
           {groupedPresets.map((group) => (
             <div key={group.id}>
-              <button
-                className="flex items-center gap-2 min-w-0 w-full p-2 rounded-sm hover:bg-muted/50 transition-colors text-left"
-                onClick={() => onScrollToFunction?.(group.id)}
-              >
+              <div className="flex items-center gap-2 min-w-0 w-full p-2 rounded-sm hover:bg-muted/50 transition-colors text-left group/header">
+                <button
+                  className="shrink-0 hover:text-foreground transition-colors text-muted-foreground opacity-0 group-hover/header:opacity-100"
+                  onClick={() => onScrollToFunction?.(group.id)}
+                  title="Scroll to this function"
+                >
+                  <Dot className="h-4 w-4" />
+                </button>
                 <Badge variant="outline" className="font-mono text-[10px] shrink-0 rounded-sm">
                   {group.id}
                 </Badge>
                 <span className="text-xs font-medium truncate">{group.name}</span>
-              </button>
+              </div>
               <div className="pl-4 pr-2 pb-2 space-y-1">
                 {group.presets.length > 0 ? (
                   group.presets.map((preset) => (
-                    <Button
-                      key={preset.id}
-                      variant="ghost"
-                      size="sm"
-                      className="w-full justify-start text-xs h-8 font-normal text-muted-foreground hover:text-foreground"
-                      onClick={() => {
-                        onSelectPreset(preset);
-                        onScrollToFunction?.(group.id);
-                      }}
-                      data-testid={`preset-${preset.id}`}
-                    >
-                      {preset.name}
-                    </Button>
+                    <div key={preset.id} className="flex items-center gap-1 group/preset">
+                      <button
+                        className="shrink-0 hover:text-foreground transition-colors text-muted-foreground opacity-0 group-hover/preset:opacity-100"
+                        onClick={() => onScrollToFunction?.(group.id)}
+                        title="Scroll to this function"
+                      >
+                        <Dot className="h-3 w-3" />
+                      </button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="flex-1 justify-start text-xs h-8 font-normal text-muted-foreground hover:text-foreground"
+                        onClick={() => {
+                          onSelectPreset(preset);
+                          onScrollToFunction?.(group.id);
+                        }}
+                        data-testid={`preset-${preset.id}`}
+                      >
+                        {preset.name}
+                      </Button>
+                    </div>
                   ))
                 ) : (
                   <p className="text-[10px] text-muted-foreground/50 py-1 pl-2">No presets</p>

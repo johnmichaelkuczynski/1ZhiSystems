@@ -7,7 +7,7 @@ import { PresetsSidebar, type Preset } from "@/components/presets-sidebar";
 import generatedLogo from "@assets/generated_images/minimalist_geometric_logo_representing_logic_transformation.png";
 
 interface FunctionInputs {
-  [key: number]: { input: string; instructions: string; trigger: number };
+  [key: number]: { input: string; inputA?: string; inputB?: string; instructions: string; trigger: number };
 }
 
 export default function Home() {
@@ -29,10 +29,26 @@ export default function Home() {
   ];
 
   const handleSelectPreset = (preset: Preset) => {
+    // Check if this is a dual-input function
+    const isSeparated = preset.input.includes("<<<SEPARATOR>>>");
+    let inputA = "";
+    let inputB = "";
+    let input = "";
+    
+    if (isSeparated) {
+      const [a, b] = preset.input.split("<<<SEPARATOR>>>");
+      inputA = a?.trim() || "";
+      inputB = b?.trim() || "";
+    } else {
+      input = preset.input;
+    }
+
     setFunctionInputs(prev => ({
       ...prev,
       [preset.functionId]: { 
-        input: prev[preset.functionId]?.input || preset.input, 
+        input,
+        inputA: inputA || prev[preset.functionId]?.inputA || "",
+        inputB: inputB || prev[preset.functionId]?.inputB || "",
         instructions: preset.instructions,
         trigger: Date.now()
       }
@@ -107,6 +123,9 @@ export default function Home() {
                         title={f.title}
                         description={f.description}
                         selectedModel={selectedModel}
+                        presetInputA={functionInputs[f.id]?.inputA}
+                        presetInputB={functionInputs[f.id]?.inputB}
+                        presetInstructions={functionInputs[f.id]?.instructions}
                         {...(f.id === 5 ? {
                           labelA: "Base Theory",
                           labelB: "Extended Theory",
