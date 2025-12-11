@@ -253,34 +253,34 @@ const PRESETS: Preset[] = [
     input: ``,
     instructions: `Rewrite the theory using physical, spatial, or metric primitives. Ground abstract concepts in physical terms where possible.`
   },
-  // FUNCTION 9: Identify Representational Biases
+  // FUNCTION 9: Interpret Canonical Meaning
   {
-    id: "f9-privilege",
-    name: "Privilege Detection",
+    id: "f9-primitive-meanings",
+    name: "Identify Primitive Meanings",
     functionId: 9,
     input: ``,
-    instructions: `Analyze what the theory's primitives make easy to express. List concepts and relations that can be stated simply. These are the privileged structures.`
+    instructions: `For each primitive symbol in the theory, identify what it is most naturally intended to represent. Explain the canonical meaning of each predicate, function, and constant.`
   },
   {
-    id: "f9-blind-spot",
-    name: "Blind-Spot Detection",
+    id: "f9-natural-language",
+    name: "Natural Language Restatement",
     functionId: 9,
     input: ``,
-    instructions: `Analyze what the theory's primitives make hard or impossible to express. List concepts that require complex circumlocutions or cannot be stated at all.`
+    instructions: `Restate all axioms using explicit natural-language terms instead of abstract symbols. Replace each primitive with a phrase that captures its intended meaning.`
   },
   {
-    id: "f9-worldview",
-    name: "Worldview Extraction",
+    id: "f9-reveal-content",
+    name: "Reveal Theory Content",
     functionId: 9,
     input: ``,
-    instructions: `Extract the implicit worldview embedded in the primitive choices. What ontological commitments do these primitives encode? What kind of reality do they presuppose?`
+    instructions: `Explain what this theory is really about. Strip away the formal notation and describe in plain English what claims the theory makes about reality.`
   },
   {
-    id: "f9-bias-ranking",
-    name: "Bias Severity Ranking",
+    id: "f9-intended-domain",
+    name: "Identify Intended Domain",
     functionId: 9,
     input: ``,
-    instructions: `List all representational biases from strongest to weakest. For each bias, explain what it privileges, what it suppresses, and how severe the distortion is.`
+    instructions: `Determine what domain of objects this theory is intended to describe. What are the primitives supposed to range over? What is the intended subject matter?`
   },
   // FUNCTION 10: Find an Interpretation
   {
@@ -365,7 +365,7 @@ export function PresetsSidebar({ onSelectPreset }: PresetsSidebarProps) {
     "Compare Conceptual Schemes (2 Args)",
     "Ontological Dependence (1 Arg)",
     "Generate Alt. Conceptualizations (1 Arg)",
-    "Identify Representational Biases (1 Arg)",
+    "Interpret Canonical Meaning (1 Arg)",
     "Find an Interpretation (1 Arg)",
     "Determine Equivalence (2 Args)"
   ];

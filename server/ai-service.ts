@@ -70,7 +70,7 @@ Then briefly explain the reasoning.`,
   
   "Generate Alternative Conceptualizations": `Generate three distinct, non-trivial, logically equivalent reformulations of the input theory using completely different primitive concepts (e.g., algebraic, topological, order-theoretic, mereological, etc.). Each reformulation must be categorical or at least bi-interpretable with the original.`,
   
-  "Identify Representational Biases": `Analyze the input theory and identify hidden representational biases, implicit ontological assumptions, and historical or notational prejudices baked into the choice of primitives and axioms. Suggest how these biases affect what the theory makes easy or difficult to express, and propose a bias-minimized alternative formulation.`,
+  "Interpret Canonical Meaning": `Identify the intended interpretations of the primitive symbols in the input theory. For each primitive, determine what it is meant to represent in the most natural or canonical interpretation. Then restate all axioms using explicit, natural-language primitives that make the meaning transparent. The goal is to reveal what the theory is really about.`,
   
   "Find an Interpretation": `Find a practical application of the input axiom system in mathematics, science (including computer science), or engineering. Map each primitive symbol to concrete objects and relations from a real scientific or engineering domain. Show how each axiom becomes a true, useful statement in that application. Provide a model that a working mathematician, scientist, or engineer would recognize as genuinely applicable to their field.`,
   
@@ -347,14 +347,14 @@ INSTRUCTIONS:
 
 Invert the conceptual hierarchy. Make derived notions primitive. Redefine original primitives. Produce an equivalent theory with different conceptual structure.`,
 
-  "Identify Representational Biases": `Identify representational biases in this theory.
+  "Interpret Canonical Meaning": `Interpret the canonical meaning of this theory.
 
 <<<INPUT>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-Analyze what the primitive choices privilege vs suppress. Extract the implicit worldview. Rank biases by severity. Suggest debiasing alternatives.`,
+For each primitive symbol, identify what it is intended to represent in the most natural interpretation. Then restate all axioms in explicit natural language that reveals what the theory is really about.`,
 
   "Find an Interpretation": `Find a concrete model/interpretation for the axiom system below.
 
