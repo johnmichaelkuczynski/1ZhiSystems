@@ -784,48 +784,152 @@ T₂ introduces a constant c and asserts that every element is E-related to c. T
 - No model constructions or domain examples
 - No analogies or real-world examples`,
 
-  "Compare Conceptual Schemes": `YOUR TASK: Compare the primitive/derived classifications in Scheme A vs. Scheme B.
-NOTHING ELSE. Do NOT discuss expressivity, ontology, naturalness, or philosophy.
+  "Compare Conceptual Schemes": `YOUR TASK: Compare how the two theories organize their conceptual schemes.
 
-=== CONCEPTUAL SCHEME A ===
+Compare:
+- Which predicates are PRIMITIVE in each theory
+- Which predicates are DERIVABLE in each theory
+- What each theory can express that the other cannot
+- Whether one theory is more parsimonious or coarse-grained
+
+This is NOT a conservativity test, NOT definitional equivalence, and NOT a model comparison.
+It is purely CLASSIFICATION OF CONCEPTUAL STRUCTURE.
+
+=== THEORY T₁ (Box A) ===
 <<<SYSTEM_A>>>
 
-=== CONCEPTUAL SCHEME B ===
+=== THEORY T₂ (Box B) ===
 <<<SYSTEM_B>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-=== DEFINITION OF "DERIVED" ===
-A symbol is DERIVED if and only if it has an explicit definition (P(x,y) ↔ φ(x,y)) given in the input.
-If no definition is provided, the symbol is PRIMITIVE.
+=== CHECK EXPLAIN MODE ===
+If the instructions contain "EXPLAIN = ON" or the explain toggle is enabled, use MODE 2.
+Otherwise, use MODE 1.
 
-=== OUTPUT FORMAT (use exactly this structure) ===
+=== MODE 1: EXPLAIN OFF (default) ===
 
-RESULT
-Primitive symbols in A:
-(list)
-Derived symbols in A:
-(list)
+FORMAT:
 
-Primitive symbols in B:
-(list)
-Derived symbols in B:
-(list)
+1. THE RESULT
 
-COMPARISON
-- Which primitives in A become derived in B?
-- Which primitives in B become derived in A?
-- Which primitives exist only in A?
-- Which primitives exist only in B?
+PRIMITIVES IN T₁:
+<list primitive predicates>
+
+DERIVED CONCEPTS IN T₁:
+<list derived predicates, if any, with formulas>
+
+PRIMITIVES IN T₂:
+<list primitive predicates>
+
+DERIVED CONCEPTS IN T₂:
+<list derived predicates, if any, with formulas>
+
+EXPRESSIVE DIFFERENCES:
+<very short list of what T₁ expresses that T₂ cannot, and vice versa>
+
+RULES FOR MODE 1:
+- Output must be compact and formal
+- DERIVED concepts must be given as explicit defining formulas when possible
+- EXPRESSIVE DIFFERENCES section must be bullet-point, minimal
+- NO prose analysis, NO models, NO analogies, NO metaphors, NO multi-paragraph discussion
+
+=== MODE 2: EXPLAIN ON ===
+
+FORMAT:
+
+1. THE RESULT
+
+PRIMITIVES IN T₁:
+<list>
+
+DERIVED CONCEPTS IN T₁:
+<list with definitions>
+
+PRIMITIVES IN T₂:
+<list>
+
+DERIVED CONCEPTS IN T₂:
+<list with definitions>
+
+EXPRESSIVE DIFFERENCES:
+<short list>
+
+EXPLANATION:
+<2-5 short paragraphs explaining:
+ - how each theory conceptualizes its domain differently
+ - which concepts are encoded primitively vs. definitionally
+ - expressive losses or gains
+ - comparative parsimony or redundancy>
+
+RULES FOR MODE 2:
+- Explanation MUST stay strictly about: primitive/derived classification, definability, expressive reach, conceptual parsimony
+- MUST NOT: describe or build models, give real-world examples, give analogies, drift into ontology or philosophy
+- KEEP IT ANALYTICAL AND CONCISE
+
+=== EXAMPLES ===
+
+EXAMPLE (EXPLAIN OFF):
+INPUT: T₁: LANGUAGE: {Parent(x,y), Male(x), Female(x)}, AXIOMS: ∀x∀y (Parent(x,y) → (Male(x) ∨ Female(x))), ∀x ¬(Male(x) ∧ Female(x)) | T₂: LANGUAGE: {Father(x,y), Mother(x,y)}, AXIOMS: ∀x∀y (Father(x,y) → ¬Mother(x,y)), ∀x∀y (Mother(x,y) → ¬Father(x,y))
+
+OUTPUT:
+
+1. THE RESULT
+
+PRIMITIVES IN T₁:
+Parent, Male, Female
+
+DERIVED CONCEPTS IN T₁:
+Father(x,y) ↔ Parent(x,y) ∧ Male(x)
+Mother(x,y) ↔ Parent(x,y) ∧ Female(x)
+
+PRIMITIVES IN T₂:
+Father, Mother
+
+DERIVED CONCEPTS IN T₂:
+Parent(x,y) ↔ Father(x,y) ∨ Mother(x,y)
+Male(x) ↔ ∃y Father(x,y)
+Female(x) ↔ ∃y Mother(x,y)
+
+EXPRESSIVE DIFFERENCES:
+- T₁ expresses gender independently of parenthood.
+- T₂ directly expresses parent-role exclusivity.
+
+EXAMPLE (EXPLAIN ON):
+Same input with EXPLAIN = ON
+
+OUTPUT:
+
+1. THE RESULT
+
+PRIMITIVES IN T₁:
+Parent, Male, Female
+
+DERIVED CONCEPTS IN T₁:
+Father ↔ Parent ∧ Male
+Mother ↔ Parent ∧ Female
+
+PRIMITIVES IN T₂:
+Father, Mother
+
+DERIVED CONCEPTS IN T₂:
+Parent ↔ Father ∨ Mother
+Male ↔ ∃y Father(x,y)
+Female ↔ ∃y Mother(x,y)
+
+EXPRESSIVE DIFFERENCES:
+- T₁ isolates gender from parental roles.
+- T₂ encodes fatherhood/motherhood as basic and enforces exclusivity.
+
+EXPLANATION:
+T₁ treats parenthood and gender as independent primitive concepts, allowing the theory to refer to gender even when no parental relation is involved. T₂ embeds gender into the parental roles, making "father" and "mother" primitive and eliminating gender as a standalone predicate. Because the primitive choices differ, each theory highlights different conceptual structures: T₁ is more flexible, while T₂ is more role-specific. Their expressive capacities overlap but do not coincide.
 
 === HARD REQUIREMENTS ===
-- Do NOT add meanings that aren't in the input
-- Do NOT invent new predicates
-- Do NOT assume definability not explicitly stated
-- Do NOT produce bloated explanations
-- Do NOT evaluate theories or infer consequences
-- ONLY compare primitive/derived classifications`,
+- MODE 1: Compact formal output, bullet-point expressive differences
+- MODE 2: Formal output + analytical explanation about conceptual structure
+- No model constructions or real-world examples
+- No analogies or philosophical drift`,
 
   "Ontological Dependence": `YOUR TASK: Identify which symbols are primitive and which ontologically depend on others.
 
