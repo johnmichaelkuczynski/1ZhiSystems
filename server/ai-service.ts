@@ -1358,12 +1358,16 @@ Axiom 1 holds because every server is trivially connected to itself by a path of
 - NEVER fail - always produce a valid model unless axioms are inconsistent`
 };
 
-function buildPrompt(input: string, instructions: string, functionName: string): string {
+function buildPrompt(input: string, instructions: string, functionName: string, explain: boolean = false): string {
   // Normalize function name by removing argument count suffix like "(One Argument)" or "(Two Arguments)"
   const normalizedName = functionName.replace(/\s*\(.*Argument.*\)\s*$/i, "").trim();
   
   const template = FUNCTION_PROMPTS[normalizedName] || FUNCTION_PROMPTS["Axiom-Set / Theory Transformation"];
-  const effectiveInstructions = instructions?.trim() || DEFAULT_INSTRUCTIONS[normalizedName] || "Perform the standard transformation for this function.";
+  const baseInstructions = instructions?.trim() || DEFAULT_INSTRUCTIONS[normalizedName] || "Perform the standard transformation for this function.";
+  
+  // Append EXPLAIN mode to instructions so the AI knows which output format to use
+  const explainDirective = explain ? "\n\nEXPLAIN = ON" : "\n\nEXPLAIN = OFF";
+  const effectiveInstructions = baseInstructions + explainDirective;
   
   // Handle dual-input functions
   const dualInputFunctions = ["Schema Equivalence", "Definitional Equivalence", "Conservative Extension Analysis", "Compare Conceptual Schemes"];
@@ -1388,7 +1392,7 @@ export async function processWithAI(request: AIRequest): Promise<AIResponse> {
     request.model
   );
   
-  const prompt = buildPrompt(request.input, refinedInstructions, request.functionName);
+  const prompt = buildPrompt(request.input, refinedInstructions, request.functionName, request.explain || false);
   
   const messages = [
     { role: "system" as const, content: SYSTEM_PROMPT },
