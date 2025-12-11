@@ -1,0 +1,101 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: ORGANIZATIONAL".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (ORGANIZATIONAL)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct an ORGANIZATIONAL MODEL
+using real organizational structures in the following priority order:
+
+1. Tasks / workflow items
+2. Dependencies (task A must precede task B)
+3. Responsibility assignments (role → task)
+4. Reporting structure (manager → subordinate)
+5. Project phases / pipelines
+6. Inter-team coordination (handoffs, blocking dependencies)
+7. Only if all above fail: abstract DAG of tasks.
+
+MODEL CONSTRUCTION RULES:
+- Choose a domain D of tasks, roles, or organizational units.
+- Interpret predicates/functions as workflow relations:
+  “precedes,” “depends-on,” “reports-to,” “is-blocked-by.”
+- Ensure axioms hold.
+
+If no interpretation exists:
+"No organizational interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <organizational domain>
+Interpretations:
+P1(x̄) := <organizational relation>
+P2(x̄) := <organizational relation>
+...
+Pk(x̄) := <organizational relation>
+
+If no interpretation exists:
+"No organizational interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Interpretation taken from earliest viable workflow structure.
+- Predicates correspond to precedence/dependency or reporting structures.
+- Axioms are checked for satisfaction.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {Precedes(x,y)}
+Axioms:
+1. ∀x ¬Precedes(x,x)
+2. ∀x∀y∀z ((Precedes(x,y) ∧ Precedes(y,z)) → Precedes(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Tasks in a project pipeline
+Interpretations:
+Precedes(x,y) := "task x must be completed before task y can begin"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Tasks in a project pipeline
+Interpretations:
+Precedes(x,y) := "task x must be completed before task y can begin"
+
+EXPLANATION:
+- Task dependencies form a strict partial order.
+- Irreflexivity and transitivity hold automatically.
+- Therefore the axioms are satisfied.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

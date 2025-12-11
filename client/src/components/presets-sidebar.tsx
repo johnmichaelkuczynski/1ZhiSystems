@@ -2552,14 +2552,102 @@ EXPLANATION:
     name: "Chemical",
     functionId: 10,
     input: ``,
-    instructions: `Find a CHEMICAL interpretation. Use chemical species, reactions, molecular structures, or reaction pathways.`
+    instructions: `FIND AN INTERPRETATION: CHEMICAL (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct a CHEMICAL MODEL using real chemical entities in the following priority order:
+
+1. Chemical species (atoms, ions, molecules)
+2. Chemical bonds (single, double, ionic, covalent)
+3. Reaction pathways (reactant → product)
+4. Energy levels, activation barriers
+5. Stoichiometric relations
+6. Equilibrium / kinetics (rates, catalysts)
+7. Only if all above fail: abstract chemical graphs
+
+MODEL CONSTRUCTION RULES:
+- Choose a chemical domain D (atoms, molecules, reactions)
+- Map each predicate/function to a real chemical relation: "bonds-with", "reacts-to-form", "has oxidation state", etc.
+- Ensure the axioms hold
+
+If no chemical interpretation satisfies T:
+"No chemical interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <chemical domain>
+Interpretations:
+P1(x̄) := <chemical relation>
+P2(x̄) := <chemical relation>
+...
+Pk(x̄) := <chemical relation>
+
+If no interpretation exists:
+"No chemical interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Interpretation is taken from the earliest feasible chemical category
+- Predicates/functions correspond to bonding, reactivity, or molecular structure
+- All axioms are checked under this interpretation`
   },
   {
     id: "f10-biological",
     name: "Biological",
     functionId: 10,
     input: ``,
-    instructions: `Find a BIOLOGICAL interpretation. Use organisms, food chains, ecosystems, cells, or evolutionary relationships.`
+    instructions: `FIND AN INTERPRETATION: BIOLOGICAL (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct a BIOLOGICAL MODEL using actual biological entities in the following priority order:
+
+1. Organisms (species members, populations)
+2. Cells and cell types
+3. Biological functions (feeds-on, predates, symbiosis)
+4. Genetic relations (parent, offspring, expresses-gene)
+5. Ecosystem interactions (producer, consumer)
+6. Evolutionary relations (ancestor, diverged-from)
+7. Only if all above fail: abstract phylogenetic graphs
+
+MODEL CONSTRUCTION RULES:
+- Select a biological domain D
+- Map predicates/functions to biological relations: "preys-on", "is-parent-of", "is-in-same-clade-as", etc.
+- Ensure the axioms hold
+
+If no interpretation exists:
+"No biological interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <biological domain>
+Interpretations:
+P1(x̄) := <biological relation>
+P2(x̄) := <biological relation>
+...
+Pk(x̄) := <biological relation>
+
+If no interpretation exists:
+"No biological interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- The domain is chosen from the simplest viable level of biological structure
+- Predicates map onto ecological, genetic, or anatomical relations
+- All axioms must hold under the interpretation`
   },
   // C. Human, Social, Cultural Domains
   {
@@ -2567,14 +2655,102 @@ EXPLANATION:
     name: "Economic",
     functionId: 10,
     input: ``,
-    instructions: `Find an ECONOMIC interpretation. Use goods, prices, markets, preferences, or trade relationships.`
+    instructions: `FIND AN INTERPRETATION: ECONOMIC (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct an ECONOMIC MODEL according to the following priority order:
+
+1. Goods, prices, and markets
+2. Agents and preferences
+3. Trade relations (buys-from, sells-to)
+4. Utility, demand, and substitution
+5. Production functions (inputs → outputs)
+6. Market equilibria
+7. Only if all above fail: abstract exchange networks
+
+MODEL CONSTRUCTION RULES:
+- Choose an economic domain D (goods, agents, prices)
+- Interpret predicates/functions as real economic relations: "prefers", "trades-with", "more-expensive-than", "produces"
+- Ensure all axioms hold
+
+If no interpretation exists:
+"No economic interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <economic domain>
+Interpretations:
+P1(x̄) := <economic relation>
+P2(x̄) := <economic relation>
+...
+Pk(x̄) := <economic relation>
+
+If no interpretation exists:
+"No economic interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- The model is chosen from the earliest viable branch of economics
+- Predicates correspond to market relations, preferences, or trade flows
+- Axioms are checked under the chosen mapping`
   },
   {
     id: "f10-social",
     name: "Social / Sociological",
     functionId: 10,
     input: ``,
-    instructions: `Find a SOCIAL interpretation. Use people, social hierarchies, relationships, or group dynamics.`
+    instructions: `FIND AN INTERPRETATION: SOCIAL / SOCIOLOGICAL (1 ARG)
+
+TASK:
+Given an uninterpreted axiom system T, construct a SOCIAL MODEL using the following priority order:
+
+1. Individuals in a group
+2. Social roles (leader, subordinate, peer)
+3. Social relations (trusts, respects, defers-to)
+4. Hierarchies (rankings, influence)
+5. Group dynamics (coalitions, alliances)
+6. Norms and rule-following behavior
+7. Only if all above fail: abstract social graphs
+
+MODEL CONSTRUCTION RULES:
+- Select a domain D of persons or social units
+- Map each predicate/function to a sociological relation: "has-higher-status-than", "defers-to", "belongs-to-group-of"
+- Ensure all axioms hold
+
+If no interpretation exists:
+"No social interpretation available"
+
+OUTPUT (EXPLAIN = OFF):
+
+1. THE RESULT
+
+MODEL:
+Domain: <social domain>
+Interpretations:
+P1(x̄) := <social relation>
+P2(x̄) := <social relation>
+...
+Pk(x̄) := <social relation>
+
+If no interpretation exists:
+"No social interpretation available"
+
+OUTPUT (EXPLAIN = ON):
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Interpretation chosen from earliest feasible social structure
+- Predicates are mapped to stable social relations (rank, influence)
+- The axioms are verified under these assignments`
   },
   {
     id: "f10-psychological",

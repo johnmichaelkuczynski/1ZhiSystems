@@ -1,0 +1,100 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: LINGUISTIC".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (LINGUISTIC)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct a LINGUISTIC MODEL
+using the following priority order:
+
+1. Words in a language
+2. Alphabetical order / lexicographic order
+3. Grammar rules (subject–verb, modifier relations)
+4. Syntactic dependencies (head, complement, specifier)
+5. Semantic relations (synonymy, entailment, reference)
+6. Pragmatic relations (topic, emphasis)
+7. Only if all above fail: abstract strings and relations.
+
+MODEL CONSTRUCTION RULES:
+- Choose a linguistic domain D (words, sentences, syntactic nodes).
+- Interpret predicates/functions as linguistic relations:
+  “precedes,” “modifies,” “dominates,” “is-synonym-of,” etc.
+- Ensure axioms are satisfied.
+
+If no interpretation exists:
+"No linguistic interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <linguistic domain>
+Interpretations:
+P1(x̄) := <linguistic relation>
+P2(x̄) := <linguistic relation>
+...
+Pk(x̄) := <linguistic relation>
+
+If no interpretation exists:
+"No linguistic interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Interpretation chosen from earliest workable linguistic level.
+- Predicates map to grammatical or semantic relations.
+- Axioms are checked for satisfaction.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {Before(x,y)}
+Axioms:
+1. ∀x ¬Before(x,x)
+2. ∀x∀y∀z ((Before(x,y) ∧ Before(y,z)) → Before(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Words in a sentence
+Interpretations:
+Before(x,y) := "x occurs earlier than y in linear word order"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Words in a sentence
+Interpretations:
+Before(x,y) := "x occurs earlier than y in linear word order"
+
+EXPLANATION:
+- Word order is irreflexive and transitive.
+- Therefore the axioms are satisfied.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

@@ -1,0 +1,100 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: GEOGRAPHICAL / SPATIAL".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (GEOGRAPHICAL / SPATIAL)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct a GEOGRAPHICAL/SPATIAL MODEL
+using spatial entities in the following priority order:
+
+1. Locations on a map
+2. Elevation / altitude relations
+3. Distances between points
+4. Adjacency and containment
+5. Movement paths / routes
+6. Regions and boundaries
+7. Only if all above fail: abstract metric spaces.
+
+MODEL CONSTRUCTION RULES:
+- Choose a spatial domain D (cities, landmarks, coordinates).
+- Interpret predicates/functions as spatial relations:
+  “north-of," “higher-than,” “closer-than,” “adjacent-to.”
+- Ensure axioms hold.
+
+If no interpretation exists:
+"No geographical interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <spatial domain>
+Interpretations:
+P1(x̄) := <spatial relation>
+P2(x̄) := <spatial relation>
+...
+Pk(x̄) := <spatial relation>
+
+If no interpretation exists:
+"No geographical interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Interpretation chosen from earliest viable spatial structure.
+- Predicates are mapped to genuine geographic or geometric relations.
+- All axioms are checked for satisfaction.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {Higher(x,y)}
+Axioms:
+1. ∀x ¬Higher(x,x)
+2. ∀x∀y∀z ((Higher(x,y) ∧ Higher(y,z)) → Higher(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Mountain peaks
+Interpretations:
+Higher(x,y) := "elevation(x) > elevation(y)"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Mountain peaks
+Interpretations:
+Higher(x,y) := "elevation(x) > elevation(y)"
+
+EXPLANATION:
+- Elevation ordering is irreflexive and transitive.
+- Therefore the axioms are satisfied.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

@@ -1,0 +1,100 @@
+Completely delete all existing logic for the sub-function:
+"FIND AN INTERPRETATION: PSYCHOLOGICAL".
+
+Do NOT modify other sub-functions in the Find an Interpretation block.
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+FIND AN INTERPRETATION (PSYCHOLOGICAL)
+=========================================================
+
+TASK:
+Given an uninterpreted axiom system T, construct a PSYCHOLOGICAL MODEL
+using mental constructs in the following priority order:
+
+1. Desires, motivations, goals
+2. Beliefs and informational states
+3. Preferences and aversions
+4. Emotions and affective valence
+5. Cognitive processes (memory, inference, attention)
+6. Decision-making structures
+7. Only if all above fail: abstract mental-state graphs.
+
+MODEL CONSTRUCTION RULES:
+- Choose a domain D consisting of mental states or agents.
+- Interpret predicates/functions as psychological relations:
+  “desires-more-than,” “believes-that,” “is-afraid-of,” “is-motivated-by,” etc.
+- Ensure all axioms are satisfied.
+
+If no interpretation exists:
+"No psychological interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: <psychological domain>
+Interpretations:
+P1(x̄) := <psychological relation>
+P2(x̄) := <psychological relation>
+...
+Pk(x̄) := <psychological relation>
+
+If no interpretation exists:
+"No psychological interpretation available"
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Predicates map to motivational/cognitive relations.
+- The interpretation is taken from the earliest viable psychological structure.
+- Axioms are verified under the mapping.
+
+=========================================================
+EXAMPLE
+=========================================================
+
+INPUT THEORY T:
+Language: {Prefers(x,y)}
+Axioms:
+1. ∀x ¬Prefers(x,x)
+2. ∀x∀y∀z ((Prefers(x,y) ∧ Prefers(y,z)) → Prefers(x,z))
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Agent desires
+Interpretations:
+Prefers(x,y) := "agent finds x more desirable than y"
+
+=========================================================
+EXAMPLE OUTPUT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+
+MODEL:
+Domain: Agent desires
+Interpretations:
+Prefers(x,y) := "agent finds x more desirable than y"
+
+EXPLANATION:
+- Desire-preference ordering is irreflexive and transitive.
+- Thus the axioms are satisfied.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
