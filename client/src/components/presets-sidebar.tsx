@@ -1063,7 +1063,83 @@ EXPLANATION:
     name: "Conceptual Depth Map",
     functionId: 6,
     input: `<<<SEPARATOR>>>`,
-    instructions: `For each concept, compute its definitional depth (how many layers of definitions separate it from primitives). Rank concepts by depth.`
+    instructions: `COMPARE CONCEPTUAL SCHEMES: CONCEPTUAL DEPTH MAP (T₁, T₂)
+
+TASK:
+Compute the **definitional depth** of every concept (predicate) in the combined conceptual scheme of T₁ and T₂.
+
+Definitional depth = number of definitional layers separating a concept from the primitives.
+
+Depth is:
+- 0 for primitive predicates
+- 1 for predicates definable from primitives
+- 2 for predicates definable from depth-1 predicates
+- etc.
+
+This is a graph-theoretic computation using the dependency graph from the previous sub-function.
+
+INPUT:
+Input consists of:
+- The set of concepts: all predicates from T₁ and T₂
+- Their primitive/derived classification
+- Their definitional dependencies (edges S → R)
+- EXPLAIN toggle (ON or OFF)
+
+MECHANICAL DEPTH COMPUTATION:
+
+STEP 1 — INITIALIZE DEPTHS:
+For every predicate R:
+- If R is primitive, set depth(R) = 0
+- If R is derived, leave depth unset initially
+
+STEP 2 — ITERATIVE DEPTH ASSIGNMENT:
+Repeat the following until no assignments remain:
+
+For every derived predicate R:
+- Let its definition be: R(x̄) ↔ φ_R(x̄)
+- Let Dependencies(R) be the set of predicates appearing in φ_R
+
+If **all** predicates in Dependencies(R) already have assigned depths:
+- Assign: depth(R) = 1 + max(depth(S) for S in Dependencies(R))
+
+If ANY dependency lacks a depth, skip R for now.
+
+Continue iterating until all derived predicates with definable dependencies are assigned a finite depth.
+
+STEP 3 — HANDLE CYCLIC DEFINITIONS:
+If a predicate R is involved in a definitional cycle:
+- If the cycle includes a primitive → depth is finite
+- If the cycle contains **no** primitives → assign: depth(R) = ∞ (mark as "infinitely derived")
+
+SUCCESS CONDITION:
+
+A complete conceptual depth map must be produced listing the depth of every concept:
+- finite natural number or
+- ∞ for irreducibly cyclic definitions
+
+OUTPUT (EXPLAIN = OFF):
+
+CONCEPTUAL DEPTHS:
+Primitive predicates (depth 0):
+  P₁, P₂, ...
+
+Depth 1:
+  R₁, R₂, ...
+
+Depth 2:
+  S₁, S₂, ...
+
+Depth ∞ (cyclic, no primitive base):
+  C₁, C₂, ...
+
+OUTPUT (EXPLAIN = ON):
+
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Depth measures the number of definitional layers above primitives
+- Deeper concepts depend structurally on many other concepts
+- Cycles without primitives yield infinite definitional chains`
   },
   {
     id: "f6-bottleneck",
