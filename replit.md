@@ -12,7 +12,7 @@ The app connects to multiple LLM providers (branded as "Zhi 1-4" with no visible
 2. **Schema Equivalence** (2 Args) - Model-theoretic sameness check
 3. **Definitional Equivalence** (2 Args) - Bi-directional definitional translation with 4-part output
 4. **Model-Preserving Rewrite** - Canonical normalization (LANGUAGE + AXIOMS format)
-5. **Conservative Extension Analysis** - Analyze extensions for conservativity
+5. **Conservative Extension Analysis** (2 Args) - Check if T₂ is conservative over T₁
 6. **Compare Conceptual Schemes** (2 Args) - Compare primitive/derived classifications
 7. **Ontological Dependence** - Analyze primitive dependencies
 8. **Generate Alternative Conceptualizations** - Produce alternative axiom-sets
@@ -42,9 +42,16 @@ The app connects to multiple LLM providers (branded as "Zhi 1-4" with no visible
 - MANDATORY category enforcement - AI must use specified domain
 - Custom output: INTERPRETATION + WHY THIS WORKS
 
+### Function 5: Conservative Extension Analysis - Complete Rewrite
+- Now a TWO-ARGUMENT function (Box A = Base Theory T₁, Box B = Extended Theory T₂)
+- Correct definition: T₂ conservative iff it proves no NEW theorems in L₁
+- Explicit definability is SUFFICIENT but NOT NECESSARY for conservativity
+- 3 calibration examples in prompt to guide AI reasoning
+- Custom labels: "Base Theory" / "Extended Theory" instead of "System A/B"
+
 ### UI Changes
-- Functions 2, 3, 6 now have DUAL INPUT boxes (System A | System B)
-- Model selector shows only "Zhi 1-4" (no provider names visible)
+- Functions 2, 3, 5, 6 now have DUAL INPUT boxes
+- Model badge shows only "Zhi 1-4" (provider names completely hidden)
 - Function 11 removed (duplicate of Function 2)
 
 ### Technical Fixes
