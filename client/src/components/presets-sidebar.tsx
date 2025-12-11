@@ -991,7 +991,72 @@ EXPLANATION:
     name: "Primitive vs. Derived Classification",
     functionId: 6,
     input: `<<<SEPARATOR>>>`,
-    instructions: `List all concepts. Classify each as primitive or derived. Draw the dependency graph showing which concepts depend on which.`
+    instructions: `COMPARE CONCEPTUAL SCHEMES: PRIMITIVE VS. DERIVED CLASSIFICATION (T₁, T₂)
+
+TASK:
+Given two theories T₁ and T₂, list all concepts (all predicate symbols), determine which are **primitive** and which are **derived**, and construct a **dependency graph** showing how derived predicates depend on primitives.
+
+Concept classification must be based on explicit definability only. No semantic reasoning, no model-searching.
+
+INPUT:
+T₁ and T₂ with:
+- Predicates P₁,...,P_k (from T₁)
+- Predicates Q₁,...,Q_m (from T₂)
+- Axioms A₁ (from T₁) and A₂ (from T₂)
+- EXPLAIN toggle ON/OFF
+
+MECHANICAL CLASSIFICATION PROCEDURE:
+
+STEP 1 — COLLECT ALL CONCEPTS:
+Concept set C = predicates of T₁ ∪ predicates of T₂. Each concept is analyzed separately.
+
+STEP 2 — TEST DEFINABILITY:
+For each predicate symbol R(x̄):
+1. Attempt to find a syntactic definition φ_R in the language of (C − {R}): R(x̄) ↔ φ_R(x̄)
+   using the mechanical definability procedure used in Definitional Equivalence:
+   - Replace non-R predicates by placeholders
+   - Attempt unification of R(x̄) with a subformula
+   - No inference, no semantic reasoning
+2. If such a φ_R exists: Mark R as **derived**. Record definition: R(x̄) ↔ φ_R(x̄)
+3. Else: Mark R as **primitive**
+
+STEP 3 — BUILD DEPENDENCY GRAPH:
+For each derived predicate R with definition φ_R:
+1. Identify all predicate symbols S appearing in φ_R
+2. Add directed edges: S → R
+
+The resulting dependency graph shows how concepts build on one another.
+
+SUCCESS CONDITION:
+
+This procedure ALWAYS succeeds: every predicate is either:
+- primitive (no explicit definition found), or
+- derived (explicit definition found)
+
+OUTPUT (EXPLAIN = OFF):
+
+PRIMITIVES:
+{ list of all predicates classified as primitive }
+
+DERIVED:
+R₁(x̄) ↔ φ₁(x̄)
+R₂(x̄) ↔ φ₂(x̄)
+...
+
+DEPENDENCY GRAPH:
+S₁ → R₁
+S₂ → R₁
+S₃ → R₂
+...
+
+OUTPUT (EXPLAIN = ON):
+
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- A concept is primitive if no explicit definition is available using the other predicates
+- A concept is derived if an explicit definition is found
+- The dependency graph shows how complex concepts depend on simpler ones, revealing the structure of the conceptual scheme`
   },
   {
     id: "f6-depth-map",
