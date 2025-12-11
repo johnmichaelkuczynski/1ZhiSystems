@@ -1,0 +1,94 @@
+Completely delete all existing logic for the sub-function:
+"Primitive Swap"
+Do NOT change the main function "Theory Transformation".
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW SUB-FUNCTION BEHAVIOR: ARGUMENT-ORDER REVERSAL
+=========================================================
+
+This sub-function must NO LONGER perform a primitive swap.
+It must now perform the following automatic transformation:
+
+TASK:
+For every predicate symbol in the LANGUAGE with arity ≥ 2,
+reverse the order of its arguments everywhere it appears:
+- in the LANGUAGE declaration
+- in every AXIOM
+
+Unary predicates (arity = 1) remain unchanged.
+
+This sub-function must never require any user choices or target selection.
+
+=========================================================
+MODE 1 — EXPLAIN = OFF (NON-EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = OFF, output ONLY the transformed theory.
+
+OUTPUT FORMAT (STRICT):
+
+1. THE RESULT
+
+LANGUAGE: {<language with each predicate of arity ≥ 2 rewritten with reversed argument order>}
+
+ARGUMENT-ORDER REVERSAL:
+<list each predicate of arity ≥ 2 with its transformation, e.g. R(x,y) → R(y,x)>
+
+AXIOMS:
+1. <axiom 1 with all occurrences of predicates of arity ≥ 2 rewritten>
+2. <axiom 2 rewritten>
+3. ...
+
+Rules:
+- This is a PURE textual reversal of argument order for predicates of arity ≥ 2.
+- Do NOT add definitions.
+- Do NOT add or remove axioms.
+- Do NOT change the logical connectives or quantifiers.
+- Do NOT change variable names except as needed to maintain well-formedness when reversing arguments.
+- Unary predicates are left unchanged.
+
+=========================================================
+MODE 2 — EXPLAIN = ON (EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = ON, produce TWO sections:
+
+(1) THE RESULT block (same format as EXPLAIN=OFF)  
+(2) An EXPLANATION block
+
+EXPLANATION FORMAT:
+
+EXPLANATION:
+- List all predicates of arity ≥ 2 that were modified.
+- For each such predicate S, state the transformation, e.g. S(x1,...,xn) → S(xn,...,x1).
+- State that every occurrence of these predicates in the axioms was rewritten with reversed argument order.
+- State that no new axioms, definitions, or constraints were introduced and that unary predicates were unchanged.
+- Keep explanation short and formal (a few bullet points or 2–3 short paragraphs).
+
+=========================================================
+EXAMPLE (the app must follow this format)
+=========================================================
+
+Example INPUT:
+Language: {R(x,y), P(x)}
+Axioms:
+1. ∀x ¬R(x,x)
+2. ∀x∀y (R(x,y) → P(x))
+EXPLAIN = OFF
+
+Example OUTPUT:
+1. THE RESULT
+
+LANGUAGE: {R(y,x), P(x)}
+
+ARGUMENT-ORDER REVERSAL:
+R(x,y) → R(y,x)
+
+AXIOMS:
+1. ∀x ¬R(x,x)
+2. ∀x∀y (R(y,x) → P(x))
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

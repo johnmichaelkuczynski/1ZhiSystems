@@ -14,35 +14,32 @@ export interface Preset {
 const PRESETS: Preset[] = [
   // FUNCTION 1: Axiom-Set / Theory Transformation
   {
-    id: "f1-primitive-swap",
-    name: "Primitive Swap",
+    id: "f1-argument-reversal",
+    name: "Argument-Order Reversal",
     functionId: 1,
     input: ``,
-    instructions: `PRIMITIVE SWAP OPERATION:
+    instructions: `ARGUMENT-ORDER REVERSAL OPERATION:
 
-1. Identify the first two primitives S1 and S2 in the LANGUAGE (they MUST have the same arity).
-2. Perform a PURE SYMBOL SWAP:
-   - Replace every occurrence of S1 with S2
-   - Replace every occurrence of S2 with S1
-   - Do NOT change anything else (variables, quantifiers, connectives)
+For every predicate symbol in the LANGUAGE with arity ≥ 2, reverse the order of its arguments everywhere it appears (in LANGUAGE and all AXIOMS). Unary predicates remain unchanged.
 
 OUTPUT FORMAT:
 1. THE RESULT
 
-LANGUAGE: {<language with S1 and S2 swapped>}
+LANGUAGE: {<language with each predicate of arity ≥ 2 rewritten with reversed argument order>}
 
-SWAP MAP:
-S1 ↔ S2
+ARGUMENT-ORDER REVERSAL:
+<list each predicate of arity ≥ 2 with its transformation, e.g. R(x,y) → R(y,x)>
 
 AXIOMS:
-1. <axiom with S1↔S2 swapped>
+1. <axiom with all arity ≥ 2 predicates rewritten with reversed arguments>
 2. ...
 
 RULES:
-- This is a PURE TEXTUAL SWAP of names only
-- Do NOT add definitions or equivalences
-- Do NOT add/remove axioms
-- If arities differ, return original unchanged with note "(no valid swap — arity mismatch)"`
+- This is a PURE textual reversal of argument order for predicates of arity ≥ 2
+- Do NOT add definitions
+- Do NOT add or remove axioms
+- Do NOT change logical connectives or quantifiers
+- Unary predicates are left unchanged`
   },
   {
     id: "f1-signature-change",
