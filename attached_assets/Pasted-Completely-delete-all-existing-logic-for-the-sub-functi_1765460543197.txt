@@ -1,0 +1,144 @@
+Completely delete all existing logic for the sub-function:
+"GENERATE ALTERNATIVE CONCEPTUALIZATIONS: PHYSICALIZATION".
+
+Do NOT modify the parent function "Generate Alternative Conceptualizations".
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+PHYSICALIZATION (1 ARG)
+=========================================================
+
+TASK:
+Rewrite a theory T using ONLY **physical, spatial, or metric predicates**.
+
+The goal is to:
+1. Eliminate abstract primitives (psychological, normative, semantic,
+   theoretical, etc.).
+2. Replace them with primitives grounded in:
+      • geometry,
+      • topology,
+      • distance relations,
+      • spatial adjacency,
+      • physical interaction patterns.
+3. Rewrite all axioms accordingly.
+4. Remove any axiom that cannot be expressed in physicalized terms.
+
+This is a syntactic transformation only.  
+No external physical interpretation is allowed.
+
+=========================================================
+INPUT
+=========================================================
+
+A single theory T with:
+- LANGUAGE: L = {P₁, …, P_k}
+- AXIOMS: A
+- Partition of predicates into:
+      • Physicalizable: Φ₁, Φ₂, …
+      • Abstract / non-physicalizable: A₁, A₂, …
+- EXPLAIN toggle ON/OFF
+
+=========================================================
+MECHANICAL PHYSICALIZATION PROCEDURE
+=========================================================
+
+STEP 1 — DEFINE THE PHYSICAL CORE LANGUAGE
+-------------------------------------------
+New language:
+      L* = { all physicalizable predicates Φ_i }
+
+These include spatial, geometric, metric, or physically-embeddable
+relations.
+
+STEP 2 — ATTEMPT DEFINABILITY OF ABSTRACT PREDICATES
+------------------------------------------------------
+For each abstract predicate A:
+
+Attempt to find a syntactic definition in L*:
+
+      A(x̄) ↔ φ_A(x̄)
+
+with φ_A containing ONLY Φ_i.
+
+Use the standard definability procedure:
+- Replace non-physical predicates by placeholders,
+- Attempt pattern unification,
+- No inference or semantic reasoning.
+
+If definable:
+    Record definition: A → φ_A.
+If not definable:
+    Mark A as **eliminated**.
+
+STEP 3 — REWRITE AXIOMS
+------------------------
+For each axiom α:
+
+1. Replace each A(x̄) with φ_A(x̄) if definable.
+2. If α contains any abstract predicate A that is **not definable**
+   in physical terms:
+       α becomes **unstatable** and is removed.
+3. Remaining axioms must contain only Φ_i.
+
+The result is the physicalized axiom-set A*.
+
+STEP 4 — FORM THE PHYSICALIZED THEORY T*
+-----------------------------------------
+T* consists of:
+- LANGUAGE: L*
+- DEFINITIONS: all A(x̄) ↔ φ_A(x̄) obtained in Step 2
+- AXIOMS: A*
+
+=========================================================
+SUCCESS CONDITION
+=========================================================
+
+Physicalization ALWAYS returns a well-defined theory, even if many
+axioms and primitives are removed.
+
+The output theory is NOT required to be equivalent to the original—
+it is a physical re-expression of whatever can survive the mapping.
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+PHYSICALIZED LANGUAGE:
+{ Φ₁, Φ₂, ... }
+
+DEFINABLE ABSTRACT PREDICATES:
+A₁(x̄) ↔ φ₁(x̄)
+A₂(x̄) ↔ φ₂(x̄)
+...
+
+ELIMINATED ABSTRACT PREDICATES:
+{ A_i not definable }
+
+REWRITTEN AXIOMS:
+1. <physicalized axiom>
+2. ...
+
+REMOVED AXIOMS:
+1. <unstatable axiom>
+2. ...
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Physicalization keeps only spatial, metric, geometric, and
+  physically structured primitives.
+- Abstract predicates are replaced where possible or removed.
+- Axioms that depend on irreducible abstract notions are deleted.
+- The resulting theory expresses T’s content in purely physical terms.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
