@@ -1,0 +1,132 @@
+Completely delete all existing logic for the sub-function:
+"GENERATE ALTERNATIVE CONCEPTUALIZATIONS: INVERT ONTOLOGY".
+
+Do NOT modify the parent function "Generate Alternative Conceptualizations".
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+INVERT ONTOLOGY (1 ARG)
+=========================================================
+
+TASK:
+Given a theory T, identify the **most heavily derived concept**—
+the predicate that appears in the largest number of definitions or
+the largest number of definitional chains—and make it the **new
+primitive**.
+
+Then:
+1. Redefine the original primitives using this new base.
+2. Rewrite all axioms into a fully inverted theory T*.
+3. Output the inverted language, definitions, and rewritten axioms.
+
+Purely syntactic. No semantic reasoning.
+
+=========================================================
+INPUT
+=========================================================
+
+A single theory T with:
+- LANGUAGE: L = {P₁, …, P_k}
+- AXIOMS: A
+- The definitional dependency graph from earlier modules
+- EXPLAIN toggle ON/OFF
+
+=========================================================
+MECHANICAL INVERSION PROCEDURE
+=========================================================
+
+STEP 1 — COMPUTE DERIVATIONAL LOAD
+----------------------------------
+For each predicate R:
+    Load(R) = number of predicates S such that R ∈ Ancestors(S)
+
+The concept with maximum Load(R) is the **most heavily derived**.
+
+If tie: choose the first in lexical order.
+
+Call this predicate D.
+
+STEP 2 — MAKE D THE NEW PRIMITIVE
+----------------------------------
+New language starts with:
+    L* = { D }
+
+STEP 3 — REDEFINE ALL OTHER PRIMITIVES
+---------------------------------------
+For each primitive or derived predicate P ≠ D:
+
+Attempt to find a syntactic definition φ_P(D, …) such that:
+
+      P(x̄) ↔ φ_P(x̄)
+
+Procedure:
+- Replace all other primitives with placeholders.
+- Try to unify P(x̄) with a formula constructed only from:
+      D and variables and logical operators.
+
+If definability succeeds:
+    Add P(x̄) ↔ φ_P(x̄) to the definition list.
+
+If definability fails:
+    Mark P as **irreducible under inversion**.
+
+STEP 4 — BUILD THE INVERTED LANGUAGE
+------------------------------------
+The inverted language contains:
+- The new primitive D,
+- Any irreducible primitives,
+- No other primitives.
+
+STEP 5 — REWRITE THE AXIOMS
+----------------------------
+For each axiom in A:
+- Replace every predicate P with its definitional surrogate φ_P.
+- Axioms that contain irreducible primitives remain intact.
+- Axioms relying on unmappable predicates are marked as
+  **non-invertible**.
+
+STEP 6 — FORM THE INVERTED THEORY T*
+------------------------------------
+T* consists of:
+- New language L*
+- Redefined axioms A* (the rewritten axioms)
+- Explicit definition list for all definable predicates
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+NEW PRIMITIVE:
+D
+
+DEFINITIONS (Old → New):
+P₁(x̄) ↔ φ₁(x̄)
+P₂(x̄) ↔ φ₂(x̄)
+...
+
+IRREDUCIBLE PREDICATES:
+{ list }
+
+INVERTED AXIOMS:
+1. <rewritten axiom>
+2. ...
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- The most derived predicate becomes the new foundation.
+- All other predicates are defined relative to it.
+- The inverted ontology reverses the original conceptual direction,
+  exposing hidden structural asymmetries.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
