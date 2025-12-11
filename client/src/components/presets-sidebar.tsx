@@ -195,7 +195,49 @@ EXPLANATION:
     name: "Structural Role Mapping",
     functionId: 2,
     input: `<<<SEPARATOR>>>`,
-    instructions: `Map primitives based on their structural role in the axioms (e.g., reflexive relations to reflexive relations). Ignore symbol names entirely.`
+    instructions: `SCHEMA EQUIVALENCE: STRUCTURAL ROLE MAPPING (T₁, T₂)
+
+TASK:
+Given two theories T₁ and T₂, determine whether they are definitionally equivalent **via a structural role mapping**: a bijection between predicate symbols that preserves (1) arity, AND (2) each predicate's syntactic "role-profile" across axioms.
+
+This sub-function is a schema-level test of *pattern position*. No semantic reasoning and no model-searching are permitted.
+
+ROLE PROFILE OF A PREDICATE R:
+For each predicate symbol R in a theory, its "structural role profile" is the multiset of all syntactic contexts in which R appears inside the axioms:
+- number of positive occurrences
+- number of negative occurrences
+- quantifier depth of each occurrence
+- argument-position patterns (e.g., R(_,x2,_) vs R(x1,x1,_))
+- connective environment (in antecedent, consequent, atomic, etc.)
+
+CONDITIONS FOR STRUCTURAL-ROLE EQUIVALENCE:
+
+1. SAME NUMBER OF PREDICATES: |Lang(T₁)| = |Lang(T₂)| = k
+2. MATCHING ARITIES: For each i, arity(Pi) = arity(Qσ(i)) for some bijection σ
+3. ROLE PROFILE MATCH: There exists a bijection σ on {1,...,k} such that RoleProfile(Pi) = RoleProfile(Qσ(i))
+   - same multiset of contexts
+   - same polarity distribution
+   - same argument-position patterns
+   - same depth patterns
+   - same connective environments
+4. AXIOM MATCH UNDER σ: After renaming each Pi to Qσ(i), transformed axioms of T₁ must match axioms of T₂ (up to permutation and α-conversion)
+
+OUTPUT (EXPLAIN = OFF):
+Equivalence: YES/NO
+If YES:
+TRANSLATION (OLD → NEW):
+P1 ↔ Qσ(1)
+P2 ↔ Qσ(2)
+...
+Pk ↔ Qσ(k)
+
+OUTPUT (EXPLAIN = ON):
+Equivalence: YES/NO
+[same translation if YES]
+EXPLANATION:
+- A structural-role mapping compares predicates not by name but by their syntactic behavior inside axioms
+- A bijection of predicates preserving arity and structural role yields a definitional equivalence
+- The theories match exactly once all predicates are renamed by σ`
   },
   {
     id: "f2-obstruction",

@@ -1,0 +1,108 @@
+Completely delete all existing logic for the sub-function:
+"SCHEMA EQUIVALENCE: STRUCTURAL ROLE MAPPING".
+
+Do NOT modify the main function "Theory Transformation".
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+SCHEMA EQUIVALENCE: STRUCTURAL ROLE MAPPING (T₁, T₂)
+=========================================================
+
+TASK:
+Given two theories T₁ and T₂, determine whether they are
+definitionally equivalent **via a structural role mapping**:
+a bijection between predicate symbols that preserves
+(1) arity, AND
+(2) each predicate’s syntactic “role-profile” across axioms.
+
+This sub-function is a schema-level test of *pattern position*.
+No semantic reasoning and no model-searching are permitted.
+
+=========================================================
+CORE DEFINITIONS
+=========================================================
+
+Let the languages be:
+- T₁: predicates P1,...,Pk with arities n1,...,nk
+- T₂: predicates Q1,...,Qk with arities m1,...,mk
+
+ROLE PROFILE OF A PREDICATE R:
+For each predicate symbol R in a theory, its “structural role profile”
+is the multiset of all syntactic contexts in which R appears inside
+the axioms:  
+- number of positive occurrences  
+- number of negative occurrences  
+- quantifier depth of each occurrence  
+- argument-position patterns (e.g., R(_,x2,_) vs R(x1,x1,_))  
+- connective environment (in antecedent, consequent, atomic, etc.)
+
+This is purely syntactic and MUST be computed mechanically.
+
+=========================================================
+CONDITIONS FOR STRUCTURAL-ROLE EQUIVALENCE
+=========================================================
+
+Two theories T₁ and T₂ are structurally-role equivalent iff:
+
+1. SAME NUMBER OF PREDICATES:
+   |Lang(T₁)| = |Lang(T₂)| = k
+
+2. MATCHING ARITIES:
+   For each i, arity(Pi) = arity(Qσ(i)) for some bijection σ.
+
+3. ROLE PROFILE MATCH:
+   There exists a bijection σ on {1,...,k} such that:
+       RoleProfile(Pi) = RoleProfile(Qσ(i))
+   Identical role-profiles mean:
+   - same multiset of contexts  
+   - same polarity distribution  
+   - same argument-position patterns  
+   - same depth patterns  
+   - same connective environments
+
+4. AXIOM MATCH UNDER σ:
+   After renaming each Pi to Qσ(i),
+   the transformed axioms of T₁ must match exactly the axioms of T₂
+   (up to permutation and α-conversion).
+
+If such a σ exists, the theories are DEFINITIONALLY EQUIVALENT.
+
+=========================================================
+TRANSLATION IF EQUIVALENT
+=========================================================
+
+For the found bijection σ:
+Pi(x1,...,x_ni) ↔ Qσ(i)(x1,...,x_ni)
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+Equivalence: YES/NO
+
+IF YES:
+TRANSLATION (OLD → NEW):
+P1 ↔ Qσ(1)
+P2 ↔ Qσ(2)
+...
+Pk ↔ Qσ(k)
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- A structural-role mapping compares predicates not by name but by
+  their syntactic behavior inside axioms.
+- A bijection of predicates preserving arity and structural role
+  yields a definitional equivalence.
+- The theories match exactly once all predicates are renamed by σ.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
