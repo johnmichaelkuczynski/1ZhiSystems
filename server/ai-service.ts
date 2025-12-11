@@ -72,7 +72,15 @@ Then briefly explain the reasoning.`,
   
   "Interpret Canonical Meaning": `Identify the intended interpretations of the primitive symbols in the input theory. For each primitive, determine what it is meant to represent in the most natural or canonical interpretation. Then restate all axioms using explicit, natural-language primitives that make the meaning transparent. The goal is to reveal what the theory is really about.`,
   
-  "Find an Interpretation": `Find a practical application of the input axiom system in mathematics, science (including computer science), or engineering. Map each primitive symbol to concrete objects and relations from a real scientific or engineering domain. Show how each axiom becomes a true, useful statement in that application. Provide a model that a working mathematician, scientist, or engineer would recognize as genuinely applicable to their field.`,
+  "Find an Interpretation": `Find a STRICTLY CORRECT interpretation (model) for the input axiom system. Requirements:
+
+1. DEFINE THE DOMAIN: Specify the exact set of objects the variables range over.
+2. MAP EACH PRIMITIVE: For every predicate, function, and constant, state precisely what it denotes in the model.
+3. VERIFY EACH AXIOM: For EVERY axiom, provide an explicit proof or demonstration that it is TRUE in this model. Do not say "this corresponds to" or "this captures" - prove it is actually true.
+4. STRICT CORRECTNESS: The interpretation must make ALL axioms literally true, not "approximately true" or "true in spirit."
+5. IF IMPOSSIBLE: If no strictly correct interpretation exists in the requested domain, explicitly state this and explain which axiom(s) cannot be satisfied. Do not fabricate a semi-correct interpretation.
+
+Prefer interpretations from mathematics, science, computer science, or engineering. The model must be one that a working professional would recognize as genuinely applicable.`,
   
   "Determine Equivalence": `Determine whether the two axiom systems generate exactly the same theorems. Provide a verdict (EQUIVALENT or NOT EQUIVALENT) with detailed analysis:
 
@@ -367,24 +375,32 @@ INSTRUCTIONS:
 
 For each primitive symbol, identify what it is intended to represent in the most natural interpretation. Then restate all axioms in explicit natural language that reveals what the theory is really about.`,
 
-  "Find an Interpretation": `Find a concrete model/interpretation for the axiom system below.
+  "Find an Interpretation": `Find a STRICTLY CORRECT interpretation (model) for the axiom system below.
 
 <<<INPUT>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-TASK:
-1. Identify the primitives (predicates, functions, constants) in the input - extract them from formal notation or natural language.
-2. Choose a concrete domain of objects from the requested field (or the most natural field if none specified).
-3. Map each primitive symbol to a specific relation/function/object in that domain.
-4. Verify that each axiom becomes a TRUE statement under this interpretation.
-5. Present the interpretation clearly with:
-   - Domain specification
-   - Symbol-to-meaning mapping
-   - Verification that each axiom holds
+CRITICAL REQUIREMENT: The interpretation must be STRICTLY CORRECT. Every axiom must be LITERALLY TRUE in the model - not "approximately true," "true in spirit," or "captures the essence." If you cannot find a strictly correct interpretation, you must say so.
 
-If the user specifies a field (e.g., "from micro-economics"), find an interpretation from that field. If no field is specified, choose the most illuminating interpretation from mathematics, physics, economics, philosophy, computer science, or any appropriate domain.`,
+TASK:
+1. IDENTIFY PRIMITIVES: Extract all predicates, functions, and constants from the input.
+2. DEFINE THE DOMAIN: Specify the EXACT set of objects that variables range over.
+3. MAP EACH PRIMITIVE: For every symbol, state PRECISELY what it denotes in the model.
+4. PROVE EACH AXIOM TRUE: For EVERY axiom, provide an explicit verification that it is TRUE in this model:
+   - State the axiom
+   - Substitute the interpretations
+   - Show why it holds in the domain
+   - Do NOT say "this corresponds to" or "this captures" - PROVE it is true
+5. STRICT CORRECTNESS CHECK: Confirm that ALL axioms are literally satisfied, not just "mostly" or "approximately."
+
+IF NO STRICTLY CORRECT INTERPRETATION EXISTS:
+- State clearly: "No strictly correct interpretation exists in [domain] because..."
+- Identify which axiom(s) cannot be satisfied and why
+- Do NOT fabricate a semi-correct interpretation
+
+If the user specifies a field, find an interpretation from that field. If none specified, choose the most natural domain from mathematics, physics, economics, or computer science.`,
 
   "Determine Equivalence": `Compare the two axiom systems below and determine their logical relationship.
 
