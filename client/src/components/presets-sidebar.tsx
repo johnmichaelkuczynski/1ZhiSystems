@@ -748,7 +748,79 @@ EXPLANATION:
     name: "New Primitives Test",
     functionId: 5,
     input: `<<<SEPARATOR>>>`,
-    instructions: `Analyze whether adding the specified new primitives changes any theorems in the original vocabulary. Report conservative or non-conservative with justification.`
+    instructions: `CONSERVATIVE EXTENSION ANALYSIS (NEW PRIMITIVES TEST)
+
+TASK:
+Given a base theory T₁ and an extended theory T₂ formed by adding NEW primitive symbols (predicates, functions, or constants), determine whether the extension is **conservative**:
+
+Adding the new primitives must NOT allow proving any new theorems in the **original vocabulary** of T₁.
+
+Only the new symbols differ; no new axioms are considered here.
+
+INPUT:
+Two theories:
+
+T₁ (base theory):
+- LANGUAGE: L₁
+- AXIOMS: A₁
+
+T₂ (extension):
+- LANGUAGE: L₂ = L₁ ∪ {new primitives}
+- AXIOMS: A₁ (same axioms; only the language is expanded)
+
+EXPLAIN toggle (ON or OFF)
+
+MECHANICAL CONSERVATIVITY TEST:
+
+STEP 1 — IDENTIFY NEW PRIMITIVES:
+New primitives = L₂ − L₁
+
+STEP 2 — CHECK FOR DEFINABILITY:
+For each new primitive symbol S:
+Attempt to find a syntactic definition φ_S in the language L₁ such that: S(x̄) ↔ φ_S(x̄)
+
+Matching must be purely syntactic:
+- Scan axioms of T₂ (which equal those of T₁)
+- Attempt to unify S(x̄) with any subformula φ_S(x̄)
+- No inference, no semantic reasoning
+
+If such a φ_S is found for ALL S: The extension is conservative.
+
+STEP 3 — CHECK FOR NEW THEOREMS IN L₁:
+Attempt to derive any formula ψ in L₁ that was NOT derivable in T₁ but becomes derivable in T₂
+
+Mechanically:
+- Replace every occurrence of each S(x̄) with φ_S(x̄) anywhere it occurs
+- If the resulting formula is ALWAYS reducible to a formula already provable from A₁, then no new theorems appear
+- If, after substitution, ANY ψ in L₁ becomes derivable that was not previously derivable, the extension is NON-conservative
+
+This is a syntactic substitution test only.
+
+SUCCESS CONDITION:
+
+The extension T₂ is CONSERVATIVE over T₁ iff:
+- Every new primitive symbol S has a syntactic definition φ_S in L₁
+- Replacing S by φ_S never produces new theorems in L₁
+
+Otherwise: The extension is NON-CONSERVATIVE
+
+OUTPUT (EXPLAIN = OFF):
+Conservative: YES/NO
+If YES:
+DEFINITIONS:
+S₁(x̄) ↔ φ₁(x̄)
+S₂(x̄) ↔ φ₂(x̄)
+...
+If NO:
+Conservative: NO
+
+OUTPUT (EXPLAIN = ON):
+Conservative: YES/NO
+[same definitions if YES]
+EXPLANATION:
+- The test checks whether each introduced primitive is definable using only the old vocabulary
+- If definable, the extension cannot add new theorems in L₁
+- If any primitive lacks a definition or yields new L₁-theorems, the extension is non-conservative`
   },
   {
     id: "f5-new-axioms",
