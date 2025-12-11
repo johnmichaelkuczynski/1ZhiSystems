@@ -60,7 +60,7 @@ Then briefly explain the reasoning.`,
   
   "Definitional Equivalence": `Determine whether the two theories are definitionally equivalent: each theory can explicitly define the other's primitives, and the axioms become identical under those definitions. Show the symbol mapping and translated axioms.`,
   
-  "Model-Preserving Rewrite": `Rewrite the input theory using a completely different vocabulary and axiom set, but such that every model of the original is isomorphic to a model of the new theory and vice versa. The two theories must be categorically equivalent. Do not use conservative extensions — the output must not be a definitional extension.`,
+  "Model-Preserving Rewrite": `Rewrite the input theory into canonical normalized form with the exact same class of models. Remove unnecessary primitives, use minimal vocabulary, output as LANGUAGE + numbered AXIOMS list.`,
   
   "Conservative Extension Analysis": `Analyze whether adding the given new axioms or primitives to the base theory constitutes a conservative extension (no new theorems in the original language are provable). Answer YES or NO and prove it: either exhibit a proof of a new old-language theorem or prove independence using a model where the extension fails.`,
   
@@ -436,14 +436,52 @@ A2 under R ↦ <: ∀x ¬(x < x) — matches B2
 - Never cite model theory jargon ("Henkin expansion", "Beth definability", etc.)
 - If NOT equivalent, explain which direction of definability fails`,
 
-  "Model-Preserving Rewrite": `Rewrite the theory below while preserving exactly the same class of models.
+  "Model-Preserving Rewrite": `YOUR TASK: Rewrite the input theory into CANONICAL NORMALIZED FORM.
+
+The output must have the EXACT SAME CLASS OF MODELS as the input.
 
 <<<INPUT>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-Analyze which primitives can be eliminated or combined. Produce a rewritten theory with different primitives but identical models.`,
+=== NORMALIZATION RULES ===
+
+1. REMOVE all unnecessary primitives (e.g., constants like Zero) — replace with existential axioms
+2. PRESERVE only essential vocabulary required to characterize the model class
+3. REWRITE axioms in clean, minimal form: NO prose, NO commentary, NO explanations
+4. OUTPUT as LANGUAGE declaration + numbered AXIOMS list
+5. ALL quantifiers must appear explicitly using standard first-order syntax
+6. OPTIMIZE for AI theorem-normalization: minimal vocabulary, no redundancy, fully canonical
+
+=== OUTPUT FORMAT (use exactly this structure) ===
+
+LANGUAGE: {Predicate1(args), Predicate2(args), ...}
+
+AXIOMS:
+1. [first axiom]
+2. [second axiom]
+3. [third axiom]
+...
+
+=== EXAMPLE ===
+
+Input: Theory with Zero constant and Less relation
+Output:
+
+LANGUAGE: {Less(x,y)}
+
+AXIOMS:
+1. ∀x ¬Less(x,x)
+2. ∀x∀y∀z ((Less(x,y) ∧ Less(y,z)) → Less(x,z))
+3. ∀x∀y (x ≠ y → (Less(x,y) ∨ Less(y,x)))
+4. ∃m ∀x ¬Less(x,m)
+
+=== HARD REQUIREMENTS ===
+- NO prose or explanations in the output
+- NO commentary about what you did
+- JUST the LANGUAGE and AXIOMS
+- Each axiom on its own numbered line`,
 
   "Conservative Extension Analysis": `Analyze whether the extension is conservative.
 
