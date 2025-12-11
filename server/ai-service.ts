@@ -50,7 +50,7 @@ export interface AIResponse {
 }
 
 const DEFAULT_INSTRUCTIONS: Record<string, string> = {
-  "Axiom-Set / Theory Transformation": `Transform the input axiomatic theory into a radically different but logically equivalent form. You may eliminate primitives, introduce new ones, change arity, switch from predicates to functions or vice versa, or completely invert the conceptual foundation. The new theory must prove exactly the same theorems and have isomorphic models. Do not keep eliminated primitives anywhere in the output, not even in definitions or comments. If impossible, explain why.`,
+  "Axiom-Set / Theory Transformation": `Transform the input statement-set (describing a model/interpretation) into a different but isomorphic model. The system will detect what axiom-set the input satisfies, then produce a completely different interpretation that satisfies the same axioms. The new model must use a different domain and different predicate meanings while preserving the same structural pattern.`,
   
   "Schema Equivalence": `Determine whether the two input theories (or schemas) are logically equivalent: i.e., they prove exactly the same theorems in all models. Answer with one of:
 — YES, they are equivalent (bi-interpretable or mutually embeddable)
@@ -324,39 +324,71 @@ Rewrite these instructions to be PERFECT and PRECISE while staying as close to t
 }
 
 const FUNCTION_PROMPTS: Record<string, string> = {
-  "Axiom-Set / Theory Transformation": `Transform the theory below according to the instructions.
-The new theory must have exactly the same models (up to isomorphism) as the original.
-Any primitive asked to be eliminated must disappear completely from the final output.
+  "Axiom-Set / Theory Transformation": `YOUR TASK: Model-to-Model Transformation
 
-You have these paradigms to guide your style:
+You are given a STATEMENT-SET describing an interpretation (a model). Your job is to:
+1. Parse the input and understand the domain, symbol meanings, and statements
+2. Detect which standard axiom-pattern the input model satisfies
+3. Produce a DIFFERENT model that satisfies the same axiom-pattern
+4. The new model must use a different domain and different predicate interpretation
 
-Paradigm 1 – Betweenness → Line
-Input: Primitives: Point(x) Between(x,y,z)
-Instructions: Rewrite using "Line(x,y)" as the sole primitive.
-Output:
-Primitive: Line(x,y)
-Axioms:
-1. ∀x∀y [Line(x,y) → x ≠ y]
-2. ∀x∀y∀z [Line(x,y) ∧ Line(y,z) → Line(x,z)]
-3. ∀x∀y [x ≠ y → ∃z (Line(x,z) ∧ Line(z,y))]
-
-Paradigm 2 – Membership → Subset
-Input: Primitives: Set(x) ElementOf(a,x)
-Instructions: Eliminate ElementOf completely, use only Subset(A,B)
-Output:
-Primitive: Subset(A,B)
-Axioms:
-1. ∀A∀B∀C [Subset(A,B) ∧ Subset(B,C) → Subset(A,C)]
-2. ∀A∀B [Subset(A,B) ∧ Subset(B,A) → A = B]
-3. ∃E ∀X ¬Subset(X,E)
-
-USER THEORY:
 <<<INPUT>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-Output the new primitives and axioms. If you must make choices, state them clearly.`,
+=== PROCEDURE ===
+
+Step 1: DETECT THE AXIOM PATTERN
+Look at the statements provided. What axiom-set do they satisfy?
+Common patterns:
+- Strict total order: irreflexive, transitive, trichotomous
+- Partial order: reflexive, antisymmetric, transitive
+- Equivalence relation: reflexive, symmetric, transitive
+- Successor structure: discrete linear ordering
+- Group-like: identity, inverse, associativity
+- Lattice: joins and meets exist
+- Tree: unique paths between nodes
+
+Step 2: SELECT A DIFFERENT DOMAIN
+Choose a domain completely different from the input. Examples:
+- If input uses "people in a line" → use natural numbers, geometric points, or time instants
+- If input uses "numbers" → use words, tasks, or physical objects
+- If input uses "sets" → use programs, regions, or organizational units
+
+Step 3: DEFINE NEW INTERPRETATIONS
+For each predicate/function symbol, give a new meaning in the new domain that preserves the axiom pattern.
+
+Step 4: TRANSLATE ALL STATEMENTS
+Rewrite each input statement as a true statement in the new model.
+
+=== OUTPUT FORMAT ===
+
+**DETECTED AXIOM PATTERN**
+[Name the pattern and list the axioms satisfied]
+
+**INPUT MODEL (Summary)**
+Domain: [what was given]
+Symbols: [meanings given]
+
+**NEW MODEL (Interpretation B)**
+Domain: [your new domain - must be different from input]
+[Symbol 1]: "[new meaning in new domain]"
+[Symbol 2]: "[new meaning in new domain]"
+
+**TRANSLATED STATEMENTS**
+[For each input statement, show the corresponding true statement in the new model]
+
+**VERIFICATION**
+[Brief confirmation that the new model satisfies the same axiom pattern]
+
+=== RULES ===
+1. The new model MUST be different from the input (different objects, different realization)
+2. The new model MUST satisfy the same axiom-set as the input
+3. The models must be structurally isomorphic (same model-theoretic type)
+4. If input is ambiguous, choose the simplest consistent axiom-pattern
+5. If statements are ill-formed, apply minimal repair and proceed
+6. NEVER return null or fail - always produce a valid transformation`,
 
   "Schema Equivalence": `Determine if the two theories below are schema-equivalent (same up to renaming of symbols).
 

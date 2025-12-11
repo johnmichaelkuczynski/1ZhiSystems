@@ -1,0 +1,54 @@
+REPLIT AGENT INSTRUCTIONS — REPLACE FUNCTION 1 COMPLETELY
+
+1. Go to the code file that implements Function 1 (Axiom-Set / Theory Transformation).
+Do not modify; delete the entire logic body of Function 1.
+
+2. Replace Function 1 with the following specification:
+
+NEW FUNCTION 1 — MODEL-TO-MODEL TRANSFORMATION
+Input: A statement-set describing an interpretation (domain + meanings of symbols + atomic or negated atomic statements).
+Goal: Produce a different interpretation that is
+
+a true model of the same axiom-set that the input model satisfies,
+
+structurally isomorphic (same model-theoretic type),
+
+uses a different domain and different predicate interpretation,
+
+produces a new statement-set of true sentences in the new interpretation.
+
+Procedure:
+
+Parse the input statement-set.
+
+Determine which standard axiom-pattern the input satisfies (e.g., strict order, partial order, equivalence relation, successor structure, group-like structure, etc.).
+
+Select a canonical but different domain for that pattern (e.g., integers, naturals, ordered pairs, geometric points).
+
+Define new interpretations of each predicate/function symbol in a way that satisfies the same axiom-pattern.
+
+Generate a new statement-set: rewrite all original statements as true statements about the new domain and new interpretation.
+
+Guarantee the new model is not identical to the input model (different objects or different realization of predicates).
+
+Output:
+
+The new domain.
+
+The new interpretation of each symbol.
+
+The list of translated statements that are true in the new model.
+
+The function must always succeed, even if input is partial:
+
+If detection is ambiguous, choose the simplest consistent axiom-pattern.
+
+If statements are ill-formed, apply minimal repair.
+
+Never return null.
+
+3. Ensure the UI label “Axiom-Set / Theory Transformation (1 Arg)” remains unchanged, but it should now invoke the new model-to-model transformation logic.
+
+4. Do not touch the other 10 functions.
+Only replace Function 1. 
+
