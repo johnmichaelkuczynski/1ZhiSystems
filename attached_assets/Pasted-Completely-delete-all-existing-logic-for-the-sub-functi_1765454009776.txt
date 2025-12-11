@@ -1,0 +1,113 @@
+Completely delete all existing logic for the sub-function:
+"Vocabulary Expansion".
+Do NOT modify the main Theory Transformation function.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION: Vocabulary Expansion
+=========================================================
+
+TASK:
+Introduce ONE new helper predicate H that abbreviates the most common
+pattern in the axioms, and rewrite the axioms to use H.
+
+STEPS:
+1. Parse all axioms and count occurrences of:
+      • every binary pattern of the form R(x,y)
+      • every unary pattern of the form P(x)
+
+2. Select the pattern with the highest frequency.  
+   If there is a tie, choose a binary one.
+
+3. Introduce a new primitive:
+      H(x,y)   if the chosen pattern is binary
+      H(x)     if the chosen pattern is unary
+
+4. Add a DEFINITION:
+      H(args) ↔ <chosen pattern>
+
+5. Rewrite every axiom by replacing every instance of the chosen pattern
+   with H.
+
+6. Do NOT eliminate the original primitive.
+   Do NOT simplify other parts of the formula.
+   Do NOT remove or modify axioms.
+   Never reject or complain about the input.
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+LANGUAGE: { <original primitives>, H(args) }
+
+DEFINITION:
+H(args) ↔ <original pattern>
+
+AXIOMS:
+1. <axiom with pattern replaced by H>
+2. <next axiom>
+...
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+<same block as EXPLAIN = OFF>
+
+EXPLANATION:
+- State which pattern was most frequent.
+- State the definition of H.
+- State that every occurrence of the pattern was replaced by H.
+- Keep it short and formal.
+
+=========================================================
+EXAMPLE — EXPLAIN = OFF
+=========================================================
+
+INPUT:
+Language: {A(x,y), B(x), C(x,y)}
+Axioms:
+1. ∀x∀y (A(x,y) → B(x))
+2. ∀x∀y∀z ((A(x,y) ∧ A(y,z)) → A(x,z))
+3. ∀x∀y (C(x,y) → ¬A(y,x))
+EXPLAIN = OFF
+
+OUTPUT:
+1. THE RESULT
+
+LANGUAGE: {A(x,y), B(x), C(x,y), H(x,y)}
+
+DEFINITION:
+H(x,y) ↔ A(x,y)
+
+AXIOMS:
+1. ∀x∀y (H(x,y) → B(x))
+2. ∀x∀y∀z ((H(x,y) ∧ H(y,z)) → H(x,z))
+3. ∀x∀y (C(x,y) → ¬H(y,x))
+
+=========================================================
+EXAMPLE — EXPLAIN = ON
+=========================================================
+
+1. THE RESULT
+
+LANGUAGE: {A(x,y), B(x), C(x,y), H(x,y)}
+
+DEFINITION:
+H(x,y) ↔ A(x,y)
+
+AXIOMS:
+1. ∀x∀y (H(x,y) → B(x))
+2. ∀x∀y∀z ((H(x,y) ∧ H(y,z)) → H(x,z))
+3. ∀x∀y (C(x,y) → ¬H(y,x))
+
+EXPLANATION:
+A(x,y) appears most frequently in the axioms, so H(x,y) was added
+as a helper predicate. All occurrences of A(x,y) were replaced by H(x,y),
+yielding a cleaner equivalent formulation of the theory.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================

@@ -85,7 +85,30 @@ AXIOMS:
     name: "Vocabulary Expansion",
     functionId: 1,
     input: ``,
-    instructions: `Introduce a new helper primitive that captures the most common pattern in the axioms. Rewrite the axioms to use this new primitive, making them shorter and clearer.`
+    instructions: `VOCABULARY EXPANSION OPERATION:
+
+Introduce ONE new helper predicate H that abbreviates the most common pattern in the axioms.
+
+STEPS:
+1. Count occurrences of every binary pattern R(x,y) and unary pattern P(x) in axioms.
+2. Select the pattern with highest frequency. If tie, choose binary.
+3. Introduce new primitive: H(x,y) if binary, H(x) if unary.
+4. Add DEFINITION: H(args) ↔ <chosen pattern>
+5. Replace every instance of chosen pattern with H in all axioms.
+6. Do NOT eliminate the original primitive.
+7. Do NOT simplify other parts of formulas.
+
+OUTPUT FORMAT:
+1. THE RESULT
+
+LANGUAGE: { <original primitives>, H(args) }
+
+DEFINITION:
+H(args) ↔ <original pattern>
+
+AXIOMS:
+1. <axiom with pattern replaced by H>
+2. ...`
   },
   {
     id: "f1-non-iso-equivalent",
