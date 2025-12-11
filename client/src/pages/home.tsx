@@ -23,7 +23,7 @@ export default function Home() {
     { id: 5, title: "Conservative Extension Analysis (Two Arguments)", description: "Analyze extensions for conservativity.", dualInput: false },
     { id: 6, title: "Compare Conceptual Schemes (Two Arguments)", description: "Compare primitive/derived classifications.", dualInput: false },
     { id: 7, title: "Ontological Dependence (One Argument)", description: "Analyze primitive dependencies.", dualInput: false },
-    { id: 8, title: "Generate Alternative Conceptualizations (One Argument)", description: "Generate equivalent conceptualizations.", dualInput: false },
+    { id: 8, title: "Generate Alternative Conceptualizations (One Argument)", description: "Produce alternative axiom-sets whose most natural interpretations are also interpretations of the input theory.", dualInput: false },
     { id: 9, title: "Identify Representational Biases (One Argument)", description: "Detect biases in primitive choices.", dualInput: false },
     { id: 10, title: "Find an Interpretation (One Argument)", description: "Find a true model for the axiom system.", dualInput: false },
     { id: 11, title: "Determine Equivalence (Two Arguments)", description: "Compare two systems for theorem equivalence.", dualInput: true },

@@ -98,9 +98,14 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
   return (
     <div className="w-full border-b border-border py-8 px-6 last:border-0" data-testid={`function-row-${id}`}>
       <div className="mb-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <Badge variant="outline" className="font-mono text-xs rounded-sm">FUNC {id}</Badge>
-          <h3 className="text-lg font-medium tracking-tight text-foreground">{title}</h3>
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center gap-3">
+            <Badge variant="outline" className="font-mono text-xs rounded-sm">FUNC {id}</Badge>
+            <h3 className="text-lg font-medium tracking-tight text-foreground">{title}</h3>
+          </div>
+          {description && (
+            <p className="text-sm text-muted-foreground ml-12">{description}</p>
+          )}
         </div>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
