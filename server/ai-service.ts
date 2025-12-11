@@ -238,6 +238,16 @@ async function refineInstructions(
     return DEFAULT_INSTRUCTIONS[functionName] || "Perform the standard transformation for this function.";
   }
 
+  // Skip refinement for detailed procedural specifications (sub-function specs)
+  // These are already fully specified and should not be modified
+  if (userInstructions.includes("MECHANICAL") || 
+      userInstructions.includes("STEP 1 —") || 
+      userInstructions.includes("STEP 1 --") ||
+      userInstructions.includes("SUCCESS CONDITION") ||
+      userInstructions.includes("OUTPUT FORMAT")) {
+    return userInstructions;
+  }
+
   const prompt = `FUNCTION: ${functionName}
 
 USER'S THEORY/INPUT:
