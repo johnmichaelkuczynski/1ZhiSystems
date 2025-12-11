@@ -699,7 +699,7 @@ The constant Zero is eliminated by replacing it with an existential claim assert
 - No model constructions or domain examples
 - NEVER fail - always produce a valid rewrite`,
 
-  "Conservative Extension Analysis": `YOUR TASK: Determine whether T₂ (Box B) is a CONSERVATIVE EXTENSION of T₁ (Box A) relative to the base language L₁.
+  "Conservative Extension Analysis": `YOUR TASK: Determine whether T₂ (Box B) is a CONSERVATIVE EXTENSION of T₁ (Box A).
 
 === BASE THEORY T₁ (Box A) ===
 <<<SYSTEM_A>>>
@@ -711,60 +711,78 @@ INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
 === DEFINITION ===
-T₂ is a conservative extension of T₁ iff for every sentence φ in the language L₁:
-    If T₂ ⊢ φ, then T₁ ⊢ φ.
+T₂ is a conservative extension of T₁ iff:
+1. T₁'s language is a subset of T₂'s language.
+2. T₂ proves no NEW theorems in the language of T₁ that T₁ does not already prove.
+3. Any new axioms in T₂ restrict only the interpretation of NEW symbols.
 
-In other words: adding new symbols and axioms in T₂ must NOT allow proving any NEW theorems about the old symbols from T₁.
+This is NOT definitional equivalence. It is a ONE-DIRECTION preservation check.
 
-=== CRITICAL RULES ===
-1. Box A is ALWAYS the base theory T₁ in language L₁. Never infer or guess it.
-2. Box B is ALWAYS the extended theory T₂ in language L₂ ⊇ L₁. It includes T₁'s axioms plus new ones.
-3. Explicit definability is SUFFICIENT for conservativity but NOT NECESSARY.
-4. Conservativity is determined ONLY by whether T₂ forces new theorems in the old language L₁.
-5. NEVER claim conservativity merely because a new symbol "seems definable."
+=== CHECK EXPLAIN MODE ===
+If the instructions contain "EXPLAIN = ON" or the explain toggle is enabled, use MODE 2.
+Otherwise, use MODE 1.
 
-=== CALIBRATION EXAMPLES ===
+=== MODE 1: EXPLAIN OFF (default) ===
 
-EXAMPLE 1 (YES — conservative)
-BOX A: LANGUAGE: {R(x,y)}, AXIOMS: ∀x ∃y R(x,y)
-BOX B: LANGUAGE: {R(x,y), f(x)}, AXIOMS: ∀x ∃y R(x,y), ∀x R(x,f(x))
-→ YES: Base theory already guarantees a witness. Adding f(x) just chooses one. No new theorems in {R} become provable.
+FORMAT:
 
-EXAMPLE 2 (NO — NOT conservative)
-BOX A: LANGUAGE: {Less(x,y)}, AXIOMS: ∀x ¬Less(x,x), ∀x∀y∀z ((Less(x,y) ∧ Less(y,z)) → Less(x,z))
-BOX B: LANGUAGE: {Less(x,y), Zero}, AXIOMS: same + ∀x ¬Less(x,Zero), ∀x (x ≠ Zero → Less(Zero,x))
-→ NO: Box B proves ∃m ∀x (x ≠ m → Less(m,x)), forcing a least element. Box A allows models with no least element (e.g., integers). T₂ proves new theorems in the old language.
-
-EXAMPLE 3 (YES — conservative even with new predicates)
-BOX A: LANGUAGE: {E(x,y)}, AXIOMS: ∀x∀y (E(x,y) → E(y,x))
-BOX B: LANGUAGE: {E(x,y), Sym(x), Anti(x)}, AXIOMS: same + new axioms about Sym/Anti
-→ YES: Any symmetric relation E can be expanded by interpreting Sym = domain, Anti = empty set. No new theorems in {E} follow.
-
-=== OUTPUT FORMAT (use exactly this structure) ===
-
-RESULT
+1. THE RESULT
 Conservative extension: YES or NO
 
-BASE LANGUAGE
-{...}
+KEY FACT:
+<one-two sentence explanation of the decisive definability / non-definability fact>
 
-BASE THEORY T₁
-(list axioms exactly as written in Box A)
+RULES FOR MODE 1:
+- MUST reference only: whether new predicates are definable from old ones, whether T₂ forces a new sentence in the old language
+- MUST NOT: describe specific models, construct domains, give analogies, give long proofs, add any extra sections
 
-EXTENDED LANGUAGE
-{...}
+=== MODE 2: EXPLAIN ON ===
 
-EXTENDED THEORY T₂
-(list axioms exactly as written in Box B)
+FORMAT:
 
-KEY FACT
-(One-sentence explanation of the reason for YES or NO)
+1. THE RESULT
+Conservative extension: YES or NO
+
+EXPLANATION:
+<2-5 short paragraphs explaining:
+ - whether the new predicates/functions/constants are explicitly definable
+ - whether T₂ proves any NEW theorems in the old language
+ - whether any new axioms constrain the old symbols beyond T₁>
+
+RULES FOR MODE 2:
+- MUST stay strictly within the logic of conservativity
+- MUST NOT: describe domains, present model constructions, give numerical or real-world examples, use analogies
+- Explanation MUST stay syntactic and model-theoretic: definability, surplus structure, new consequences in old language, whether added axioms restrict old primitives
+
+=== EXAMPLES ===
+
+EXAMPLE (EXPLAIN OFF):
+INPUT: T₁: LANGUAGE: {E(x,y)}, AXIOMS: ∀x∀y (E(x,y) → E(y,x)) | T₂: LANGUAGE: {E(x,y), c}, AXIOMS: ∀x∀y (E(x,y) → E(y,x)), ∀x E(x,c)
+
+OUTPUT:
+
+1. THE RESULT
+Conservative extension: NO
+
+KEY FACT:
+T₂ proves ∃x∃y E(x,y), which T₁ does not; T₁ allows E to be empty.
+
+EXAMPLE (EXPLAIN ON):
+Same input with EXPLAIN = ON
+
+OUTPUT:
+
+1. THE RESULT
+Conservative extension: NO
+
+EXPLANATION:
+T₂ introduces a constant c and asserts that every element is E-related to c. This forces E to be nonempty. In T₁, E may be empty, since symmetry alone imposes no content. Because T₂ proves a new sentence in the old language ("E is nonempty") that T₁ does not, the extension is not conservative.
 
 === HARD REQUIREMENTS ===
-- NO commentary or pedagogy
-- Copy axioms exactly as provided
-- Explicit quantifiers only
-- One-sentence KEY FACT explaining WHY`,
+- MODE 1: Purely formal, just result + KEY FACT
+- MODE 2: Result + explanation about conservativity logic only
+- No model constructions or domain examples
+- No analogies or real-world examples`,
 
   "Compare Conceptual Schemes": `YOUR TASK: Compare the primitive/derived classifications in Scheme A vs. Scheme B.
 NOTHING ELSE. Do NOT discuss expressivity, ontology, naturalness, or philosophy.

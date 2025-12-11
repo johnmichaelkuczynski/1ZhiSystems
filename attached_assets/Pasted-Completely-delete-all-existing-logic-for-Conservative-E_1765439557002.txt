@@ -1,0 +1,130 @@
+Completely delete all existing logic for:
+"Conservative Extension Analysis (Two Arguments)"
+Replace it entirely with the unified rules below.
+
+=========================================================
+UNIFIED LOGIC FOR THIS FUNCTION
+=========================================================
+
+INPUT:
+- BOX A = Base Theory T₁ (LANGUAGE + AXIOMS)
+- BOX B = Extended Theory T₂ (LANGUAGE + AXIOMS)
+- EXPLAIN toggle (ON or OFF)
+
+TASK:
+Determine whether T₂ is a *conservative extension* of T₁.
+
+Definition:
+T₂ is a conservative extension of T₁ iff:
+1. T₁’s language is a subset of T₂’s language.
+2. T₂ proves no NEW theorems in the language of T₁ that T₁ does not already prove.
+3. Any new axioms in T₂ restrict only the interpretation of NEW symbols.
+
+This is NOT definitional equivalence.  
+It is a **one-direction** preservation check.
+
+=========================================================
+MODE 1 — EXPLAIN TOGGLE OFF (NON-EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = OFF, output MUST be:
+
+1. THE RESULT
+Conservative extension: YES   or   Conservative extension: NO
+
+KEY FACT:
+<one-two sentence explanation of the decisive definability / non-definability fact>
+
+Rules:
+- MUST reference only:
+    * whether new predicates are definable from old ones
+    * whether T₂ forces a new sentence in the old language
+- MUST NOT:
+    * describe specific models
+    * construct domains
+    * give analogies
+    * give long proofs
+    * add any extra sections
+
+=========================================================
+MODE 2 — EXPLAIN TOGGLE ON (EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = ON, output MUST contain:
+
+1. THE RESULT  
+Conservative extension: YES or NO
+
+2. EXPLANATION  
+(2–5 short paragraphs)
+
+FORMAT:
+
+1. THE RESULT
+Conservative extension: YES   (or NO)
+
+EXPLANATION:
+<Explanation of:
+ - whether the new predicates/functions/constants are explicitly definable
+ - whether T₂ proves any NEW theorems in the old language
+ - whether any new axioms constrain the old symbols beyond T₁>
+
+Rules for EXPLAIN = ON:
+- MUST stay strictly within the logic of conservativity.
+- MUST NOT:
+    * describe domains
+    * present model constructions
+    * give numerical or real-world examples
+    * use analogies (servers, letters, timelines, etc.)
+
+The explanation MUST stay syntactic and model-theoretic:
+- definability
+- surplus structure
+- new consequences in old language
+- whether added axioms restrict old primitives
+
+=========================================================
+STYLE TEMPLATE (THE AGENT MUST FOLLOW)
+=========================================================
+
+Example INPUT:
+
+BOX A (T₁):
+LANGUAGE: {E(x,y)}
+AXIOMS:
+1. ∀x∀y (E(x,y) → E(y,x))
+
+BOX B (T₂):
+LANGUAGE: {E(x,y), c}
+AXIOMS:
+1. ∀x∀y (E(x,y) → E(y,x))
+2. ∀x E(x,c)
+
+EXPLAIN = OFF
+
+Example OUTPUT:
+
+1. THE RESULT
+Conservative extension: NO
+KEY FACT:
+T₂ proves ∃x∃y E(x,y), which T₁ does not; T₁ allows E to be empty.
+
+-----------------------------
+
+Example INPUT with EXPLAIN = ON:
+(same theories)
+
+Example OUTPUT:
+
+1. THE RESULT
+Conservative extension: NO
+
+EXPLANATION:
+T₂ introduces a constant c and asserts that every element is E-related to c.
+This forces E to be nonempty. In T₁, E may be empty, since symmetry alone
+imposes no content. Because T₂ proves a new sentence in the old language
+(“E is nonempty”) that T₁ does not, the extension is not conservative.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
