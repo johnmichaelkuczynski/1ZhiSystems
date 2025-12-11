@@ -283,40 +283,171 @@ const PRESETS: Preset[] = [
     instructions: `Determine what domain of objects this theory is intended to describe. What are the primitives supposed to range over? What is the intended subject matter?`
   },
   // FUNCTION 10: Find an Interpretation
+  // A. Abstract / Formal Domains
   {
-    id: "f10-mathematics",
-    name: "Mathematical Interpretation",
+    id: "f10-mathematical",
+    name: "Mathematical",
     functionId: 10,
     input: ``,
-    instructions: `Find an interpretation from pure mathematics. Map primitives to set-theoretic, algebraic, or geometric structures. Verify each axiom holds in the model.`
+    instructions: `Find a MATHEMATICAL interpretation. Use algebra, topology, geometry, calculus, or trigonometry. Resort to set theory only if all else fails.`
+  },
+  {
+    id: "f10-computational",
+    name: "Computational",
+    functionId: 10,
+    input: ``,
+    instructions: `Find a COMPUTATIONAL interpretation. Use data structures, algorithms, types, programs, or processes.`
+  },
+  {
+    id: "f10-philosophical",
+    name: "Philosophical",
+    functionId: 10,
+    input: ``,
+    instructions: `Find a PHILOSOPHICAL interpretation. Use concepts like substances, properties, events, minds, or abstract objects.`
+  },
+  // B. Natural Sciences
+  {
+    id: "f10-physical",
+    name: "Physical (Everyday)",
+    functionId: 10,
+    input: ``,
+    instructions: `Find a PHYSICAL interpretation from everyday life. Use tangible objects, containers, weight, heat, space, motion in the intuitive sense.`
   },
   {
     id: "f10-physics",
-    name: "Physical Interpretation",
+    name: "Physics (Science)",
     functionId: 10,
     input: ``,
-    instructions: `Find an interpretation from physics. Map primitives to physical entities (spacetime, particles, fields, forces). Show how each axiom becomes a true physical statement.`
+    instructions: `Find a PHYSICS interpretation from the science. Use spacetime, fields, forces, thermodynamics, electromagnetism, or relativity.`
   },
   {
-    id: "f10-economics",
-    name: "Economic Interpretation",
+    id: "f10-chemical",
+    name: "Chemical",
     functionId: 10,
     input: ``,
-    instructions: `Find an interpretation from economics. Map primitives to economic entities (agents, goods, preferences, markets). Verify each axiom as an economic principle.`
+    instructions: `Find a CHEMICAL interpretation. Use chemical species, reactions, molecular structures, or reaction pathways.`
   },
   {
-    id: "f10-computer-science",
-    name: "Computational Interpretation",
+    id: "f10-biological",
+    name: "Biological",
     functionId: 10,
     input: ``,
-    instructions: `Find an interpretation from computer science. Map primitives to computational structures (types, programs, data structures, processes). Verify each axiom computationally.`
+    instructions: `Find a BIOLOGICAL interpretation. Use organisms, food chains, ecosystems, cells, or evolutionary relationships.`
+  },
+  // C. Human, Social, Cultural Domains
+  {
+    id: "f10-economic",
+    name: "Economic",
+    functionId: 10,
+    input: ``,
+    instructions: `Find an ECONOMIC interpretation. Use goods, prices, markets, preferences, or trade relationships.`
   },
   {
-    id: "f10-philosophy",
-    name: "Philosophical Interpretation",
+    id: "f10-social",
+    name: "Social / Sociological",
     functionId: 10,
     input: ``,
-    instructions: `Find an interpretation from philosophy or metaphysics. Map primitives to philosophical concepts (substances, properties, events, minds). Explain the philosophical significance.`
+    instructions: `Find a SOCIAL interpretation. Use people, social hierarchies, relationships, or group dynamics.`
+  },
+  {
+    id: "f10-psychological",
+    name: "Psychological",
+    functionId: 10,
+    input: ``,
+    instructions: `Find a PSYCHOLOGICAL interpretation. Use desires, motivations, mental states, or priority of needs.`
+  },
+  {
+    id: "f10-linguistic",
+    name: "Linguistic",
+    functionId: 10,
+    input: ``,
+    instructions: `Find a LINGUISTIC interpretation. Use words, alphabetical order, grammar, or syntactic structures.`
+  },
+  {
+    id: "f10-organizational",
+    name: "Organizational",
+    functionId: 10,
+    input: ``,
+    instructions: `Find an ORGANIZATIONAL interpretation. Use tasks, workflows, dependencies, or project structures.`
+  },
+  {
+    id: "f10-geographical",
+    name: "Geographical / Spatial",
+    functionId: 10,
+    input: ``,
+    instructions: `Find a GEOGRAPHICAL interpretation. Use locations, elevations, distances, or spatial relationships.`
+  },
+  {
+    id: "f10-home-economics",
+    name: "Home Economics",
+    functionId: 10,
+    input: ``,
+    instructions: `Find a HOME ECONOMICS interpretation. Use cooking, food prep, appliances, temperature, household tasks, or storage rules.`
+  },
+  // D. Engineering & Systems
+  {
+    id: "f10-engineering",
+    name: "Engineering / Systems",
+    functionId: 10,
+    input: ``,
+    instructions: `Find an ENGINEERING interpretation. Use machine components, system dependencies, or functional relationships.`
+  },
+  {
+    id: "f10-network",
+    name: "Network",
+    functionId: 10,
+    input: ``,
+    instructions: `Find a NETWORK interpretation. Use servers, routing, data flow, graphs, or connectivity.`
+  },
+  // E. Finance, Markets, Investment
+  {
+    id: "f10-market-microstructure",
+    name: "Market Microstructure",
+    functionId: 10,
+    input: ``,
+    instructions: `Find a MARKET MICROSTRUCTURE interpretation. Use limit orders, price priority, execution rules, or order books.`
+  },
+  {
+    id: "f10-portfolio-risk",
+    name: "Portfolio & Risk",
+    functionId: 10,
+    input: ``,
+    instructions: `Find a PORTFOLIO & RISK interpretation. Use asset classes, risk levels, allocations, or return profiles.`
+  },
+  {
+    id: "f10-credit-fixed-income",
+    name: "Credit & Fixed-Income",
+    functionId: 10,
+    input: ``,
+    instructions: `Find a CREDIT & FIXED-INCOME interpretation. Use tranches, seniority, bonds, or CDO structures.`
+  },
+  {
+    id: "f10-ma-corporate",
+    name: "M&A / Corporate Structure",
+    functionId: 10,
+    input: ``,
+    instructions: `Find an M&A / CORPORATE STRUCTURE interpretation. Use corporate entities, ownership, voting control, or subsidiaries.`
+  },
+  {
+    id: "f10-derivatives",
+    name: "Derivatives",
+    functionId: 10,
+    input: ``,
+    instructions: `Find a DERIVATIVES interpretation. Use options, strike prices, payoffs, or contract structures.`
+  },
+  {
+    id: "f10-private-equity",
+    name: "Private Equity / LBO",
+    functionId: 10,
+    input: ``,
+    instructions: `Find a PRIVATE EQUITY / LBO interpretation. Use capital structure layers, exit waterfalls, or payout priorities.`
+  },
+  {
+    id: "f10-macro-intermarket",
+    name: "Macro / Intermarket",
+    functionId: 10,
+    input: ``,
+    instructions: `Find a MACRO / INTERMARKET interpretation. Use global macro indicators, leads/lags, or economic sequences.`
   },
   // FUNCTION 11: Determine Equivalence
   {

@@ -72,15 +72,64 @@ Then briefly explain the reasoning.`,
   
   "Interpret Canonical Meaning": `Identify the intended interpretations of the primitive symbols in the input theory. For each primitive, determine what it is meant to represent in the most natural or canonical interpretation. Then restate all axioms using explicit, natural-language primitives that make the meaning transparent. The goal is to reveal what the theory is really about.`,
   
-  "Find an Interpretation": `Find a STRICTLY CORRECT interpretation (model) for the input axiom system. Requirements:
+  "Find an Interpretation": `Find a TRUE MODEL for the input axiom system.
 
-1. DEFINE THE DOMAIN: Specify the exact set of objects the variables range over.
-2. MAP EACH PRIMITIVE: For every predicate, function, and constant, state precisely what it denotes in the model.
-3. VERIFY EACH AXIOM: For EVERY axiom, provide an explicit proof or demonstration that it is TRUE in this model. Do not say "this corresponds to" or "this captures" - prove it is actually true.
-4. STRICT CORRECTNESS: The interpretation must make ALL axioms literally true, not "approximately true" or "true in spirit."
-5. IF IMPOSSIBLE: If no strictly correct interpretation exists in the requested domain, explicitly state this and explain which axiom(s) cannot be satisfied. Do not fabricate a semi-correct interpretation.
+GENERAL RULES:
+1. Produce a true model that actually satisfies ALL axioms
+2. Use the selected category to guide the interpretation type
+3. Give: Domain, Interpretation of each symbol, Plain-English explanation
+4. Be CONCRETE and INTUITIVE - avoid jargon unless intrinsic to the domain
+5. Use the SIMPLEST model unless a more complex one is required
+6. Ensure the interpretation actually satisfies every axiom
 
-Prefer interpretations from mathematics, science, computer science, or engineering. The model must be one that a working professional would recognize as genuinely applicable.`,
+CATEGORY GUIDANCE:
+- Mathematical: algebra, topology, geometry, calculus, trigonometry (use set theory/logic only as last resort)
+- Physical: tangible everyday reality - objects, heat, weight, space, motion in intuitive sense
+- Physics: scientific physics - spacetime, fields, forces, thermodynamics, relativity
+- Chemical: reactions, molecular structures, chemical species
+- Biological: organisms, food chains, ecosystems, cellular processes
+- Economic: goods, prices, markets, preferences
+- Social/Sociological: people, hierarchies, relationships, organizations
+- Psychological: desires, motivations, mental states
+- Linguistic: words, grammar, alphabetical order, syntax
+- Organizational: tasks, workflows, dependencies
+- Geographical/Spatial: locations, elevations, distances
+- Home Economics: cooking, food prep, appliances, household tasks, storage
+- Engineering/Systems: components, dependencies, systems
+- Network: servers, routing, data flow, graphs
+- Market Microstructure: orders, price priority, execution
+- Portfolio & Risk: assets, risk levels, allocations
+- Credit & Fixed-Income: tranches, seniority, bonds
+- M&A/Corporate Structure: ownership, voting control, subsidiaries
+- Derivatives: options, strike prices, payoffs
+- Private Equity/LBO: capital structure, waterfall, exits
+- Macro/Intermarket: indicators, leads/lags, sequences
+
+FAILURE CASE HANDLING - NEVER OUTPUT NULL OR ERROR:
+
+CASE A (No Model Exists - Contradictory):
+- Explain why no model exists
+- Identify adjacent interpretable axiom-sets via minimal modifications
+- Provide a model for the adjacent set
+- Educate user on the obstruction
+
+CASE B (Ill-Formed, No Obvious Fix):
+- Note input is syntactically broken
+- Construct charitable minimal reconstruction
+- Provide model for reconstructed version
+- State reconstruction is provisional
+
+CASE C (Ill-Formed, Obvious Fix):
+- Identify exact syntactic defects
+- Fix in the most straightforward way
+- Model the corrected axiom-set
+- Explain repair briefly
+
+CASE D (Would Have Model If Slightly Modified):
+- Explain why current version has no model
+- Identify smallest modification for consistency
+- Model the modified axiom-set
+- Show connection between original and corrected`,
   
   "Determine Equivalence": `Determine whether the two axiom systems generate exactly the same theorems. Provide a verdict (EQUIVALENT or NOT EQUIVALENT) with detailed analysis:
 
@@ -375,38 +424,57 @@ INSTRUCTIONS:
 
 For each primitive symbol, identify what it is intended to represent in the most natural interpretation. Then restate all axioms in explicit natural language that reveals what the theory is really about.`,
 
-  "Find an Interpretation": `Find a STRICTLY CORRECT interpretation (model) for the axiom system below.
+  "Find an Interpretation": `Find a TRUE MODEL for the axiom system below.
 
 <<<INPUT>>>
 
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-=== OUTPUT FORMAT FOR THIS FUNCTION ===
+=== MANDATORY OUTPUT FORMAT ===
 
-**1. THE INTERPRETATION** (Simple, clear, human-readable - START HERE)
-State the interpretation in plain language FIRST. Example format:
-- Domain: [what the variables range over, e.g., "the natural numbers" or "people in a company"]
-- [symbol 1] means: [plain English meaning]
-- [symbol 2] means: [plain English meaning]
-- etc.
+**INTERPRETATION**
 
-This section should be SHORT and IMMEDIATELY UNDERSTANDABLE. No jargon. A reader should instantly grasp what the model is.
+Domain: [exactly what objects the variables range over]
+[Symbol 1]: [plain English meaning]
+[Symbol 2]: [plain English meaning]
+[etc.]
 
-**2. AXIOM VERIFICATION** (Prove each axiom is true)
-For each axiom:
-- State the axiom
-- Substitute the interpretation
-- Show it is TRUE in the domain (not just "corresponds to" - actually prove it)
+**WHY THIS WORKS**
 
-**3. SIGNIFICANCE**
-Why this interpretation matters or where it applies.
+[For each axiom, explain in 1-2 sentences why it is TRUE in this model. Be concrete and intuitive.]
 
 === END FORMAT ===
 
-CRITICAL: The interpretation must be STRICTLY CORRECT. Every axiom must be LITERALLY TRUE - not approximately true. If no strictly correct interpretation exists, say so and explain which axiom fails.
+RULES:
+1. The interpretation section must be SHORT and IMMEDIATELY UNDERSTANDABLE
+2. No jargon - a reader should instantly grasp the model
+3. The model must make ALL axioms literally true (not approximately true)
+4. Use the category specified in instructions to guide domain choice
+5. If no category specified, choose the most natural/intuitive domain
 
-If the user specifies a field, find an interpretation from that field. Otherwise, choose from mathematics, physics, economics, or computer science.`,
+CATEGORY GUIDANCE:
+- Mathematical: algebra, topology, geometry, calculus (set theory only as last resort)
+- Physical: everyday tangible reality - objects, containers, weight, heat
+- Physics: scientific physics - spacetime, fields, forces, thermodynamics
+- Chemical: reactions, species, molecular structures
+- Biological: organisms, food chains, ecosystems
+- Economic: goods, prices, preferences
+- Social: people, hierarchies, relationships
+- Psychological: desires, motivations
+- Linguistic: words, alphabetical order
+- Organizational: tasks, workflows
+- Geographical: locations, elevations
+- Home Economics: cooking, food prep, appliances
+- Engineering: components, dependencies
+- Network: servers, routing, graphs
+- Finance categories: orders, assets, tranches, options, capital structure, indicators
+
+FAILURE HANDLING (never return empty):
+- Case A (contradictory): Explain why, give adjacent consistent set with model
+- Case B (ill-formed, unclear): Reconstruct charitably, model that
+- Case C (ill-formed, obvious fix): Fix syntax, model corrected version
+- Case D (nearly consistent): Show minimal fix, model the fixed version`,
 
   "Determine Equivalence": `Compare the two axiom systems below and determine their logical relationship.
 
