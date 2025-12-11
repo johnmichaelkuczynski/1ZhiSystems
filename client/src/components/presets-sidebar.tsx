@@ -142,11 +142,10 @@ AXIOMS:
 1. <axiom with all Pi-atoms rewritten as Hi(c,...)>
 2. ...`
   },
-  // FUNCTION 2: Schema Equivalence
   {
-    id: "f2-direct-vocab",
+    id: "f1-direct-vocab",
     name: "Direct Vocabulary Mapping",
-    functionId: 2,
+    functionId: 1,
     input: ``,
     instructions: `DIRECT VOCABULARY MAPPING - NON-ISOMORPHIC TRANSFORMATION:
 
@@ -174,6 +173,14 @@ P2(x1,...,x_n2) ↔ H2(c,x1,...,x_n2)
 AXIOMS:
 1. <original axiom 1 rewritten>
 2. ...`
+  },
+  // FUNCTION 2: Schema Equivalence
+  {
+    id: "f2-direct-vocab",
+    name: "Direct Vocabulary Mapping",
+    functionId: 2,
+    input: `<<<SEPARATOR>>>`,
+    instructions: `Build a one-to-one symbol mapping between the two theories. Match each primitive to exactly one primitive in the other theory. Report if such a mapping exists.`
   },
   {
     id: "f2-arity-preserving",
