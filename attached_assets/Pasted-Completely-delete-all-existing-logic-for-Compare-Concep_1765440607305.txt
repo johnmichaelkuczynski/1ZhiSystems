@@ -1,0 +1,192 @@
+Completely delete all existing logic for:
+"Compare Conceptual Schemes (Two Arguments)"
+Replace it entirely with the unified rules below.
+
+=========================================================
+UNIFIED LOGIC FOR THIS FUNCTION
+=========================================================
+
+INPUT:
+- BOX A = Theory T₁ (LANGUAGE + AXIOMS)
+- BOX B = Theory T₂ (LANGUAGE + AXIOMS)
+- EXPLAIN toggle (ON or OFF)
+
+GOAL:
+Compare how the two theories organize their conceptual schemes:
+- Which predicates are PRIMITIVE in each theory
+- Which predicates are DERIVABLE in each theory
+- What each theory can express that the other cannot
+- Whether one theory is more parsimonious or coarse-grained
+
+This is *NOT* a conservativity test, *NOT* definitional equivalence,  
+and *NOT* a model comparison.  
+It is purely **classification of conceptual structure**.
+
+There are TWO output modes depending on EXPLAIN toggle.
+
+=========================================================
+MODE 1 — EXPLAIN TOGGLE OFF (NON-EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = OFF, output MUST be:
+
+1. THE RESULT
+
+PRIMITIVES IN T₁:
+<list primitive predicates>
+
+DERIVED CONCEPTS IN T₁:
+<list derived predicates, if any, with formulas>
+
+PRIMITIVES IN T₂:
+<list primitive predicates>
+
+DERIVED CONCEPTS IN T₂:
+<list derived predicates, if any, with formulas>
+
+EXPRESSIVE DIFFERENCES:
+<very short list of what T₁ expresses that T₂ cannot, and vice versa>
+
+Rules for EXPLAIN = OFF:
+- Output must be compact and formal.
+- DERIVED concepts must be given as *explicit defining formulas* when possible.
+- EXPRESSIVE DIFFERENCES section must be **bullet-point, minimal**.
+- NO prose analysis.
+- NO models.
+- NO analogies.
+- NO metaphors.
+- NO multi-paragraph discussion.
+
+=========================================================
+MODE 2 — EXPLAIN TOGGLE ON (EXPLAIN VERSION)
+=========================================================
+
+When EXPLAIN = ON, output must contain:
+
+1. THE RESULT  
+   (Same structure as EXPLAIN=OFF, but allowed to be slightly fuller)
+
+2. EXPLANATION  
+   (2–5 short paragraphs)
+
+FORMAT:
+
+1. THE RESULT
+
+PRIMITIVES IN T₁:
+<list>
+
+DERIVED CONCEPTS IN T₁:
+<list with definitions>
+
+PRIMITIVES IN T₂:
+<list>
+
+DERIVED CONCEPTS IN T₂:
+<list with definitions>
+
+EXPRESSIVE DIFFERENCES:
+<short list>
+
+EXPLANATION:
+<Explain how each theory conceptualizes its domain differently>
+<Explain which concepts are encoded primitively vs. definitionally>
+<Explain expressive losses or gains>
+<Explain comparative parsimony or redundancy>
+
+Rules for EXPLAIN = ON:
+- Explanation MUST stay strictly about:
+    * primitive/derived classification
+    * definability
+    * expressive reach
+    * conceptual parsimony
+- MUST NOT:
+    * describe or build models
+    * give real-world examples (parents, servers, networks, numbers, etc.)
+    * give analogies
+    * drift into ontology or philosophy
+- KEEP IT ANALYTICAL AND CONCISE.
+
+=========================================================
+STYLE TEMPLATE FOR OUTPUT (MUST FOLLOW)
+=========================================================
+
+Example INPUT:
+
+T₁:
+LANGUAGE: {Parent(x,y), Male(x), Female(x)}
+AXIOMS:
+1. ∀x∀y (Parent(x,y) → (Male(x) ∨ Female(x)))
+2. ∀x ¬(Male(x) ∧ Female(x))
+
+T₂:
+LANGUAGE: {Father(x,y), Mother(x,y)}
+AXIOMS:
+1. ∀x∀y (Father(x,y) → ¬Mother(x,y))
+2. ∀x∀y (Mother(x,y) → ¬Father(x,y))
+
+EXPLAIN = OFF
+
+Example OUTPUT:
+
+1. THE RESULT
+
+PRIMITIVES IN T₁:
+Parent, Male, Female
+
+DERIVED CONCEPTS IN T₁:
+Father(x,y) ↔ Parent(x,y) ∧ Male(x)
+Mother(x,y) ↔ Parent(x,y) ∧ Female(x)
+
+PRIMITIVES IN T₂:
+Father, Mother
+
+DERIVED CONCEPTS IN T₂:
+Parent(x,y) ↔ Father(x,y) ∨ Mother(x,y)
+Male(x) ↔ ∃y Father(x,y)
+Female(x) ↔ ∃y Mother(x,y)
+
+EXPRESSIVE DIFFERENCES:
+- T₁ expresses gender independently of parenthood.
+- T₂ directly expresses parent-role exclusivity.
+
+-----------------------------
+
+Example INPUT with EXPLAIN = ON:
+(same theories)
+
+Example OUTPUT:
+
+1. THE RESULT
+
+PRIMITIVES IN T₁:
+Parent, Male, Female
+
+DERIVED CONCEPTS IN T₁:
+Father ↔ Parent ∧ Male
+Mother ↔ Parent ∧ Female
+
+PRIMITIVES IN T₂:
+Father, Mother
+
+DERIVED CONCEPTS IN T₂:
+Parent ↔ Father ∨ Mother
+Male ↔ ∃y Father(x,y)
+Female ↔ ∃y Mother(x,y)
+
+EXPRESSIVE DIFFERENCES:
+- T₁ isolates gender from parental roles.
+- T₂ encodes fatherhood/motherhood as basic and enforces exclusivity.
+
+EXPLANATION:
+T₁ treats parenthood and gender as independent primitive concepts, allowing the
+theory to refer to gender even when no parental relation is involved. T₂
+embeds gender into the parental roles, making “father” and “mother” primitive
+and eliminating gender as a standalone predicate. Because the primitive choices
+differ, each theory highlights different conceptual structures: T₁ is more
+flexible, while T₂ is more role-specific. Their expressive capacities overlap
+but do not coincide.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
