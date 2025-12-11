@@ -7,6 +7,7 @@ import { type LLM, processTheory } from "@/lib/api";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { handlePaste } from "@/lib/normalizer";
 
 interface FunctionRowProps {
   id: number;
@@ -161,6 +162,7 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
             className="min-h-[500px] font-mono text-sm bg-secondary/30 resize-none border-border rounded-sm focus-visible:ring-1 focus-visible:ring-ring"
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            onPaste={(e) => handlePaste(e, setInput)}
             data-testid={`input-${id}`}
           />
         </div>

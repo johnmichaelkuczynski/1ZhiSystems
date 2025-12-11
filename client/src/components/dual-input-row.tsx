@@ -6,6 +6,7 @@ import { type LLM, processTheory } from "@/lib/api";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { handlePaste } from "@/lib/normalizer";
 
 interface DualInputRowProps {
   id: number;
@@ -148,6 +149,7 @@ export function DualInputRow({ id, title, description, selectedModel, presetInpu
             className="min-h-[300px] font-mono text-sm bg-secondary/30 resize-none border-border rounded-sm focus-visible:ring-1 focus-visible:ring-ring"
             value={inputA}
             onChange={(e) => setInputA(e.target.value)}
+            onPaste={(e) => handlePaste(e, setInputA)}
             data-testid={`input-a-${id}`}
           />
         </div>
@@ -159,6 +161,7 @@ export function DualInputRow({ id, title, description, selectedModel, presetInpu
             className="min-h-[300px] font-mono text-sm bg-secondary/30 resize-none border-border rounded-sm focus-visible:ring-1 focus-visible:ring-ring"
             value={inputB}
             onChange={(e) => setInputB(e.target.value)}
+            onPaste={(e) => handlePaste(e, setInputB)}
             data-testid={`input-b-${id}`}
           />
         </div>
