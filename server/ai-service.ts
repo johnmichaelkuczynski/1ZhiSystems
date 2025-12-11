@@ -404,51 +404,62 @@ Otherwise, use MODE 1.
 
 === MODE 1: EXPLAIN OFF (default) ===
 
-Output ONLY the formal result. NO commentary.
-
 FORMAT:
 
 RESULT
 Equivalence: YES or NO
 
-SYMBOL MAPPING (if YES):
-P₁ ↦ Q₁
-P₂ ↦ Q₂
-...
+KEY FACT:
+<one-sentence reason identifying the critical definitional issue>
 
-OBSTRUCTION (if NO):
-<one sentence stating what prevents equivalence>
+RULES FOR MODE 1:
+- Answer must be BINARY: YES or NO
+- KEY FACT must be ONE or TWO sentences maximum
+- KEY FACT must refer ONLY to: definability/non-definability, missing/extra structures, mismatched constraints
+- NO semantic examples, NO domains, NO model constructions, NO long explanations, NO proofs, NO analogies
 
 === MODE 2: EXPLAIN ON ===
 
-Output the formal result PLUS a short EXPLANATION.
-
 FORMAT:
 
 RESULT
 Equivalence: YES or NO
 
-SYMBOL MAPPING (if YES):
-P₁ ↦ Q₁
-P₂ ↦ Q₂
-...
+EXPLANATION:
+<2-5 short paragraphs>
 
-DEFINITIONS (showing how each theory defines the other's primitives):
-In T₁: Q(x,y) ↔ <formula using T₁ primitives>
-In T₂: P(x,y) ↔ <formula using T₂ primitives>
+RULES FOR MODE 2:
+- MUST discuss: why theories DO or DO NOT determine same class of models, whether each primitive is explicitly definable in the other theory, any structural property present in one but absent in the other
+- MUST NOT: construct specific domains, describe example models, tell stories or analogies, drift into ontology/metaphysics/philosophy
+- MUST stay strictly within: definability, axiomatized constraints, model-theoretic equivalence
+
+=== EXAMPLES ===
+
+EXAMPLE (EXPLAIN OFF):
+INPUT: T₁: LANGUAGE: {Parent(x,y), Male(x)}, AXIOMS: ∀x∀y (Parent(x,y) → Male(x)) | T₂: LANGUAGE: {Father(x,y)}, AXIOMS: ∀x∀y (Father(x,y) → Father(x,y))
+
+OUTPUT:
+RESULT
+Equivalence: NO
+KEY FACT:
+T₁'s predicates Parent(x,y) and Male(x) cannot be definitionally recovered from T₂'s single predicate Father(x,y).
+
+EXAMPLE (EXPLAIN ON):
+Same input with EXPLAIN = ON
+
+OUTPUT:
+RESULT
+Equivalence: NO
 
 EXPLANATION:
-<2-3 paragraphs explaining:
-- How each theory can define the other's primitives
-- Why the axioms become identical under translation
-- What the obstruction is (if NO)>
+T₂ has only one primitive predicate Father(x,y), which does not contain sufficient structure to recover the distinct predicates Parent and Male appearing in T₁. Consequently, the models of T₂ allow many interpretations that cannot correspond to any model of T₁. Since at least one primitive in each direction is not explicitly definable, the theories are not definitionally equivalent.
 
 === HARD REQUIREMENTS ===
-- MODE 1: Purely formal, no prose
-- MODE 2: Formal + brief explanation
+- MODE 1: Purely formal, no prose beyond KEY FACT
+- MODE 2: Formal + brief explanation about definability
 - No long proofs or derivations
 - No model theory jargon
-- If NOT equivalent, state the obstruction clearly`,
+- No semantic examples or domain constructions`,
 
   "Definitional Equivalence": `YOUR TASK: Determine if the two theories are DEFINITIONALLY EQUIVALENT.
 
