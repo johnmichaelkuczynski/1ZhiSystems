@@ -46,13 +46,13 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
   };
 
   useEffect(() => {
-    if (presetInput !== undefined) {
+    if (presetInput !== undefined && presetInput !== "") {
       setInput(presetInput);
     }
   }, [presetInput]);
 
   useEffect(() => {
-    if (presetInstructions !== undefined) {
+    if (presetInstructions !== undefined && presetInstructions !== "") {
       setInstructions(presetInstructions);
     }
   }, [presetInstructions]);

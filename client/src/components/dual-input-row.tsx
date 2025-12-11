@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2, Play, ArrowRight, AlertCircle, Copy, Check, Trash2 } from "lucide-react";
@@ -44,11 +44,23 @@ export function DualInputRow({ id, title, description, selectedModel, presetInpu
     setUsedModel(null);
   };
 
-  useState(() => {
-    if (presetInputA !== undefined) setInputA(presetInputA);
-    if (presetInputB !== undefined) setInputB(presetInputB);
-    if (presetInstructions !== undefined) setInstructions(presetInstructions);
-  });
+  useEffect(() => {
+    if (presetInputA !== undefined && presetInputA !== "") {
+      setInputA(presetInputA);
+    }
+  }, [presetInputA]);
+
+  useEffect(() => {
+    if (presetInputB !== undefined && presetInputB !== "") {
+      setInputB(presetInputB);
+    }
+  }, [presetInputB]);
+
+  useEffect(() => {
+    if (presetInstructions !== undefined && presetInstructions !== "") {
+      setInstructions(presetInstructions);
+    }
+  }, [presetInstructions]);
 
   const handleRun = async () => {
     if (!inputA || !inputB) return;
