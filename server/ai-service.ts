@@ -133,17 +133,22 @@ CASE D (Would Have Model If Slightly Modified):
 - Model the modified axiom-set
 - Show connection between original and corrected`,
   
-  "Determine Equivalence": `Determine whether the two axiom systems generate exactly the same theorems. Provide a verdict (EQUIVALENT or NOT EQUIVALENT) with detailed analysis:
+  "Determine Equivalence": `Compare two axiom systems and determine their logical relationship.
 
-If EQUIVALENT: Explain why they generate the same theorems. Show the logical relationship between them.
+START YOUR RESPONSE WITH A CLEAR VERDICT. Use this exact format:
 
-If NOT EQUIVALENT: Classify the relationship:
-- DISJOINT: The theorem sets have no overlap (neither proves anything the other proves)
-- OVERLAPPING: Some theorems are shared, but each has unique theorems
-- A ⊂ B: System A's theorems are a proper subset of System B's theorems
-- B ⊂ A: System B's theorems are a proper subset of System A's theorems
+**VERDICT: [EQUIVALENT / NOT EQUIVALENT]**
 
-Provide specific examples of theorems that demonstrate the relationship.`
+If NOT EQUIVALENT, also state the relationship:
+- A ⊂ B (A is strictly weaker - every A-theorem is provable in B, but B proves more)
+- B ⊂ A (B is strictly weaker)
+- OVERLAPPING (each has theorems the other cannot prove)
+- DISJOINT (no shared theorems)
+
+Then provide:
+1. Key theorems each system proves
+2. A separating theorem (if not equivalent) - something provable in one but not the other
+3. Brief explanation of why the relationship holds`
 };
 
 const SYSTEM_PROMPT = `You are the world's foremost expert in first-order logic, theory transformation, and formal ontology analysis.
@@ -486,7 +491,7 @@ FAILURE HANDLING (never return empty):
 - Case C (ill-formed, obvious fix): Fix syntax, model corrected version
 - Case D (nearly consistent): Show minimal fix, model the fixed version`,
 
-  "Determine Equivalence": `Compare the two axiom systems below and determine their logical relationship.
+  "Determine Equivalence": `YOUR TASK: Determine if two axiom systems are logically equivalent.
 
 === SYSTEM A ===
 <<<SYSTEM_A>>>
@@ -497,19 +502,23 @@ FAILURE HANDLING (never return empty):
 INSTRUCTIONS:
 <<<INSTRUCTIONS>>>
 
-TASK:
-1. Identify the primitives and axioms of each system.
-2. Determine what theorems each system can prove.
-3. Compare the theorem sets and classify the relationship:
-   - EQUIVALENT: Both systems prove exactly the same theorems
-   - A ⊂ B (A STRICTLY WEAKER): Every theorem of A is provable in B, but B proves more
-   - B ⊂ A (B STRICTLY WEAKER): Every theorem of B is provable in A, but A proves more
-   - OVERLAPPING: Some shared theorems, but each has unique theorems the other cannot prove
-   - DISJOINT: No shared theorems (extremely rare)
+=== USE THIS OUTPUT FORMAT (not the default 5-section format) ===
 
-4. Provide specific example theorems demonstrating the relationship.
-5. If equivalent, show why (translation, bi-interpretation, etc.).
-6. If not equivalent, show a separating theorem (provable in one but not the other).`
+**VERDICT: [EQUIVALENT / NOT EQUIVALENT]**
+
+**RELATIONSHIP:** [If not equivalent, state: A ⊂ B / B ⊂ A / OVERLAPPING / DISJOINT]
+
+**ANALYSIS:**
+- System A proves: [key theorems]
+- System B proves: [key theorems]
+- Separating theorem: [if not equivalent, a theorem provable in one but not the other]
+
+**EXPLANATION:**
+[Brief explanation of why the relationship holds - 2-3 sentences max]
+
+=== END FORMAT ===
+
+START WITH THE VERDICT. The user needs to know immediately if they are equivalent or not.`
 };
 
 function buildPrompt(input: string, instructions: string, functionName: string): string {
