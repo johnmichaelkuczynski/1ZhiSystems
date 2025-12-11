@@ -389,7 +389,58 @@ EXPLANATION:
     name: "Definition Minimization",
     functionId: 3,
     input: `<<<SEPARATOR>>>`,
-    instructions: `Find the shortest possible explicit definitions. Minimize the total number of quantifiers and logical connectives in the definitions.`
+    instructions: `DEFINITIONAL EQUIVALENCE (DEFINITION MINIMIZATION)
+
+TASK:
+Given two theories T₁ and T₂, and assuming explicit definitions from earlier steps exist, compute **the shortest possible explicit definitions** for each primitive predicate of T₁ using the vocabulary of T₂.
+
+"Shortest" means:
+- Minimizing total number of quantifiers, and
+- Minimizing total number of logical connectives
+If ties remain, prefer the syntactically shortest formula.
+
+This is a purely syntactic optimization step.
+
+INPUT:
+For each predicate Pi of T₁:
+- A list of candidate explicit definitions φi¹, φi², … in the vocabulary of T₂ (generated earlier by the definability module)
+- Each candidate is a formula with free variables x1,...,x_ni
+
+MECHANICAL MINIMIZATION PROCEDURE:
+
+For each predicate Pi:
+1. For every candidate φiᵏ: Compute its **complexity score**: Score(φiᵏ) = (# of quantifiers) + (# of connectives)
+2. Find the minimum score: S_min = min_k Score(φiᵏ)
+3. Collect all candidates with Score = S_min
+4. If more than one candidate remains: Select the lexicographically shortest formula as a tiebreaker
+5. Record the unique minimal definition: Pi(x̄) ↔ φi_min(x̄)
+
+SUCCESS CONDITION:
+
+Definition minimization ALWAYS succeeds if at least one explicit definition exists for each Pi.
+
+If any predicate has no candidate definitions:
+- Minimization fails for that predicate
+- Report "No definable formula available"
+
+OUTPUT (EXPLAIN = OFF):
+MINIMAL DEFINITIONS:
+P1(x̄) ↔ φ1_min(x̄)
+P2(x̄) ↔ φ2_min(x̄)
+...
+Pk(x̄) ↔ φk_min(x̄)
+
+If any predicate has no available definition:
+Report only:
+"No definable formula available for Pi"
+
+OUTPUT (EXPLAIN = ON):
+MINIMAL DEFINITIONS:
+[same as above]
+EXPLANATION:
+- Minimization selects the explicit definition with the smallest total number of quantifiers and connectives
+- If multiple formulas tie, the syntactically shortest is chosen
+- This ensures each definition is the most efficient available`
   },
   {
     id: "f3-conservative",
