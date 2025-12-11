@@ -16,17 +16,17 @@ export default function Home() {
   const functionRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
 
   const functions = [
-    { id: 1, title: "Axiom-Set / Theory Transformation", description: "Rewrite primitives and axioms.", dualInput: false },
-    { id: 2, title: "Schema Equivalence", description: "Model-theoretic sameness check.", dualInput: false },
-    { id: 3, title: "Definitional Equivalence", description: "Bi-directional definitional translation.", dualInput: false },
-    { id: 4, title: "Model-Preserving Rewrite", description: "Rewrite theory preserving all models.", dualInput: false },
-    { id: 5, title: "Conservative Extension Analysis", description: "Analyze extensions for conservativity.", dualInput: false },
-    { id: 6, title: "Compare Conceptual Schemes", description: "Compare primitive/derived classifications.", dualInput: false },
-    { id: 7, title: "Ontological Dependence", description: "Analyze primitive dependencies.", dualInput: false },
-    { id: 8, title: "Generate Alternative Conceptualizations", description: "Generate equivalent conceptualizations.", dualInput: false },
-    { id: 9, title: "Identify Representational Biases", description: "Detect biases in primitive choices.", dualInput: false },
-    { id: 10, title: "Find an Interpretation", description: "Find a true model for the axiom system.", dualInput: false },
-    { id: 11, title: "Determine Equivalence", description: "Compare two systems for theorem equivalence.", dualInput: true },
+    { id: 1, title: "Axiom-Set / Theory Transformation (One Argument)", description: "Rewrite primitives and axioms.", dualInput: false },
+    { id: 2, title: "Schema Equivalence (Two Arguments)", description: "Model-theoretic sameness check.", dualInput: false },
+    { id: 3, title: "Definitional Equivalence (Two Arguments)", description: "Bi-directional definitional translation.", dualInput: false },
+    { id: 4, title: "Model-Preserving Rewrite (One Argument)", description: "Rewrite theory preserving all models.", dualInput: false },
+    { id: 5, title: "Conservative Extension Analysis (Two Arguments)", description: "Analyze extensions for conservativity.", dualInput: false },
+    { id: 6, title: "Compare Conceptual Schemes (Two Arguments)", description: "Compare primitive/derived classifications.", dualInput: false },
+    { id: 7, title: "Ontological Dependence (One Argument)", description: "Analyze primitive dependencies.", dualInput: false },
+    { id: 8, title: "Generate Alternative Conceptualizations (One Argument)", description: "Generate equivalent conceptualizations.", dualInput: false },
+    { id: 9, title: "Identify Representational Biases (One Argument)", description: "Detect biases in primitive choices.", dualInput: false },
+    { id: 10, title: "Find an Interpretation (One Argument)", description: "Find a true model for the axiom system.", dualInput: false },
+    { id: 11, title: "Determine Equivalence (Two Arguments)", description: "Compare two systems for theorem equivalence.", dualInput: true },
   ];
 
   const handleSelectPreset = (preset: Preset) => {

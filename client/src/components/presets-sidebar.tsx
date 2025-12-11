@@ -357,17 +357,17 @@ export function PresetsSidebar({ onSelectPreset }: PresetsSidebarProps) {
   const [openSections, setOpenSections] = useState<number[]>([1, 2, 3]);
 
   const functionNames = [
-    "Axiom-Set / Theory Transformation",
-    "Schema Equivalence",
-    "Definitional Equivalence",
-    "Model-Preserving Rewrite",
-    "Conservative Extension Analysis",
-    "Compare Conceptual Schemes",
-    "Ontological Dependence",
-    "Generate Alternative Conceptualizations",
-    "Identify Representational Biases",
-    "Find an Interpretation",
-    "Determine Equivalence"
+    "Axiom-Set / Theory Transformation (1 Arg)",
+    "Schema Equivalence (2 Args)",
+    "Definitional Equivalence (2 Args)",
+    "Model-Preserving Rewrite (1 Arg)",
+    "Conservative Extension Analysis (2 Args)",
+    "Compare Conceptual Schemes (2 Args)",
+    "Ontological Dependence (1 Arg)",
+    "Generate Alt. Conceptualizations (1 Arg)",
+    "Identify Representational Biases (1 Arg)",
+    "Find an Interpretation (1 Arg)",
+    "Determine Equivalence (2 Args)"
   ];
 
   const toggleSection = (id: number) => {
