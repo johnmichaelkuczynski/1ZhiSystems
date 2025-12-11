@@ -1,0 +1,115 @@
+Completely delete all existing logic for the sub-function:
+"MODEL-PRESERVING REWRITE: EXPANDED PRIMITIVE SET".
+
+Do NOT modify the main function "Model-Preserving Rewrite".
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION:
+MODEL-PRESERVING REWRITE (EXPANDED PRIMITIVE SET)
+=========================================================
+
+TASK:
+Given a theory T, introduce NEW primitive predicates that serve as
+abbreviations for complex or frequently occurring patterns in the
+axioms, with the objective of making the axiom-set syntactically
+simpler while preserving EXACTLY the same models.
+
+Each added primitive MUST:
+1. Correspond to a definable pattern in the original language,
+2. Be introduced with an explicit definition,
+3. Preserve model-equivalence (the new primitives add no new models
+   and remove none).
+
+The rewritten theory must contain:
+- The enlarged vocabulary (old primitives + new primitives),
+- The original axioms rewritten to use the new primitives,
+- The explicit definitions of the new primitives.
+
+=========================================================
+INPUT
+=========================================================
+
+A single theory T with:
+- LANGUAGE: P1,...,Pk
+- AXIOMS: any first-order sentences
+- EXPLAIN toggle (ON or OFF)
+
+=========================================================
+MECHANICAL EXPANSION PROCEDURE
+=========================================================
+
+1. **Pattern Detection**  
+   Scan every axiom for repeated subformula patterns ψ(x̄).
+   A pattern counts as repeated if it occurs at least twice
+   syntactically (α-equivalent).
+
+2. **New Primitive Introduction**  
+   For each repeated ψ(x̄), introduce a fresh predicate Hψ
+   with arity equal to the length of x̄.
+
+3. **Definition of New Primitive**  
+   Add a definitional axiom:
+      ∀x̄ ( Hψ(x̄) ↔ ψ(x̄) )
+   This ensures eliminability and model-equivalence.
+
+4. **Rewrite Axioms Using New Primitives**  
+   Replace every occurrence of ψ(x̄) in the axioms with Hψ(x̄).
+
+5. **Model-Equivalence Verification (Syntactic Only)**  
+   Because Hψ is introduced via an explicit biconditional:
+   - Every model of the original theory uniquely expands to a model
+     of the new theory by interpreting Hψ as ψ,
+   - Every model of the new theory reduces to a model of the old
+     theory by eliminating Hψ.
+
+   Therefore, NO semantic check, inference, or model search is used.
+
+=========================================================
+SUCCESS CONDITION
+=========================================================
+
+Expansion ALWAYS succeeds.
+
+If no repeated patterns are found:
+- No new primitives are added.
+- Output “No convenient primitives detected.”
+
+If repeated patterns exist:
+- Add new primitives,
+- Add definitional equivalences,
+- Rewrite axioms accordingly.
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+1. THE RESULT
+
+NEW LANGUAGE:
+{ original predicates, plus all new Hψ predicates }
+
+DEFINITIONS:
+Hψ(x̄) ↔ ψ(x̄)
+...
+
+REWRITTEN AXIOMS:
+1. <axiom 1 rewritten using Hψ>
+2. <axiom 2 rewritten using Hψ>
+...
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+1. THE RESULT
+(same as EXPLAIN = OFF)
+
+EXPLANATION:
+- Each added primitive abbreviates a repeated complex pattern.
+- Each is introduced conservatively via a biconditional definition.
+- Eliminability of the new primitives ensures model-equivalence.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
