@@ -1,0 +1,171 @@
+Completely delete all existing logic for the sub-function:
+"Non-Isomorphic Equivalent".
+Do NOT modify the main function "Theory Transformation".
+Replace ONLY this sub-function with the unified rules below.
+
+=========================================================
+NEW LOGIC FOR SUB-FUNCTION: Non-Isomorphic Equivalent
+=========================================================
+
+TASK:
+Given any theory T, build a NEW theory T* in a COMPLETELY DIFFERENT SIGNATURE
+(same number of predicates, but ALL with HIGHER ARITY and DIFFERENT NAMES),
+such that T and T* are definitionally equivalent.
+
+You must also output an explicit TRANSLATION from T to T*.
+
+=========================================================
+CORE CONSTRUCTION
+=========================================================
+
+INPUT:
+- LANGUAGE: any set of predicate symbols P1,...,Pk of various arities ≥ 1
+- AXIOMS: any list of first-order sentences over that language
+- EXPLAIN toggle (ON or OFF)
+
+CONSTRUCTION:
+1. Let the original predicates be:
+      P1 of arity n1, ..., Pk of arity nk (each ni ≥ 1).
+
+2. Introduce ONE NEW CONSTANT:
+      c
+
+3. For each Pi, introduce a NEW predicate symbol Hi with arity ni + 1.
+   - Hi is a completely new name (not equal to any Pi).
+   - Think of Hi(x0, x1, ..., x_ni) where x0 will always be instantiated by c.
+
+4. NEW LANGUAGE of T*:
+   - All Hi of arity ni + 1, for i = 1,...,k
+   - The constant symbol c
+   - NO original Pi appear in the LANGUAGE of T*.
+
+5. TRANSLATION (OLD → NEW), at the atomic level:
+   - Replace every atom Pi(t1,...,t_ni) in every axiom with
+         Hi(c, t1,...,t_ni).
+
+6. The AXIOMS of T* are exactly the original axioms with all atoms
+   rewritten using step 5.
+
+7. Do NOT add any extra axioms beyond these rewritten ones.
+   Do NOT keep Pi in the LANGUAGE of T*.
+   Do NOT reject any input.
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = OFF)
+=========================================================
+
+When EXPLAIN = OFF, output ONLY the new theory and the translation.
+
+FORMAT:
+
+1. THE RESULT
+
+LANGUAGE: { H1(x0, x1, ..., x_n1), H2(x0, x1, ..., x_n2), ..., c }
+
+TRANSLATION (OLD → NEW):
+P1(x1,...,x_n1) ↔ H1(c,x1,...,x_n1)
+P2(x1,...,x_n2) ↔ H2(c,x1,...,x_n2)
+...
+
+AXIOMS:
+1. <original axiom 1 with all Pi-atoms rewritten as Hi(c,...)>
+2. <original axiom 2 rewritten>
+3. ...
+
+Rules:
+- Every occurrence of Pi(...) MUST be replaced by Hi(c,...).
+- Quantifiers and logical connectives are left unchanged.
+- Only Pi-atoms change; all else stays exactly as in the original.
+
+=========================================================
+OUTPUT FORMAT (EXPLAIN = ON)
+=========================================================
+
+When EXPLAIN = ON, output the same RESULT block as above PLUS an
+EXPLANATION block.
+
+FORMAT:
+
+1. THE RESULT
+<same as EXPLAIN = OFF>
+
+EXPLANATION:
+- State that each original predicate Pi has been replaced by a higher-arity
+  predicate Hi with an extra c-argument.
+- State that the TRANSLATION (Pi(x1,...,x_n) ↔ Hi(c,x1,...,x_n))
+  gives a definitional equivalence between T and T*.
+- State that T* is structurally different (different symbol names, higher arities),
+  but has exactly the same theorems up to this translation.
+- Keep the explanation short and formal.
+
+=========================================================
+EXAMPLE — EXPLAIN = OFF
+=========================================================
+
+INPUT:
+Language: {A(x,y), B(x), C(x,y), D(x)}
+Axioms:
+1. ∀x ¬A(x,x)
+2. ∀x∀y (A(x,y) → B(x))
+3. ∀x (B(x) → ∃y A(x,y))
+4. ∀x∀y (C(x,y) → ¬C(y,x))
+5. ∀x∀y∀z ((C(x,y) ∧ C(y,z)) → C(x,z))
+6. ∀x (D(x) → ¬B(x))
+7. ∀x (B(x) ∨ D(x))
+EXPLAIN = OFF
+
+OUTPUT:
+1. THE RESULT
+
+LANGUAGE: {H_A(c,x,y), H_B(c,x), H_C(c,x,y), H_D(c,x), c}
+
+TRANSLATION (OLD → NEW):
+A(x,y) ↔ H_A(c,x,y)
+B(x)   ↔ H_B(c,x)
+C(x,y) ↔ H_C(c,x,y)
+D(x)   ↔ H_D(c,x)
+
+AXIOMS:
+1. ∀x ¬H_A(c,x,x)
+2. ∀x∀y (H_A(c,x,y) → H_B(c,x))
+3. ∀x (H_B(c,x) → ∃y H_A(c,x,y))
+4. ∀x∀y (H_C(c,x,y) → ¬H_C(c,y,x))
+5. ∀x∀y∀z ((H_C(c,x,y) ∧ H_C(c,y,z)) → H_C(c,x,z))
+6. ∀x (H_D(c,x) → ¬H_B(c,x))
+7. ∀x (H_B(c,x) ∨ H_D(c,x))
+
+=========================================================
+EXAMPLE — EXPLAIN = ON
+=========================================================
+
+1. THE RESULT
+
+LANGUAGE: {H_A(c,x,y), H_B(c,x), H_C(c,x,y), H_D(c,x), c}
+
+TRANSLATION (OLD → NEW):
+A(x,y) ↔ H_A(c,x,y)
+B(x)   ↔ H_B(c,x)
+C(x,y) ↔ H_C(c,x,y)
+D(x)   ↔ H_D(c,x)
+
+AXIOMS:
+1. ∀x ¬H_A(c,x,x)
+2. ∀x∀y (H_A(c,x,y) → H_B(c,x))
+3. ∀x (H_B(c,x) → ∃y H_A(c,x,y))
+4. ∀x∀y (H_C(c,x,y) → ¬H_C(c,y,x))
+5. ∀x∀y∀z ((H_C(c,x,y) ∧ H_C(c,y,z)) → H_C(c,x,z))
+6. ∀x (H_D(c,x) → ¬H_B(c,x))
+7. ∀x (H_B(c,x) ∨ H_D(c,x))
+
+EXPLANATION:
+Each original predicate has been replaced by a new predicate of higher arity
+that carries an extra constant argument c: A by H_A, B by H_B, C by H_C, and D by H_D.
+The translation P(...) ↔ H_P(c,...) ensures that any model of the original theory
+extends to a model of the new theory by interpreting H_P(c,...) exactly where P(...)
+was true, and conversely P(...) can be recovered from H_P(c,...).
+Thus the new theory is structurally non-isomorphic (different symbols, different arities)
+but has the same theorems as the original up to this translation.
+
+=========================================================
+END OF INSTRUCTIONS
+=========================================================
