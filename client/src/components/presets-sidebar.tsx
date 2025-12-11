@@ -1,9 +1,7 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronDown, FileText } from "lucide-react";
-import { useState } from "react";
+import { FileText } from "lucide-react";
 
 export interface Preset {
   id: string;
@@ -457,8 +455,6 @@ interface PresetsSidebarProps {
 }
 
 export function PresetsSidebar({ onSelectPreset, onScrollToFunction }: PresetsSidebarProps) {
-  const [openSections, setOpenSections] = useState<number[]>([1, 2, 3]);
-
   const functionNames = [
     "Axiom-Set / Theory Transformation (1 Arg)",
     "Schema Equivalence (2 Args)",
@@ -471,12 +467,6 @@ export function PresetsSidebar({ onSelectPreset, onScrollToFunction }: PresetsSi
     "Interpret Canonical Meaning (1 Arg)",
     "Find an Interpretation (1 Arg)"
   ];
-
-  const toggleSection = (id: number) => {
-    setOpenSections(prev => 
-      prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
-    );
-  };
 
   const groupedPresets = functionNames.map((name, idx) => ({
     id: idx + 1,
@@ -499,49 +489,35 @@ export function PresetsSidebar({ onSelectPreset, onScrollToFunction }: PresetsSi
       <ScrollArea className="flex-1">
         <div className="p-2 space-y-1">
           {groupedPresets.map((group) => (
-            <Collapsible 
-              key={group.id} 
-              open={openSections.includes(group.id)}
-              onOpenChange={() => toggleSection(group.id)}
-            >
-              <div className="flex items-center w-full">
-                <button
-                  className="flex items-center gap-2 min-w-0 flex-1 p-2 rounded-sm hover:bg-muted/50 transition-colors text-left"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onScrollToFunction?.(group.id);
-                  }}
-                >
-                  <Badge variant="outline" className="font-mono text-[10px] shrink-0 rounded-sm">
-                    {group.id}
-                  </Badge>
-                  <span className="text-xs font-medium truncate">{group.name}</span>
-                </button>
-                <CollapsibleTrigger className="p-2 rounded-sm hover:bg-muted/50 transition-colors">
-                  <ChevronDown className={`h-3 w-3 shrink-0 text-muted-foreground transition-transform ${openSections.includes(group.id) ? 'rotate-180' : ''}`} />
-                </CollapsibleTrigger>
+            <div key={group.id}>
+              <button
+                className="flex items-center gap-2 min-w-0 w-full p-2 rounded-sm hover:bg-muted/50 transition-colors text-left"
+                onClick={() => onScrollToFunction?.(group.id)}
+              >
+                <Badge variant="outline" className="font-mono text-[10px] shrink-0 rounded-sm">
+                  {group.id}
+                </Badge>
+                <span className="text-xs font-medium truncate">{group.name}</span>
+              </button>
+              <div className="pl-4 pr-2 pb-2 space-y-1">
+                {group.presets.length > 0 ? (
+                  group.presets.map((preset) => (
+                    <Button
+                      key={preset.id}
+                      variant="ghost"
+                      size="sm"
+                      className="w-full justify-start text-xs h-8 font-normal text-muted-foreground hover:text-foreground"
+                      onClick={() => onSelectPreset(preset)}
+                      data-testid={`preset-${preset.id}`}
+                    >
+                      {preset.name}
+                    </Button>
+                  ))
+                ) : (
+                  <p className="text-[10px] text-muted-foreground/50 py-1 pl-2">No presets</p>
+                )}
               </div>
-              <CollapsibleContent>
-                <div className="pl-4 pr-2 pb-2 space-y-1">
-                  {group.presets.length > 0 ? (
-                    group.presets.map((preset) => (
-                      <Button
-                        key={preset.id}
-                        variant="ghost"
-                        size="sm"
-                        className="w-full justify-start text-xs h-8 font-normal text-muted-foreground hover:text-foreground"
-                        onClick={() => onSelectPreset(preset)}
-                        data-testid={`preset-${preset.id}`}
-                      >
-                        {preset.name}
-                      </Button>
-                    ))
-                  ) : (
-                    <p className="text-[10px] text-muted-foreground/50 py-1 pl-2">No presets</p>
-                  )}
-                </div>
-              </CollapsibleContent>
-            </Collapsible>
+            </div>
           ))}
         </div>
       </ScrollArea>
