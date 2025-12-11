@@ -1,0 +1,84 @@
+Completely delete all existing logic for 
+"Axiom-Set / Theory Transformation (One Argument)".
+Replace it entirely with the following rules.
+
+=====================================================
+NEW LOGIC FOR THIS FUNCTION (NON-EXPLAIN VERSION)
+=====================================================
+
+1. INPUT FORMAT:
+The user provides ONE theory consisting of:
+   - LANGUAGE: a set of primitive symbols
+   - AXIOMS: a list of formulas in that language
+
+2. TASK:
+Produce a NEW THEORY that is model-equivalent to the original theory,
+but with *rewritten primitives and rewritten axioms*.
+
+The transformation must:
+   - Introduce ONE new primitive symbol, OR eliminate the original primitive,
+     OR re-express the axioms using a definitional equivalence.
+   - Preserve all models up to definitional expansion.
+   - Produce a CLEAN syntactic rewrite ONLY.
+
+3. OUTPUT FORMAT:
+The output MUST follow exactly this structure:
+
+1. THE RESULT
+
+LANGUAGE: { <new primitives> }
+
+DEFINITIONS (if needed):
+<old_symbol>(...) ↔ <formula using new primitives>
+
+AXIOMS:
+1. <rewritten axiom>
+2. <rewritten axiom>
+...
+
+4. WHAT IS NOT ALLOWED:
+   - NO model construction
+   - NO domains
+   - NO interpretations
+   - NO analogies (letters, numbers, servers, etc.)
+   - NO semantic discussion
+   - NO proofs
+   - NO paragraphs of explanation
+   - NO justification of why it works
+   - NO commentary on strict orders, graphs, etc.
+
+5. WHAT IS REQUIRED:
+   - A purely syntactic rewrite of the theory.
+   - A definitional bridge between old and new primitives (if applicable).
+   - A set of axioms over the new primitives that preserves equivalence.
+   - Output must be SHORT and FORMAL.
+
+6. REQUIRED STYLE — EXAMPLE THE APP MUST IMITATE EXACTLY:
+
+INPUT:
+LANGUAGE: {R(x,y)}
+AXIOMS:
+1. ∀x ¬R(x,x)
+2. ∀x∀y∀z ((R(x,y) ∧ R(y,z)) → R(x,z))
+
+OUTPUT:
+1. THE RESULT
+
+LANGUAGE: {T(x,y)}
+
+DEFINITIONS:
+R(x,y) ↔ (T(x,y) ∧ x ≠ y)
+
+AXIOMS:
+1. ∀x T(x,x)
+2. ∀x∀y∀z ((T(x,y) ∧ T(y,z)) → T(x,z))
+
+7. FURTHER RULES:
+   - Always choose the simplest possible new primitive.
+   - If eliminating a primitive, provide a definition tying the old symbol 
+     to the new one.
+   - All rewritten axioms must be valid in exactly the same class of models.
+
+=====================================================
+THIS REPLACES ALL PRIOR LOGIC FOR THIS FUNCTION.
+=====================================================
