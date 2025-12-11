@@ -84,6 +84,8 @@ GENERAL RULES:
 
 CATEGORY GUIDANCE:
 - Mathematical: algebra, topology, geometry, calculus, trigonometry (use set theory/logic only as last resort)
+- Computational: data structures, algorithms, types, programs, processes, state machines
+- Philosophical: substances, properties, events, minds, abstract objects, modalities
 - Physical: tangible everyday reality - objects, heat, weight, space, motion in intuitive sense
 - Physics: scientific physics - spacetime, fields, forces, thermodynamics, relativity
 - Chemical: reactions, molecular structures, chemical species
@@ -455,6 +457,8 @@ RULES:
 
 CATEGORY GUIDANCE:
 - Mathematical: algebra, topology, geometry, calculus (set theory only as last resort)
+- Computational: data structures, algorithms, types, programs, processes
+- Philosophical: substances, properties, events, minds, abstract objects
 - Physical: everyday tangible reality - objects, containers, weight, heat
 - Physics: scientific physics - spacetime, fields, forces, thermodynamics
 - Chemical: reactions, species, molecular structures
