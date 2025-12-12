@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, Play, ArrowRight, AlertCircle, Copy, Check, Trash2 } from "lucide-react";
+import { Loader2, Play, ArrowRight, AlertCircle, Copy, Check, Trash2, FileInput } from "lucide-react";
 import { type LLM, processTheory } from "@/lib/api";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
@@ -10,6 +10,7 @@ import { handlePaste } from "@/lib/normalizer";
 import { PRESETS } from "@/components/presets-sidebar";
 import { BatchExecutionPanel } from "@/components/batch-execution-panel";
 import { BatchResultsAccordion, type BatchResult } from "@/components/batch-results-accordion";
+import { getExamplesForFunction, type FunctionExample } from "@/lib/function-examples";
 
 interface DualInputRowProps {
   id: number;
@@ -49,6 +50,16 @@ export function DualInputRow({ id, title, description, selectedModel, presetInpu
         instructions: p.instructions
       }));
   }, [id]);
+
+  const examples = useMemo(() => getExamplesForFunction(id), [id]);
+
+  const loadExample = (example: FunctionExample) => {
+    if (example.inputA) setInputA(example.inputA);
+    if (example.inputB) setInputB(example.inputB);
+    setOutput("");
+    setError(null);
+    setBatchResults([]);
+  };
 
   const handleCopy = async () => {
     if (!output) return;
@@ -163,6 +174,26 @@ export function DualInputRow({ id, title, description, selectedModel, presetInpu
           </div>
           {description && (
             <p className="text-sm text-muted-foreground ml-12">{description}</p>
+          )}
+          {examples.length > 0 && (
+            <div className="flex items-center gap-2 ml-12 mt-2">
+              <span className="text-[10px] font-mono text-muted-foreground uppercase flex items-center gap-1">
+                <FileInput className="h-3 w-3" />
+                Examples:
+              </span>
+              {examples.map(ex => (
+                <Button
+                  key={ex.id}
+                  variant="outline"
+                  size="sm"
+                  onClick={() => loadExample(ex)}
+                  className="h-6 text-[10px] px-2 font-mono"
+                  data-testid={`example-${ex.id}`}
+                >
+                  {ex.name}
+                </Button>
+              ))}
+            </div>
           )}
         </div>
         <div className="flex items-center gap-4">

@@ -1,0 +1,387 @@
+**Pair 1**
+A:
+1. ∀x(x = x)
+2. ∀x∀y(x = y → y = x)
+3. ∀x∀y∀z((x = y ∧ y = z) → x = z)
+
+B:
+1. ∀x(Fx → Gx)
+2. ∀x(Gx → Hx)
+3. ∀x(Hx → Jx)
+4. ∃x(Fx)
+
+**Pair 2**
+A:
+1. ∀x(x + 0 = x)
+2. ∀x(x · 1 = x)
+3. ∀x(x · 0 = 0)
+4. ∀x∀y(x + y = y + x)
+5. ∀x∀y(x · y = y · x)
+
+B:
+1. ∀x(Rxx)
+2. ∀x∀y(Rxy → Ryx)
+3. ∀x∀y∀z((Rxy ∧ Ryz) → Rxz)
+
+**Pair 3**
+A:
+1. ∀x¬(x < x)
+2. ∀x∀y∀z((x < y ∧ y < z) → x < z)
+3. ∀x∀y(x < y ∨ x = y ∨ y < x)
+4. ∀x∃y(x < y)
+5. ∀x∃y(y < x)
+
+B:
+1. ∃x(Px)
+2. ∃x(Qx)
+3. ∀x(Px → ¬Qx)
+4. ∀x((Px ∨ Qx) → Rx)
+5. ∃x(Rx ∧ Sx)
+
+**Pair 4**
+A:
+1. □(P → P)
+2. □P → P
+3. □P → □□P
+4. ◇P → □◇P
+5. □(P → Q) → (□P → □Q)
+
+B:
+1. ∀x(Part(x,x))
+2. ∀x∀y((Part(x,y) ∧ Part(y,x)) → x = y)
+3. ∀x∀y∀z((Part(x,y) ∧ Part(y,z)) → Part(x,z))
+4. ∀x∀y(Overlap(x,y) ↔ ∃z(Part(z,x) ∧ Part(z,y)))
+
+**Pair 5**
+A:
+1. ∀x∀y∃z(z = x ⊕ y)
+2. ∀x∀y(x ⊕ y = y ⊕ x)
+3. ∀x∀y∀z((x ⊕ y) ⊕ z = x ⊕ (y ⊕ z))
+4. ∃e∀x(x ⊕ e = x)
+5. ∀x∃y(x ⊕ y = e)
+
+B:
+1. ∀x(Ax → Bx)
+2. ∀x(Bx → (Cx ∨ Dx))
+3. ∀x(Cx → Ex)
+4. ∀x(Dx → Ex)
+5. ∃x(Ax)
+6. ∀x(Ex → Fx)
+
+**Pair 6**
+A:
+1. ∀x(0 ≤ x)
+2. ∀x(x ≤ x)
+3. ∀x∀y((x ≤ y ∧ y ≤ x) → x = y)
+4. ∀x∀y∀z((x ≤ y ∧ y ≤ z) → x ≤ z)
+5. ∀x∀y(x ≤ y ∨ y ≤ x)
+6. ∀x∀y∃z(z = max(x,y))
+
+B:
+1. ∀x(Kx → Lx)
+2. ∀x(Lx → Mx)
+3. ∀x(Mx → ¬Nx)
+4. ∃x(Kx ∧ Ox)
+5. ∀x(Ox → Px)
+
+**Pair 7**
+A:
+1. ∀x∀y(d(x,y) ≥ 0)
+2. ∀x∀y(d(x,y) = 0 ↔ x = y)
+3. ∀x∀y(d(x,y) = d(y,x))
+4. ∀x∀y∀z(d(x,z) ≤ d(x,y) + d(y,z))
+
+B:
+1. ∀x(Sx → ∃y(Ty ∧ Rxy))
+2. ∀x(Tx → ∃y(Uy ∧ Rxy))
+3. ∀x∀y(Rxy → Ryx)
+4. ∃x(Sx)
+5. ∀x(Ux → Vx)
+
+**Pair 8**
+A:
+1. ∀x(x ∧ ⊤ = x)
+2. ∀x(x ∨ ⊥ = x)
+3. ∀x(x ∧ x′ = ⊥)
+4. ∀x(x ∨ x′ = ⊤)
+5. ∀x(x′′ = x)
+6. ∀x∀y((x ∧ y)′ = x′ ∨ y′)
+7. ∀x∀y((x ∨ y)′ = x′ ∧ y′)
+
+B:
+1. ∃x∃y∃z(x ≠ y ∧ y ≠ z ∧ x ≠ z)
+2. ∀x∀y(Cxy ∨ ¬Cxy)
+3. ∀x¬Cxx
+4. ∀x∃y(Cxy)
+
+**Pair 9**
+A:
+1. ∀x(S0 ≠ x + x)
+2. ∀x(x + 0 = x)
+3. ∀x∀y(x + Sy = S(x + y))
+4. ∀x(x · 0 = 0)
+5. ∀x∀y(x · Sy = (x · y) + x)
+
+B:
+1. ∀x(Hx → Ix)
+2. ∀x(Ix → (Jx ∧ Kx))
+3. ∀x(Jx → Lx)
+4. ∀x(Kx → Mx)
+5. ∃x(Hx ∧ Nx)
+6. ∀x(Nx → Ox)
+
+**Pair 10**
+A:
+1. ∀x(f(x) ∈ D)
+2. ∀x∀y(f(x) = f(y) → x = y)
+3. ∀y∃x(f(x) = y)
+4. f(f(x)) = x
+5. ∀x(f(x) ≠ x)
+
+B:
+1. ∀x(Wx → ∃y(Wy ∧ Exy ∧ y ≠ x))
+2. ∀x∀y(Exy → Eyx)
+3. ∀x∀y∀z((Exy ∧ Eyz) → Exz)
+4. ∀x(Exx)
+5. ∃x(Wx)
+
+**Pair 11**
+A:
+1. ∀x∀y(x ∩ y = y ∩ x)
+2. ∀x∀y(x ∪ y = y ∪ x)
+3. ∀x∀y∀z(x ∩ (y ∩ z) = (x ∩ y) ∩ z)
+4. ∀x∀y∀z(x ∪ (y ∪ z) = (x ∪ y) ∪ z)
+5. ∀x∀y(x ∩ (x ∪ y) = x)
+6. ∀x∀y(x ∪ (x ∩ y) = x)
+
+B:
+1. ∀x(Gx → Hx)
+2. ∀x(Hx → (Ix ∨ Jx))
+3. ∀x(Ix → Kx)
+4. ∀x(Jx → Kx)
+5. ∀x(Kx → ¬Lx)
+6. ∃x(Gx ∧ Mx)
+7. ∃x(Lx)
+
+**Pair 12**
+A:
+1. ∀x∀y∃z(z = x * y)
+2. ∀x∀y∀z((x * y) * z = x * (y * z))
+3. ∃e∀x(e * x = x ∧ x * e = x)
+4. ∀x∃y(x * y = e ∧ y * x = e)
+5. ∀x∀y(x * y = y * x)
+
+B:
+1. □P → ◇P
+2. □(P → Q) → (□P → □Q)
+3. ◇(P ∧ Q) → (◇P ∧ ◇Q)
+4. □(P ∧ Q) ↔ (□P ∧ □Q)
+
+**Pair 13**
+A:
+1. ∀x(|x| ≥ 0)
+2. ∀x(|x| = 0 ↔ x = 0)
+3. ∀x∀y(|x · y| = |x| · |y|)
+4. ∀x∀y(|x + y| ≤ |x| + |y|)
+5. ∀x(|−x| = |x|)
+
+B:
+1. ∀x∀y(Axy → ¬Ayx)
+2. ∀x∀y∀z((Axy ∧ Ayz) → Axz)
+3. ∀x¬Axx
+4. ∀x∃y(Axy)
+5. ∀x∃y(Ayx)
+
+**Pair 14**
+A:
+1. ∀p(p → p)
+2. ∀p∀q(p → (q → p))
+3. ∀p∀q∀r((p → (q → r)) → ((p → q) → (p → r)))
+4. ∀p∀q((¬p → ¬q) → (q → p))
+
+B:
+1. ∀x(Bx → Cx)
+2. ∀x(Cx → (Dx ∧ Ex))
+3. ∀x(Dx → Fx)
+4. ∀x(Ex → Gx)
+5. ∀x((Fx ∧ Gx) → Hx)
+6. ∃x(Bx)
+
+**Pair 15**
+A:
+1. ∀x∀y(x ⊑ y ∨ y ⊑ x ∨ x ⊥ y)
+2. ∀x(x ⊑ x)
+3. ∀x∀y((x ⊑ y ∧ y ⊑ x) → x = y)
+4. ∀x∀y∀z((x ⊑ y ∧ y ⊑ z) → x ⊑ z)
+5. ∃r∀x(x ⊑ r)
+
+B:
+1. ∀x(Nx → ∃y(Ny ∧ Sxy))
+2. ∀x∀y((Sxy ∧ Sxz) → y = z)
+3. ∃x(Nx ∧ ∀y¬Syx)
+4. ∀x∀y(Sxy → (Nx ∧ Ny))
+
+**Pair 16**
+A:
+1. ∀x∀y(x ⊔ y = y ⊔ x)
+2. ∀x∀y(x ⊓ y = y ⊓ x)
+3. ∀x∀y∀z(x ⊔ (y ⊔ z) = (x ⊔ y) ⊔ z)
+4. ∀x∀y∀z(x ⊓ (y ⊓ z) = (x ⊓ y) ⊓ z)
+5. ∀x(x ⊔ x = x)
+6. ∀x(x ⊓ x = x)
+7. ∀x∀y(x ⊓ (x ⊔ y) = x)
+
+B:
+1. ∀x∀y(Txy → ∃z(Tzx ∧ Tzy))
+2. ∀x(Txx)
+3. ∀x∀y∀z((Txy ∧ Tyz) → Txz)
+4. ∃a∃b(Tab ∧ a ≠ b)
+
+**Pair 17**
+A:
+1. ∀v(v + 0⃗ = v)
+2. ∀v(v + (−v) = 0⃗)
+3. ∀v∀w(v + w = w + v)
+4. ∀u∀v∀w((u + v) + w = u + (v + w))
+5. ∀v(1 · v = v)
+6. ∀a∀b∀v((ab) · v = a · (b · v))
+
+B:
+1. ∀x(Jx → (Kx ∨ Lx))
+2. ∀x(Kx → Mx)
+3. ∀x(Lx → Mx)
+4. ∀x(Mx → Nx)
+5. ∃x(Jx ∧ Ox)
+6. ∀x(Ox → Px)
+7. ∀x(Px → ¬Qx)
+
+**Pair 18**
+A:
+1. ∀x(0 ≤ μ(x) ≤ 1)
+2. μ(∅) = 0
+3. μ(U) = 1
+4. ∀x∀y(x ∩ y = ∅ → μ(x ∪ y) = μ(x) + μ(y))
+5. ∀x(μ(xᶜ) = 1 − μ(x))
+
+B:
+1. ∀x∀y(Cxy → Cyx)
+2. ∀x∃y(Cxy ∧ x ≠ y)
+3. ∀x∀y∀z((Cxy ∧ Cyz ∧ x ≠ z) → Cxz)
+4. ∃x∃y(¬Cxy)
+
+**Pair 19**
+A:
+1. ∀x(x ≡ x)
+2. ∀x∀y(x ≡ y → y ≡ x)
+3. ∀x∀y∀z((x ≡ y ∧ y ≡ z) → x ≡ z)
+4. ∀x∃y(y ≡ x ∧ y ≠ x)
+5. ∃a∃b∃c(a ≢ b ∧ b ≢ c ∧ a ≢ c)
+
+B:
+1. ∀x(Ax → Bx)
+2. ∀x(Bx → Cx)
+3. ∀x(Cx → (Dx ↔ Ex))
+4. ∃x(Ax ∧ Dx)
+5. ∃x(Ax ∧ ¬Dx)
+
+**Pair 20**
+A:
+1. ∀x∀y(⟨x,y⟩ = ⟨y,x⟩ → x = y)
+2. ∀x∀y∀z∀w(⟨x,y⟩ = ⟨z,w⟩ → (x = z ∧ y = w))
+3. ∀x∀y∃z(z = ⟨x,y⟩)
+4. ∀x∃y∃z(x = ⟨y,z⟩ → (π₁(x) = y ∧ π₂(x) = z))
+
+B:
+1. ∀x(Wx → Xx)
+2. ∀x(Xx → Yx)
+3. ∀x(Yx → Zx)
+4. ∀x(Zx → ¬Wx)
+5. ∃x¬Wx
+6. ∃x(Xx ∧ ¬Yx)
+
+**Pair 21**
+A:
+1. ∀x(x → x = ⊤)
+2. ∀x(x ⊗ ⊤ = x)
+3. ∀x∀y(x ⊗ y = y ⊗ x)
+4. ∀x∀y∀z((x ⊗ y) ⊗ z = x ⊗ (y ⊗ z))
+5. ∀x∀y((x ⊗ y) → z ↔ x → (y → z))
+
+B:
+1. ∀t(t < t′)
+2. ∀t∀s(t < s ∨ t = s ∨ s < t)
+3. ∀t∀s∀r((t < s ∧ s < r) → t < r)
+4. ∀t¬(t < t)
+5. ∀t∃s(s < t)
+
+**Pair 22**
+A:
+1. ∀x(in(x, ∅) → ⊥)
+2. ∀x∀y∀z(in(x, {y,z}) ↔ (x = y ∨ x = z))
+3. ∀x∀A∀B(in(x, A ∪ B) ↔ (in(x,A) ∨ in(x,B)))
+4. ∀x∀A∀B(in(x, A ∩ B) ↔ (in(x,A) ∧ in(x,B)))
+5. ∀A∀B(A = B ↔ ∀x(in(x,A) ↔ in(x,B)))
+
+B:
+1. ∀x(Px → Qx)
+2. ∀x(Qx → (Rx ∨ Sx))
+3. ∀x(Rx → Tx)
+4. ∀x(Sx → Tx)
+5. ∀x(Tx → Ux)
+6. ∀x(Ux → ¬Vx)
+7. ∃x(Px ∧ Wx)
+8. ∃x(Vx)
+
+**Pair 23**
+A:
+1. ∀f∀g∀x((f ∘ g)(x) = f(g(x)))
+2. ∀f(f ∘ id = f)
+3. ∀f(id ∘ f = f)
+4. ∀f∀g∀h((f ∘ g) ∘ h = f ∘ (g ∘ h))
+5. ∀x(id(x) = x)
+
+B:
+1. ∀x∀y(Bxy → ∃z(Bxz ∧ Bzy))
+2. ∀x∃y(Bxy)
+3. ∀x∀y∀z((Bxy ∧ Bxz) → (y = z ∨ Byz ∨ Bzy))
+4. ∀x¬Bxx
+
+**Pair 24**
+A:
+1. ∀a(a ∨ ¬a = 1)
+2. ∀a(a ∧ ¬a = 0)
+3. ∀a(a ∨ 0 = a)
+4. ∀a(a ∧ 1 = a)
+5. ∀a∀b(a ∨ (a ∧ b) = a)
+6. ∀a∀b(a ∧ (a ∨ b) = a)
+7. ∀a∀b∀c(a ∨ (b ∧ c) = (a ∨ b) ∧ (a ∨ c))
+8. ∀a∀b∀c(a ∧ (b ∨ c) = (a ∧ b) ∨ (a ∧ c))
+
+B:
+1. ∀x(Dx → Ex)
+2. ∀x(Ex → (Fx ∧ Gx))
+3. ∀x(Fx → Hx)
+4. ∀x(Gx → Ix)
+5. ∀x((Hx ∧ Ix) → Jx)
+6. ∃x(Dx ∧ Kx)
+7. ∀x(Kx → Lx)
+
+**Pair 25**
+A:
+1. ∀x∀y(x ≼ y → f(x) ≼ f(y))
+2. ∀x(x ≼ f(x))
+3. ∀x(f(f(x)) = f(x))
+4. ∀x(x ≼ x)
+5. ∀x∀y((x ≼ y ∧ y ≼ x) → x = y)
+6. ∀x∀y∀z((x ≼ y ∧ y ≼ z) → x ≼ z)
+
+B:
+1. ∀x(Mx → Nx)
+2. ∀x(Nx → Ox)
+3. ∀x(Ox → (Px ⊕ Qx))
+4. ∀x(Px → Rx)
+5. ∀x(Qx → Rx)
+6. ∀x(Rx → Sx)
+7. ∃x(Mx ∧ Tx)
+8. ∀x(Tx → Ux)
+9. ∀x(Ux → ¬Vx)
