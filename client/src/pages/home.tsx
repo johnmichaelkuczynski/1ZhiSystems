@@ -156,7 +156,7 @@ export default function Home() {
 
             {/* Chat Interface Column */}
             <div className="xl:col-span-4">
-              <div className="sticky top-24">
+              <div className="sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto rounded-sm">
                 <Tabs defaultValue="builder" className="w-full">
                   <TabsList className="w-full grid grid-cols-4 mb-4">
                     <TabsTrigger value="builder" className="flex items-center gap-1 text-[9px] font-mono px-1" data-testid="tab-builder">
