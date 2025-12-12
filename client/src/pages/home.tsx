@@ -6,8 +6,9 @@ import { DualInputRow } from "@/components/dual-input-row";
 import { PresetsSidebar, type Preset } from "@/components/presets-sidebar";
 import { AxiomLibrary } from "@/components/axiom-library";
 import { AxiomBuilder } from "@/components/axiom-builder";
+import { FormalizerConsole } from "@/components/formalizer-console";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Bot, BookOpen, Hammer } from "lucide-react";
+import { Bot, BookOpen, Hammer, FileText } from "lucide-react";
 import generatedLogo from "@assets/generated_images/minimalist_geometric_logo_representing_logic_transformation.png";
 
 interface FunctionInputs {
@@ -157,16 +158,20 @@ export default function Home() {
             <div className="xl:col-span-4">
               <div className="sticky top-24">
                 <Tabs defaultValue="builder" className="w-full">
-                  <TabsList className="w-full grid grid-cols-3 mb-4">
-                    <TabsTrigger value="builder" className="flex items-center gap-1.5 text-[10px] font-mono" data-testid="tab-builder">
+                  <TabsList className="w-full grid grid-cols-4 mb-4">
+                    <TabsTrigger value="builder" className="flex items-center gap-1 text-[9px] font-mono px-1" data-testid="tab-builder">
                       <Hammer className="h-3 w-3" />
-                      BUILDER
+                      BUILD
                     </TabsTrigger>
-                    <TabsTrigger value="library" className="flex items-center gap-1.5 text-[10px] font-mono" data-testid="tab-library">
+                    <TabsTrigger value="library" className="flex items-center gap-1 text-[9px] font-mono px-1" data-testid="tab-library">
                       <BookOpen className="h-3 w-3" />
                       LIBRARY
                     </TabsTrigger>
-                    <TabsTrigger value="chat" className="flex items-center gap-1.5 text-[10px] font-mono" data-testid="tab-chat">
+                    <TabsTrigger value="formalizer" className="flex items-center gap-1 text-[9px] font-mono px-1" data-testid="tab-formalizer">
+                      <FileText className="h-3 w-3" />
+                      FORMALIZE
+                    </TabsTrigger>
+                    <TabsTrigger value="chat" className="flex items-center gap-1 text-[9px] font-mono px-1" data-testid="tab-chat">
                       <Bot className="h-3 w-3" />
                       CHAT
                     </TabsTrigger>
@@ -178,6 +183,10 @@ export default function Home() {
                   
                   <TabsContent value="library" className="mt-0">
                     <AxiomLibrary />
+                  </TabsContent>
+                  
+                  <TabsContent value="formalizer" className="mt-0">
+                    <FormalizerConsole selectedModel={selectedModel} />
                   </TabsContent>
                   
                   <TabsContent value="chat" className="mt-0 space-y-4">
