@@ -568,6 +568,112 @@ AXIOMS:
 2. ∀x(x ~ x)
 3. ∀x∀y(x ~ y → y ~ x)`
   },
+  {
+    id: "differential-structure",
+    name: "Differential Structure Without Limits",
+    category: "Advanced Mathematics",
+    description: "Abstract differential operator without topology",
+    content: `LANGUAGE: {+, ·, 0, 1, D(x,y)}
+
+D(x,y) = "y is the derivative of x"
+
+AXIOMS:
+1. ∀x ∃!y D(x,y)
+2. ∀x∀y∀z ((D(x,y) ∧ D(x,z)) → y = z)
+3. ∀x∀y∀z ((D(x,y) ∧ D(y,z)) → D(x,z))
+4. D(0,0)
+5. ∀x (D(x,0) ↔ x = c) for constant c
+6. ∀x∀y (D(x,y) → D(x + c, y))
+7. ∀x∀y∀z ((D(x,y) ∧ D(z,y)) → ∃w (x = z + w ∧ D(w,0)))`
+  },
+  {
+    id: "primitive-flow-calculus",
+    name: "Primitive Flow Calculus",
+    category: "Advanced Mathematics",
+    description: "Time-free dynamics with directed flow",
+    content: `LANGUAGE: {State(x), Flow(x,y), Compose(x,y,z)}
+
+AXIOMS:
+1. ∀x State(x)
+2. ∀x ∃y Flow(x,y)
+3. ∀x Flow(x,x)
+4. ∀x∀y∀z ((Flow(x,y) ∧ Flow(y,z)) → Flow(x,z))
+5. ∀x∀y (Flow(x,y) → ∃z (Flow(x,z) ∧ Flow(z,y)))
+6. ∀x∀y ((Flow(x,y) ∧ Flow(y,x)) → x = y)`
+  },
+  {
+    id: "minimal-market",
+    name: "Minimal Market Without Prices",
+    category: "Economics",
+    description: "Pure exchange without utilities or prices",
+    content: `LANGUAGE: {Agent(x), Good(g), Has(x,g), CanTrade(x,y)}
+
+AXIOMS:
+1. ∀x ∃g Has(x,g)
+2. ∀x∀y (CanTrade(x,y) → CanTrade(y,x))
+3. ∀x ¬CanTrade(x,x)
+4. ∀x∀y ((Has(x,g) ∧ ¬Has(y,g)) → CanTrade(x,y))
+5. ∀x∀y∀z ((CanTrade(x,y) ∧ CanTrade(y,z)) → CanTrade(x,z))
+6. ∀x ∃y CanTrade(x,y)`
+  },
+  {
+    id: "preference-endogenous",
+    name: "Preference with Endogenous Comparison",
+    category: "Economics",
+    description: "Non-utility preference theory",
+    content: `LANGUAGE: {Pref(x,y), Compare(x,y,z)}
+
+Compare(x,y,z) = "z prefers x to y"
+
+AXIOMS:
+1. ∀x∀y∀z (Compare(x,y,z) → Pref(x,y))
+2. ∀x∀y (Pref(x,y) → ¬Pref(y,x))
+3. ∀x∀y∀z ((Pref(x,y) ∧ Pref(y,z)) → Pref(x,z))
+4. ∀x∀y ∃z Compare(x,y,z)
+5. ∃x∃y∃z∃z' (Compare(x,y,z) ∧ Compare(y,x,z'))`
+  },
+  {
+    id: "proto-probability",
+    name: "Proto-Probability Without Numbers",
+    category: "Advanced Mathematics",
+    description: "Pre-numerical comparative probability",
+    content: `LANGUAGE: {MoreLikely(x,y), Event(x), Incomparable(x,y)}
+
+AXIOMS:
+1. ∀x ¬MoreLikely(x,x)
+2. ∀x∀y (MoreLikely(x,y) → ¬MoreLikely(y,x))
+3. ∀x∀y∀z ((MoreLikely(x,y) ∧ MoreLikely(y,z)) → MoreLikely(x,z))
+4. ∀x∀y (x ≠ y → (MoreLikely(x,y) ∨ MoreLikely(y,x) ∨ Incomparable(x,y)))
+5. ∃x∃y Incomparable(x,y)`
+  },
+  {
+    id: "discrete-geometry",
+    name: "Discrete Geometry via Adjacency",
+    category: "Geometry",
+    description: "Incidence-free geometry with adjacency",
+    content: `LANGUAGE: {Point(x), Adj(x,y)}
+
+AXIOMS:
+1. ∀x ¬Adj(x,x)
+2. ∀x∀y (Adj(x,y) → Adj(y,x))
+3. ∀x ∃y Adj(x,y)
+4. ∀x∀y∀z ((Adj(x,y) ∧ Adj(y,z) ∧ x ≠ z) → ¬Adj(x,z))
+5. ∃x∃y∃z (Adj(x,y) ∧ Adj(y,z) ∧ Adj(z,x))`
+  },
+  {
+    id: "causal-asymmetry",
+    name: "Causal Asymmetry with Interventions",
+    category: "Philosophy",
+    description: "Pearl-style causal structure without probability",
+    content: `LANGUAGE: {Causes(x,y), Intervene(x,y)}
+
+AXIOMS:
+1. ∀x ¬Causes(x,x)
+2. ∀x∀y ((Causes(x,y) ∧ Causes(y,x)) → ⊥)
+3. ∀x∀y∀z ((Causes(x,y) ∧ Causes(y,z)) → Causes(x,z))
+4. ∀x∀y (Intervene(x,y) → Causes(x,y))
+5. ∃x∃y (Causes(x,y) ∧ ¬Intervene(x,y))`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [

@@ -1,0 +1,152 @@
+1. Differential Structure Without Limits (Calculus-Proper)
+
+Language:
++ , · , 0 , 1 , D(x,y)
+
+Intended reading: D(x,y) = “y is the derivative of x”
+
+Axioms:
+
+∀x ∃!y D(x,y)
+
+∀x ∀y ∀z ((D(x,y) ∧ D(x,z)) → y = z)
+
+∀x ∀y ∀z ((D(x,y) ∧ D(y,z)) → D(x,z))
+
+D(0,0)
+
+∀x (D(x,0) ↔ x = c) for some constant c
+
+∀x∀y (D(x,y) → D(x + c, y))
+
+∀x∀y∀z ((D(x,y) ∧ D(z,y)) → ∃w (x = z + w ∧ D(w,0)))
+
+What it is:
+An abstract differential operator without limits, continuity, or topology. It behaves like differentiation up to constants.
+
+2. Primitive Flow Calculus (Time-Free Dynamics)
+
+Language:
+State(x), Flow(x,y), Compose(x,y,z)
+
+Axioms:
+
+∀x State(x)
+
+∀x ∃y Flow(x,y)
+
+∀x Flow(x,x)
+
+∀x∀y∀z ((Flow(x,y) ∧ Flow(y,z)) → Flow(x,z))
+
+∀x∀y (Flow(x,y) → ∃z (Flow(x,z) ∧ Flow(z,y)))
+
+∀x∀y ((Flow(x,y) ∧ Flow(y,x)) → x = y)
+
+What it is:
+A directed, irreversible dynamical system without clocks. Captures asymmetry, stability, and evolution.
+
+3. Minimal Market Without Prices (Pure Exchange)
+
+Language:
+Agent(x), Good(g), Has(x,g), CanTrade(x,y)
+
+Axioms:
+
+∀x ∃g Has(x,g)
+
+∀x∀y ((CanTrade(x,y)) → CanTrade(y,x))
+
+∀x ¬CanTrade(x,x)
+
+∀x∀y ((Has(x,g) ∧ ¬Has(y,g)) → CanTrade(x,y))
+
+∀x∀y∀z ((CanTrade(x,y) ∧ CanTrade(y,z)) → CanTrade(x,z))
+
+∀x ∃y (CanTrade(x,y))
+
+What it is:
+An exchange economy without prices, utilities, or equilibrium. Trade arises purely from asymmetric holdings.
+
+4. Preference with Endogenous Comparison (Non-Utility Econ)
+
+Language:
+Pref(x,y), Compare(x,y,z)
+
+Intended reading:
+Compare(x,y,z) = “z prefers x to y”
+
+Axioms:
+
+∀x∀y∀z (Compare(x,y,z) → Pref(x,y))
+
+∀x∀y (Pref(x,y) → ¬Pref(y,x))
+
+∀x∀y∀z ((Pref(x,y) ∧ Pref(y,z)) → Pref(x,z))
+
+∀x∀y ∃z (Compare(x,y,z))
+
+∃x∃y∃z (Compare(x,y,z) ∧ Compare(y,x,z'))
+
+What it is:
+Preferences exist only through agents. No global utility, no completeness.
+
+5. Proto-Probability Without Numbers
+
+Language:
+MoreLikely(x,y), Event(x)
+
+Axioms:
+
+∀x ¬MoreLikely(x,x)
+
+∀x∀y (MoreLikely(x,y) → ¬MoreLikely(y,x))
+
+∀x∀y∀z ((MoreLikely(x,y) ∧ MoreLikely(y,z)) → MoreLikely(x,z))
+
+∀x∀y (x ≠ y → (MoreLikely(x,y) ∨ MoreLikely(y,x) ∨ Incomparable(x,y)))
+
+∃x∃y Incomparable(x,y)
+
+What it is:
+A pre-numerical probability theory. Order without measure.
+
+6. Discrete Geometry via Adjacency (No Coordinates)
+
+Language:
+Point(x), Adj(x,y)
+
+Axioms:
+
+∀x ¬Adj(x,x)
+
+∀x∀y (Adj(x,y) → Adj(y,x))
+
+∀x ∃y Adj(x,y)
+
+∀x∀y∀z ((Adj(x,y) ∧ Adj(y,z) ∧ x ≠ z) → ¬Adj(x,z))
+
+∃x∃y∃z (Adj(x,y) ∧ Adj(y,z) ∧ Adj(z,x))
+
+What it is:
+A pure incidence-free geometry: adjacency defines structure, triangles exist, but no metric.
+
+7. Causal Asymmetry with Interventions
+
+Language:
+Causes(x,y), Intervene(x,y)
+
+Axioms:
+
+∀x ¬Causes(x,x)
+
+∀x∀y ((Causes(x,y) ∧ Causes(y,x)) → ⊥)
+
+∀x∀y∀z ((Causes(x,y) ∧ Causes(y,z)) → Causes(x,z))
+
+∀x∀y (Intervene(x,y) → Causes(x,y))
+
+∃x∃y (Causes(x,y) ∧ ¬Intervene(x,y))
+
+What it is:
+A Pearl-style causal structure without probability.
