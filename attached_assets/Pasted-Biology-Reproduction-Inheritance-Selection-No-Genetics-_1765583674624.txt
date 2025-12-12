@@ -1,0 +1,165 @@
+Biology — Reproduction, Inheritance, Selection (No Genetics)
+
+Language:
+Organism(x), Parent(x,y), Trait(x,t), Survives(x)
+
+Axioms:
+
+∀x (Organism(x) → ∃y Parent(x,y))
+
+∀x∀y (Parent(x,y) → Organism(x) ∧ Organism(y))
+
+∀x∀t ((Trait(x,t) ∧ Parent(x,y)) → ∃t' Trait(y,t'))
+
+∀x∀y ((Parent(x,y) ∧ Parent(x,z)) → y = z)
+
+∀x ((∃t Trait(x,t)) → (Survives(x) ∨ ¬Survives(x)))
+
+∃x∃y (Trait(x,t) ∧ ¬Trait(y,t))
+
+What it captures:
+Reproduction, inheritance with variation, survival without teleology.
+
+2. Biology — Ecology Without Energy or Math
+
+Language:
+Species(x), Eats(x,y), Competes(x,y), Extinct(x)
+
+Axioms:
+
+∀x ¬Eats(x,x)
+
+∀x∀y ((Eats(x,y)) → ¬Eats(y,x))
+
+∀x∀y ((Eats(x,y)) → Competes(x,y))
+
+∀x∀y∀z ((Eats(x,y) ∧ Eats(y,z)) → Eats(x,z))
+
+∀x (Extinct(x) → ∀y ¬Eats(x,y))
+
+∃x∃y Eats(x,y)
+
+What it captures:
+Food chains, competition, extinction—no calories, no equilibrium.
+
+3. Classical Mechanics — Force-Free Kinematics
+
+Language:
+Body(x), Position(x,p,t), Moves(x)
+
+Axioms:
+
+∀x Body(x)
+
+∀x∀t ∃p Position(x,p,t)
+
+∀x (Moves(x) ↔ ∃t₁∃t₂ Position(x,p₁,t₁) ∧ Position(x,p₂,t₂) ∧ p₁ ≠ p₂)
+
+∀x∀t Position(x,p,t) → ∃t' Position(x,p',t')
+
+∃x Moves(x)
+
+What it captures:
+Motion without force, mass, or geometry—pure persistence through time.
+
+4. Physics — Causal Field Structure (Pre-Equations)
+
+Language:
+Event(x), Influences(x,y), Simultaneous(x,y)
+
+Axioms:
+
+∀x Event(x)
+
+∀x ¬Influences(x,x)
+
+∀x∀y ((Influences(x,y)) → ¬Simultaneous(x,y))
+
+∀x∀y∀z ((Influences(x,y) ∧ Influences(y,z)) → Influences(x,z))
+
+∀x∀y (Simultaneous(x,y) → Simultaneous(y,x))
+
+∃x∃y Influences(x,y)
+
+What it captures:
+Causal asymmetry + simultaneity without spacetime metrics.
+
+5. Chemistry — Reaction Network Without Stoichiometry
+
+Language:
+Substance(x), Reacts(x,y), Produces(x,y)
+
+Axioms:
+
+∀x Substance(x)
+
+∀x ¬Reacts(x,x)
+
+∀x∀y (Reacts(x,y) → Produces(x,y))
+
+∀x∀y∀z ((Produces(x,y) ∧ Produces(y,z)) → Produces(x,z))
+
+∃x∃y Reacts(x,y)
+
+What it captures:
+Transformations, chains of reactions, no quantities.
+
+6. Psychology — Belief, Desire, Action (No Rationality)
+
+Language:
+Agent(x), Believes(x,p), Desires(x,p), Acts(x,a)
+
+Axioms:
+
+∀x Agent(x)
+
+∀x∀p (Believes(x,p) → ¬Believes(x,¬p))
+
+∀x∀p (Desires(x,p) → ¬Desires(x,¬p))
+
+∀x∀p ((Believes(x,p) ∧ Desires(x,p)) → ∃a Acts(x,a))
+
+∃x∃p (Believes(x,p) ∧ ¬Desires(x,p))
+
+What it captures:
+Intentional structure without coherence or optimization.
+
+7. Economics — Production Without Utility or Prices
+
+Language:
+Firm(x), Input(x,y), Output(x,y)
+
+Axioms:
+
+∀x Firm(x)
+
+∀x∀y (Input(x,y) → ¬Output(x,y))
+
+∀x∀y (Output(x,y) → ∃z Input(x,z))
+
+∀x∀y∀z ((Input(x,y) ∧ Output(x,z)) → y ≠ z)
+
+∃x∃y Output(x,y)
+
+What it captures:
+Production structure without marginalism.
+
+8. Sociology — Institutions and Roles
+
+Language:
+Person(x), Institution(i), Member(x,i), Role(x,r)
+
+Axioms:
+
+∀x Person(x)
+
+∀i Institution(i)
+
+∀x∀i (Member(x,i) → ∃r Role(x,r))
+
+∀x∀i∀j ((Member(x,i) ∧ Member(x,j)) → i ≠ j ∨ Role(x,r₁) ≠ Role(x,r₂))
+
+∃x∃i Member(x,i)
+
+What it captures:
+Social structure without norms or power.

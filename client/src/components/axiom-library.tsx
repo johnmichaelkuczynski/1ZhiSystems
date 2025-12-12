@@ -674,6 +674,121 @@ AXIOMS:
 4. ∀x∀y (Intervene(x,y) → Causes(x,y))
 5. ∃x∃y (Causes(x,y) ∧ ¬Intervene(x,y))`
   },
+  {
+    id: "biology-reproduction",
+    name: "Biology: Reproduction, Inheritance, Selection",
+    category: "Biology",
+    description: "Reproduction and inheritance without genetics",
+    content: `LANGUAGE: {Organism(x), Parent(x,y), Trait(x,t), Survives(x)}
+
+AXIOMS:
+1. ∀x (Organism(x) → ∃y Parent(x,y))
+2. ∀x∀y (Parent(x,y) → Organism(x) ∧ Organism(y))
+3. ∀x∀t∀y ((Trait(x,t) ∧ Parent(x,y)) → ∃t' Trait(y,t'))
+4. ∀x∀y∀z ((Parent(x,y) ∧ Parent(x,z)) → y = z)
+5. ∀x ((∃t Trait(x,t)) → (Survives(x) ∨ ¬Survives(x)))
+6. ∃x∃y∃t (Trait(x,t) ∧ ¬Trait(y,t))`
+  },
+  {
+    id: "biology-ecology",
+    name: "Biology: Ecology Without Energy",
+    category: "Biology",
+    description: "Food chains and competition without calories",
+    content: `LANGUAGE: {Species(x), Eats(x,y), Competes(x,y), Extinct(x)}
+
+AXIOMS:
+1. ∀x ¬Eats(x,x)
+2. ∀x∀y (Eats(x,y) → ¬Eats(y,x))
+3. ∀x∀y (Eats(x,y) → Competes(x,y))
+4. ∀x∀y∀z ((Eats(x,y) ∧ Eats(y,z)) → Eats(x,z))
+5. ∀x (Extinct(x) → ∀y ¬Eats(x,y))
+6. ∃x∃y Eats(x,y)`
+  },
+  {
+    id: "physics-kinematics",
+    name: "Classical Mechanics: Force-Free Kinematics",
+    category: "Physics",
+    description: "Motion without force, mass, or geometry",
+    content: `LANGUAGE: {Body(x), Position(x,p,t), Moves(x)}
+
+AXIOMS:
+1. ∀x Body(x)
+2. ∀x∀t ∃p Position(x,p,t)
+3. ∀x (Moves(x) ↔ ∃t₁∃t₂∃p₁∃p₂ (Position(x,p₁,t₁) ∧ Position(x,p₂,t₂) ∧ p₁ ≠ p₂))
+4. ∀x∀t∀p (Position(x,p,t) → ∃t'∃p' Position(x,p',t'))
+5. ∃x Moves(x)`
+  },
+  {
+    id: "physics-causal-field",
+    name: "Physics: Causal Field Structure",
+    category: "Physics",
+    description: "Causal asymmetry and simultaneity pre-equations",
+    content: `LANGUAGE: {Event(x), Influences(x,y), Simultaneous(x,y)}
+
+AXIOMS:
+1. ∀x Event(x)
+2. ∀x ¬Influences(x,x)
+3. ∀x∀y (Influences(x,y) → ¬Simultaneous(x,y))
+4. ∀x∀y∀z ((Influences(x,y) ∧ Influences(y,z)) → Influences(x,z))
+5. ∀x∀y (Simultaneous(x,y) → Simultaneous(y,x))
+6. ∃x∃y Influences(x,y)`
+  },
+  {
+    id: "chemistry-reactions",
+    name: "Chemistry: Reaction Network",
+    category: "Chemistry",
+    description: "Transformations without stoichiometry",
+    content: `LANGUAGE: {Substance(x), Reacts(x,y), Produces(x,y)}
+
+AXIOMS:
+1. ∀x Substance(x)
+2. ∀x ¬Reacts(x,x)
+3. ∀x∀y (Reacts(x,y) → Produces(x,y))
+4. ∀x∀y∀z ((Produces(x,y) ∧ Produces(y,z)) → Produces(x,z))
+5. ∃x∃y Reacts(x,y)`
+  },
+  {
+    id: "psychology-bda",
+    name: "Psychology: Belief, Desire, Action",
+    category: "Psychology",
+    description: "Intentional structure without rationality",
+    content: `LANGUAGE: {Agent(x), Believes(x,p), Desires(x,p), Acts(x,a)}
+
+AXIOMS:
+1. ∀x Agent(x)
+2. ∀x∀p (Believes(x,p) → ¬Believes(x,¬p))
+3. ∀x∀p (Desires(x,p) → ¬Desires(x,¬p))
+4. ∀x∀p ((Believes(x,p) ∧ Desires(x,p)) → ∃a Acts(x,a))
+5. ∃x∃p (Believes(x,p) ∧ ¬Desires(x,p))`
+  },
+  {
+    id: "economics-production",
+    name: "Economics: Production Without Utility",
+    category: "Economics",
+    description: "Production structure without marginalism",
+    content: `LANGUAGE: {Firm(x), Input(x,y), Output(x,y)}
+
+AXIOMS:
+1. ∀x Firm(x)
+2. ∀x∀y (Input(x,y) → ¬Output(x,y))
+3. ∀x∀y (Output(x,y) → ∃z Input(x,z))
+4. ∀x∀y∀z ((Input(x,y) ∧ Output(x,z)) → y ≠ z)
+5. ∃x∃y Output(x,y)`
+  },
+  {
+    id: "sociology-institutions",
+    name: "Sociology: Institutions and Roles",
+    category: "Sociology",
+    description: "Social structure without norms or power",
+    content: `LANGUAGE: {Person(x), Institution(i), Member(x,i), Role(x,r)}
+
+AXIOMS:
+1. ∀x Person(x)
+2. ∀i Institution(i)
+3. ∀x∀i (Member(x,i) → ∃r Role(x,r))
+4. ∀x∀i∀j∀r₁∀r₂ ((Member(x,i) ∧ Member(x,j)) → (i ≠ j ∨ r₁ ≠ r₂))
+5. ∃x∃i Member(x,i)`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [
