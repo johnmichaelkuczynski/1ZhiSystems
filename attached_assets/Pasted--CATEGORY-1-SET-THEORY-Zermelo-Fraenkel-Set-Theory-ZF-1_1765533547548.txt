@@ -1,0 +1,200 @@
+**CATEGORY 1: SET THEORY**
+
+**Zermelo-Fraenkel Set Theory (ZF)**
+1. Extensionality: ∀x∀y[∀z(z ∈ x ↔ z ∈ y) → x = y]
+2. Empty Set: ∃x∀y(y ∉ x)
+3. Pairing: ∀x∀y∃z∀w(w ∈ z ↔ w = x ∨ w = y)
+4. Union: ∀x∃y∀z(z ∈ y ↔ ∃w(z ∈ w ∧ w ∈ x))
+5. Power Set: ∀x∃y∀z(z ∈ y ↔ z ⊆ x)
+6. Infinity: ∃x(∅ ∈ x ∧ ∀y(y ∈ x → y ∪ {y} ∈ x))
+7. Separation: ∀x∃y∀z(z ∈ y ↔ z ∈ x ∧ φ(z))
+8. Replacement: ∀x[∀y∈x ∃!z φ(y,z) → ∃w∀z(z ∈ w ↔ ∃y∈x φ(y,z))]
+9. Foundation: ∀x(x ≠ ∅ → ∃y∈x(y ∩ x = ∅))
+
+**Von Neumann-Bernays-Gödel Set Theory (NBG)**
+1. Extensionality for classes: ∀X∀Y[∀z(z ∈ X ↔ z ∈ Y) → X = Y]
+2. Pairing: ∀x∀y∃z∀w(w ∈ z ↔ w = x ∨ w = y)
+3. Class Comprehension: For each formula φ with no bound class variables: ∃X∀y(y ∈ X ↔ φ(y))
+4. Union: ∀x∃y∀z(z ∈ y ↔ ∃w(z ∈ w ∧ w ∈ x))
+5. Power Set: ∀x∃y∀z(z ∈ y ↔ z ⊆ x)
+6. Infinity: ∃x(∅ ∈ x ∧ ∀y(y ∈ x → y ∪ {y} ∈ x))
+7. Replacement: If F is a class function, then for any set x, F[x] is a set
+8. Foundation: ∀x(x ≠ ∅ → ∃y∈x(y ∩ x = ∅))
+9. Limitation of Size: A class is proper iff it is equinumerous with V
+
+---
+
+**CATEGORY 2: PROPOSITIONAL LOGIC**
+
+**Classical Propositional Logic (Hilbert-Ackermann)**
+1. A → (B → A)
+2. (A → (B → C)) → ((A → B) → (A → C))
+3. (¬A → ¬B) → (B → A)
+4. Rule: Modus Ponens
+
+**Łukasiewicz's Axioms for Classical Propositional Logic**
+1. (A → B) → ((B → C) → (A → C))
+2. (¬A → A) → A
+3. A → (¬A → B)
+4. Rule: Modus Ponens, Substitution
+
+---
+
+**CATEGORY 3: PREDICATE LOGIC**
+
+**First-Order Logic (Hilbert System)**
+1. All propositional tautologies
+2. ∀x φ(x) → φ(t) for t free for x
+3. ∀x(φ → ψ) → (φ → ∀x ψ) where x not free in φ
+4. x = x
+5. x = y → (φ(x) → φ(y))
+6. Rules: Modus Ponens, Universal Generalization
+
+**First-Order Logic (Natural Deduction Axiomatization)**
+1. ∀-Introduction: From Γ ⊢ φ infer Γ ⊢ ∀x φ (x not free in Γ)
+2. ∀-Elimination: From ∀x φ infer φ[t/x]
+3. ∃-Introduction: From φ[t/x] infer ∃x φ
+4. ∃-Elimination: From ∃x φ and φ → ψ infer ψ (x not free in ψ)
+5. =-Introduction: t = t
+6. =-Elimination: From t = s and φ[t/x] infer φ[s/x]
+
+---
+
+**CATEGORY 4: MODAL LOGIC**
+
+**System K**
+1. All propositional tautologies
+2. □(A → B) → (□A → □B)
+3. Rules: Modus Ponens, Necessitation (from ⊢A infer ⊢□A)
+
+**System S5**
+1. All propositional tautologies
+2. □(A → B) → (□A → □B)
+3. □A → A
+4. □A → □□A
+5. ◇A → □◇A
+6. Rules: Modus Ponens, Necessitation
+
+---
+
+**CATEGORY 5: ARITHMETIC**
+
+**Peano Arithmetic (PA)**
+1. ∀x(Sx ≠ 0)
+2. ∀x∀y(Sx = Sy → x = y)
+3. ∀x(x + 0 = x)
+4. ∀x∀y(x + Sy = S(x + y))
+5. ∀x(x · 0 = 0)
+6. ∀x∀y(x · Sy = x · y + x)
+7. Induction Schema: [φ(0) ∧ ∀x(φ(x) → φ(Sx))] → ∀x φ(x)
+
+**Robinson Arithmetic (Q)**
+1. ∀x(Sx ≠ 0)
+2. ∀x∀y(Sx = Sy → x = y)
+3. ∀x(x ≠ 0 → ∃y(x = Sy))
+4. ∀x(x + 0 = x)
+5. ∀x∀y(x + Sy = S(x + y))
+6. ∀x(x · 0 = 0)
+7. ∀x∀y(x · Sy = x · y + x)
+
+---
+
+**CATEGORY 6: GEOMETRY**
+
+**Hilbert's Axioms for Euclidean Geometry**
+I. Incidence:
+1. Two distinct points determine a unique line
+2. Every line contains at least two points
+3. There exist three non-collinear points
+II. Order:
+4. Betweenness axioms (4 axioms)
+III. Congruence:
+5. Segment congruence axioms (5 axioms)
+IV. Parallels:
+6. Given a line and point not on it, exactly one parallel exists
+V. Continuity:
+7. Archimedes' Axiom
+8. Completeness Axiom
+
+**Tarski's Axioms for Euclidean Geometry**
+1. Reflexivity of Congruence: xy ≡ yx
+2. Transitivity of Congruence: xy ≡ zu ∧ xy ≡ vw → zu ≡ vw
+3. Identity of Congruence: xy ≡ zz → x = y
+4. Segment Construction: ∃y(B(x,y,z) ∧ yz ≡ ab)
+5. Five-Segment: Congruence preservation under betweenness
+6. Identity of Betweenness: B(x,y,x) → x = y
+7. Pasch: B(x,u,z) ∧ B(y,v,z) → ∃a(B(u,a,y) ∧ B(v,a,x))
+8. Lower Dimension: ∃a∃b∃c(¬B(a,b,c) ∧ ¬B(b,c,a) ∧ ¬B(c,a,b))
+9. Upper Dimension: Coplanarity condition
+10. Euclid: Parallel postulate equivalent
+11. Continuity Schema
+
+---
+
+**CATEGORY 7: BOOLEAN ALGEBRA**
+
+**Huntington's Axioms for Boolean Algebra**
+1. a + b = b + a
+2. a · b = b · a
+3. a + (b · c) = (a + b) · (a + c)
+4. a · (b + c) = (a · b) + (a · c)
+5. a + 0 = a
+6. a · 1 = a
+7. a + a' = 1
+8. a · a' = 0
+
+**Sheffer Stroke Axioms**
+1. (a | a) | (a | a) = a
+2. a | (b | (b | b)) = a | a
+3. (a | (b | c)) | (a | (b | c)) = ((b | b) | a) | ((c | c) | a)
+
+---
+
+**CATEGORY 8: GROUP THEORY**
+
+**Standard Group Axioms**
+1. Closure: ∀a∀b(a · b ∈ G)
+2. Associativity: ∀a∀b∀c((a · b) · c = a · (b · c))
+3. Identity: ∃e∀a(e · a = a · e = a)
+4. Inverse: ∀a∃b(a · b = b · a = e)
+
+**Single-Axiom Group Theory (Higman-Neumann)**
+1. (a⁻¹ · a) · (b · ((c⁻¹ · c) · d)) = b · d
+(All group axioms derivable from this single axiom with inverse as primitive)
+
+---
+
+**CATEGORY 9: LATTICE THEORY**
+
+**Lattice Axioms (Meet-Join Formulation)**
+1. a ∨ b = b ∨ a
+2. a ∧ b = b ∧ a
+3. a ∨ (b ∨ c) = (a ∨ b) ∨ c
+4. a ∧ (b ∧ c) = (a ∧ b) ∧ c
+5. a ∨ (a ∧ b) = a
+6. a ∧ (a ∨ b) = a
+
+**Lattice Axioms (Partial Order Formulation)**
+1. a ≤ a
+2. a ≤ b ∧ b ≤ a → a = b
+3. a ≤ b ∧ b ≤ c → a ≤ c
+4. ∀a∀b∃c(c = sup{a,b})
+5. ∀a∀b∃c(c = inf{a,b})
+
+---
+
+**CATEGORY 10: MEREOLOGY**
+
+**Classical Extensional Mereology (CEM)**
+1. Reflexivity: x ≤ x
+2. Antisymmetry: x ≤ y ∧ y ≤ x → x = y
+3. Transitivity: x ≤ y ∧ y ≤ z → x ≤ z
+4. Strong Supplementation: ¬(y ≤ x) → ∃z(z ≤ y ∧ ¬O(z,x))
+5. Unrestricted Fusion: ∀φ(∃x φ(x) → ∃y∀z(O(z,y) ↔ ∃x(φ(x) ∧ O(z,x))))
+
+**General Extensional Mereology (GEM - Leśniewski)**
+1. Transitivity of Part: P(x,y) ∧ P(y,z) → P(x,z)
+2. Supplementation: P(x,y) ∧ x ≠ y → ∃z(P(z,y) ∧ ¬O(z,x))
+3. Sum: ∃x φ(x) → ∃y Fus(y,φ)
+4. Product: O(x,y) → ∃z∀w(P(w,z) ↔ P(w,x) ∧ P(w,y))
+5. Extensionality: ∀z(P(z,x) ↔ P(z,y)) → x = y

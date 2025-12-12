@@ -2,8 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
-import { Copy, Check, BookOpen, ChevronDown, ChevronUp } from "lucide-react";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Copy, Check, BookOpen } from "lucide-react";
 
 interface AxiomSet {
   id: string;
@@ -240,7 +239,6 @@ interface AxiomLibraryProps {
 
 export function AxiomLibrary({ onCopyToInput }: AxiomLibraryProps) {
   const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [isOpen, setIsOpen] = useState(true);
 
   const handleCopy = async (axiomSet: AxiomSet) => {
     await navigator.clipboard.writeText(axiomSet.content);
@@ -251,24 +249,18 @@ export function AxiomLibrary({ onCopyToInput }: AxiomLibraryProps) {
   const categories = Array.from(new Set(AXIOM_LIBRARY.map(a => a.category)));
 
   return (
-    <Collapsible open={isOpen} onOpenChange={setIsOpen} className="border border-border rounded-sm bg-card">
-      <CollapsibleTrigger asChild>
-        <div className="p-3 border-b border-border bg-muted/30 flex items-center justify-between cursor-pointer hover:bg-muted/50 transition-colors">
-          <h3 className="font-medium text-sm flex items-center gap-2">
-            <BookOpen className="h-4 w-4" />
-            Axiom Library
-          </h3>
-          <div className="flex items-center gap-2">
-            <Badge variant="secondary" className="text-[10px]">
-              {AXIOM_LIBRARY.length} sets
-            </Badge>
-            {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-          </div>
-        </div>
-      </CollapsibleTrigger>
+    <div className="border border-border rounded-sm bg-card">
+      <div className="p-3 border-b border-border bg-muted/30 flex items-center justify-between">
+        <h3 className="font-medium text-sm flex items-center gap-2">
+          <BookOpen className="h-4 w-4" />
+          Axiom Library
+        </h3>
+        <Badge variant="secondary" className="text-[10px]">
+          {AXIOM_LIBRARY.length} sets
+        </Badge>
+      </div>
       
-      <CollapsibleContent>
-        <ScrollArea className="h-[400px]">
+      <ScrollArea className="h-[550px]">
           <div className="p-3 space-y-4">
             {categories.map(category => (
               <div key={category}>
@@ -310,7 +302,6 @@ export function AxiomLibrary({ onCopyToInput }: AxiomLibraryProps) {
             ))}
           </div>
         </ScrollArea>
-      </CollapsibleContent>
-    </Collapsible>
+    </div>
   );
 }

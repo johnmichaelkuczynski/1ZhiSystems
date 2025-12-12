@@ -5,6 +5,8 @@ import { FunctionRow } from "@/components/function-row";
 import { DualInputRow } from "@/components/dual-input-row";
 import { PresetsSidebar, type Preset } from "@/components/presets-sidebar";
 import { AxiomLibrary } from "@/components/axiom-library";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Bot, BookOpen } from "lucide-react";
 import generatedLogo from "@assets/generated_images/minimalist_geometric_logo_representing_logic_transformation.png";
 
 interface FunctionInputs {
@@ -152,50 +154,67 @@ export default function Home() {
 
             {/* Chat Interface Column */}
             <div className="xl:col-span-4">
-              <div className="sticky top-24 space-y-6">
-                <ChatInterface 
-                  selectedModel={selectedModel} 
-                  onModelChange={setSelectedModel} 
-                />
-
-                <AxiomLibrary />
-                
-                <div className="p-5 rounded-sm bg-muted/30 border border-border text-xs text-muted-foreground font-mono leading-relaxed space-y-3">
-                  <div className="flex items-center gap-2 text-foreground font-semibold border-b border-border pb-2">
-                    <span className="text-[10px] bg-primary text-primary-foreground px-1 py-0.5 rounded-[1px]">INFO</span>
-                    AVAILABLE ENGINES
-                  </div>
-                  <div className="grid grid-cols-4 gap-2">
-                    <button 
-                      onClick={() => setSelectedModel("Zhi 1")}
-                      className={`text-center p-2 rounded-sm transition-colors cursor-pointer font-bold ${selectedModel === "Zhi 1" ? "bg-primary/20 ring-1 ring-primary text-foreground" : "hover:bg-muted/50 text-foreground"}`}
-                      data-testid="button-select-zhi-1"
-                    >
-                      ZHI 1
-                    </button>
-                    <button 
-                      onClick={() => setSelectedModel("Zhi 2")}
-                      className={`text-center p-2 rounded-sm transition-colors cursor-pointer font-bold ${selectedModel === "Zhi 2" ? "bg-primary/20 ring-1 ring-primary text-foreground" : "hover:bg-muted/50 text-foreground"}`}
-                      data-testid="button-select-zhi-2"
-                    >
-                      ZHI 2
-                    </button>
-                    <button 
-                      onClick={() => setSelectedModel("Zhi 3")}
-                      className={`text-center p-2 rounded-sm transition-colors cursor-pointer font-bold ${selectedModel === "Zhi 3" ? "bg-primary/20 ring-1 ring-primary text-foreground" : "hover:bg-muted/50 text-foreground"}`}
-                      data-testid="button-select-zhi-3"
-                    >
-                      ZHI 3
-                    </button>
-                    <button 
-                      onClick={() => setSelectedModel("Zhi 4")}
-                      className={`text-center p-2 rounded-sm transition-colors cursor-pointer font-bold ${selectedModel === "Zhi 4" ? "bg-primary/20 ring-1 ring-primary text-foreground" : "hover:bg-muted/50 text-foreground"}`}
-                      data-testid="button-select-zhi-4"
-                    >
-                      ZHI 4
-                    </button>
-                  </div>
-                </div>
+              <div className="sticky top-24">
+                <Tabs defaultValue="chat" className="w-full">
+                  <TabsList className="w-full grid grid-cols-2 mb-4">
+                    <TabsTrigger value="chat" className="flex items-center gap-2 text-xs font-mono" data-testid="tab-chat">
+                      <Bot className="h-3.5 w-3.5" />
+                      AI CHAT
+                    </TabsTrigger>
+                    <TabsTrigger value="library" className="flex items-center gap-2 text-xs font-mono" data-testid="tab-library">
+                      <BookOpen className="h-3.5 w-3.5" />
+                      AXIOM LIBRARY
+                    </TabsTrigger>
+                  </TabsList>
+                  
+                  <TabsContent value="chat" className="mt-0 space-y-4">
+                    <ChatInterface 
+                      selectedModel={selectedModel} 
+                      onModelChange={setSelectedModel} 
+                    />
+                    
+                    <div className="p-4 rounded-sm bg-muted/30 border border-border text-xs text-muted-foreground font-mono leading-relaxed space-y-3">
+                      <div className="flex items-center gap-2 text-foreground font-semibold border-b border-border pb-2">
+                        <span className="text-[10px] bg-primary text-primary-foreground px-1 py-0.5 rounded-[1px]">INFO</span>
+                        AVAILABLE ENGINES
+                      </div>
+                      <div className="grid grid-cols-4 gap-2">
+                        <button 
+                          onClick={() => setSelectedModel("Zhi 1")}
+                          className={`text-center p-2 rounded-sm transition-colors cursor-pointer font-bold ${selectedModel === "Zhi 1" ? "bg-primary/20 ring-1 ring-primary text-foreground" : "hover:bg-muted/50 text-foreground"}`}
+                          data-testid="button-select-zhi-1"
+                        >
+                          ZHI 1
+                        </button>
+                        <button 
+                          onClick={() => setSelectedModel("Zhi 2")}
+                          className={`text-center p-2 rounded-sm transition-colors cursor-pointer font-bold ${selectedModel === "Zhi 2" ? "bg-primary/20 ring-1 ring-primary text-foreground" : "hover:bg-muted/50 text-foreground"}`}
+                          data-testid="button-select-zhi-2"
+                        >
+                          ZHI 2
+                        </button>
+                        <button 
+                          onClick={() => setSelectedModel("Zhi 3")}
+                          className={`text-center p-2 rounded-sm transition-colors cursor-pointer font-bold ${selectedModel === "Zhi 3" ? "bg-primary/20 ring-1 ring-primary text-foreground" : "hover:bg-muted/50 text-foreground"}`}
+                          data-testid="button-select-zhi-3"
+                        >
+                          ZHI 3
+                        </button>
+                        <button 
+                          onClick={() => setSelectedModel("Zhi 4")}
+                          className={`text-center p-2 rounded-sm transition-colors cursor-pointer font-bold ${selectedModel === "Zhi 4" ? "bg-primary/20 ring-1 ring-primary text-foreground" : "hover:bg-muted/50 text-foreground"}`}
+                          data-testid="button-select-zhi-4"
+                        >
+                          ZHI 4
+                        </button>
+                      </div>
+                    </div>
+                  </TabsContent>
+                  
+                  <TabsContent value="library" className="mt-0">
+                    <AxiomLibrary />
+                  </TabsContent>
+                </Tabs>
               </div>
             </div>
           </div>
