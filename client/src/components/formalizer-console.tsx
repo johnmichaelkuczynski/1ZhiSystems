@@ -175,7 +175,7 @@ Begin analysis. Start with "EXTRACTED ARGUMENT":`;
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               placeholder="Paste or type natural language text here (e.g., a philosophy essay, argument, or reasoning passage). The AI will find formalizable arguments and convert them to axiom systems with interpretations..."
-              className="min-h-[180px] text-sm resize-y"
+              className="min-h-[300px] text-sm resize-y"
               data-testid="input-natural-language"
             />
             <div className="text-[10px] text-muted-foreground text-right">
