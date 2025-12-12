@@ -808,6 +808,419 @@ RULES:
 5. =-Intro: t = t
 6. =-Elim: t = s, φ[t/x] ⟹ φ[s/x]`
   },
+  {
+    id: "pair-1-identity-vs-chain",
+    name: "Identity vs Implication Chain",
+    category: "Mixed Pairs",
+    description: "Equality axioms vs predicate chain",
+    systemA: `1. ∀x(x = x)
+2. ∀x∀y(x = y → y = x)
+3. ∀x∀y∀z((x = y ∧ y = z) → x = z)`,
+    systemB: `1. ∀x(Fx → Gx)
+2. ∀x(Gx → Hx)
+3. ∀x(Hx → Jx)
+4. ∃x(Fx)`
+  },
+  {
+    id: "pair-2-semiring-vs-equiv",
+    name: "Semiring vs Equivalence",
+    category: "Mixed Pairs",
+    description: "Arithmetic properties vs equivalence relation",
+    systemA: `1. ∀x(x + 0 = x)
+2. ∀x(x · 1 = x)
+3. ∀x(x · 0 = 0)
+4. ∀x∀y(x + y = y + x)
+5. ∀x∀y(x · y = y · x)`,
+    systemB: `1. ∀x(Rxx)
+2. ∀x∀y(Rxy → Ryx)
+3. ∀x∀y∀z((Rxy ∧ Ryz) → Rxz)`
+  },
+  {
+    id: "pair-3-dlo-vs-predicates",
+    name: "Dense Order vs Predicates",
+    category: "Mixed Pairs",
+    description: "Dense linear order vs predicate logic",
+    systemA: `1. ∀x¬(x < x)
+2. ∀x∀y∀z((x < y ∧ y < z) → x < z)
+3. ∀x∀y(x < y ∨ x = y ∨ y < x)
+4. ∀x∃y(x < y)
+5. ∀x∃y(y < x)`,
+    systemB: `1. ∃x(Px)
+2. ∃x(Qx)
+3. ∀x(Px → ¬Qx)
+4. ∀x((Px ∨ Qx) → Rx)
+5. ∃x(Rx ∧ Sx)`
+  },
+  {
+    id: "pair-4-s5-vs-mereology",
+    name: "S5 Modal vs Mereology",
+    category: "Mixed Pairs",
+    description: "Modal logic S5 vs part-whole",
+    systemA: `1. □(P → P)
+2. □P → P
+3. □P → □□P
+4. ◇P → □◇P
+5. □(P → Q) → (□P → □Q)`,
+    systemB: `1. ∀x(Part(x,x))
+2. ∀x∀y((Part(x,y) ∧ Part(y,x)) → x = y)
+3. ∀x∀y∀z((Part(x,y) ∧ Part(y,z)) → Part(x,z))
+4. ∀x∀y(Overlap(x,y) ↔ ∃z(Part(z,x) ∧ Part(z,y)))`
+  },
+  {
+    id: "pair-5-group-vs-chain",
+    name: "Abelian Group vs Predicate Chain",
+    category: "Mixed Pairs",
+    description: "Group axioms vs implication chain",
+    systemA: `1. ∀x∀y∃z(z = x ⊕ y)
+2. ∀x∀y(x ⊕ y = y ⊕ x)
+3. ∀x∀y∀z((x ⊕ y) ⊕ z = x ⊕ (y ⊕ z))
+4. ∃e∀x(x ⊕ e = x)
+5. ∀x∃y(x ⊕ y = e)`,
+    systemB: `1. ∀x(Ax → Bx)
+2. ∀x(Bx → (Cx ∨ Dx))
+3. ∀x(Cx → Ex)
+4. ∀x(Dx → Ex)
+5. ∃x(Ax)
+6. ∀x(Ex → Fx)`
+  },
+  {
+    id: "pair-6-bounded-order-vs-chain",
+    name: "Bounded Order vs Chain",
+    category: "Mixed Pairs",
+    description: "Total order with 0 vs implications",
+    systemA: `1. ∀x(0 ≤ x)
+2. ∀x(x ≤ x)
+3. ∀x∀y((x ≤ y ∧ y ≤ x) → x = y)
+4. ∀x∀y∀z((x ≤ y ∧ y ≤ z) → x ≤ z)
+5. ∀x∀y(x ≤ y ∨ y ≤ x)
+6. ∀x∀y∃z(z = max(x,y))`,
+    systemB: `1. ∀x(Kx → Lx)
+2. ∀x(Lx → Mx)
+3. ∀x(Mx → ¬Nx)
+4. ∃x(Kx ∧ Ox)
+5. ∀x(Ox → Px)`
+  },
+  {
+    id: "pair-7-metric-vs-relations",
+    name: "Metric Space vs Relations",
+    category: "Mixed Pairs",
+    description: "Distance function vs relational",
+    systemA: `1. ∀x∀y(d(x,y) ≥ 0)
+2. ∀x∀y(d(x,y) = 0 ↔ x = y)
+3. ∀x∀y(d(x,y) = d(y,x))
+4. ∀x∀y∀z(d(x,z) ≤ d(x,y) + d(y,z))`,
+    systemB: `1. ∀x(Sx → ∃y(Ty ∧ Rxy))
+2. ∀x(Tx → ∃y(Uy ∧ Rxy))
+3. ∀x∀y(Rxy → Ryx)
+4. ∃x(Sx)
+5. ∀x(Ux → Vx)`
+  },
+  {
+    id: "pair-8-boolean-vs-graph",
+    name: "Boolean Algebra vs Graph",
+    category: "Mixed Pairs",
+    description: "Boolean with De Morgan vs graph coloring",
+    systemA: `1. ∀x(x ∧ ⊤ = x)
+2. ∀x(x ∨ ⊥ = x)
+3. ∀x(x ∧ x′ = ⊥)
+4. ∀x(x ∨ x′ = ⊤)
+5. ∀x(x′′ = x)
+6. ∀x∀y((x ∧ y)′ = x′ ∨ y′)
+7. ∀x∀y((x ∨ y)′ = x′ ∧ y′)`,
+    systemB: `1. ∃x∃y∃z(x ≠ y ∧ y ≠ z ∧ x ≠ z)
+2. ∀x∀y(Cxy ∨ ¬Cxy)
+3. ∀x¬Cxx
+4. ∀x∃y(Cxy)`
+  },
+  {
+    id: "pair-9-robinson-vs-chain",
+    name: "Robinson Arithmetic vs Chain",
+    category: "Mixed Pairs",
+    description: "Weak arithmetic vs predicate chain",
+    systemA: `1. ∀x(S0 ≠ x + x)
+2. ∀x(x + 0 = x)
+3. ∀x∀y(x + Sy = S(x + y))
+4. ∀x(x · 0 = 0)
+5. ∀x∀y(x · Sy = (x · y) + x)`,
+    systemB: `1. ∀x(Hx → Ix)
+2. ∀x(Ix → (Jx ∧ Kx))
+3. ∀x(Jx → Lx)
+4. ∀x(Kx → Mx)
+5. ∃x(Hx ∧ Nx)
+6. ∀x(Nx → Ox)`
+  },
+  {
+    id: "pair-10-bijection-vs-equiv",
+    name: "Bijection vs Equivalence",
+    category: "Mixed Pairs",
+    description: "Involutive bijection vs equivalence with witnesses",
+    systemA: `1. ∀x(f(x) ∈ D)
+2. ∀x∀y(f(x) = f(y) → x = y)
+3. ∀y∃x(f(x) = y)
+4. f(f(x)) = x
+5. ∀x(f(x) ≠ x)`,
+    systemB: `1. ∀x(Wx → ∃y(Wy ∧ Exy ∧ y ≠ x))
+2. ∀x∀y(Exy → Eyx)
+3. ∀x∀y∀z((Exy ∧ Eyz) → Exz)
+4. ∀x(Exx)
+5. ∃x(Wx)`
+  },
+  {
+    id: "pair-11-lattice-vs-chain",
+    name: "Lattice vs Predicate Chain",
+    category: "Mixed Pairs",
+    description: "Set-theoretic lattice vs implications",
+    systemA: `1. ∀x∀y(x ∩ y = y ∩ x)
+2. ∀x∀y(x ∪ y = y ∪ x)
+3. ∀x∀y∀z(x ∩ (y ∩ z) = (x ∩ y) ∩ z)
+4. ∀x∀y∀z(x ∪ (y ∪ z) = (x ∪ y) ∪ z)
+5. ∀x∀y(x ∩ (x ∪ y) = x)
+6. ∀x∀y(x ∪ (x ∩ y) = x)`,
+    systemB: `1. ∀x(Gx → Hx)
+2. ∀x(Hx → (Ix ∨ Jx))
+3. ∀x(Ix → Kx)
+4. ∀x(Jx → Kx)
+5. ∀x(Kx → ¬Lx)
+6. ∃x(Gx ∧ Mx)
+7. ∃x(Lx)`
+  },
+  {
+    id: "pair-12-abelian-vs-modal",
+    name: "Abelian Group vs Modal",
+    category: "Mixed Pairs",
+    description: "Commutative group vs modal distribution",
+    systemA: `1. ∀x∀y∃z(z = x * y)
+2. ∀x∀y∀z((x * y) * z = x * (y * z))
+3. ∃e∀x(e * x = x ∧ x * e = x)
+4. ∀x∃y(x * y = e ∧ y * x = e)
+5. ∀x∀y(x * y = y * x)`,
+    systemB: `1. □P → ◇P
+2. □(P → Q) → (□P → □Q)
+3. ◇(P ∧ Q) → (◇P ∧ ◇Q)
+4. □(P ∧ Q) ↔ (□P ∧ □Q)`
+  },
+  {
+    id: "pair-13-norm-vs-strict-order",
+    name: "Norm vs Strict Order",
+    category: "Mixed Pairs",
+    description: "Absolute value vs strict ordering",
+    systemA: `1. ∀x(|x| ≥ 0)
+2. ∀x(|x| = 0 ↔ x = 0)
+3. ∀x∀y(|x · y| = |x| · |y|)
+4. ∀x∀y(|x + y| ≤ |x| + |y|)
+5. ∀x(|−x| = |x|)`,
+    systemB: `1. ∀x∀y(Axy → ¬Ayx)
+2. ∀x∀y∀z((Axy ∧ Ayz) → Axz)
+3. ∀x¬Axx
+4. ∀x∃y(Axy)
+5. ∀x∃y(Ayx)`
+  },
+  {
+    id: "pair-14-hilbert-vs-chain",
+    name: "Hilbert Axioms vs Chain",
+    category: "Mixed Pairs",
+    description: "Propositional calculus vs predicate chain",
+    systemA: `1. ∀p(p → p)
+2. ∀p∀q(p → (q → p))
+3. ∀p∀q∀r((p → (q → r)) → ((p → q) → (p → r)))
+4. ∀p∀q((¬p → ¬q) → (q → p))`,
+    systemB: `1. ∀x(Bx → Cx)
+2. ∀x(Cx → (Dx ∧ Ex))
+3. ∀x(Dx → Fx)
+4. ∀x(Ex → Gx)
+5. ∀x((Fx ∧ Gx) → Hx)
+6. ∃x(Bx)`
+  },
+  {
+    id: "pair-15-tree-vs-successor",
+    name: "Tree Order vs Successor",
+    category: "Mixed Pairs",
+    description: "Tree structure vs successor function",
+    systemA: `1. ∀x∀y(x ⊑ y ∨ y ⊑ x ∨ x ⊥ y)
+2. ∀x(x ⊑ x)
+3. ∀x∀y((x ⊑ y ∧ y ⊑ x) → x = y)
+4. ∀x∀y∀z((x ⊑ y ∧ y ⊑ z) → x ⊑ z)
+5. ∃r∀x(x ⊑ r)`,
+    systemB: `1. ∀x(Nx → ∃y(Ny ∧ Sxy))
+2. ∀x∀y((Sxy ∧ Sxz) → y = z)
+3. ∃x(Nx ∧ ∀y¬Syx)
+4. ∀x∀y(Sxy → (Nx ∧ Ny))`
+  },
+  {
+    id: "pair-16-semilattice-vs-trans",
+    name: "Semilattice vs Transitive",
+    category: "Mixed Pairs",
+    description: "Idempotent semilattice vs transitivity",
+    systemA: `1. ∀x∀y(x ⊔ y = y ⊔ x)
+2. ∀x∀y(x ⊓ y = y ⊓ x)
+3. ∀x∀y∀z(x ⊔ (y ⊔ z) = (x ⊔ y) ⊔ z)
+4. ∀x∀y∀z(x ⊓ (y ⊓ z) = (x ⊓ y) ⊓ z)
+5. ∀x(x ⊔ x = x)
+6. ∀x(x ⊓ x = x)
+7. ∀x∀y(x ⊓ (x ⊔ y) = x)`,
+    systemB: `1. ∀x∀y(Txy → ∃z(Tzx ∧ Tzy))
+2. ∀x(Txx)
+3. ∀x∀y∀z((Txy ∧ Tyz) → Txz)
+4. ∃a∃b(Tab ∧ a ≠ b)`
+  },
+  {
+    id: "pair-17-vector-vs-chain",
+    name: "Vector Space vs Chain",
+    category: "Mixed Pairs",
+    description: "Vector space axioms vs implications",
+    systemA: `1. ∀v(v + 0⃗ = v)
+2. ∀v(v + (−v) = 0⃗)
+3. ∀v∀w(v + w = w + v)
+4. ∀u∀v∀w((u + v) + w = u + (v + w))
+5. ∀v(1 · v = v)
+6. ∀a∀b∀v((ab) · v = a · (b · v))`,
+    systemB: `1. ∀x(Jx → (Kx ∨ Lx))
+2. ∀x(Kx → Mx)
+3. ∀x(Lx → Mx)
+4. ∀x(Mx → Nx)
+5. ∃x(Jx ∧ Ox)
+6. ∀x(Ox → Px)
+7. ∀x(Px → ¬Qx)`
+  },
+  {
+    id: "pair-18-measure-vs-connectivity",
+    name: "Measure vs Connectivity",
+    category: "Mixed Pairs",
+    description: "Probability measure vs graph connectivity",
+    systemA: `1. ∀x(0 ≤ μ(x) ≤ 1)
+2. μ(∅) = 0
+3. μ(U) = 1
+4. ∀x∀y(x ∩ y = ∅ → μ(x ∪ y) = μ(x) + μ(y))
+5. ∀x(μ(xᶜ) = 1 − μ(x))`,
+    systemB: `1. ∀x∀y(Cxy → Cyx)
+2. ∀x∃y(Cxy ∧ x ≠ y)
+3. ∀x∀y∀z((Cxy ∧ Cyz ∧ x ≠ z) → Cxz)
+4. ∃x∃y(¬Cxy)`
+  },
+  {
+    id: "pair-19-equiv-with-diff-vs-biconditional",
+    name: "Rich Equivalence vs Biconditional",
+    category: "Mixed Pairs",
+    description: "Equivalence with distinct classes vs biconditional",
+    systemA: `1. ∀x(x ≡ x)
+2. ∀x∀y(x ≡ y → y ≡ x)
+3. ∀x∀y∀z((x ≡ y ∧ y ≡ z) → x ≡ z)
+4. ∀x∃y(y ≡ x ∧ y ≠ x)
+5. ∃a∃b∃c(a ≢ b ∧ b ≢ c ∧ a ≢ c)`,
+    systemB: `1. ∀x(Ax → Bx)
+2. ∀x(Bx → Cx)
+3. ∀x(Cx → (Dx ↔ Ex))
+4. ∃x(Ax ∧ Dx)
+5. ∃x(Ax ∧ ¬Dx)`
+  },
+  {
+    id: "pair-20-ordered-pair-vs-chain",
+    name: "Ordered Pairs vs Chain",
+    category: "Mixed Pairs",
+    description: "Pair axioms vs predicate chain",
+    systemA: `1. ∀x∀y(⟨x,y⟩ = ⟨y,x⟩ → x = y)
+2. ∀x∀y∀z∀w(⟨x,y⟩ = ⟨z,w⟩ → (x = z ∧ y = w))
+3. ∀x∀y∃z(z = ⟨x,y⟩)
+4. ∀x∃y∃z(x = ⟨y,z⟩ → (π₁(x) = y ∧ π₂(x) = z))`,
+    systemB: `1. ∀x(Wx → Xx)
+2. ∀x(Xx → Yx)
+3. ∀x(Yx → Zx)
+4. ∀x(Zx → ¬Wx)
+5. ∃x¬Wx
+6. ∃x(Xx ∧ ¬Yx)`
+  },
+  {
+    id: "pair-21-linear-logic-vs-time",
+    name: "Linear Logic vs Time",
+    category: "Mixed Pairs",
+    description: "Linear logic tensor vs temporal order",
+    systemA: `1. ∀x(x → x = ⊤)
+2. ∀x(x ⊗ ⊤ = x)
+3. ∀x∀y(x ⊗ y = y ⊗ x)
+4. ∀x∀y∀z((x ⊗ y) ⊗ z = x ⊗ (y ⊗ z))
+5. ∀x∀y((x ⊗ y) → z ↔ x → (y → z))`,
+    systemB: `1. ∀t(t < t′)
+2. ∀t∀s(t < s ∨ t = s ∨ s < t)
+3. ∀t∀s∀r((t < s ∧ s < r) → t < r)
+4. ∀t¬(t < t)
+5. ∀t∃s(s < t)`
+  },
+  {
+    id: "pair-22-set-ops-vs-chain",
+    name: "Set Operations vs Chain",
+    category: "Mixed Pairs",
+    description: "Set membership vs predicate chain",
+    systemA: `1. ∀x(in(x, ∅) → ⊥)
+2. ∀x∀y∀z(in(x, {y,z}) ↔ (x = y ∨ x = z))
+3. ∀x∀A∀B(in(x, A ∪ B) ↔ (in(x,A) ∨ in(x,B)))
+4. ∀x∀A∀B(in(x, A ∩ B) ↔ (in(x,A) ∧ in(x,B)))
+5. ∀A∀B(A = B ↔ ∀x(in(x,A) ↔ in(x,B)))`,
+    systemB: `1. ∀x(Px → Qx)
+2. ∀x(Qx → (Rx ∨ Sx))
+3. ∀x(Rx → Tx)
+4. ∀x(Sx → Tx)
+5. ∀x(Tx → Ux)
+6. ∀x(Ux → ¬Vx)
+7. ∃x(Px ∧ Wx)
+8. ∃x(Vx)`
+  },
+  {
+    id: "pair-23-composition-vs-branching",
+    name: "Function Composition vs Branching",
+    category: "Mixed Pairs",
+    description: "Category-like composition vs branching relation",
+    systemA: `1. ∀f∀g∀x((f ∘ g)(x) = f(g(x)))
+2. ∀f(f ∘ id = f)
+3. ∀f(id ∘ f = f)
+4. ∀f∀g∀h((f ∘ g) ∘ h = f ∘ (g ∘ h))
+5. ∀x(id(x) = x)`,
+    systemB: `1. ∀x∀y(Bxy → ∃z(Bxz ∧ Bzy))
+2. ∀x∃y(Bxy)
+3. ∀x∀y∀z((Bxy ∧ Bxz) → (y = z ∨ Byz ∨ Bzy))
+4. ∀x¬Bxx`
+  },
+  {
+    id: "pair-24-boolean-full-vs-chain",
+    name: "Full Boolean vs Chain",
+    category: "Mixed Pairs",
+    description: "Complete Boolean algebra vs predicate chain",
+    systemA: `1. ∀a(a ∨ ¬a = 1)
+2. ∀a(a ∧ ¬a = 0)
+3. ∀a(a ∨ 0 = a)
+4. ∀a(a ∧ 1 = a)
+5. ∀a∀b(a ∨ (a ∧ b) = a)
+6. ∀a∀b(a ∧ (a ∨ b) = a)
+7. ∀a∀b∀c(a ∨ (b ∧ c) = (a ∨ b) ∧ (a ∨ c))
+8. ∀a∀b∀c(a ∧ (b ∨ c) = (a ∧ b) ∨ (a ∧ c))`,
+    systemB: `1. ∀x(Dx → Ex)
+2. ∀x(Ex → (Fx ∧ Gx))
+3. ∀x(Fx → Hx)
+4. ∀x(Gx → Ix)
+5. ∀x((Hx ∧ Ix) → Jx)
+6. ∃x(Dx ∧ Kx)
+7. ∀x(Kx → Lx)`
+  },
+  {
+    id: "pair-25-closure-op-vs-chain",
+    name: "Closure Operator vs Long Chain",
+    category: "Mixed Pairs",
+    description: "Closure on poset vs extended predicate chain",
+    systemA: `1. ∀x∀y(x ≼ y → f(x) ≼ f(y))
+2. ∀x(x ≼ f(x))
+3. ∀x(f(f(x)) = f(x))
+4. ∀x(x ≼ x)
+5. ∀x∀y((x ≼ y ∧ y ≼ x) → x = y)
+6. ∀x∀y∀z((x ≼ y ∧ y ≼ z) → x ≼ z)`,
+    systemB: `1. ∀x(Mx → Nx)
+2. ∀x(Nx → Ox)
+3. ∀x(Ox → (Px ⊕ Qx))
+4. ∀x(Px → Rx)
+5. ∀x(Qx → Rx)
+6. ∀x(Rx → Sx)
+7. ∃x(Mx ∧ Tx)
+8. ∀x(Tx → Ux)
+9. ∀x(Ux → ¬Vx)`
+  },
 ];
 
 interface AxiomLibraryProps {
