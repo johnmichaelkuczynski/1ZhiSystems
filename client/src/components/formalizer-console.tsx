@@ -203,7 +203,7 @@ Begin analysis. Start with "EXTRACTED ARGUMENT":`;
           </Button>
         </div>
         
-        <div className="flex-1 flex flex-col min-h-[300px]">
+        <div className="flex flex-col">
           <div className="p-3 border-b border-border flex items-center justify-between">
             <span className="text-xs font-mono text-muted-foreground uppercase">Formalized Output</span>
             {output && (
@@ -228,19 +228,21 @@ Begin analysis. Start with "EXTRACTED ARGUMENT":`;
               </Button>
             )}
           </div>
-          <div className="flex-1 p-4 overflow-auto">
-            {output ? (
-              <pre className="text-sm font-mono whitespace-pre-wrap text-foreground leading-relaxed">
-                {output}
-              </pre>
-            ) : (
-              <div className="text-sm text-muted-foreground text-center py-12 space-y-2">
-                <FileText className="h-8 w-8 mx-auto opacity-50" />
-                <div>Paste natural language text and click EXTRACT & FORMALIZE</div>
-                <div className="text-xs">The AI will find arguments and convert them to formal axiom systems</div>
-              </div>
-            )}
-          </div>
+          <ScrollArea className="h-[400px]">
+            <div className="p-4">
+              {output ? (
+                <pre className="text-sm font-mono whitespace-pre-wrap text-foreground leading-relaxed">
+                  {output}
+                </pre>
+              ) : (
+                <div className="text-sm text-muted-foreground text-center py-12 space-y-2">
+                  <FileText className="h-8 w-8 mx-auto opacity-50" />
+                  <div>Paste natural language text and click EXTRACT & FORMALIZE</div>
+                  <div className="text-xs">The AI will find arguments and convert them to formal axiom systems</div>
+                </div>
+              )}
+            </div>
+          </ScrollArea>
         </div>
       </div>
     </ScrollArea>
