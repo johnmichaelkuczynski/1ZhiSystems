@@ -1,13 +1,15 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
 import { Loader2, Play, ArrowRight, AlertCircle, Copy, Check, Trash2 } from "lucide-react";
 import { type LLM, processTheory } from "@/lib/api";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { handlePaste } from "@/lib/normalizer";
+import { PRESETS, type Preset } from "@/components/presets-sidebar";
+import { BatchExecutionPanel, type SubFunction } from "@/components/batch-execution-panel";
+import { BatchResultsAccordion, type BatchResult } from "@/components/batch-results-accordion";
 
 interface FunctionRowProps {
   id: number;
@@ -31,6 +33,20 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
   const [pendingRun, setPendingRun] = useState(false);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
+  const [batchResults, setBatchResults] = useState<BatchResult[]>([]);
+  const [isBatchExecuting, setIsBatchExecuting] = useState(false);
+  const [executingIds, setExecutingIds] = useState<string[]>([]);
+
+  const subFunctions = useMemo(() => {
+    return PRESETS
+      .filter(p => p.functionId === id)
+      .map(p => ({
+        id: p.id,
+        name: p.name,
+        instructions: p.instructions
+      }));
+  }, [id]);
+
   const handleCopy = async () => {
     if (!output) return;
     await navigator.clipboard.writeText(output);
@@ -44,6 +60,7 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
     setOutput("");
     setError(null);
     setUsedModel(null);
+    setBatchResults([]);
   };
 
   useEffect(() => {
@@ -96,6 +113,51 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
     await runTransformation(input, instructions);
   };
 
+  const handleBatchExecute = async (selectedIds: string[]) => {
+    if (!input) return;
+
+    setIsBatchExecuting(true);
+    setExecutingIds(selectedIds);
+    
+    const initialResults: BatchResult[] = selectedIds.map(id => {
+      if (id === "main") {
+        return { id: "main", name: "Main Function", status: "pending" as const };
+      }
+      const sf = subFunctions.find(s => s.id === id);
+      return { id, name: sf?.name || id, status: "pending" as const };
+    });
+    setBatchResults(initialResults);
+
+    const executeOne = async (execId: string): Promise<BatchResult> => {
+      const isMain = execId === "main";
+      const sf = subFunctions.find(s => s.id === execId);
+      const name = isMain ? "Main Function" : (sf?.name || execId);
+      const execInstructions = isMain ? instructions : (sf?.instructions || "");
+
+      setBatchResults(prev => prev.map(r => 
+        r.id === execId ? { ...r, status: "running" as const } : r
+      ));
+
+      try {
+        const response = await processTheory(input, execInstructions, title, selectedModel, explain);
+        return { id: execId, name, status: "success", output: response.result, model: selectedModel };
+      } catch (err: any) {
+        return { id: execId, name, status: "error", error: err.message || "Processing failed" };
+      }
+    };
+
+    const promises = selectedIds.map(async (execId) => {
+      const result = await executeOne(execId);
+      setBatchResults(prev => prev.map(r => r.id === execId ? result : r));
+      setExecutingIds(prev => prev.filter(id => id !== execId));
+      return result;
+    });
+
+    await Promise.allSettled(promises);
+    setIsBatchExecuting(false);
+    setExecutingIds([]);
+  };
+
   return (
     <div className="w-full border-b border-border py-8 px-6 last:border-0" data-testid={`function-row-${id}`}>
       <div className="mb-4 flex items-center justify-between">
@@ -128,7 +190,7 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
             variant="ghost"
             size="sm"
             onClick={handleClear}
-            disabled={isProcessing || (!input && !output && !instructions)}
+            disabled={isProcessing || isBatchExecuting || (!input && !output && !instructions && batchResults.length === 0)}
             className="rounded-sm font-mono text-xs text-muted-foreground hover:text-foreground"
             data-testid={`clear-button-${id}`}
           >
@@ -139,7 +201,7 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
             variant="default" 
             size="sm" 
             onClick={handleRun} 
-            disabled={isProcessing || !input}
+            disabled={isProcessing || isBatchExecuting || !input}
             className="rounded-sm font-mono text-xs"
             data-testid={`run-button-${id}`}
           >
@@ -233,6 +295,21 @@ export function FunctionRow({ id, title, description, selectedModel, presetInput
           />
         </div>
       </div>
+
+      {subFunctions.length > 0 && (
+        <BatchExecutionPanel
+          functionId={id}
+          functionTitle={title}
+          subFunctions={subFunctions}
+          onExecute={handleBatchExecute}
+          isExecuting={isBatchExecuting}
+          executingIds={executingIds}
+        />
+      )}
+
+      {batchResults.length > 0 && (
+        <BatchResultsAccordion results={batchResults} functionId={id} />
+      )}
     </div>
   );
 }

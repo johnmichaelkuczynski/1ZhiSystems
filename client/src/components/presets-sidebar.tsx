@@ -11,7 +11,7 @@ export interface Preset {
   instructions: string;
 }
 
-const PRESETS: Preset[] = [
+export const PRESETS: Preset[] = [
   // FUNCTION 1: Axiom-Set / Theory Transformation
   {
     id: "f1-argument-reversal",

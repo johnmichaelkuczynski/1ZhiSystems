@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2, Play, ArrowRight, AlertCircle, Copy, Check, Trash2 } from "lucide-react";
@@ -7,6 +7,9 @@ import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { handlePaste } from "@/lib/normalizer";
+import { PRESETS } from "@/components/presets-sidebar";
+import { BatchExecutionPanel } from "@/components/batch-execution-panel";
+import { BatchResultsAccordion, type BatchResult } from "@/components/batch-results-accordion";
 
 interface DualInputRowProps {
   id: number;
@@ -33,6 +36,20 @@ export function DualInputRow({ id, title, description, selectedModel, presetInpu
   const [copied, setCopied] = useState(false);
   const [explain, setExplain] = useState(false);
 
+  const [batchResults, setBatchResults] = useState<BatchResult[]>([]);
+  const [isBatchExecuting, setIsBatchExecuting] = useState(false);
+  const [executingIds, setExecutingIds] = useState<string[]>([]);
+
+  const subFunctions = useMemo(() => {
+    return PRESETS
+      .filter(p => p.functionId === id)
+      .map(p => ({
+        id: p.id,
+        name: p.name,
+        instructions: p.instructions
+      }));
+  }, [id]);
+
   const handleCopy = async () => {
     if (!output) return;
     await navigator.clipboard.writeText(output);
@@ -47,6 +64,7 @@ export function DualInputRow({ id, title, description, selectedModel, presetInpu
     setOutput("");
     setError(null);
     setUsedModel(null);
+    setBatchResults([]);
   };
 
   useEffect(() => {
@@ -88,6 +106,53 @@ export function DualInputRow({ id, title, description, selectedModel, presetInpu
     }
   };
 
+  const handleBatchExecute = async (selectedIds: string[]) => {
+    if (!inputA || !inputB) return;
+
+    setIsBatchExecuting(true);
+    setExecutingIds(selectedIds);
+    
+    const combinedInput = `${inputA}<<<SEPARATOR>>>${inputB}`;
+    
+    const initialResults: BatchResult[] = selectedIds.map(execId => {
+      if (execId === "main") {
+        return { id: "main", name: "Main Function", status: "pending" as const };
+      }
+      const sf = subFunctions.find(s => s.id === execId);
+      return { id: execId, name: sf?.name || execId, status: "pending" as const };
+    });
+    setBatchResults(initialResults);
+
+    const executeOne = async (execId: string): Promise<BatchResult> => {
+      const isMain = execId === "main";
+      const sf = subFunctions.find(s => s.id === execId);
+      const name = isMain ? "Main Function" : (sf?.name || execId);
+      const execInstructions = isMain ? instructions : (sf?.instructions || "");
+
+      setBatchResults(prev => prev.map(r => 
+        r.id === execId ? { ...r, status: "running" as const } : r
+      ));
+
+      try {
+        const response = await processTheory(combinedInput, execInstructions, title, selectedModel, explain);
+        return { id: execId, name, status: "success", output: response.result, model: selectedModel };
+      } catch (err: any) {
+        return { id: execId, name, status: "error", error: err.message || "Processing failed" };
+      }
+    };
+
+    const promises = selectedIds.map(async (execId) => {
+      const result = await executeOne(execId);
+      setBatchResults(prev => prev.map(r => r.id === execId ? result : r));
+      setExecutingIds(prev => prev.filter(id => id !== execId));
+      return result;
+    });
+
+    await Promise.allSettled(promises);
+    setIsBatchExecuting(false);
+    setExecutingIds([]);
+  };
+
   return (
     <div className="w-full border-b border-border py-8 px-6 last:border-0" data-testid={`function-row-${id}`}>
       <div className="mb-4 flex items-center justify-between">
@@ -120,7 +185,7 @@ export function DualInputRow({ id, title, description, selectedModel, presetInpu
             variant="ghost"
             size="sm"
             onClick={handleClear}
-            disabled={isProcessing || (!inputA && !inputB && !output && !instructions)}
+            disabled={isProcessing || isBatchExecuting || (!inputA && !inputB && !output && !instructions && batchResults.length === 0)}
             className="rounded-sm font-mono text-xs text-muted-foreground hover:text-foreground"
             data-testid={`clear-button-${id}`}
           >
@@ -131,7 +196,7 @@ export function DualInputRow({ id, title, description, selectedModel, presetInpu
             variant="default" 
             size="sm" 
             onClick={handleRun} 
-            disabled={isProcessing || !inputA || !inputB}
+            disabled={isProcessing || isBatchExecuting || !inputA || !inputB}
             className="rounded-sm font-mono text-xs"
             data-testid={`run-button-${id}`}
           >
@@ -187,7 +252,18 @@ export function DualInputRow({ id, title, description, selectedModel, presetInpu
         </div>
       </div>
 
-      <div className="space-y-3">
+      {subFunctions.length > 0 && (
+        <BatchExecutionPanel
+          functionId={id}
+          functionTitle={title}
+          subFunctions={subFunctions}
+          onExecute={handleBatchExecute}
+          isExecuting={isBatchExecuting}
+          executingIds={executingIds}
+        />
+      )}
+
+      <div className="space-y-3 mt-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Verdict</label>
@@ -236,6 +312,10 @@ export function DualInputRow({ id, title, description, selectedModel, presetInpu
           )}
         </div>
       </div>
+
+      {batchResults.length > 0 && (
+        <BatchResultsAccordion results={batchResults} functionId={id} />
+      )}
     </div>
   );
 }
