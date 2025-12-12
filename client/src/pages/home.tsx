@@ -5,8 +5,9 @@ import { FunctionRow } from "@/components/function-row";
 import { DualInputRow } from "@/components/dual-input-row";
 import { PresetsSidebar, type Preset } from "@/components/presets-sidebar";
 import { AxiomLibrary } from "@/components/axiom-library";
+import { AxiomBuilder } from "@/components/axiom-builder";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Bot, BookOpen } from "lucide-react";
+import { Bot, BookOpen, Hammer } from "lucide-react";
 import generatedLogo from "@assets/generated_images/minimalist_geometric_logo_representing_logic_transformation.png";
 
 interface FunctionInputs {
@@ -155,17 +156,29 @@ export default function Home() {
             {/* Chat Interface Column */}
             <div className="xl:col-span-4">
               <div className="sticky top-24">
-                <Tabs defaultValue="chat" className="w-full">
-                  <TabsList className="w-full grid grid-cols-2 mb-4">
-                    <TabsTrigger value="chat" className="flex items-center gap-2 text-xs font-mono" data-testid="tab-chat">
-                      <Bot className="h-3.5 w-3.5" />
-                      AI CHAT
+                <Tabs defaultValue="builder" className="w-full">
+                  <TabsList className="w-full grid grid-cols-3 mb-4">
+                    <TabsTrigger value="builder" className="flex items-center gap-1.5 text-[10px] font-mono" data-testid="tab-builder">
+                      <Hammer className="h-3 w-3" />
+                      BUILDER
                     </TabsTrigger>
-                    <TabsTrigger value="library" className="flex items-center gap-2 text-xs font-mono" data-testid="tab-library">
-                      <BookOpen className="h-3.5 w-3.5" />
-                      AXIOM LIBRARY
+                    <TabsTrigger value="library" className="flex items-center gap-1.5 text-[10px] font-mono" data-testid="tab-library">
+                      <BookOpen className="h-3 w-3" />
+                      LIBRARY
+                    </TabsTrigger>
+                    <TabsTrigger value="chat" className="flex items-center gap-1.5 text-[10px] font-mono" data-testid="tab-chat">
+                      <Bot className="h-3 w-3" />
+                      CHAT
                     </TabsTrigger>
                   </TabsList>
+                  
+                  <TabsContent value="builder" className="mt-0">
+                    <AxiomBuilder selectedModel={selectedModel} />
+                  </TabsContent>
+                  
+                  <TabsContent value="library" className="mt-0">
+                    <AxiomLibrary />
+                  </TabsContent>
                   
                   <TabsContent value="chat" className="mt-0 space-y-4">
                     <ChatInterface 
@@ -209,10 +222,6 @@ export default function Home() {
                         </button>
                       </div>
                     </div>
-                  </TabsContent>
-                  
-                  <TabsContent value="library" className="mt-0">
-                    <AxiomLibrary />
                   </TabsContent>
                 </Tabs>
               </div>

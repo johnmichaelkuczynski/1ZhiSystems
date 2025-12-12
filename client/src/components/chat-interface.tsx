@@ -9,7 +9,7 @@ import {
   SelectTrigger, 
   SelectValue 
 } from "@/components/ui/select";
-import { Send, Trash2, Bot, User, Copy, Check, Wand2 } from "lucide-react";
+import { Send, Trash2, Bot, User, Copy, Check } from "lucide-react";
 import { type LLM, sendChatMessage, type ChatMessage } from "@/lib/api";
 import 'katex/dist/katex.min.css';
 import katex from 'katex';
@@ -137,71 +137,6 @@ export function ChatInterface({ selectedModel, onModelChange }: ChatInterfacePro
     setTimeout(() => setCopiedIndex(null), 2000);
   };
 
-  const generateAxiomSet = async (type: string) => {
-    const baseInstructions = `OUTPUT RULES (MANDATORY):
-- Return ONLY plain Unicode text
-- NO markdown (no **, no ##, no *, no _)
-- NO commentary, explanations, or descriptions
-- NO prose or natural language
-- ONLY the formal axiom system
-
-FORMAT (exactly this structure):
-LANGUAGE: {symbol list}
-
-AXIOMS:
-1. <axiom using ∀ ∃ → ∧ ∨ ¬ ↔>
-2. <axiom>
-...`;
-
-    const prompts: Record<string, string> = {
-      "strict-order": `${baseInstructions}
-
-Generate: STRICT PARTIAL ORDER (irreflexive, transitive binary relation)`,
-      "equivalence": `${baseInstructions}
-
-Generate: EQUIVALENCE RELATION (reflexive, symmetric, transitive)`,
-      "group": `${baseInstructions}
-
-Generate: GROUP THEORY (associative operation, identity, inverses)`,
-      "lattice": `${baseInstructions}
-
-Generate: LATTICE (partial order with meets and joins)`,
-      "boolean-algebra": `${baseInstructions}
-
-Generate: BOOLEAN ALGEBRA (complemented distributive lattice)`,
-      "set-theory": `${baseInstructions}
-
-Generate: SET THEORY (membership and subset relations)`,
-    };
-
-    const prompt = prompts[type] || prompts["strict-order"];
-    setInput("");
-    
-    const userMsg: Message = { role: "user", content: `Generate: ${type.replace("-", " ").toUpperCase()} axiom system` };
-    setMessages(prev => [...prev, userMsg]);
-    setIsTyping(true);
-
-    try {
-      const history: ChatMessage[] = messages
-        .filter(m => m.role === "user" || m.role === "assistant")
-        .map(m => ({ role: m.role, content: m.content }));
-
-      const response = await sendChatMessage(prompt, selectedModel, history);
-      
-      const assistantMsg: Message = {
-        role: "assistant",
-        content: response.result,
-        model: selectedModel,
-        provider: response.provider
-      };
-      setMessages(prev => [...prev, assistantMsg]);
-    } catch (err: any) {
-      setError(err.message || "Failed to generate");
-    } finally {
-      setIsTyping(false);
-    }
-  };
-
   const handleSend = async () => {
     if (!input.trim() || isTyping) return;
     
@@ -314,75 +249,6 @@ Generate: SET THEORY (membership and subset relations)`,
           )}
         </div>
       </ScrollArea>
-
-      <div className="p-3 border-t border-border bg-muted/20 space-y-2">
-        <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider flex items-center gap-1">
-          <Wand2 className="h-3 w-3" />
-          Quick Generate
-        </div>
-        <div className="flex flex-wrap gap-1">
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={() => generateAxiomSet("strict-order")}
-            disabled={isTyping}
-            className="h-6 text-[10px] px-2"
-            data-testid="generate-strict-order"
-          >
-            Strict Order
-          </Button>
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={() => generateAxiomSet("equivalence")}
-            disabled={isTyping}
-            className="h-6 text-[10px] px-2"
-            data-testid="generate-equivalence"
-          >
-            Equivalence
-          </Button>
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={() => generateAxiomSet("group")}
-            disabled={isTyping}
-            className="h-6 text-[10px] px-2"
-            data-testid="generate-group"
-          >
-            Group
-          </Button>
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={() => generateAxiomSet("lattice")}
-            disabled={isTyping}
-            className="h-6 text-[10px] px-2"
-            data-testid="generate-lattice"
-          >
-            Lattice
-          </Button>
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={() => generateAxiomSet("boolean-algebra")}
-            disabled={isTyping}
-            className="h-6 text-[10px] px-2"
-            data-testid="generate-boolean"
-          >
-            Boolean Alg
-          </Button>
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={() => generateAxiomSet("set-theory")}
-            disabled={isTyping}
-            className="h-6 text-[10px] px-2"
-            data-testid="generate-set-theory"
-          >
-            Set Theory
-          </Button>
-        </div>
-      </div>
 
       <div className="p-3 border-t border-border bg-background space-y-3">
         <Select value={selectedModel} onValueChange={(val) => {
