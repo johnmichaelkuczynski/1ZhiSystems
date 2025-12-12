@@ -384,6 +384,190 @@ AXIOMS:
 5. ∀x ∃y (y < x)                       [No Minimum]
 6. ∀x ∃y (x < y)                       [No Maximum]`
   },
+  {
+    id: "quick-identity",
+    name: "Identity",
+    category: "Quick Examples",
+    description: "Self-identity axiom",
+    content: `1. ∀x(x = x)`
+  },
+  {
+    id: "quick-symmetry",
+    name: "Symmetric Relation",
+    category: "Quick Examples",
+    description: "Symmetry axiom for R",
+    content: `1. ∀x∀y(Rxy → Ryx)`
+  },
+  {
+    id: "quick-transitivity-chain",
+    name: "Transitivity Chain",
+    category: "Quick Examples",
+    description: "F→G→H chain",
+    content: `1. ∀x(Fx → Gx)
+2. ∀x(Gx → Hx)`
+  },
+  {
+    id: "quick-existence",
+    name: "Existence Claim",
+    category: "Quick Examples",
+    description: "Something has property P",
+    content: `1. ∃x(Px)`
+  },
+  {
+    id: "quick-transitivity",
+    name: "Transitive Relation",
+    category: "Quick Examples",
+    description: "Transitivity axiom for R",
+    content: `1. ∀x∀y∀z((Rxy ∧ Ryz) → Rxz)`
+  },
+  {
+    id: "quick-commutativity",
+    name: "Commutativity",
+    category: "Quick Examples",
+    description: "Addition is commutative",
+    content: `1. a + b = b + a`
+  },
+  {
+    id: "quick-successor",
+    name: "Successor Ordering",
+    category: "Quick Examples",
+    description: "x < x+1 always",
+    content: `1. ∀x(x < x + 1)`
+  },
+  {
+    id: "quick-unbounded",
+    name: "Unbounded Above",
+    category: "Quick Examples",
+    description: "No maximum element",
+    content: `1. ∀x∃y(y > x)`
+  },
+  {
+    id: "quick-lem",
+    name: "Law of Excluded Middle",
+    category: "Quick Examples",
+    description: "Everything is F or not F",
+    content: `1. ∀x(Fx ∨ ¬Fx)`
+  },
+  {
+    id: "quick-two-distinct",
+    name: "Two Distinct Objects",
+    category: "Quick Examples",
+    description: "At least two things exist",
+    content: `1. ∃x∃y(x ≠ y)`
+  },
+  {
+    id: "quick-comm-monoid",
+    name: "Commutative Monoid",
+    category: "Quick Examples",
+    description: "Comm. operation with identity",
+    content: `1. ∀x∀y(x · y = y · x)
+2. ∀x(x · 1 = x)`
+  },
+  {
+    id: "quick-relational",
+    name: "Relational Dependence",
+    category: "Quick Examples",
+    description: "P implies related Q exists",
+    content: `1. ∀x(Px → ∃y(Qy ∧ Rxy))`
+  },
+  {
+    id: "quick-disjoint",
+    name: "Disjoint Properties",
+    category: "Quick Examples",
+    description: "F and G are disjoint but both exist",
+    content: `1. ¬∃x(Fx ∧ Gx)
+2. ∃xFx
+3. ∃xGx`
+  },
+  {
+    id: "quick-total-order",
+    name: "Totality",
+    category: "Quick Examples",
+    description: "Linear/total ordering",
+    content: `1. ∀x∀y(x ≤ y ∨ y ≤ x)`
+  },
+  {
+    id: "quick-unique-existence",
+    name: "Unique Existence",
+    category: "Quick Examples",
+    description: "Exactly one F exists",
+    content: `1. ∃!x(Fx)`
+  },
+  {
+    id: "quick-subset-chain",
+    name: "Subset Chain",
+    category: "Quick Examples",
+    description: "A ⊆ B ⊆ C",
+    content: `1. ∀x(x ∈ A → x ∈ B)
+2. ∀x(x ∈ B → x ∈ C)`
+  },
+  {
+    id: "quick-asymmetry",
+    name: "Asymmetric Relation",
+    category: "Quick Examples",
+    description: "L is asymmetric",
+    content: `1. ∀x∀y(Lxy → ¬Lyx)`
+  },
+  {
+    id: "quick-modal-t",
+    name: "Modal T Axiom",
+    category: "Quick Examples",
+    description: "Necessary implies actual",
+    content: `1. □P → P`
+  },
+  {
+    id: "quick-successor-exists",
+    name: "Successor Existence",
+    category: "Quick Examples",
+    description: "Every N has a successor",
+    content: `1. ∀x(Nx → ∃y(Ny ∧ Syx))`
+  },
+  {
+    id: "quick-identity-element",
+    name: "Identity Element",
+    category: "Quick Examples",
+    description: "e is two-sided identity",
+    content: `1. ∀x(x ○ e = x)
+2. ∀x(e ○ x = x)`
+  },
+  {
+    id: "quick-closure",
+    name: "Closure Operation",
+    category: "Quick Examples",
+    description: "⊕ is closed",
+    content: `1. ∀x∀y∃z(z = x ⊕ y)`
+  },
+  {
+    id: "quick-part-reflexive",
+    name: "Part Reflexivity",
+    category: "Quick Examples",
+    description: "Everything is part of itself",
+    content: `1. ∀x(Part(x,x))`
+  },
+  {
+    id: "quick-modal-possibility",
+    name: "Actuality → Possibility",
+    category: "Quick Examples",
+    description: "What is actual is possible",
+    content: `1. P → ◇P`
+  },
+  {
+    id: "quick-chain-inference",
+    name: "Chain Inference",
+    category: "Quick Examples",
+    description: "B→C∧D, C→E chain",
+    content: `1. ∀x(Bx → ∃y(Cy ∧ Dxy))
+2. ∀y(Cy → Ey)`
+  },
+  {
+    id: "quick-equiv-full",
+    name: "Full Equivalence Relation",
+    category: "Quick Examples",
+    description: "~ is reflexive, symmetric, transitive",
+    content: `1. ∀x∀y((x ~ y ∧ y ~ z) → x ~ z)
+2. ∀x(x ~ x)
+3. ∀x∀y(x ~ y → y ~ x)`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [
