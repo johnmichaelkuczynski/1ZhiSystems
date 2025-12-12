@@ -26,8 +26,58 @@ interface ChatInterfaceProps {
   onModelChange: (model: LLM) => void;
 }
 
-function renderMathContent(text: string): string {
+function stripMarkdown(text: string): string {
   let result = text;
+  
+  result = result.replace(/^#{1,6}\s+/gm, '');
+  
+  result = result.replace(/\*\*([^*]+)\*\*/g, '$1');
+  result = result.replace(/\*([^*]+)\*/g, '$1');
+  result = result.replace(/__([^_]+)__/g, '$1');
+  result = result.replace(/_([^_]+)_/g, '$1');
+  
+  result = result.replace(/`([^`]+)`/g, '$1');
+  result = result.replace(/```[\s\S]*?```/g, '');
+  
+  result = result.replace(/^\s*[-*+]\s+/gm, '');
+  
+  result = result.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+  
+  const logicSymbols: [RegExp, string][] = [
+    [/\\forall/g, '∀'],
+    [/\\exists/g, '∃'],
+    [/\\neg/g, '¬'],
+    [/\\land/g, '∧'],
+    [/\\lor/g, '∨'],
+    [/\\to/g, '→'],
+    [/\\rightarrow/g, '→'],
+    [/\\leftrightarrow/g, '↔'],
+    [/\\iff/g, '↔'],
+    [/\\in/g, '∈'],
+    [/\\notin/g, '∉'],
+    [/\\subset/g, '⊂'],
+    [/\\subseteq/g, '⊆'],
+    [/\\cup/g, '∪'],
+    [/\\cap/g, '∩'],
+    [/\\emptyset/g, '∅'],
+    [/\\infty/g, '∞'],
+    [/\\neq/g, '≠'],
+    [/\\leq/g, '≤'],
+    [/\\geq/g, '≥'],
+    [/\\equiv/g, '≡'],
+    [/\\times/g, '×'],
+    [/\\cdot/g, '·'],
+  ];
+  
+  for (const [pattern, symbol] of logicSymbols) {
+    result = result.replace(pattern, symbol);
+  }
+  
+  return result.trim();
+}
+
+function renderMathContent(text: string): string {
+  let result = stripMarkdown(text);
   
   result = result.replace(/\$\$([^$]+)\$\$/g, (_, math) => {
     try {
@@ -61,36 +111,6 @@ function renderMathContent(text: string): string {
     }
   });
   
-  const logicSymbols: [RegExp, string][] = [
-    [/\\forall/g, '∀'],
-    [/\\exists/g, '∃'],
-    [/\\neg/g, '¬'],
-    [/\\land/g, '∧'],
-    [/\\lor/g, '∨'],
-    [/\\to/g, '→'],
-    [/\\rightarrow/g, '→'],
-    [/\\leftrightarrow/g, '↔'],
-    [/\\iff/g, '↔'],
-    [/\\in/g, '∈'],
-    [/\\notin/g, '∉'],
-    [/\\subset/g, '⊂'],
-    [/\\subseteq/g, '⊆'],
-    [/\\cup/g, '∪'],
-    [/\\cap/g, '∩'],
-    [/\\emptyset/g, '∅'],
-    [/\\infty/g, '∞'],
-    [/\\neq/g, '≠'],
-    [/\\leq/g, '≤'],
-    [/\\geq/g, '≥'],
-    [/\\equiv/g, '≡'],
-    [/\\times/g, '×'],
-    [/\\cdot/g, '·'],
-  ];
-  
-  for (const [pattern, symbol] of logicSymbols) {
-    result = result.replace(pattern, symbol);
-  }
-  
   return result;
 }
 
@@ -111,19 +131,47 @@ export function ChatInterface({ selectedModel, onModelChange }: ChatInterfacePro
   }, [messages]);
 
   const handleCopy = async (content: string, index: number) => {
-    await navigator.clipboard.writeText(content);
+    const cleanContent = stripMarkdown(content);
+    await navigator.clipboard.writeText(cleanContent);
     setCopiedIndex(index);
     setTimeout(() => setCopiedIndex(null), 2000);
   };
 
   const generateAxiomSet = async (type: string) => {
+    const baseInstructions = `OUTPUT RULES (MANDATORY):
+- Return ONLY plain Unicode text
+- NO markdown (no **, no ##, no *, no _)
+- NO commentary, explanations, or descriptions
+- NO prose or natural language
+- ONLY the formal axiom system
+
+FORMAT (exactly this structure):
+LANGUAGE: {symbol list}
+
+AXIOMS:
+1. <axiom using ∀ ∃ → ∧ ∨ ¬ ↔>
+2. <axiom>
+...`;
+
     const prompts: Record<string, string> = {
-      "strict-order": "Generate a formal axiom system for STRICT PARTIAL ORDER with predicates. Use proper logical notation with ∀, ∃, →, ∧, ¬. Format as:\n\nLANGUAGE: {predicate list}\n\nAXIOMS:\n1. ...\n2. ...",
-      "equivalence": "Generate a formal axiom system for EQUIVALENCE RELATION. Use proper logical notation with ∀, ∃, →, ∧, ¬. Format as:\n\nLANGUAGE: {predicate list}\n\nAXIOMS:\n1. ...\n2. ...",
-      "group": "Generate a formal axiom system for GROUP THEORY. Use proper logical notation with ∀, ∃, →, ∧, ¬. Format as:\n\nLANGUAGE: {predicate list, function list}\n\nAXIOMS:\n1. ...\n2. ...",
-      "lattice": "Generate a formal axiom system for LATTICE THEORY. Use proper logical notation with ∀, ∃, →, ∧, ¬. Format as:\n\nLANGUAGE: {predicate list}\n\nAXIOMS:\n1. ...\n2. ...",
-      "boolean-algebra": "Generate a formal axiom system for BOOLEAN ALGEBRA. Use proper logical notation. Format as:\n\nLANGUAGE: {predicate list, function list}\n\nAXIOMS:\n1. ...\n2. ...",
-      "set-theory": "Generate a formal axiom system for basic SET THEORY (membership, subset). Use proper logical notation. Format as:\n\nLANGUAGE: {predicate list}\n\nAXIOMS:\n1. ...\n2. ...",
+      "strict-order": `${baseInstructions}
+
+Generate: STRICT PARTIAL ORDER (irreflexive, transitive binary relation)`,
+      "equivalence": `${baseInstructions}
+
+Generate: EQUIVALENCE RELATION (reflexive, symmetric, transitive)`,
+      "group": `${baseInstructions}
+
+Generate: GROUP THEORY (associative operation, identity, inverses)`,
+      "lattice": `${baseInstructions}
+
+Generate: LATTICE (partial order with meets and joins)`,
+      "boolean-algebra": `${baseInstructions}
+
+Generate: BOOLEAN ALGEBRA (complemented distributive lattice)`,
+      "set-theory": `${baseInstructions}
+
+Generate: SET THEORY (membership and subset relations)`,
     };
 
     const prompt = prompts[type] || prompts["strict-order"];
