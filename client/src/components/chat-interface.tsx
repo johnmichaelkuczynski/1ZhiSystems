@@ -9,8 +9,10 @@ import {
   SelectTrigger, 
   SelectValue 
 } from "@/components/ui/select";
-import { Send, Trash2, Bot, User, AlertCircle } from "lucide-react";
+import { Send, Trash2, Bot, User, Copy, Check, Wand2 } from "lucide-react";
 import { type LLM, sendChatMessage, type ChatMessage } from "@/lib/api";
+import 'katex/dist/katex.min.css';
+import katex from 'katex';
 
 interface Message {
   role: "user" | "assistant";
@@ -24,13 +26,82 @@ interface ChatInterfaceProps {
   onModelChange: (model: LLM) => void;
 }
 
+function renderMathContent(text: string): string {
+  let result = text;
+  
+  result = result.replace(/\$\$([^$]+)\$\$/g, (_, math) => {
+    try {
+      return katex.renderToString(math.trim(), { displayMode: true, throwOnError: false });
+    } catch {
+      return `$$${math}$$`;
+    }
+  });
+  
+  result = result.replace(/\$([^$]+)\$/g, (_, math) => {
+    try {
+      return katex.renderToString(math.trim(), { displayMode: false, throwOnError: false });
+    } catch {
+      return `$${math}$`;
+    }
+  });
+  
+  result = result.replace(/\\\[([^\]]+)\\\]/g, (_, math) => {
+    try {
+      return katex.renderToString(math.trim(), { displayMode: true, throwOnError: false });
+    } catch {
+      return `\\[${math}\\]`;
+    }
+  });
+  
+  result = result.replace(/\\\(([^)]+)\\\)/g, (_, math) => {
+    try {
+      return katex.renderToString(math.trim(), { displayMode: false, throwOnError: false });
+    } catch {
+      return `\\(${math}\\)`;
+    }
+  });
+  
+  const logicSymbols: [RegExp, string][] = [
+    [/\\forall/g, '∀'],
+    [/\\exists/g, '∃'],
+    [/\\neg/g, '¬'],
+    [/\\land/g, '∧'],
+    [/\\lor/g, '∨'],
+    [/\\to/g, '→'],
+    [/\\rightarrow/g, '→'],
+    [/\\leftrightarrow/g, '↔'],
+    [/\\iff/g, '↔'],
+    [/\\in/g, '∈'],
+    [/\\notin/g, '∉'],
+    [/\\subset/g, '⊂'],
+    [/\\subseteq/g, '⊆'],
+    [/\\cup/g, '∪'],
+    [/\\cap/g, '∩'],
+    [/\\emptyset/g, '∅'],
+    [/\\infty/g, '∞'],
+    [/\\neq/g, '≠'],
+    [/\\leq/g, '≤'],
+    [/\\geq/g, '≥'],
+    [/\\equiv/g, '≡'],
+    [/\\times/g, '×'],
+    [/\\cdot/g, '·'],
+  ];
+  
+  for (const [pattern, symbol] of logicSymbols) {
+    result = result.replace(pattern, symbol);
+  }
+  
+  return result;
+}
+
 export function ChatInterface({ selectedModel, onModelChange }: ChatInterfaceProps) {
   const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: "Ready to assist with formal theory analysis. Select a model and begin.", model: selectedModel }
+    { role: "assistant", content: "Ready to assist with formal theory analysis. You can ask me to generate axiom systems, explain logical concepts, or help with theory transformations.", model: selectedModel }
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -38,6 +109,50 @@ export function ChatInterface({ selectedModel, onModelChange }: ChatInterfacePro
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages]);
+
+  const handleCopy = async (content: string, index: number) => {
+    await navigator.clipboard.writeText(content);
+    setCopiedIndex(index);
+    setTimeout(() => setCopiedIndex(null), 2000);
+  };
+
+  const generateAxiomSet = async (type: string) => {
+    const prompts: Record<string, string> = {
+      "strict-order": "Generate a formal axiom system for STRICT PARTIAL ORDER with predicates. Use proper logical notation with ∀, ∃, →, ∧, ¬. Format as:\n\nLANGUAGE: {predicate list}\n\nAXIOMS:\n1. ...\n2. ...",
+      "equivalence": "Generate a formal axiom system for EQUIVALENCE RELATION. Use proper logical notation with ∀, ∃, →, ∧, ¬. Format as:\n\nLANGUAGE: {predicate list}\n\nAXIOMS:\n1. ...\n2. ...",
+      "group": "Generate a formal axiom system for GROUP THEORY. Use proper logical notation with ∀, ∃, →, ∧, ¬. Format as:\n\nLANGUAGE: {predicate list, function list}\n\nAXIOMS:\n1. ...\n2. ...",
+      "lattice": "Generate a formal axiom system for LATTICE THEORY. Use proper logical notation with ∀, ∃, →, ∧, ¬. Format as:\n\nLANGUAGE: {predicate list}\n\nAXIOMS:\n1. ...\n2. ...",
+      "boolean-algebra": "Generate a formal axiom system for BOOLEAN ALGEBRA. Use proper logical notation. Format as:\n\nLANGUAGE: {predicate list, function list}\n\nAXIOMS:\n1. ...\n2. ...",
+      "set-theory": "Generate a formal axiom system for basic SET THEORY (membership, subset). Use proper logical notation. Format as:\n\nLANGUAGE: {predicate list}\n\nAXIOMS:\n1. ...\n2. ...",
+    };
+
+    const prompt = prompts[type] || prompts["strict-order"];
+    setInput("");
+    
+    const userMsg: Message = { role: "user", content: `Generate: ${type.replace("-", " ").toUpperCase()} axiom system` };
+    setMessages(prev => [...prev, userMsg]);
+    setIsTyping(true);
+
+    try {
+      const history: ChatMessage[] = messages
+        .filter(m => m.role === "user" || m.role === "assistant")
+        .map(m => ({ role: m.role, content: m.content }));
+
+      const response = await sendChatMessage(prompt, selectedModel, history);
+      
+      const assistantMsg: Message = {
+        role: "assistant",
+        content: response.result,
+        model: selectedModel,
+        provider: response.provider
+      };
+      setMessages(prev => [...prev, assistantMsg]);
+    } catch (err: any) {
+      setError(err.message || "Failed to generate");
+    } finally {
+      setIsTyping(false);
+    }
+  };
 
   const handleSend = async () => {
     if (!input.trim() || isTyping) return;
@@ -107,17 +222,35 @@ export function ChatInterface({ selectedModel, onModelChange }: ChatInterfacePro
                 {msg.role === 'user' ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
               </div>
               <div className={`
-                max-w-[85%] rounded-sm p-3 text-sm leading-relaxed
+                max-w-[85%] rounded-sm p-3 text-sm leading-relaxed relative group
                 ${msg.role === 'user' 
                   ? 'bg-primary text-primary-foreground' 
                   : 'bg-secondary text-secondary-foreground'}
               `}>
+                {msg.role === 'assistant' && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => handleCopy(msg.content, i)}
+                    className="absolute top-1 right-1 h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity bg-background/50 hover:bg-background"
+                    data-testid={`copy-message-${i}`}
+                  >
+                    {copiedIndex === i ? (
+                      <Check className="h-3 w-3 text-green-500" />
+                    ) : (
+                      <Copy className="h-3 w-3" />
+                    )}
+                  </Button>
+                )}
                 {msg.role === 'assistant' && msg.model && (
-                  <div className="text-[10px] font-mono opacity-50 mb-1 uppercase tracking-wider">
-                    {msg.model} {msg.provider ? `(${msg.provider})` : ''}
+                  <div className="text-[10px] font-mono opacity-50 mb-1 uppercase tracking-wider pr-6">
+                    {msg.model}
                   </div>
                 )}
-                <div className="whitespace-pre-wrap">{msg.content}</div>
+                <div 
+                  className="whitespace-pre-wrap math-content"
+                  dangerouslySetInnerHTML={{ __html: renderMathContent(msg.content) }}
+                />
               </div>
             </div>
           ))}
@@ -133,6 +266,75 @@ export function ChatInterface({ selectedModel, onModelChange }: ChatInterfacePro
           )}
         </div>
       </ScrollArea>
+
+      <div className="p-3 border-t border-border bg-muted/20 space-y-2">
+        <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider flex items-center gap-1">
+          <Wand2 className="h-3 w-3" />
+          Quick Generate
+        </div>
+        <div className="flex flex-wrap gap-1">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={() => generateAxiomSet("strict-order")}
+            disabled={isTyping}
+            className="h-6 text-[10px] px-2"
+            data-testid="generate-strict-order"
+          >
+            Strict Order
+          </Button>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={() => generateAxiomSet("equivalence")}
+            disabled={isTyping}
+            className="h-6 text-[10px] px-2"
+            data-testid="generate-equivalence"
+          >
+            Equivalence
+          </Button>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={() => generateAxiomSet("group")}
+            disabled={isTyping}
+            className="h-6 text-[10px] px-2"
+            data-testid="generate-group"
+          >
+            Group
+          </Button>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={() => generateAxiomSet("lattice")}
+            disabled={isTyping}
+            className="h-6 text-[10px] px-2"
+            data-testid="generate-lattice"
+          >
+            Lattice
+          </Button>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={() => generateAxiomSet("boolean-algebra")}
+            disabled={isTyping}
+            className="h-6 text-[10px] px-2"
+            data-testid="generate-boolean"
+          >
+            Boolean Alg
+          </Button>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={() => generateAxiomSet("set-theory")}
+            disabled={isTyping}
+            className="h-6 text-[10px] px-2"
+            data-testid="generate-set-theory"
+          >
+            Set Theory
+          </Button>
+        </div>
+      </div>
 
       <div className="p-3 border-t border-border bg-background space-y-3">
         <Select value={selectedModel} onValueChange={(val) => {
@@ -159,7 +361,7 @@ export function ChatInterface({ selectedModel, onModelChange }: ChatInterfacePro
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleSend()}
-            placeholder="Ask about the theory..."
+            placeholder="Ask about theory or request axiom generation..."
             className="flex-1 h-9 text-sm font-sans border-border rounded-sm"
             disabled={isTyping}
             data-testid="chat-input"

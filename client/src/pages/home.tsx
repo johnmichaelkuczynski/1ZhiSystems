@@ -4,6 +4,7 @@ import { type LLM } from "@/lib/api";
 import { FunctionRow } from "@/components/function-row";
 import { DualInputRow } from "@/components/dual-input-row";
 import { PresetsSidebar, type Preset } from "@/components/presets-sidebar";
+import { AxiomLibrary } from "@/components/axiom-library";
 import generatedLogo from "@assets/generated_images/minimalist_geometric_logo_representing_logic_transformation.png";
 
 interface FunctionInputs {
@@ -156,6 +157,8 @@ export default function Home() {
                   selectedModel={selectedModel} 
                   onModelChange={setSelectedModel} 
                 />
+
+                <AxiomLibrary />
                 
                 <div className="p-5 rounded-sm bg-muted/30 border border-border text-xs text-muted-foreground font-mono leading-relaxed space-y-3">
                   <div className="flex items-center gap-2 text-foreground font-semibold border-b border-border pb-2">
