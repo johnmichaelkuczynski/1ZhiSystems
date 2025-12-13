@@ -805,6 +805,31 @@ AXIOMS:
 6. ∀x∀z (x ≠ z → ∃y Between(x,y,z))
 7. ∀x∀y∀z∀r ((¬Col(x,y,z) ∧ In(x,r) ∧ In(y,r) ∧ In(z,r)) → ∀u (On(u,x) → In(u,r)))`
   },
+  {
+    id: "physics-spacetime-signals",
+    name: "Physics: Space-Time with Signals",
+    category: "Physics",
+    description: "Coincidence, temporal precedence, signal reachability",
+    content: `LANGUAGE: {C(x,y), T(x,y), S(x,y)}
+
+C(x,y) = coincidence
+T(x,y) = temporal precedence
+S(x,y) = signal reachability
+
+AXIOMS:
+1. ∀x C(x,x)
+2. ∀x∀y (C(x,y) → C(y,x))
+3. ∀x∀y∀z ((C(x,y) ∧ C(y,z)) → C(x,z))
+4. ∀x ¬T(x,x)
+5. ∀x∀y∀z ((T(x,y) ∧ T(y,z)) → T(x,z))
+6. ∀x∀y (T(x,y) → ¬T(y,x))
+7. ∀x ¬S(x,x)
+8. ∀x∀y∀z ((S(x,y) ∧ S(y,z)) → S(x,z))
+9. ∀x∀y (S(x,y) → ¬S(y,x))
+10. ∀x∀y (S(x,y) → T(x,y))
+11. ∀x∀y (C(x,y) → ¬T(x,y))
+12. ∀x∀y (C(x,y) → ¬S(x,y))`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [
