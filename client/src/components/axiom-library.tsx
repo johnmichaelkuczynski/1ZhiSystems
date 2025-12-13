@@ -940,6 +940,19 @@ AXIOMS:
 1. ∀x∀y (P(x ∩ y) = P(x|y) · P(y))
 2. ∀x∀y (P(y) > 0 → P(x|y) = P(y|x) · P(x) / P(y))`
   },
+  {
+    id: "probability-definetti",
+    name: "Subjective Probability (De Finetti)",
+    category: "Probability",
+    description: "Preference-based probability via betting",
+    content: `LANGUAGE: {Event(x), Pref(x,y)}
+
+AXIOMS:
+1. ∀x ¬Pref(x,x)
+2. ∀x∀y (Pref(x,y) → ¬Pref(y,x))
+3. ∀x∀y∀z ((Pref(x,y) ∧ Pref(y,z)) → Pref(x,z))
+4. ∀x∀y∀z (Pref(x,y) → Pref(x ∪ z, y ∪ z))`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [
