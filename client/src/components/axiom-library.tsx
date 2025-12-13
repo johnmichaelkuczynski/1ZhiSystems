@@ -929,6 +929,17 @@ AXIOMS:
 3. ∀x∀y∀z ((MoreLikely(x,y) ∧ MoreLikely(y,z)) → MoreLikely(x,z))
 4. ∀x∀y∀z ((MoreLikely(x,y) ∧ z ∩ x = ∅ ∧ z ∩ y = ∅) → MoreLikely(x ∪ z, y ∪ z))`
   },
+  {
+    id: "probability-bayesian",
+    name: "Bayesian Updating",
+    category: "Probability",
+    description: "Chain rule and Bayes' theorem",
+    content: `LANGUAGE: {Event(x), P(x), P(x|y)}
+
+AXIOMS:
+1. ∀x∀y (P(x ∩ y) = P(x|y) · P(y))
+2. ∀x∀y (P(y) > 0 → P(x|y) = P(y|x) · P(x) / P(y))`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [
