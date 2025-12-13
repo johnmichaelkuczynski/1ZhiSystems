@@ -916,6 +916,19 @@ AXIOMS:
 2. ∃u (Event(u) ∧ P(u) = 1)
 3. ∀x∀y ((Event(x) ∧ Event(y) ∧ x ∩ y = ∅) → P(x ∪ y) = P(x) + P(y))`
   },
+  {
+    id: "probability-qualitative",
+    name: "Qualitative Probability (Order-Only)",
+    category: "Probability",
+    description: "Comparative probability without numbers",
+    content: `LANGUAGE: {Event(x), MoreLikely(x,y)}
+
+AXIOMS:
+1. ∀x ¬MoreLikely(x,x)
+2. ∀x∀y (MoreLikely(x,y) → ¬MoreLikely(y,x))
+3. ∀x∀y∀z ((MoreLikely(x,y) ∧ MoreLikely(y,z)) → MoreLikely(x,z))
+4. ∀x∀y∀z ((MoreLikely(x,y) ∧ z ∩ x = ∅ ∧ z ∩ y = ∅) → MoreLikely(x ∪ z, y ∪ z))`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [
