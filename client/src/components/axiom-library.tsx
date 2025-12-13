@@ -864,6 +864,18 @@ AXIOMS:
 5. ∀x ¬Parent(x,x)
 6. ∀x∀y (Parent(x,y) → Human(x) ∧ Human(y))`
   },
+  {
+    id: "probability-conditional",
+    name: "Conditional Probability (Primitive)",
+    category: "Probability",
+    description: "Kolmogorov-style with conditional as primitive",
+    content: `LANGUAGE: {Event(x), P(x|y)}
+
+AXIOMS:
+1. ∀x∀y (P(x|y) ≥ 0)
+2. ∀y (Event(y) → P(y|y) = 1)
+3. ∀x∀y∀z ((x ∩ y ∩ z = ∅) → P(x ∪ y|z) = P(x|z) + P(y|z))`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [
