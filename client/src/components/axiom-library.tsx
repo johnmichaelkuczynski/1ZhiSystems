@@ -983,6 +983,25 @@ DEFINITIONS:
 D1. EconomicDecision(b) ↔ Governs(SmithianRationality,b) ∨ Governs(VeblenianRationality,b)
 D2. IrrationalAppearance(b) ↔ ∃r₁∃r₂ (Governs(r₁,b) ∧ ¬Governs(r₂,b) ∧ r₁ ≠ r₂)`
   },
+  {
+    id: "kuczynski-veblen-rationality-2",
+    name: "Kuczynski-Veblen Rationality II (Smithian)",
+    category: "Economics",
+    description: "Resource-based rationality with return maximization",
+    content: `LANGUAGE: {Agent(x), Action(a), Resource(r), Return(a,v), Cost(a,c), Constraint(x,k), Selects(x,a)}
+
+AXIOMS:
+1. ∀x (Agent(x) → ∃k Constraint(x,k))
+2. ∀a (Action(a) → ∃v∃c (Return(a,v) ∧ Cost(a,c)))
+3. ∀x∀k (Constraint(x,k) → ∃a Selects(x,a))
+4. ∀x∀a (Selects(x,a) → ∀a' (Return(a,v)/Cost(a,c) ≥ Return(a',v')/Cost(a',c')))
+5. ∀a∀v (Return(a,v) → TangibleBenefit(v))
+
+DEFINITIONS:
+D1. SmithRationalAgent(x) ↔ ∀a (Selects(x,a) → MaximizesReturnPerCost(x,a))
+D2. PayoffStructure(a) ↔ ∃v∃c (Return(a,v) ∧ Cost(a,c))
+D3. ProvisioningLogic(x) ↔ SmithRationalAgent(x) ∧ ∀a (Selects(x,a) → TangibleBenefit(Return(a)))`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [
