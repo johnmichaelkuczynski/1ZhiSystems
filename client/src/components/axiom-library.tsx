@@ -849,6 +849,21 @@ AXIOMS:
 9. ∀x∀y (Fuse(x,y) → Earlier(x,y))
 10. ∀x ¬∃y (Divide(x,y) ∧ Fuse(x,y))`
   },
+  {
+    id: "biology-kinship",
+    name: "Biology: Kinship Relations",
+    category: "Biology",
+    description: "Sex, parenthood, unique biological parents",
+    content: `LANGUAGE: {Human(x), Male(x), Female(x), Parent(x,y)}
+
+AXIOMS:
+1. ∀x (Human(x) → (Male(x) ∨ Female(x)))
+2. ∀x ¬(Male(x) ∧ Female(x))
+3. ∀x∀y∀z ((Parent(x,y) ∧ Parent(z,y) ∧ Male(x) ∧ Male(z)) → x = z)
+4. ∀x∀y∀z ((Parent(x,y) ∧ Parent(z,y) ∧ Female(x) ∧ Female(z)) → x = z)
+5. ∀x ¬Parent(x,x)
+6. ∀x∀y (Parent(x,y) → Human(x) ∧ Human(y))`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [
