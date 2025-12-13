@@ -1044,6 +1044,32 @@ D2. ShortTermContext(t) ↔ Context(t) ∧ PrioritizesImmediacy(t)
 D3. LongTermContext(t) ↔ Context(t) ∧ PrioritizesSustainability(t)
 D4. InstitutionalAgent(x) ↔ Agent(x) ∧ Collective(x) ∧ CoordinatesSelections(x)`
   },
+  {
+    id: "kuczynski-smith-rationality-3",
+    name: "Kuczynski-Smith Rationality III",
+    category: "Economics",
+    description: "Smithian vs orthogonal rationality modes",
+    content: `LANGUAGE: {R, B, C, S, O, Governs(r,b), ActiveIn(r,c)}
+
+R = rationality mode
+B = behavior
+C = context
+S = Smithian rationality
+O = orthogonal rationality
+
+AXIOMS:
+1. ∃R∃B Governs(R,B)
+2. ∀B (Governs(S,B) → Provisioning(B))
+3. ∃B ¬Governs(S,B)
+4. ∃O∃B (O ≠ S ∧ Governs(O,B) ∧ ¬Governs(S,B))
+5. ∀B∀R (Governs(R,B) → ∃C ActiveIn(R,C))
+6. ∀B∀C ¬(Governs(S,B) ∧ Governs(O,B) ∧ ActiveIn(S,C) ∧ ActiveIn(O,C))
+
+DEFINITIONS:
+D1. ProvisioningBehavior(B) ↔ Governs(S,B)
+D2. NonProvisioningBehavior(B) ↔ ¬Governs(S,B)
+D3. ContextualActivation(C,R,B) ↔ ActiveIn(R,C) ∧ Governs(R,B)`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [
