@@ -904,6 +904,18 @@ AXIOMS:
 2. P(Ω) = 1
 3. ∀x∀y ((Event(x) ∧ Event(y) ∧ x ∩ y = ∅) → P(x ∪ y) = P(x) + P(y))`
   },
+  {
+    id: "probability-finite-additivity",
+    name: "Probability Theory (Finite Additivity)",
+    category: "Probability",
+    description: "Finitely additive probability without sample space",
+    content: `LANGUAGE: {Event(x), P(x)}
+
+AXIOMS:
+1. ∀x (Event(x) → P(x) ≥ 0)
+2. ∃u (Event(u) ∧ P(u) = 1)
+3. ∀x∀y ((Event(x) ∧ Event(y) ∧ x ∩ y = ∅) → P(x ∪ y) = P(x) + P(y))`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [
