@@ -953,6 +953,18 @@ AXIOMS:
 3. ∀x∀y∀z ((Pref(x,y) ∧ Pref(y,z)) → Pref(x,z))
 4. ∀x∀y∀z (Pref(x,y) → Pref(x ∪ z, y ∪ z))`
   },
+  {
+    id: "probability-frequentist",
+    name: "Frequentist Limit Probability",
+    category: "Probability",
+    description: "Probability as limiting relative frequency",
+    content: `LANGUAGE: {Event(x), Freq(x,n), P(x)}
+
+AXIOMS:
+1. ∀x∀n (0 ≤ Freq(x,n) ≤ 1)
+2. ∀x (limₙ Freq(x,n) exists)
+3. ∀x (P(x) = limₙ Freq(x,n))`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [
