@@ -876,6 +876,22 @@ AXIOMS:
 2. ∀y (Event(y) → P(y|y) = 1)
 3. ∀x∀y∀z ((x ∩ y ∩ z = ∅) → P(x ∪ y|z) = P(x|z) + P(y|z))`
   },
+  {
+    id: "legal-kinship",
+    name: "Legal Kinship",
+    category: "Law",
+    description: "Legal parenthood and spousal relations",
+    content: `LANGUAGE: {Person(x), LegalParent(x,y), LegalSpouse(x,y)}
+
+AXIOMS:
+1. ∀x∀y (LegalParent(x,y) → Person(x) ∧ Person(y))
+2. ∀x∀y (LegalSpouse(x,y) → Person(x) ∧ Person(y))
+3. ∀x ¬LegalParent(x,x)
+4. ∀x ¬LegalSpouse(x,x)
+5. ∀x∀y (LegalSpouse(x,y) → LegalSpouse(y,x))
+6. ∀x∀y (LegalParent(x,y) → ¬LegalSpouse(x,y))
+7. ∀x∀y∀z ((LegalParent(x,y) ∧ LegalParent(y,z)) → x ≠ z)`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [
