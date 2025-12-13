@@ -1023,6 +1023,27 @@ DEFINITIONS:
 D1. OptimalAction(A,C) ↔ ∀A' (U(C,A) ≥ U(C,A'))
 D2. UtilityMaximization(x,C) ↔ ∃A (Selects(x,A) ∧ OptimalAction(A,C))`
   },
+  {
+    id: "kuczynski-smith-rationality-2",
+    name: "Kuczynski-Smith Rationality II",
+    category: "Economics",
+    description: "Contextual optimization with temporal horizons",
+    content: `LANGUAGE: {Agent(x), Option(o), Cost(o,c), Benefit(o,b), Constraint(x,k), Selection(x,o), Context(t)}
+
+AXIOMS:
+1. ∀x∀t (Agent(x) ∧ Context(t) → ∃o Option(o))
+2. ∀o∀t (Option(o) ∧ Context(t) → ∃c∃b (Cost(o,c) ∧ Benefit(o,b)))
+3. ∀x∀t (Agent(x) ∧ Context(t) → ∃k Constraint(x,k))
+4. ∀x∀t (Agent(x) ∧ Context(t) → ∃o (Selection(x,o) ∧ Optimizes(o,b-c,k)))
+5. ∀t₁∀t₂ (Context(t₁) ∧ Context(t₂) ∧ t₁ ≠ t₂ → MayDiffer(Costs,Benefits,Constraints))
+6. ∀x (Agent(x) → (Individual(x) ∨ Institution(x)))
+
+DEFINITIONS:
+D1. Rationality(x) ↔ ∀t∀o (Selection(x,o) → Optimizes(o,Benefit-Cost,Constraint))
+D2. ShortTermContext(t) ↔ Context(t) ∧ PrioritizesImmediacy(t)
+D3. LongTermContext(t) ↔ Context(t) ∧ PrioritizesSustainability(t)
+D4. InstitutionalAgent(x) ↔ Agent(x) ∧ Collective(x) ∧ CoordinatesSelections(x)`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [
