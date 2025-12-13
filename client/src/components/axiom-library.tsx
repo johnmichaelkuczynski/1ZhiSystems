@@ -789,6 +789,22 @@ AXIOMS:
 4. ∀x∀i∀j∀r₁∀r₂ ((Member(x,i) ∧ Member(x,j)) → (i ≠ j ∨ r₁ ≠ r₂))
 5. ∃x∃i Member(x,i)`
   },
+  {
+    id: "geometry-incidence-order",
+    name: "Geometry: Incidence + Order",
+    category: "Geometry",
+    description: "Points, lines, planes with betweenness",
+    content: `LANGUAGE: {Point(x), Line(u), Plane(r), On(x,u), In(x,r), Between(x,y,z), Col(x,y,z)}
+
+AXIOMS:
+1. ∀x∀y (x ≠ y → ∃u (On(x,u) ∧ On(y,u)))
+2. ∀x∀y∀u∀v ((On(x,u) ∧ On(y,u) ∧ On(x,v) ∧ On(y,v)) → u = v)
+3. ∀u ∃x∃y (x ≠ y ∧ On(x,u) ∧ On(y,u))
+4. ∃x∃y∃z ¬Col(x,y,z)
+5. ∀x∀y∀z (Between(x,y,z) → x ≠ y ∧ y ≠ z ∧ x ≠ z)
+6. ∀x∀z (x ≠ z → ∃y Between(x,y,z))
+7. ∀x∀y∀z∀r ((¬Col(x,y,z) ∧ In(x,r) ∧ In(y,r) ∧ In(z,r)) → ∀u (On(u,x) → In(u,r)))`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [
