@@ -892,6 +892,18 @@ AXIOMS:
 6. ∀x∀y (LegalParent(x,y) → ¬LegalSpouse(x,y))
 7. ∀x∀y∀z ((LegalParent(x,y) ∧ LegalParent(y,z)) → x ≠ z)`
   },
+  {
+    id: "probability-kolmogorov",
+    name: "Probability Theory (Kolmogorov)",
+    category: "Probability",
+    description: "Standard Kolmogorov axioms",
+    content: `LANGUAGE: {Ω, Event(x), ∪, ∩, ¬, P(x)}
+
+AXIOMS:
+1. ∀x (Event(x) → P(x) ≥ 0)
+2. P(Ω) = 1
+3. ∀x∀y ((Event(x) ∧ Event(y) ∧ x ∩ y = ∅) → P(x ∪ y) = P(x) + P(y))`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [
