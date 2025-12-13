@@ -830,6 +830,25 @@ AXIOMS:
 11. ∀x∀y (C(x,y) → ¬T(x,y))
 12. ∀x∀y (C(x,y) → ¬S(x,y))`
   },
+  {
+    id: "biology-temporal-mereology",
+    name: "Biology: Temporal Mereology + Transformation",
+    category: "Biology",
+    description: "Part-whole with time, division, and fusion",
+    content: `LANGUAGE: {Thing(x), Part(x,y), Earlier(x,y), Divide(x,y), Fuse(x,y)}
+
+AXIOMS:
+1. ∀x Part(x,x)
+2. ∀x∀y∀z ((Part(x,y) ∧ Part(y,z)) → Part(x,z))
+3. ∀x∀y ((Part(x,y) ∧ Part(y,x)) → x = y)
+4. ∀x ¬Earlier(x,x)
+5. ∀x∀y∀z ((Earlier(x,y) ∧ Earlier(y,z)) → Earlier(x,z))
+6. ∀x ∃y Part(y,x)
+7. ∀x ∃y (Earlier(y,x) ∨ Earlier(x,y))
+8. ∀x∀y (Divide(x,y) → Earlier(x,y))
+9. ∀x∀y (Fuse(x,y) → Earlier(x,y))
+10. ∀x ¬∃y (Divide(x,y) ∧ Fuse(x,y))`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [
