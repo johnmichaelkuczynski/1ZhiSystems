@@ -1002,6 +1002,27 @@ D1. SmithRationalAgent(x) ↔ ∀a (Selects(x,a) → MaximizesReturnPerCost(x,a)
 D2. PayoffStructure(a) ↔ ∃v∃c (Return(a,v) ∧ Cost(a,c))
 D3. ProvisioningLogic(x) ↔ SmithRationalAgent(x) ∧ ∀a (Selects(x,a) → TangibleBenefit(Return(a)))`
   },
+  {
+    id: "kuczynski-smith-rationality",
+    name: "Kuczynski-Smith Rationality",
+    category: "Economics",
+    description: "Utility maximization under circumstances",
+    content: `LANGUAGE: {C, A, U(C,A), R, ≥}
+
+C = circumstances/context
+A = possible action
+U = utility function
+R = real numbers
+
+AXIOMS:
+1. ∀C∀A ∃!r (r ∈ R ∧ U(C,A) = r)
+2. ∀C ∃A ∀A' (U(C,A) ≥ U(C,A'))
+3. ∀r₁∀r₂ (r₁ ∈ R ∧ r₂ ∈ R → (r₁ ≥ r₂ ∨ r₂ ≥ r₁))
+
+DEFINITIONS:
+D1. OptimalAction(A,C) ↔ ∀A' (U(C,A) ≥ U(C,A'))
+D2. UtilityMaximization(x,C) ↔ ∃A (Selects(x,A) ∧ OptimalAction(A,C))`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [
