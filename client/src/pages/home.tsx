@@ -8,6 +8,7 @@ import { AxiomLibrary } from "@/components/axiom-library";
 import { AxiomBuilder } from "@/components/axiom-builder";
 import { FormalizerConsole } from "@/components/formalizer-console";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Bot, BookOpen, Hammer, FileText } from "lucide-react";
 import generatedLogo from "@assets/generated_images/minimalist_geometric_logo_representing_logic_transformation.png";
 
@@ -96,9 +97,17 @@ export default function Home() {
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                 SYSTEM ONLINE
               </div>
-              <div className="text-xs font-mono text-muted-foreground border-l border-border pl-4">
-                Engine: <span className="text-foreground font-medium">{selectedModel}</span>
-              </div>
+              <Select value={selectedModel} onValueChange={(value) => setSelectedModel(value as LLM)}>
+                <SelectTrigger className="w-32 text-xs font-mono border-border" data-testid="select-llm-model">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Zhi 1" data-testid="option-zhi-1">Zhi 1</SelectItem>
+                  <SelectItem value="Zhi 2" data-testid="option-zhi-2">Zhi 2</SelectItem>
+                  <SelectItem value="Zhi 3" data-testid="option-zhi-3">Zhi 3</SelectItem>
+                  <SelectItem value="Zhi 4" data-testid="option-zhi-4">Zhi 4</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </header>
