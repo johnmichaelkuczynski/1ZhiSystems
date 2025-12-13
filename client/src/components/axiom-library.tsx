@@ -965,6 +965,24 @@ AXIOMS:
 2. ∀x (limₙ Freq(x,n) exists)
 3. ∀x (P(x) = limₙ Freq(x,n))`
   },
+  {
+    id: "kuczynski-veblen-rationality",
+    name: "Kuczynski-Veblen Rationality",
+    category: "Economics",
+    description: "Dual rationality: resource efficiency vs social status",
+    content: `LANGUAGE: {Agent(x), Behavior(b), SmithianRationality(r), VeblenianRationality(r), Governs(r,b)}
+
+AXIOMS:
+1. ∀x (Agent(x) → ∃b (Behavior(b) ∧ Governs(SmithianRationality,b)))
+2. ∀x (Agent(x) → ∃b (Behavior(b) ∧ Governs(VeblenianRationality,b)))
+3. ∀b ¬(Governs(SmithianRationality,b) ∧ Governs(VeblenianRationality,b))
+4. ∀b (Behavior(b) → (Governs(SmithianRationality,b) ∨ Governs(VeblenianRationality,b)))
+5. ∀b ((¬Governs(SmithianRationality,b)) → Governs(VeblenianRationality,b))
+
+DEFINITIONS:
+D1. EconomicDecision(b) ↔ Governs(SmithianRationality,b) ∨ Governs(VeblenianRationality,b)
+D2. IrrationalAppearance(b) ↔ ∃r₁∃r₂ (Governs(r₁,b) ∧ ¬Governs(r₂,b) ∧ r₁ ≠ r₂)`
+  },
 ];
 
 const AXIOM_PAIRS: AxiomPair[] = [
