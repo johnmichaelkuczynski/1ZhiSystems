@@ -50,6 +50,26 @@ export interface AIResponse {
 }
 
 const DEFAULT_INSTRUCTIONS: Record<string, string> = {
+  "Custom Analysis": `TASK: You perform one of the following based on the axiom quality:
+
+IF THE AXIOMS ARE DEFECTIVE (contradictory, malformed, or inconsistent):
+1. Identify and fix the defects
+2. Explain what was wrong
+3. Find a TRUE MODEL for the corrected axiom set
+4. Output a paragraph on the significance of the corrected axioms and model
+
+IF THE AXIOMS ARE NON-DEFECTIVE (consistent and well-formed):
+1. Find a TRUE MODEL for the axiom system
+2. Output a paragraph on the significance of the axioms and model
+
+OUTPUT FORMAT:
+- Analysis of axiom quality (defective or non-defective)
+- If defective: repairs made and explanation
+- Model: Domain, interpretation of each symbol, plain-English explanation
+- Significance paragraph: what do these axioms represent? Why are they important? What conceptual or mathematical territory do they cover?
+
+Be CONCRETE and INTUITIVE - avoid jargon unless intrinsic to the domain. Use the SIMPLEST model that satisfies all axioms.`,
+
   "Axiom-Set / Theory Transformation": `Produce a model-preserving syntactic transformation of the input theory by introducing new primitives or eliminating old ones. The transformation must preserve models up to definitional equivalence.`,
   
   "Schema Equivalence": `Determine whether the two input theories (or schemas) are logically equivalent: i.e., they prove exactly the same theorems in all models. Answer with one of:

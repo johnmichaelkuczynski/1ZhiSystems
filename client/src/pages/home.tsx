@@ -22,6 +22,7 @@ export default function Home() {
   const functionRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
 
   const functions = [
+    { id: 0, title: "Custom Analysis (One Argument)", description: "Custom instructions or auto-analyze. Detects defects, fixes them, and finds models.", dualInput: false },
     { id: 1, title: "Axiom-Set / Theory Transformation (One Argument)", description: "Rewrite primitives and axioms.", dualInput: false },
     { id: 2, title: "Schema Equivalence (Two Arguments)", description: "Model-theoretic sameness check.", dualInput: true },
     { id: 3, title: "Definitional Equivalence (Two Arguments)", description: "Bi-directional definitional translation.", dualInput: true },
